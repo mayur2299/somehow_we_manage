@@ -1,0 +1,44 @@
+import { WARDS, resolvePin, DEFAULT_SLUG } from '~/utils/wards'
+
+export function useWardContext() {
+  const route = useRoute()
+  const slug = useState<string>('ward-slug', () => DEFAULT_SLUG)
+  const pin = useState<string | null>('ward-pin', () => null)
+  const area = useState<string>('ward-area', () => '')
+  const ready = useState<boolean>('ward-ready', () => false)
+
+  function apply(p: string) {
+    const hit = resolvePin(p)
+    if (!hit) return false
+    slug.value = hit.slug; pin.value = p; area.value = hit.area; ready.value = true
+    try { localStorage.setItem('wmwmg:pin', p) } catch {}
+    return true
+  }
+  function clear() {
+    ready.value = false; pin.value = null
+    try { localStorage.removeItem('wmwmg:pin') } catch {}
+    navigateTo('/')
+  }
+  onMounted(() => {
+    if (ready.value) return
+    try {
+      const q = (route.query.pin as string) || new URLSearchParams(location.search).get('pin')
+      const saved = localStorage.getItem('wmwmg:pin')
+      const p = q || saved
+      if (p) apply(p)
+    } catch {}
+  })
+  const ward = computed(() => WARDS[slug.value])
+  return { slug, pin, area, ready, ward, apply, clear }
+}
+
+// shared modal state so any page can open the receipt / RTI
+export function useWardModals() {
+  const receiptOpen = useState('m-receipt', () => false)
+  const rtiOpen = useState('m-rti', () => false)
+  const service = useState('m-service', () => 'swd')
+  const receiptPost = useState<any>('m-post', () => null)
+  function openReceipt(k?: string, post?: any) { if (k) service.value = k; receiptPost.value = post ?? null; receiptOpen.value = true }
+  function openRti(k?: string) { if (k) service.value = k; rtiOpen.value = true }
+  return { receiptOpen, rtiOpen, service, receiptPost, openReceipt, openRti }
+}

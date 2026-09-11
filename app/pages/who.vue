@@ -1,115 +1,83 @@
 <script setup lang="ts">
-import { PINCODES } from '~/utils/wards'
 import { tagLabel } from '~/utils/tags'
-const { ward, pin, area, ready, apply, clear } = useWardContext()
+const { ward, pin, area, ready, clear } = useWardContext()
 const { openReceipt, openRti } = useWardModals()
-const allPins = computed(() => Object.entries(PINCODES).map(([p, v]) => ({ pin: p, area: v[1], slug: v[0] })))
+watchEffect(() => { if (import.meta.client && !ready.value && !localStorage.getItem('wmwmg:pin')) navigateTo('/') })
 const { data: flags, refresh: refreshFlags } = await useFetch(() => `/api/flags?ward=${useState<string>('ward-slug').value}`, { default: () => ({ counts: {} as Record<string, number>, recent: [] as any[] }), watch: [useState<string>('ward-slug')] })
 const posts = computed(() => flags.value?.recent ?? [])
-const svcLabel = (k: string) => ward.value.services.find((x: any) => x.key === k)?.label ?? k
-const svcIcon = (k: string) => ward.value.services.find((x: any) => x.key === k)?.icon ?? ''
-function go(id: string) {
-  const el = document.querySelector(id) as HTMLElement | null
-  if (!el) return
-  const off = (document.querySelector('nav') as HTMLElement)?.offsetHeight ?? 64
-  const hub = (document.querySelector('.hub') as HTMLElement)?.offsetHeight ?? 0
-  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - off - hub - 8, behavior: 'smooth' })
-}
-const heroPost = computed(() => posts.value.find((p: any) => p.photo && p.title) ?? posts.value[0] ?? null)
 const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
 const rs = (n: number) => `₹${n.toLocaleString('en-IN')}`
 const pct = (a: number | null, b: number) => a == null ? null : Math.round((a / b) * 100)
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
 const utilClass = (u: number | null) => u == null ? 'purple' : u > 150 ? 'red' : u < 90 ? 'blue' : 'green'
-const latestIdx = computed(() => ward.value.total.ward.actual.map((v: any, i: number) => v == null ? -1 : i).filter((i: number) => i >= 0).pop() ?? 2)
-const latestBE = computed(() => ward.value.total.ward.be[latestIdx.value])
-const latestActual = computed(() => ward.value.total.ward.actual[latestIdx.value])
+
+const acc = computed(() => ward.value.accountable ?? {})
 const ctx = computed(() => ward.value.cityContext ?? {})
-const pinInfo = computed(() => ({ pin: pin.value ?? '', area: area.value }))
-function onFound(p: { pin: string; area: string }) { apply(p.pin); window.scrollTo({ top: 0 }) }
-useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.name} · Where My Ward's Money Goes` : `Where My Ward's Money Goes`) })
+const partyTally = computed(() => Object.entries((acc.value.corporators ?? []).reduce((t: Record<string, number>, c: any) => { t[c.party] = (t[c.party] ?? 0) + 1; return t }, {})).sort((a: any, b: any) => b[1] - a[1]))
+const affidavit = (name: string) => `https://www.myneta.info/search_myneta.php?q=${encodeURIComponent(name)}`
+useHead({ title: computed(() => `Who represents ${ward.value.code} ${ward.value.name}`) })
 </script>
 
 <template>
-  <div>
-    <PinGate v-if="!ready" :pincodes="allPins" @found="onFound" />
-    <div v-else class="page">
-      <WardNav :ward="ward" :pin="pin" active="act" :posts="posts" @change-pin="clear" />
-      <main>
-<!-- HERO -->
-      <header class="hero">
-        <div>
-          <div class="idbar">
-            <span class="pill">📍 {{ pin }}</span>
-            <span class="pill yellow">{{ ward.code }} ward</span>
-            <span class="pill">{{ pinInfo?.area }}</span>
-          </div>
-          <h1>Your ward<br>got money.<br>Now what?</h1>
-          <p>See what {{ ward.name }} was allotted, what it actually spent, and where it went. Then post what you see on the ground, sign a petition, or send the BMC an RTI with the numbers already filled in.</p>
-          <div class="cta-row">
-            <NuxtLink class="btn flag" :to="{ path: '/forum', query: { post: '1' } }">🚩 Report a problem</NuxtLink>
-            <button class="btn primary" @click="openReceipt()">🧾 Get the receipt</button>
-            <button class="btn act" @click="openRti()">Ask the BMC</button>
-          </div>
-        </div>
-        <NuxtLink v-if="heroPost" class="card feature pink herocard live" :to="{ path: '/forum', hash: `#post-${heroPost.id}` }">
-          <div class="live-top"><span class="pill red">● Live · {{ ward.code }}</span><span class="pill">{{ posts.length }} complaints</span></div>
-          <img v-if="heroPost.photo" :src="heroPost.photo" alt="" referrerpolicy="no-referrer" />
-          <div class="live-title">{{ heroPost.title || heroPost.note }}</div>
-          <div class="live-meta">👀 {{ heroPost.confirms ?? 0 }} people say this is still here<span v-if="heroPost.locality"> · 📍 {{ heroPost.locality }}</span></div>
-          <div class="live-cta">Open the forum →</div>
-        </NuxtLink>
-        <div v-else class="card feature pink herocard">
-          <span class="pill">Ward share of total BMC budget</span>
-          <div class="slash">{{ ctx.wardShare2021 ?? 18 }}% → {{ ctx.wardShare2025 ?? 11 }}%</div>
-          <p>The total BMC budget nearly doubled. The share reaching wards fell.</p>
-        </div>
-      </header>
-
-      <!-- ACT -->
-      <section id="act" class="actsec">
-        <div class="section-head"><h2>Don't just<br>look. Act.</h2><p>Four things you can do right now, no login. Each one carries the ward's own numbers.</p></div>
-        <div class="actgrid">
-          <NuxtLink class="card red actcard" :to="{ path: '/forum', query: { post: '1' } }"><span class="ic">🚩</span><h3>Report a problem</h3><p>Photo, location, what's wrong. It goes public in the ward chat.</p><span class="go">Post →</span></NuxtLink>
-          <button class="card yellow actcard" @click="openReceipt()"><span class="ic">🧾</span><h3>Share the receipt</h3><p>A savage, sourced card for WhatsApp, Instagram, X. Ends with "Is your ward any better?"</p><span class="go">Generate →</span></button>
-          <button class="card green actcard" @click="openRti()"><span class="ic">📄</span><h3>Ask the BMC</h3><p>An RTI application already filled with the allotted and spent figures. Copy, file, 30-day clock starts.</p><span class="go">Fill it →</span></button>
-          <a class="card purple actcard" href="#petitions" @click.prevent="go('#petitions')"><span class="ic">✍️</span><h3>Sign a petition</h3><p>Grievances with numbers on them. Sign one, or raise your own from any complaint.</p><span class="go">Sign →</span></a>
-        </div>
-      </section>
-
-      <!-- 4. FORUM / GROUND -->
-      <section id="forum" class="forum">
-        <div class="section-head">
-          <h2>On paper<br>vs on the ground.</h2>
-          <p>The ward's group chat. No login, no names. What the BMC spent, pinned at the top. What residents see, underneath.</p>
-        </div>
+  <div v-if="ward" class="page">
+    <WardNav :ward="ward" :pin="pin" active="who" :posts="posts" @change-pin="clear" />
+    <main>
+<!-- 1. REPRESENTATIVES -->
+      <section id="reps">
+        <div class="section-head"><h2>Who<br>represents you.</h2><p>Elected {{ acc.electedOn }}. Before that, {{ acc.administratorPeriod.toLowerCase() }}, nobody was.</p></div>
         <div class="grid">
-          <article class="card pink span5 teaser">
-            <span class="pill">{{ ward.code }} residents</span>
-            <div class="big">{{ posts.length }}</div>
-            <div class="vs">complaints · {{ posts.reduce((a: number, p: any) => a + (p.confirms ?? 0), 0) }} "me too" · {{ posts.filter((p: any) => p.photo).length }} photos</div>
-            <div class="cta-row">
-              <NuxtLink class="btn primary" to="/forum">💬 Go to forum →</NuxtLink>
-              <NuxtLink class="btn flag" :to="{ path: '/forum', query: { post: '1' } }">🚩 Report a problem</NuxtLink>
+          <article class="card red span7">
+            <span class="pill">{{ acc.administratorPeriod }}</span>
+            <h3>No elected council for almost four years.</h3>
+            <p><strong>{{ acc.administratorNote }}</strong></p>
+          </article>
+          <article class="card span5">
+            <span class="pill">Ward office</span>
+            <template v-if="acc.wardOffice">
+              <h3 class="h-sm">{{ acc.wardOffice.title }}</h3>
+              <p>{{ acc.wardOffice.address }}<br><strong>{{ acc.wardOffice.phone }}</strong></p>
+              <p class="mini">{{ acc.wardOffice.note }}</p>
+            </template>
+            <template v-else>
+              <h3 class="h-sm">Assistant Municipal Commissioner, {{ ward.code }} Ward</h3>
+              <p>Address and phone not yet compiled for this ward. BMC central helpline <strong>1916</strong>.</p>
+              <p class="mini">The RTI on this page is addressed to this office.</p>
+            </template>
+          </article>
+          <article class="card span12">
+            <div class="reps-head">
+              <div>
+                <span class="pill green">Corporators · electoral wards {{ acc.electoralWards }}</span>
+                <h3 v-if="acc.corporators?.length" class="h-sm">{{ acc.corporators.length }} corporators, {{ partyTally.map(([p, n]) => `${n} ${p}`).join(', ') }}.</h3>
+              </div>
+              <p class="mini">Party shown as text only. Colours on this site mean data, never politics. "Declared" links open the candidate's own election affidavit search on MyNeta, where assets and pending cases are self-declared.</p>
+            </div>
+            <div class="reps">
+              <div v-for="c in (acc.corporators ?? [])" :key="c.ward" class="rep" :class="{ kn: c.nowKNorth }">
+                <span class="wn">{{ c.ward }}</span>
+                <div class="rep-body">
+                  <div class="nm">{{ c.name }}</div>
+                  <div class="pt">{{ c.party }} · {{ c.votes.toLocaleString('en-IN') }} votes</div>
+                </div>
+                <a class="btn sm" :href="affidavit(c.name)" target="_blank" rel="noopener">Declared ↗</a>
+              </div>
+            </div>
+            <p v-if="acc.kNorthNote" class="mini">{{ acc.kNorthNote }} Dashed cards now report to K/North.</p>
+            <hr class="divider" />
+            <div v-if="acc.mlas?.length || acc.mayor" class="mlas">
+              <div v-for="m in (acc.mlas ?? [])" :key="m.constituency" class="mla">
+                <span class="pill">MLA · {{ m.constituency }}</span>
+                <div class="nm">{{ m.name }} <span class="pt">· {{ m.party }}</span></div>
+                <a class="btn sm" :href="affidavit(m.name)" target="_blank" rel="noopener">Declared ↗</a>
+              </div>
+              <div v-if="acc.mayor" class="mla">
+                <span class="pill">Mayor of Mumbai</span>
+                <div class="nm">{{ acc.mayor.name }} <span class="pt">· {{ acc.mayor.party }}</span></div>
+                <a class="btn sm" :href="affidavit(acc.mayor.name)" target="_blank" rel="noopener">Declared ↗</a>
+              </div>
             </div>
           </article>
-          <div class="span7 latest">
-            <NuxtLink v-for="p in posts.slice(0, 3)" :key="p.id" class="card lp" :to="{ path: '/forum', hash: `#post-${p.id}` }">
-              <img v-if="p.photo" :src="p.photo" alt="" referrerpolicy="no-referrer" />
-              <div>
-                <div class="lp-tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcIcon(p.service) }} {{ svcLabel(p.service) }}</span></div>
-                <p class="lp-title">{{ p.title || p.note }}</p>
-                <p class="mini">👀 {{ p.confirms ?? 0 }} me too · 💬 {{ p.comments ?? 0 }}<span v-if="p.locality"> · 📍 {{ p.locality }}</span></p>
-              </div>
-            </NuxtLink>
-          </div>
         </div>
-      </section>
-
-      <section class="close">
-        <h2>You paid.<br>You should know.</h2>
-        <p>The BMC is called the richest municipal corporation in the country. Every Mumbai resident pays for their ward. This makes the money visible, and turns "where did it go?" into a question the BMC has to answer.</p>
-        <div class="cta-row center"><button class="btn primary" @click="openReceipt()">🧾 Share the receipt</button><button class="btn" @click="openRti()">Ask the BMC</button><button class="btn act" @click="navigateTo('/petitions')">✍️ Sign a petition</button></div>
       </section>
 
       <section v-if="ward.todo?.length" class="gaps">
@@ -120,13 +88,13 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
         </div>
       </section>
 
-            </main>
-      <WardModals :ward="ward" :posts="posts" />
-      <footer>
-        <div class="logo">Somehow We <b>Manage</b></div>
-        <div class="disclaimer"><strong>CREATE 2026 prototype · 11 September 2026.</strong> Pilot ward K/E has seeded complaints to show the loop. Ward actuals come from Praja Foundation's RTI-sourced report.</div>
-      </footer>
-    </div>
+      
+    </main>
+    <WardModals :ward="ward" :posts="posts" />
+    <footer>
+      <div class="logo">Somehow We <b>Manage</b></div>
+      <div class="disclaimer"><strong>CREATE 2026 prototype · 11 September 2026.</strong> Ward actuals are not published by the BMC; Praja Foundation obtained them under the Right to Information Act. Utilisation above 100% means recorded spend exceeded the allotment.</div>
+    </footer>
   </div>
 </template>
 
@@ -311,4 +279,6 @@ footer { padding: 34px max(6vw, calc((100vw - 1440px) / 2)) 50px; font-weight: 7
 }
 
 .page { background: var(--paper); min-height: 100vh; }
+main { display: block; }
+
 </style>

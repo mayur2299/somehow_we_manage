@@ -40,11 +40,7 @@ useHead({ title: computed(() => `${ward.value.code} residents · Where My Ward's
 
 <template>
   <div class="fpage">
-    <nav>
-      <NuxtLink class="btn sm" to="/">← {{ ward.code }} ward</NuxtLink>
-      <div class="logo">Where My Ward's <b>Money Goes</b></div>
-      <div class="pins"><span class="pill">📍 {{ pin ?? '——' }}</span><span class="pill yellow">{{ area }}</span></div>
-    </nav>
+    <WardNav :ward="ward" :pin="pin" active="forum" :posts="posts" @change-pin="() => { localStorage.removeItem('wmwmg:pin'); navigateTo('/') }" />
     <Forum full :ward-slug="wardSlug" :ward-code="ward.code" :ward-name="ward.name" :services="ward.services" :posts="posts" :counts="flags?.counts ?? {}" :initial-service="initial" :open-form="openForm" @refresh="refreshFlags()" @celebrate="celebrate()" @petition="toPetitions" @petitions-changed="() => {}" @receipt="openReceipt" />
 
     <div v-if="receiptOpen" class="modal" @click.self="receiptOpen = false">

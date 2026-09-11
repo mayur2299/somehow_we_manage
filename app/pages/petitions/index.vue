@@ -23,11 +23,7 @@ useHead({ title: computed(() => `Petitions · ${ward.value.code}`) })
 
 <template>
   <div class="ppage">
-    <nav>
-      <NuxtLink class="btn sm" to="/">← {{ ward.code }} ward</NuxtLink>
-      <div class="logo">Where My Ward's <b>Money Goes</b></div>
-      <div class="pins"><span class="pill">📍 {{ pin ?? '——' }}</span><NuxtLink class="btn sm" to="/forum">💬 Forum</NuxtLink></div>
-    </nav>
+    <WardNav :ward="ward" :pin="pin" active="petitions" @change-pin="() => { localStorage.removeItem('wmwmg:pin'); navigateTo('/') }" />
     <main>
       <header class="head">
         <span class="pill green">{{ ward.code }} · {{ ward.name }}</span>
