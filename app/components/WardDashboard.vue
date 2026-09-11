@@ -69,7 +69,42 @@ const petitionPreselect = ref<string | undefined>()
 const petitionsKey = ref(0)
 function startPetition(k: string) { petitionPreselect.value = k; document.querySelector('#petitions')?.scrollIntoView({ behavior: 'smooth' }) }
 
-function go(id: string) { document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' }) }
+// sticky hub: measure nav, compact once past the hero, highlight the section in view
+const navEl = ref<HTMLElement | null>(null)
+const hubEl = ref<HTMLElement | null>(null)
+const compact = ref(false)
+const active = ref('')
+let io: IntersectionObserver | null = null
+function syncNavHeight() {
+  const h = navEl.value?.offsetHeight ?? 64
+  document.documentElement.style.setProperty('--navh', `${h}px`)
+}
+onMounted(() => {
+  syncNavHeight()
+  window.addEventListener('resize', syncNavHeight)
+  const onScroll = () => { compact.value = window.scrollY > (window.innerHeight * 0.5) }
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+  onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', syncNavHeight) })
+
+  io = new IntersectionObserver((entries) => {
+    const vis = entries.filter(e => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+    if (vis) active.value = (vis.target as HTMLElement).id
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5] })
+  for (const id of ['reps', 'money', 'services', 'petitions']) {
+    const el = document.getElementById(id)
+    if (el) io.observe(el)
+  }
+})
+onBeforeUnmount(() => io?.disconnect())
+
+function go(id: string) {
+  const el = document.querySelector(id) as HTMLElement | null
+  if (!el) return
+  const nav = navEl.value?.offsetHeight ?? 64
+  const hub = hubEl.value?.offsetHeight ?? 0
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - nav - hub - 8, behavior: 'smooth' })
+}
 function pickService(k: string, then: 'forum' | 'rti') {
   selected.value = k
   if (then === 'rti') openRti()
@@ -90,7 +125,7 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
         </span>
       </div></div>
 
-      <nav>
+      <nav ref="navEl">
         <div class="logo">Where My Ward's <b>Money Goes</b></div>
         <div class="links">
           <a href="#act" @click.prevent="go('#act')">Act</a>
@@ -135,13 +170,13 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
       </header>
 
       <!-- HUB: the five branches -->
-      <section class="hub">
+      <section ref="hubEl" class="hub" :class="{ compact }">
         <div class="hubgrid">
-          <a class="tile blue" href="#reps" @click.prevent="go('#reps')"><span class="ic">🗳️</span><span class="t">Who represents you</span><span class="d">{{ acc.corporators.length }} corporators · ward office · MLAs</span></a>
-          <a class="tile yellow" href="#money" @click.prevent="go('#money')"><span class="ic">💸</span><span class="t">Money received vs spent</span><span class="d">{{ cr(latestBE) }} allotted · {{ cr(latestActual) }} spent</span></a>
-          <a class="tile green" href="#services" @click.prevent="go('#services')"><span class="ic">🕳️</span><span class="t">Split by department</span><span class="d">Roads, drains, garbage, health, parks, markets</span></a>
+          <a class="tile blue" href="#reps" @click.prevent="go('#reps')" :class="{ on: active === 'reps' }"><span class="ic">🗳️</span><span class="t">Who represents you</span><span class="d">{{ acc.corporators.length }} corporators · ward office · MLAs</span></a>
+          <a class="tile yellow" href="#money" @click.prevent="go('#money')" :class="{ on: active === 'money' }"><span class="ic">💸</span><span class="t">Money received vs spent</span><span class="d">{{ cr(latestBE) }} allotted · {{ cr(latestActual) }} spent</span></a>
+          <a class="tile green" href="#services" @click.prevent="go('#services')" :class="{ on: active === 'services' }"><span class="ic">🕳️</span><span class="t">Split by department</span><span class="d">Roads, drains, garbage, health, parks, markets</span></a>
           <NuxtLink class="tile pink" to="/forum"><span class="ic">💬</span><span class="t">Forum for {{ pinInfo?.pin }}</span><span class="d">{{ posts.length }} complaints · photos · me too</span></NuxtLink>
-          <a class="tile purple" href="#petitions" @click.prevent="go('#petitions')"><span class="ic">✍️</span><span class="t">Petitions and RTI</span><span class="d">Sign, check status, or ask the BMC</span></a>
+          <a class="tile purple" href="#petitions" @click.prevent="go('#petitions')" :class="{ on: active === 'petitions' }"><span class="ic">✍️</span><span class="t">Petitions and RTI</span><span class="d">Sign, check status, or ask the BMC</span></a>
         </div>
       </section>
 
@@ -436,10 +471,21 @@ h1 { font-size: clamp(56px, 8.4vw, 128px); line-height: .84; letter-spacing: -.0
 .herocard p { font-size: 18px; font-weight: 700; margin: 0 0 8px; }
 .mini { font-size: 12px; font-weight: 700; color: #3f3b34; }
 section { padding: 72px max(6vw, calc((100vw - 1440px) / 2)); border-bottom: 3px solid var(--ink); }
-section.hub { padding-top: 28px; padding-bottom: 28px; background: var(--ink); }
+section.hub {
+  position: sticky; top: var(--navh, 64px); z-index: 25;
+  padding-top: 16px; padding-bottom: 16px; background: var(--ink);
+  border-bottom: 3px solid var(--ink);
+  transition: padding 160ms ease;
+}
+section.hub.compact { padding-top: 8px; padding-bottom: 8px; }
+section.hub.compact .tile { padding: 8px 12px; box-shadow: 3px 3px 0 rgba(255,255,255,.9); }
+section.hub.compact .tile .ic { font-size: 18px; }
+section.hub.compact .tile .t { font-size: 15px; }
+section.hub.compact .tile .d { display: none; }
 .hubgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
 .tile { display: grid; gap: 4px; border: 3px solid var(--ink); border-radius: 16px; padding: 14px; text-decoration: none; color: var(--ink); box-shadow: 5px 5px 0 rgba(255,255,255,.9); transition: transform 120ms, box-shadow 120ms; }
 .tile:hover { transform: translate(3px, 3px); box-shadow: 2px 2px 0 rgba(255,255,255,.9); }
+.tile.on { outline: 3px solid var(--white); outline-offset: 3px; }
 .tile.blue { background: var(--blue); } .tile.yellow { background: var(--yellow); } .tile.green { background: var(--green); } .tile.pink { background: var(--pink); } .tile.purple { background: var(--purple); }
 .tile .ic { font-size: 26px; }
 .tile .t { font-family: var(--display); font-size: 18px; letter-spacing: -.04em; line-height: 1; }
