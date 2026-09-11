@@ -281,6 +281,22 @@
     {
       "name": "Hindustan Times: contractor fined ₹1 lakh for poor-quality ₹24 crore nullah work",
       "url": "https://www.pressreader.com/india/hindustan-times-st-mumbai/20221122/281724093551403"
+    },
+    {
+      "name": "BMC Election Results 2026, ward-wise winners (OpenCity CSV)",
+      "url": "https://data.opencity.in/dataset/bmc-election-results-2026"
+    },
+    {
+      "name": "Free Press Journal, Know Your Ward: K East (68–82), 30 Dec 2025",
+      "url": "https://www.freepressjournal.in/mumbai/know-your-ward-all-you-need-to-know-about-mumbais-k-east-ward-68-82-ahead-of-bmc-elections-2026"
+    },
+    {
+      "name": "Free Press Journal, 10 Feb 2026",
+      "url": "https://www.freepressjournal.in/mumbai/mumbai-news-bmc-appoints-assistant-commissioner-to-newly-formed-k-north-ward-making-office-operational-after-16-month-wait"
+    },
+    {
+      "name": "Wikipedia, 2026 Brihanmumbai Municipal Corporation election",
+      "url": "https://en.wikipedia.org/wiki/2026_Brihanmumbai_Municipal_Corporation_election"
     }
   ],
   "cityContext": {
@@ -298,5 +314,155 @@
       "url": "https://www.pressreader.com/india/hindustan-times-st-mumbai/20221122/281724093551403",
       "source": "Hindustan Times, 22 Nov 2022"
     }
+  },
+  "accountable": {
+    "electedOn": "16 January 2026",
+    "administratorPeriod": "March 2022 to January 2026",
+    "administratorNote": "For almost four years the BMC had no elected council. A state-appointed administrator ran it, so the 2022-23 and 2023-24 spend on this page was approved with no elected local oversight.",
+    "electoralWards": "68 to 82",
+    "electoralWardsSource": {
+      "name": "Free Press Journal, Know Your Ward: K East (68–82), 30 Dec 2025",
+      "url": "https://www.freepressjournal.in/mumbai/know-your-ward-all-you-need-to-know-about-mumbais-k-east-ward-68-82-ahead-of-bmc-elections-2026"
+    },
+    "kNorthNote": "Six of these electoral wards (72, 73, 74, 77, 78, 79) moved to the new K/North ward office in February 2026. The budget figures on this page are for the undivided K/East.",
+    "kNorthSource": {
+      "name": "Free Press Journal, 10 Feb 2026",
+      "url": "https://www.freepressjournal.in/mumbai/mumbai-news-bmc-appoints-assistant-commissioner-to-newly-formed-k-north-ward-making-office-operational-after-16-month-wait"
+    },
+    "corporators": [
+      {
+        "ward": 68,
+        "name": "Rohan Shashindra Rathod",
+        "party": "BJP",
+        "votes": 12992,
+        "nowKNorth": false
+      },
+      {
+        "ward": 69,
+        "name": "Sudha Shambhunath Singh",
+        "party": "BJP",
+        "votes": 10492,
+        "nowKNorth": false
+      },
+      {
+        "ward": 70,
+        "name": "Anish Naval Makwani",
+        "party": "BJP",
+        "votes": 14745,
+        "nowKNorth": false
+      },
+      {
+        "ward": 71,
+        "name": "Sunita Rajesh Mehta",
+        "party": "BJP",
+        "votes": 9825,
+        "nowKNorth": false
+      },
+      {
+        "ward": 72,
+        "name": "Mamta Pankaj Yadav",
+        "party": "BJP",
+        "votes": 14588,
+        "nowKNorth": true
+      },
+      {
+        "ward": 73,
+        "name": "Lona Rajendrasingh Rawat",
+        "party": "SS (UBT)",
+        "votes": 13424,
+        "nowKNorth": true
+      },
+      {
+        "ward": 74,
+        "name": "Vidya Bharat Arya-Kangane",
+        "party": "MNS",
+        "votes": 8036,
+        "nowKNorth": true
+      },
+      {
+        "ward": 75,
+        "name": "Pramod Pandurang Sawant",
+        "party": "SS (UBT)",
+        "votes": 12131,
+        "nowKNorth": false
+      },
+      {
+        "ward": 76,
+        "name": "Prakash Daulat Musale",
+        "party": "BJP",
+        "votes": 12036,
+        "nowKNorth": false
+      },
+      {
+        "ward": 77,
+        "name": "Shivani Shailesh Parab",
+        "party": "SS (UBT)",
+        "votes": 15431,
+        "nowKNorth": true
+      },
+      {
+        "ward": 78,
+        "name": "Sophie Naziya Abdul Jabbar",
+        "party": "Shiv Sena",
+        "votes": 5826,
+        "nowKNorth": true
+      },
+      {
+        "ward": 79,
+        "name": "Mansi Madhukar Juwatkar",
+        "party": "SS (UBT)",
+        "votes": 12104,
+        "nowKNorth": true
+      },
+      {
+        "ward": 80,
+        "name": "Disha Sunil Yadav",
+        "party": "BJP",
+        "votes": 13683,
+        "nowKNorth": false
+      },
+      {
+        "ward": 81,
+        "name": "Kesharkhen Murji Patel",
+        "party": "BJP",
+        "votes": 13224,
+        "nowKNorth": false
+      },
+      {
+        "ward": 82,
+        "name": "Amin Jagdishwari Jagdish",
+        "party": "BJP",
+        "votes": 9260,
+        "nowKNorth": false
+      }
+    ],
+    "wardOffice": {
+      "title": "Assistant Municipal Commissioner, K/East",
+      "address": "3rd floor, Gundavali Gaonthan, Azad Road, Andheri East, Mumbai 400069",
+      "phone": "022-26816730",
+      "note": "The RTI on this page is addressed to this office."
+    },
+    "mlas": [
+      {
+        "constituency": "Andheri East",
+        "name": "Murji Patel",
+        "party": "Shiv Sena"
+      },
+      {
+        "constituency": "Jogeshwari East",
+        "name": "Anant Nar",
+        "party": "SS (UBT)"
+      },
+      {
+        "constituency": "Vile Parle",
+        "name": "Parag Alavani",
+        "party": "BJP"
+      }
+    ],
+    "mayor": {
+      "name": "Ritu Tawde",
+      "party": "BJP"
+    },
+    "roadContractorNote": "Since 2023 the BMC has awarded road concretisation as a handful of zone-level contracts worth thousands of crore. Contractor names per individual work in this ward are not published. Question 1 of the RTI asks for them."
   }
 }

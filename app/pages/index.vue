@@ -51,6 +51,8 @@ const { data: flags, refresh: refreshFlags } = await useFetch(`/api/flags?ward=$
 const svcFlags = computed(() => (flags.value?.recent ?? []).filter((f: any) => f.service === selected.value))
 watch(selected, () => (panel.value = 'none'))
 const ctx = ward.cityContext
+const acc = ward.accountable
+const partyClass = (p: string) => p.startsWith('BJP') ? 'p-bjp' : p.includes('UBT') ? 'p-ubt' : p.startsWith('Shiv') ? 'p-ss' : p.startsWith('Cong') ? 'p-inc' : p.startsWith('MNS') ? 'p-mns' : ''
 </script>
 
 <template>
@@ -199,6 +201,35 @@ const ctx = ward.cityContext
       <p class="note">Spent figures shown in <span class="over">orange</span> exceeded the allotment by more than half, <span class="under">blue</span> fell short of 90%, <span class="ok">green</span> is within range.</p>
     </section>
 
+    <section class="card">
+      <h2>Who is accountable today</h2>
+      <p class="sub">Elected {{ acc.electedOn }} for electoral wards {{ acc.electoralWards }}, the area these budget figures cover.</p>
+      <div class="admin">
+        <strong>{{ acc.administratorPeriod }}: no elected council.</strong> {{ acc.administratorNote }}
+      </div>
+      <div class="corps">
+        <div v-for="c in acc.corporators" :key="c.ward" class="corp" :class="{ kn: c.nowKNorth }">
+          <span class="wn">{{ c.ward }}</span>
+          <span class="nm">{{ c.name }}</span>
+          <span class="pt" :class="partyClass(c.party)">{{ c.party }}</span>
+        </div>
+      </div>
+      <p class="note">{{ acc.kNorthNote }} Wards shown with a dashed border now report to K/North.</p>
+      <div class="offs">
+        <div class="off">
+          <p class="oft">{{ acc.wardOffice.title }}</p>
+          <p>{{ acc.wardOffice.address }}<br>{{ acc.wardOffice.phone }}</p>
+          <p class="fine">{{ acc.wardOffice.note }}</p>
+        </div>
+        <div class="off">
+          <p class="oft">MLAs for this area</p>
+          <p v-for="m in acc.mlas" :key="m.constituency">{{ m.constituency }}: <strong>{{ m.name }}</strong> <span class="pt" :class="partyClass(m.party)">{{ m.party }}</span></p>
+          <p>Mayor of Mumbai: <strong>{{ acc.mayor.name }}</strong> <span class="pt" :class="partyClass(acc.mayor.party)">{{ acc.mayor.party }}</span></p>
+        </div>
+      </div>
+      <p class="note">{{ acc.roadContractorNote }}</p>
+    </section>
+
     <section class="card dark">
       <h2>What the BMC does not publish</h2>
       <ul class="np">
@@ -310,7 +341,21 @@ tr.sep th { text-align: left; color: #666; font-weight: 600; padding-top: 0.8rem
 .np { padding-left: 1.1rem; margin: 0.5rem 0 0.75rem; line-height: 1.5; }
 .ex { margin: 0.5rem 0 0; line-height: 1.5; font-size: 0.92rem; }
 .ex a { color: #ffd166; }
+
+.admin { background: #fff4e6; border-left: 4px solid #e8590c; border-radius: 8px; padding: 0.7rem 0.9rem; font-size: 0.9rem; line-height: 1.45; margin-bottom: 0.9rem; }
+.corps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.45rem; }
+.corp { display: flex; align-items: center; gap: 0.5rem; border: 1px solid #e3e3e3; border-radius: 10px; padding: 0.45rem 0.6rem; font-size: 0.85rem; background: #fafafa; }
+.corp.kn { border-style: dashed; }
+.wn { font-weight: 800; color: #666; min-width: 1.6rem; }
+.nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pt { font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 999px; background: #eee; color: #444; white-space: nowrap; }
+.p-bjp { background: #ffe8cc; color: #b35c00; } .p-ubt { background: #fff3bf; color: #8a6d00; } .p-ss { background: #ffe3e3; color: #a61e1e; } .p-inc { background: #d3f9d8; color: #1b6e2e; } .p-mns { background: #e5dbff; color: #5f3dc4; }
+.offs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.9rem; }
+.off { background: #f6f7fb; border-radius: 10px; padding: 0.8rem 0.9rem; font-size: 0.88rem; line-height: 1.45; }
+.off p { margin: 0 0 0.3rem; }
+.oft { font-weight: 700; }
 @media (max-width: 520px) {
+  .offs { grid-template-columns: 1fr; }
   h1 { font-size: 1.6rem; }
   .stats { grid-template-columns: 1fr; }
   .big { font-size: 1.15rem; }
