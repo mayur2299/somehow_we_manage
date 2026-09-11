@@ -282,7 +282,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
                 <a class="chip" :href="links(p).whatsapp" target="_blank" rel="noopener">WhatsApp</a>
                 <a class="chip" :href="links(p).x" target="_blank" rel="noopener">X</a>
                 <a class="chip" :href="links(p).facebook" target="_blank" rel="noopener">Facebook</a>
-                <button class="chip act" @click="emitReceipt(p.service, p)">🧾 Make public of this post</button>
+                <button class="chip act" @click="emitReceipt(p.service, p)">🧾 Make this public</button>
                 <button class="chip" @click="copyLink(p)">Copy link</button>
                 <button class="chip" @click="shareAsk(p)">Ask neighbours</button>
               </div>
