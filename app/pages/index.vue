@@ -64,7 +64,7 @@ const liked = ref<Record<string, boolean>>({})
 async function like(f: any) {
   if (liked.value[f.id]) return
   liked.value[f.id] = true
-  try { const r = await $fetch<{ likes: number }>(`/api/flags/${encodeURIComponent(`${f.ward}:${f.service}:${f.id}`)}/like`, { method: 'POST' }); f.likes = r.likes } catch { liked.value[f.id] = false }
+  try { await $fetch(`/api/flags/${encodeURIComponent(`${f.ward}:${f.service}:${f.id}`)}/like`, { method: 'POST' }); await refreshFlags() } catch { liked.value[f.id] = false }
 }
 async function sharePost(f: any) {
   const text = `${svcLabel(f.service)} in ${ward.code} ${ward.name}: ${tagLabel(f.tag)}. "${f.note}" — ${ward.code} spent ${cr(sum3(svc.value.actual))} on ${svcLabel(f.service).toLowerCase()} (${Math.round(svc.value.avgUtil * 100)}% of budget). ${location.href.split('#')[0]}#forum`
