@@ -256,7 +256,7 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
       <section id="forum" class="forum">
         <div class="section-head">
           <h2>On paper<br>vs on the ground.</h2>
-          <p>Pick a service. See what was spent. See what residents report. If you have the same problem, say so. Then share the card.</p>
+          <p>The ward's group chat. No login, no names. The pinned message is what the BMC spent. Everything under it is what residents see. Same problem? Tap me too.</p>
         </div>
         <Forum :ward-slug="wardSlug" :ward-code="ward.code" :ward-name="ward.name" :services="ward.services" :posts="posts" :counts="flags?.counts ?? {}" :initial-service="forumService" :open-form="showPostForm" @refresh="refreshFlags()" @celebrate="celebrate()" @petition="startPetition" @petitions-changed="petitionsKey++" @receipt="openReceipt" />
       </section>
@@ -366,12 +366,12 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
 .track { display: inline-block; padding: 10px 0; animation: ticker 28s linear infinite; font-weight: 900; font-size: 13px; }
 .track span span { margin-right: 38px; }
 @keyframes ticker { to { transform: translateX(-50%); } }
-nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 5vw; background: rgba(244,239,223,.94); backdrop-filter: blur(10px); border-bottom: 2px solid var(--ink); }
+nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px max(5vw, calc((100vw - 1440px) / 2)); background: rgba(244,239,223,.94); backdrop-filter: blur(10px); border-bottom: 2px solid var(--ink); }
 .logo { font-weight: 900; font-size: 20px; letter-spacing: -0.045em; white-space: nowrap; }
 .logo b { background: var(--yellow); padding: 3px 7px; border: 2px solid var(--ink); border-radius: 7px; box-shadow: 3px 3px 0 var(--ink); }
 nav .links { display: flex; gap: 16px; font-weight: 900; font-size: 13px; text-transform: uppercase; }
 nav a { text-decoration: none; }
-.hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 34px; padding: 64px 6vw 48px; align-items: center; border-bottom: 3px solid var(--ink); }
+.hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 34px; padding: 64px max(6vw, calc((100vw - 1440px) / 2)) 48px; align-items: center; border-bottom: 3px solid var(--ink); }
 .idbar { display: flex; gap: 8px; flex-wrap: wrap; }
 h1 { font-size: clamp(56px, 8.4vw, 128px); line-height: .84; letter-spacing: -.075em; margin: 22px 0; text-transform: uppercase; }
 .hero p { font-size: clamp(18px, 2vw, 24px); line-height: 1.25; font-weight: 700; max-width: 760px; }
@@ -381,7 +381,7 @@ h1 { font-size: clamp(56px, 8.4vw, 128px); line-height: .84; letter-spacing: -.0
 .herocard .slash { font-family: var(--display); font-size: clamp(64px, 9vw, 140px); line-height: .8; letter-spacing: -.07em; margin: 14px 0; }
 .herocard p { font-size: 18px; font-weight: 700; margin: 0 0 8px; }
 .mini { font-size: 12px; font-weight: 700; color: #3f3b34; }
-section { padding: 72px 6vw; border-bottom: 3px solid var(--ink); }
+section { padding: 72px max(6vw, calc((100vw - 1440px) / 2)); border-bottom: 3px solid var(--ink); }
 .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
 .section-head h2 { font-size: clamp(42px, 6vw, 84px); line-height: .9; letter-spacing: -.06em; text-transform: uppercase; }
 .section-head p { max-width: 480px; font-weight: 700; margin: 0; }
@@ -468,7 +468,7 @@ tr.sep th { padding-top: 16px; text-transform: uppercase; font-size: 11px; lette
 .close { background: var(--yellow); text-align: center; }
 .close h2 { font-size: clamp(52px, 8vw, 116px); line-height: .85; letter-spacing: -.07em; text-transform: uppercase; }
 .close p { font-size: 20px; font-weight: 700; max-width: 800px; margin: 24px auto; }
-footer { padding: 34px 6vw 50px; font-weight: 700; }
+footer { padding: 34px max(6vw, calc((100vw - 1440px) / 2)) 50px; font-weight: 700; }
 .disclaimer { background: var(--white); border: 2px dashed var(--ink); padding: 14px; border-radius: 12px; margin-top: 14px; font-size: 14px; }
 .pinkbtn { background: var(--pink); }
 .modal { position: fixed; inset: 0; background: rgba(17,17,17,.74); display: grid; place-items: center; padding: 20px; z-index: 99; }
