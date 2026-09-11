@@ -120,11 +120,11 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
               <div class="live-top"><span class="pill red">● Live</span><span class="pill">{{ svcIcon(heroPost.service) }} {{ svcLabel(heroPost.service) }}</span></div>
               <img v-if="heroPost.photo" :src="heroPost.photo" alt="" referrerpolicy="no-referrer" />
               <div class="live-title">{{ heroPost.title || heroPost.note }}</div>
-              <div class="live-meta">👀 {{ heroPost.confirms ?? 0 }} people say this is still here<span v-if="heroPost.locality"> · 📍 {{ heroPost.locality }}</span></div>
+              <div class="live-meta">👀 {{ heroPost.confirms ?? 0 }} {{ (heroPost.confirms ?? 0) === 1 ? 'person says' : 'people say' }} this is still here<span v-if="heroPost.locality"> · 📍 {{ heroPost.locality }}</span></div>
               <div class="live-cta">Open the forum →</div>
             </NuxtLink>
             <div class="latest">
-              <NuxtLink v-for="p in posts.slice(1, 4)" :key="p.id" class="card lp" :to="{ path: '/forum', hash: `#post-${p.id}` }">
+              <NuxtLink v-for="p in posts.slice(1, 4)" :key="p.id" class="card lp" :class="{ nopic: !p.photo }" :to="{ path: '/forum', hash: `#post-${p.id}` }">
                 <img v-if="p.photo" :src="p.photo" alt="" referrerpolicy="no-referrer" />
                 <div>
                   <div class="lp-tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcIcon(p.service) }} {{ svcLabel(p.service) }}</span></div>
@@ -253,6 +253,7 @@ h3 { font-size: 34px; letter-spacing: -.05em; line-height: 1; margin: 10px 0; }
 .teaser .vs { font-weight: 900; font-size: 17px; margin: 6px 0 4px; }
 .latest { display: grid; gap: 12px; align-content: start; }
 .lp { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 10px; text-decoration: none; align-items: center; }
+.lp.nopic { grid-template-columns: 1fr; }
 .lp img { width: 96px; height: 96px; object-fit: cover; border: 2px solid var(--ink); border-radius: 10px; }
 .lp-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
 .lp-title { margin: 0 0 4px; font-weight: 800; font-size: 15px; line-height: 1.25; }
