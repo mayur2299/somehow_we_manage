@@ -29,7 +29,7 @@ const punch = computed(() => {
   if (util.value < 90) return 'Money left on the table. Not on your road.'
   return 'On budget. So where is it?'
 })
-const caption = computed(() => `${props.wardCode} ${props.wardName.toUpperCase()} — ${props.service.label.toUpperCase()}\n${crore(spent.value)} SPENT (${util.value}% of budget)\n${svcPosts.value.length} resident report${svcPosts.value.length === 1 ? '' : 's'} say they don't see it\n${punch.value}\nIs your ward any better? Check your PIN → ${props.siteUrl}`)
+const caption = computed(() => `${props.wardCode} ${props.wardName.toUpperCase()} — ${props.service.label.toUpperCase()}\n${crore(spent.value)} SPENT (${util.value}% of budget)\n${svcPosts.value.length} resident report${svcPosts.value.length === 1 ? '' : 's'} ${svcPosts.value.length === 1 ? 'says' : 'say'} they don't see it\n${punch.value}\nIs your ward any better? Check your PIN → ${props.siteUrl}`)
 
 function loadImg(src: string) { return new Promise<HTMLImageElement>((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src }) }
 function rr(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
