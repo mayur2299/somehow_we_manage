@@ -58,6 +58,7 @@ const compare = (s: typeof ward.services[number]) => {
 const wardSlug = 'k-east'
 const { data: flags, refresh: refreshFlags } = await useFetch(`/api/flags?ward=${wardSlug}`, { default: () => ({ counts: {} as Record<string, number>, recent: [] as any[] }) })
 const posts = computed(() => flags.value?.recent ?? [])
+const heroPost = computed(() => posts.value.find((p: any) => p.photo && p.title) ?? posts.value[0])
 const photoCount = (k: string) => posts.value.filter((f: any) => f.service === k && f.photo).length
 const showPostForm = ref(false)
 const forumService = ref<string | undefined>()
@@ -107,11 +108,12 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
       <nav>
         <div class="logo">Where My Ward's <b>Money Goes</b></div>
         <div class="links">
-          <a href="#reps" @click.prevent="go('#reps')">Who</a>
+          <a href="#act" @click.prevent="go('#act')">Act</a>
+          <NuxtLink to="/forum">Forum</NuxtLink>
           <a href="#money" @click.prevent="go('#money')">Money</a>
           <a href="#services" @click.prevent="go('#services')">Where</a>
-          <a href="#forum" @click.prevent="go('#forum')">Ground</a>
           <a href="#petitions" @click.prevent="go('#petitions')">Petitions</a>
+          <a href="#reps" @click.prevent="go('#reps')">Who</a>
           <a href="#receipts" @click.prevent="go('#receipts')">Receipts</a>
         </div>
         <button class="btn sm" @click="changePin">← Change PIN</button>
@@ -128,16 +130,22 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
           <h1>Your ward<br>got money.<br>Now what?</h1>
           <p>See what {{ ward.name }} was allotted, what it actually spent, and where it went. Then post what you see on the ground, sign a petition, or send the BMC an RTI with the numbers already filled in.</p>
           <div class="cta-row">
-            <button class="btn primary" @click="go('#money')">Show me the money ↓</button>
-            <button class="btn" @click="go('#reps')">Who represents me?</button>
-            <button class="btn pinkbtn" @click="openReceipt()">🧾 Get the receipt</button>
+            <NuxtLink class="btn flag" :to="{ path: '/forum', query: { post: '1' } }">🚩 Report a problem</NuxtLink>
+            <button class="btn primary" @click="openReceipt()">🧾 Get the receipt</button>
+            <button class="btn act" @click="openRti()">Ask the BMC</button>
           </div>
         </div>
-        <div class="card feature pink herocard">
+        <NuxtLink v-if="heroPost" class="card feature pink herocard live" :to="{ path: '/forum', hash: `#post-${heroPost.id}` }">
+          <div class="live-top"><span class="pill red">● Live · {{ ward.code }}</span><span class="pill">{{ posts.length }} complaints</span></div>
+          <img v-if="heroPost.photo" :src="heroPost.photo" alt="" referrerpolicy="no-referrer" />
+          <div class="live-title">{{ heroPost.title || heroPost.note }}</div>
+          <div class="live-meta">👀 {{ heroPost.confirms ?? 0 }} people say this is still here<span v-if="heroPost.locality"> · 📍 {{ heroPost.locality }}</span></div>
+          <div class="live-cta">Open the forum →</div>
+        </NuxtLink>
+        <div v-else class="card feature pink herocard">
           <span class="pill">Ward share of total BMC budget</span>
           <div class="slash">{{ ctx.wardShare2021 }}% → {{ ctx.wardShare2025 }}%</div>
-          <p>The total BMC budget nearly doubled, ₹{{ ctx.bmcBudget2021.toLocaleString('en-IN') }} cr to ₹{{ ctx.bmcBudget2025.toLocaleString('en-IN') }} cr. The share reaching wards fell.</p>
-          <small class="mini">Source in the receipts section.</small>
+          <p>The total BMC budget nearly doubled. The share reaching wards fell.</p>
         </div>
       </header>
 
@@ -152,54 +160,43 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
         </div>
       </section>
 
-      <!-- 1. REPRESENTATIVES -->
-      <section id="reps">
-        <div class="section-head"><h2>Who<br>represents you.</h2><p>Elected {{ acc.electedOn }}. Before that, {{ acc.administratorPeriod.toLowerCase() }}, nobody was.</p></div>
+      <!-- ACT -->
+      <section id="act" class="actsec">
+        <div class="section-head"><h2>Don't just<br>look. Act.</h2><p>Four things you can do right now, no login. Each one carries the ward's own numbers.</p></div>
+        <div class="actgrid">
+          <NuxtLink class="card red actcard" :to="{ path: '/forum', query: { post: '1' } }"><span class="ic">🚩</span><h3>Report a problem</h3><p>Photo, location, what's wrong. It goes public in the ward chat.</p><span class="go">Post →</span></NuxtLink>
+          <button class="card yellow actcard" @click="openReceipt()"><span class="ic">🧾</span><h3>Share the receipt</h3><p>A savage, sourced card for WhatsApp, Instagram, X. Ends with "Is your ward any better?"</p><span class="go">Generate →</span></button>
+          <button class="card green actcard" @click="openRti()"><span class="ic">📄</span><h3>Ask the BMC</h3><p>An RTI application already filled with the allotted and spent figures. Copy, file, 30-day clock starts.</p><span class="go">Fill it →</span></button>
+          <a class="card purple actcard" href="#petitions" @click.prevent="go('#petitions')"><span class="ic">✍️</span><h3>Sign a petition</h3><p>Grievances with numbers on them. Sign one, or raise your own from any complaint.</p><span class="go">Sign →</span></a>
+        </div>
+      </section>
+
+      <!-- 4. FORUM / GROUND -->
+      <section id="forum" class="forum">
+        <div class="section-head">
+          <h2>On paper<br>vs on the ground.</h2>
+          <p>The ward's group chat. No login, no names. What the BMC spent, pinned at the top. What residents see, underneath.</p>
+        </div>
         <div class="grid">
-          <article class="card red span7">
-            <span class="pill">{{ acc.administratorPeriod }}</span>
-            <h3>No elected council for almost four years.</h3>
-            <p><strong>{{ acc.administratorNote }}</strong></p>
+          <article class="card pink span5 teaser">
+            <span class="pill">{{ ward.code }} residents</span>
+            <div class="big">{{ posts.length }}</div>
+            <div class="vs">complaints · {{ posts.reduce((a: number, p: any) => a + (p.confirms ?? 0), 0) }} "me too" · {{ posts.filter((p: any) => p.photo).length }} photos</div>
+            <div class="cta-row">
+              <NuxtLink class="btn primary" to="/forum">💬 Go to forum →</NuxtLink>
+              <NuxtLink class="btn flag" :to="{ path: '/forum', query: { post: '1' } }">🚩 Report a problem</NuxtLink>
+            </div>
           </article>
-          <article class="card span5">
-            <span class="pill">Ward office</span>
-            <h3 class="h-sm">{{ acc.wardOffice.title }}</h3>
-            <p>{{ acc.wardOffice.address }}<br><strong>{{ acc.wardOffice.phone }}</strong></p>
-            <p class="mini">{{ acc.wardOffice.note }}</p>
-          </article>
-          <article class="card span12">
-            <div class="reps-head">
+          <div class="span7 latest">
+            <NuxtLink v-for="p in posts.slice(0, 3)" :key="p.id" class="card lp" :to="{ path: '/forum', hash: `#post-${p.id}` }">
+              <img v-if="p.photo" :src="p.photo" alt="" referrerpolicy="no-referrer" />
               <div>
-                <span class="pill green">Corporators · electoral wards {{ acc.electoralWards }}</span>
-                <h3 class="h-sm">{{ acc.corporators.length }} corporators, {{ partyTally.map(([p, n]) => `${n} ${p}`).join(', ') }}.</h3>
+                <div class="lp-tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcIcon(p.service) }} {{ svcLabel(p.service) }}</span></div>
+                <p class="lp-title">{{ p.title || p.note }}</p>
+                <p class="mini">👀 {{ p.confirms ?? 0 }} me too · 💬 {{ p.comments ?? 0 }}<span v-if="p.locality"> · 📍 {{ p.locality }}</span></p>
               </div>
-              <p class="mini">Party shown as text only. Colours on this site mean data, never politics. "Declared" links open the candidate's own election affidavit search on MyNeta, where assets and pending cases are self-declared.</p>
-            </div>
-            <div class="reps">
-              <div v-for="c in acc.corporators" :key="c.ward" class="rep" :class="{ kn: c.nowKNorth }">
-                <span class="wn">{{ c.ward }}</span>
-                <div class="rep-body">
-                  <div class="nm">{{ c.name }}</div>
-                  <div class="pt">{{ c.party }} · {{ c.votes.toLocaleString('en-IN') }} votes</div>
-                </div>
-                <a class="btn sm" :href="affidavit(c.name)" target="_blank" rel="noopener">Declared ↗</a>
-              </div>
-            </div>
-            <p class="mini">{{ acc.kNorthNote }} Dashed cards now report to K/North.</p>
-            <hr class="divider" />
-            <div class="mlas">
-              <div v-for="m in acc.mlas" :key="m.constituency" class="mla">
-                <span class="pill">MLA · {{ m.constituency }}</span>
-                <div class="nm">{{ m.name }} <span class="pt">· {{ m.party }}</span></div>
-                <a class="btn sm" :href="affidavit(m.name)" target="_blank" rel="noopener">Declared ↗</a>
-              </div>
-              <div class="mla">
-                <span class="pill">Mayor of Mumbai</span>
-                <div class="nm">{{ acc.mayor.name }} <span class="pt">· {{ acc.mayor.party }}</span></div>
-                <a class="btn sm" :href="affidavit(acc.mayor.name)" target="_blank" rel="noopener">Declared ↗</a>
-              </div>
-            </div>
-          </article>
+            </NuxtLink>
+          </div>
         </div>
       </section>
 
@@ -263,39 +260,61 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
         </div>
       </section>
 
-      <!-- 4. FORUM / GROUND -->
-      <section id="forum" class="forum">
-        <div class="section-head">
-          <h2>On paper<br>vs on the ground.</h2>
-          <p>The ward's group chat. No login, no names. What the BMC spent, pinned at the top. What residents see, underneath.</p>
-        </div>
-        <div class="grid">
-          <article class="card pink span5 teaser">
-            <span class="pill">{{ ward.code }} residents</span>
-            <div class="big">{{ posts.length }}</div>
-            <div class="vs">complaints · {{ posts.reduce((a: number, p: any) => a + (p.confirms ?? 0), 0) }} "me too" · {{ posts.filter((p: any) => p.photo).length }} photos</div>
-            <div class="cta-row">
-              <NuxtLink class="btn primary" to="/forum">💬 Go to forum →</NuxtLink>
-              <NuxtLink class="btn flag" :to="{ path: '/forum', query: { post: '1' } }">🚩 Report a problem</NuxtLink>
-            </div>
-          </article>
-          <div class="span7 latest">
-            <NuxtLink v-for="p in posts.slice(0, 3)" :key="p.id" class="card lp" :to="{ path: '/forum', hash: `#post-${p.id}` }">
-              <img v-if="p.photo" :src="p.photo" alt="" referrerpolicy="no-referrer" />
-              <div>
-                <div class="lp-tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcIcon(p.service) }} {{ svcLabel(p.service) }}</span></div>
-                <p class="lp-title">{{ p.title || p.note }}</p>
-                <p class="mini">👀 {{ p.confirms ?? 0 }} me too · 💬 {{ p.comments ?? 0 }}<span v-if="p.locality"> · 📍 {{ p.locality }}</span></p>
-              </div>
-            </NuxtLink>
-          </div>
-        </div>
-      </section>
-
       <!-- 5. PETITIONS -->
       <section id="petitions">
         <div class="section-head"><h2>Put your<br>name on it.</h2><p>Grievances with numbers attached. Every petition carries the ward's own budget figures and goes to the ward office.</p></div>
         <Petitions :key="petitionsKey" :ward-slug="wardSlug" :ward-code="ward.code" :services="ward.services" :preselect="petitionPreselect" />
+      </section>
+
+      <!-- 1. REPRESENTATIVES -->
+      <section id="reps">
+        <div class="section-head"><h2>Who<br>represents you.</h2><p>Elected {{ acc.electedOn }}. Before that, {{ acc.administratorPeriod.toLowerCase() }}, nobody was.</p></div>
+        <div class="grid">
+          <article class="card red span7">
+            <span class="pill">{{ acc.administratorPeriod }}</span>
+            <h3>No elected council for almost four years.</h3>
+            <p><strong>{{ acc.administratorNote }}</strong></p>
+          </article>
+          <article class="card span5">
+            <span class="pill">Ward office</span>
+            <h3 class="h-sm">{{ acc.wardOffice.title }}</h3>
+            <p>{{ acc.wardOffice.address }}<br><strong>{{ acc.wardOffice.phone }}</strong></p>
+            <p class="mini">{{ acc.wardOffice.note }}</p>
+          </article>
+          <article class="card span12">
+            <div class="reps-head">
+              <div>
+                <span class="pill green">Corporators · electoral wards {{ acc.electoralWards }}</span>
+                <h3 class="h-sm">{{ acc.corporators.length }} corporators, {{ partyTally.map(([p, n]) => `${n} ${p}`).join(', ') }}.</h3>
+              </div>
+              <p class="mini">Party shown as text only. Colours on this site mean data, never politics. "Declared" links open the candidate's own election affidavit search on MyNeta, where assets and pending cases are self-declared.</p>
+            </div>
+            <div class="reps">
+              <div v-for="c in acc.corporators" :key="c.ward" class="rep" :class="{ kn: c.nowKNorth }">
+                <span class="wn">{{ c.ward }}</span>
+                <div class="rep-body">
+                  <div class="nm">{{ c.name }}</div>
+                  <div class="pt">{{ c.party }} · {{ c.votes.toLocaleString('en-IN') }} votes</div>
+                </div>
+                <a class="btn sm" :href="affidavit(c.name)" target="_blank" rel="noopener">Declared ↗</a>
+              </div>
+            </div>
+            <p class="mini">{{ acc.kNorthNote }} Dashed cards now report to K/North.</p>
+            <hr class="divider" />
+            <div class="mlas">
+              <div v-for="m in acc.mlas" :key="m.constituency" class="mla">
+                <span class="pill">MLA · {{ m.constituency }}</span>
+                <div class="nm">{{ m.name }} <span class="pt">· {{ m.party }}</span></div>
+                <a class="btn sm" :href="affidavit(m.name)" target="_blank" rel="noopener">Declared ↗</a>
+              </div>
+              <div class="mla">
+                <span class="pill">Mayor of Mumbai</span>
+                <div class="nm">{{ acc.mayor.name }} <span class="pt">· {{ acc.mayor.party }}</span></div>
+                <a class="btn sm" :href="affidavit(acc.mayor.name)" target="_blank" rel="noopener">Declared ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
       </section>
 
       <!-- MEMES -->
@@ -314,6 +333,8 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
         <div class="section-head"><h2>Every number<br>we have.</h2><p>No "trust us". Source, year, and whether a number is actual, estimate or unavailable.</p></div>
         <div class="grid">
           <article class="card span12">
+            <details class="alltable">
+              <summary class="btn">Show every number we have ▾</summary>
             <div class="tablewrap">
               <table>
                 <thead>
@@ -339,6 +360,7 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
               </table>
             </div>
             <p class="mini">₹ crore. <span class="pill red">Red</span> spent over 150% of allotment · <span class="pill blue">Blue</span> under 90% · <span class="pill green">Green</span> within range · <span class="pill purple">est.</span> not closed yet.</p>
+            </details>
           </article>
           <div class="span7 sources">
             <a v-for="s in ward.sources" :key="s.url" class="source" :href="s.url" target="_blank" rel="noopener">{{ s.name }}<small>{{ s.url.replace(/^https?:\/\//, '').split('/')[0] }}</small></a>
@@ -519,6 +541,24 @@ tr.sep th { padding-top: 16px; text-transform: uppercase; font-size: 11px; lette
 footer { padding: 34px max(6vw, calc((100vw - 1440px) / 2)) 50px; font-weight: 700; }
 .disclaimer { background: var(--white); border: 2px dashed var(--ink); padding: 14px; border-radius: 12px; margin-top: 14px; font-size: 14px; }
 .pinkbtn { background: var(--pink); }
+.herocard.live { display: grid; gap: 10px; text-decoration: none; color: var(--ink); padding: 18px; }
+.live-top { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.herocard.live img { width: 100%; height: 220px; object-fit: cover; border: 3px solid var(--ink); border-radius: 14px; display: block; }
+.live-title { font-family: var(--display); font-size: clamp(22px, 2.4vw, 32px); letter-spacing: -.04em; line-height: 1.02; }
+.live-meta { font-weight: 800; font-size: 14px; }
+.live-cta { font-weight: 900; text-decoration: underline; }
+.actsec { background: var(--paper); }
+.actgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.actcard { display: grid; gap: 8px; align-content: start; text-align: left; text-decoration: none; color: var(--ink); cursor: pointer; font: inherit; min-height: 220px; }
+.actcard .ic { font-size: 34px; }
+.actcard h3 { font-size: 26px; margin: 0; }
+.actcard p { margin: 0; font-weight: 700; font-size: 14px; line-height: 1.35; }
+.actcard .go { margin-top: auto; font-weight: 900; text-decoration: underline; }
+.actcard:hover { transform: translate(3px, 3px); box-shadow: 4px 4px 0 var(--ink); }
+.alltable summary { list-style: none; display: inline-flex; margin-bottom: 14px; }
+.alltable summary::-webkit-details-marker { display: none; }
+@media (max-width: 920px) { .actgrid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .actgrid { grid-template-columns: 1fr; } }
 .modal { position: fixed; inset: 0; background: rgba(17,17,17,.74); display: grid; place-items: center; padding: 20px; z-index: 99; }
 .modal-card { background: var(--paper); border: 3px solid var(--ink); border-radius: 22px; padding: 22px; max-width: 760px; width: 100%; box-shadow: 10px 10px 0 var(--yellow); max-height: 92vh; overflow: auto; display: grid; gap: 14px; }
 .modal-top { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
