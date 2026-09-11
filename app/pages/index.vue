@@ -78,7 +78,8 @@ function celebrate() { confettiOn.value = true; setTimeout(() => (confettiOn.val
 const confetti = Array.from({ length: 28 }, (_, i) => ({ left: `${(i * 37) % 100}vw`, delay: `${(i % 7) * 0.05}s`, bg: ['#ffd84d', '#b7ff4a', '#ff88c7', '#85c7ff'][i % 4] }))
 
 // threads
-const { data: threads } = await useFetch(`/api/threads?q=${encodeURIComponent('Andheri East')}`, { default: () => ({ source: 'snapshot', items: [] as any[] }), server: false })
+const threads = ref<{ source: string; items: any[] }>({ source: 'snapshot', items: [] })
+onMounted(async () => { try { threads.value = await $fetch(`/api/threads?q=${encodeURIComponent('Andheri East')}`) } catch {} })
 
 // ---------- RTI modal ----------
 const rtiOpen = ref(false)

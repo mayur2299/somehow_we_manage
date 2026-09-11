@@ -6,8 +6,11 @@ const props = defineProps<{
   preselect?: string
   prefill?: string
 }>()
-const { data, refresh } = await useFetch(`/api/petitions?ward=${props.wardSlug}`, { default: () => ({ petitions: [] as any[] }) })
-const list = computed(() => data.value?.petitions ?? [])
+const list = ref<any[]>([])
+async function refresh() {
+  try { const r = await $fetch<{ petitions: any[] }>(`/api/petitions?ward=${props.wardSlug}`); list.value = r.petitions } catch {}
+}
+onMounted(refresh)
 
 const creating = ref(false)
 const service = ref(props.preselect ?? props.services[0].key)
