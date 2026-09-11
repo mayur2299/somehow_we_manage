@@ -71,6 +71,7 @@ function openRti(k?: string) { if (k) selected.value = k; rtiOpen.value = true }
 
 // petitions
 const petitionPreselect = ref<string | undefined>()
+const petitionsKey = ref(0)
 function startPetition(k: string) { petitionPreselect.value = k; document.querySelector('#petitions')?.scrollIntoView({ behavior: 'smooth' }) }
 
 function go(id: string) { document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' }) }
@@ -250,13 +251,13 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
           <h2>On paper<br>vs on the ground.</h2>
           <p>The BMC's numbers, next to what residents of {{ ward.name }} actually see. Post, like, reply, share, or turn a post into a petition.</p>
         </div>
-        <Forum :ward-slug="wardSlug" :ward-code="ward.code" :ward-name="ward.name" :services="ward.services" :posts="posts" :counts="flags?.counts ?? {}" :initial-service="forumService" :open-form="showPostForm" @refresh="refreshFlags()" @celebrate="celebrate()" @petition="startPetition" />
+        <Forum :ward-slug="wardSlug" :ward-code="ward.code" :ward-name="ward.name" :services="ward.services" :posts="posts" :counts="flags?.counts ?? {}" :initial-service="forumService" :open-form="showPostForm" @refresh="refreshFlags()" @celebrate="celebrate()" @petition="startPetition" @petitions-changed="petitionsKey++" />
       </section>
 
       <!-- 5. PETITIONS -->
       <section id="petitions">
         <div class="section-head"><h2>Put your<br>name on it.</h2><p>Grievances with numbers attached. Every petition carries the ward's own budget figures and goes to the ward office.</p></div>
-        <Petitions :ward-slug="wardSlug" :ward-code="ward.code" :services="ward.services" :preselect="petitionPreselect" />
+        <Petitions :key="petitionsKey" :ward-slug="wardSlug" :ward-code="ward.code" :services="ward.services" :preselect="petitionPreselect" />
       </section>
 
       <!-- MEMES -->

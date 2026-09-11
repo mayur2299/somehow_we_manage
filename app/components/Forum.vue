@@ -10,7 +10,7 @@ const props = defineProps<{
   initialService?: string
   openForm?: boolean
 }>()
-const emit = defineEmits<{ (e: 'refresh'): void; (e: 'petition', service: string): void; (e: 'celebrate'): void }>()
+const emit = defineEmits<{ (e: 'refresh'): void; (e: 'petition', service: string): void; (e: 'celebrate'): void; (e: 'petitionsChanged'): void }>()
 
 const cr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
@@ -87,6 +87,50 @@ onMounted(() => {
   if (m) { const p = props.posts.find(x => x.id === m[1]); if (p) { service.value = 'all'; nextTick(() => { document.getElementById(`post-${p.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }); open.value[p.id] = true; loadComments(p) }) } }
 })
 
+// petitions linked to posts
+const petitions = ref<any[]>([])
+async function loadPetitions() {
+  try { const r = await $fetch<{ petitions: any[] }>(`/api/petitions?ward=${props.wardSlug}`); petitions.value = r.petitions } catch {}
+}
+onMounted(loadPetitions)
+const petitionFor = (p: any) => petitions.value.find(x => x.fromFlag === p.id)
+const signedP = ref<Record<string, boolean>>({})
+async function signFor(p: any) {
+  const pet = petitionFor(p)
+  if (!pet || signedP.value[pet.id]) return
+  signedP.value[pet.id] = true
+  try { await $fetch(`/api/petitions/${encodeURIComponent(`${pet.ward}:${pet.id}`)}/sign`, { method: 'POST' }); await loadPetitions(); emit('petitionsChanged'); toast.value = 'Signed. Your name is on it.' }
+  catch { signedP.value[pet.id] = false }
+}
+
+// raise a petition straight from a post
+const raising = ref<Record<string, boolean>>({})
+const pTitle = ref<Record<string, string>>({})
+const pDemand = ref<Record<string, string>>({})
+const pBusy = ref<Record<string, boolean>>({})
+function startRaise(p: any) {
+  raising.value[p.id] = !raising.value[p.id]
+  if (!raising.value[p.id]) return
+  const s = svcOf(p.service)!
+  const util = Math.round(s.avgUtil * 100)
+  const where = p.locality ? ` at ${p.locality}` : ''
+  pTitle.value[p.id] = pTitle.value[p.id] || `${s.label}${where}: ${tagLabel(p.tag).toLowerCase()}`
+  pDemand.value[p.id] = pDemand.value[p.id] || `A resident of ${props.wardCode} (${props.wardName}) reports${where}: "${p.note}"\n\n${props.wardCode} recorded ${cr(sum3(s.actual))} spent on ${s.label.toLowerCase()} between 2021-22 and 2023-24, ${util}% of what was allotted. We ask the Assistant Municipal Commissioner to inspect this location, publish the works and contractors behind that spend, and tell residents what will be fixed and by when.`
+}
+async function raise(p: any) {
+  const title = (pTitle.value[p.id] ?? '').trim()
+  const demand = (pDemand.value[p.id] ?? '').trim()
+  if (title.length < 8 || demand.length < 20) { toast.value = 'Add a title and what you are asking for.'; return }
+  pBusy.value[p.id] = true
+  try {
+    await $fetch('/api/petitions', { method: 'POST', body: { ward: props.wardSlug, service: p.service, title, demand, fromFlag: p.id } })
+    raising.value[p.id] = false
+    await loadPetitions(); emit('petitionsChanged'); emit('celebrate')
+    toast.value = 'Petition raised from this post.'
+  } catch (e: any) { toast.value = e?.data?.statusMessage || 'Could not save.' }
+  finally { pBusy.value[p.id] = false }
+}
+
 // threads (elsewhere)
 const threads = ref<{ source: string; items: any[] }>({ source: 'snapshot', items: [] })
 onMounted(async () => { try { threads.value = await $fetch(`/api/threads?q=${encodeURIComponent(props.wardName)}`) } catch {} })
@@ -148,9 +192,30 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
                 <button class="btn sm" :disabled="liked[p.id]" @click="like(p)">👍 {{ p.likes ?? 0 }}</button>
                 <button class="btn sm" @click="toggle(p)">💬 {{ p.comments ?? 0 }}</button>
                 <button class="btn sm" @click="share(p)">Share</button>
-                <button class="btn sm act" @click="emit('petition', p.service)">✍️</button>
               </div>
             </div>
+
+            <div class="pet-strip" :class="petitionFor(p) ? 'has' : ''">
+              <template v-if="petitionFor(p)">
+                <div class="pet-info">
+                  <span class="pill green">Petition raised</span>
+                  <p class="pet-title">{{ petitionFor(p).title }}</p>
+                  <p class="mini"><strong>{{ petitionFor(p).signatures }}</strong> {{ petitionFor(p).signatures === 1 ? 'signature' : 'signatures' }} · {{ petitionFor(p).status === 'open' ? 'collecting signatures' : petitionFor(p).status }}</p>
+                </div>
+                <button class="btn sm act" :disabled="signedP[petitionFor(p).id]" @click="signFor(p)">{{ signedP[petitionFor(p).id] ? '✓ Signed' : '✍️ Sign this' }}</button>
+              </template>
+              <template v-else>
+                <p class="mini">No petition on this yet.</p>
+                <button class="btn sm" @click="startRaise(p)">{{ raising[p.id] ? 'Cancel' : '✍️ Raise a petition' }}</button>
+              </template>
+            </div>
+
+            <form v-if="raising[p.id]" class="raise" @submit.prevent="raise(p)">
+              <input v-model="pTitle[p.id]" class="input" maxlength="120" placeholder="Petition title" />
+              <textarea v-model="pDemand[p.id]" class="input" rows="6" maxlength="600"></textarea>
+              <p class="mini">Pre-filled with this post and {{ wardCode }}'s own budget figures. Edit anything.</p>
+              <button class="btn sm act" type="submit" :disabled="pBusy[p.id]">{{ pBusy[p.id] ? 'Raising…' : 'Publish petition' }}</button>
+            </form>
             <div v-if="open[p.id]" class="comments">
               <p v-if="!comments[p.id]" class="mini">Loading…</p>
               <p v-else-if="!comments[p.id].length" class="mini">No replies yet.</p>
@@ -195,6 +260,12 @@ h3 { font-size: 26px; letter-spacing: -.05em; margin: 0 0 12px; }
 .note { margin: 0; font-weight: 700; }
 .foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
 .acts { display: flex; gap: 6px; flex-wrap: wrap; }
+.pet-strip { border-top: 2px dashed var(--ink); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.pet-strip.has { background: #f3ffe0; border: 2px solid var(--ink); border-radius: 12px; padding: 10px; }
+.pet-info { display: grid; gap: 4px; min-width: 0; flex: 1; }
+.pet-title { margin: 0; font-weight: 800; font-size: 14px; line-height: 1.25; }
+.raise { display: grid; gap: 8px; border-top: 2px dashed var(--ink); padding-top: 10px; }
+.raise .btn { justify-self: start; }
 .comments { border-top: 2px dashed var(--ink); padding-top: 10px; display: grid; gap: 8px; }
 .comment { background: var(--white); border: 2px solid var(--ink); border-radius: 12px; padding: 8px 10px; }
 .comment p { margin: 0 0 2px; font-weight: 600; font-size: 14px; }
