@@ -2,7 +2,6 @@
 import { tagLabel } from '~/utils/tags'
 const { ward, pin, area, ready, clear } = useWardContext()
 const { openReceipt, openRti } = useWardModals()
-watchEffect(() => { if (import.meta.client && !ready.value && !localStorage.getItem('wmwmg:pin')) navigateTo('/') })
 const { data: flags, refresh: refreshFlags } = await useFetch(() => `/api/flags?ward=${useState<string>('ward-slug').value}`, { default: () => ({ counts: {} as Record<string, number>, recent: [] as any[] }), watch: [useState<string>('ward-slug')] })
 const posts = computed(() => flags.value?.recent ?? [])
 const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`

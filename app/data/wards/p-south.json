@@ -362,13 +362,44 @@
     "nowKNorth": false
    }
   ],
-  "wardOffice": null,
-  "mlas": [],
+  "wardOffice": {
+   "title": "Assistant Municipal Commissioner, P/S",
+   "address": "3rd floor, CTS No. 746, S.V. Road, Goregaon West, Mumbai 400104",
+   "phone": "022-28737000",
+   "note": "The RTI on this page is addressed to this office."
+  },
+  "mlas": [
+   {
+    "constituency": "Goregaon",
+    "name": "Vidhya Thakur",
+    "party": "BJP"
+   },
+   {
+    "constituency": "Jogeshwari East",
+    "name": "Anant Nar",
+    "party": "SHS-UBT"
+   },
+   {
+    "constituency": "Versova",
+    "name": "Haroon Khan",
+    "party": "SHS-UBT"
+   },
+   {
+    "constituency": "Andheri West",
+    "name": "Ameet Satam",
+    "party": "BJP"
+   }
+  ],
   "mayor": {
    "name": "Ritu Tawde",
    "party": "BJP"
   },
-  "roadContractorNote": ""
+  "roadContractorNote": "",
+  "mp": {
+   "constituency": "Mumbai North West",
+   "name": "Ravindra Waikar",
+   "party": "SHS"
+  }
  },
  "cityContext": {
   "wardShare2021": 18,
@@ -397,10 +428,11 @@
   {
    "name": "BMC / MyBMC official website",
    "url": "https://portal.mcgm.gov.in/"
+  },
+  {
+   "name": "MajhaWard — BMC ward offices, corporators and MLAs",
+   "url": "https://majhaward.com/"
   }
  ],
- "todo": [
-  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
-  "mlas: assembly constituency mapping not yet verified"
- ]
+ "todo": []
 }

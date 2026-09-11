@@ -337,13 +337,39 @@
     "nowKNorth": false
    }
   ],
-  "wardOffice": null,
-  "mlas": [],
+  "wardOffice": {
+   "title": "Assistant Municipal Commissioner, R/N",
+   "address": "CS No. 921/7, Dahisar Gaon, Rustomji Colony, Raganath Keskar Marg, Dahisar West, Mumbai 400068",
+   "phone": "022-28920242",
+   "note": "The RTI on this page is addressed to this office."
+  },
+  "mlas": [
+   {
+    "constituency": "Dahisar",
+    "name": "Manisha Chaudhary",
+    "party": "BJP"
+   },
+   {
+    "constituency": "Magathane",
+    "name": "Prakash Surve",
+    "party": "SHS"
+   },
+   {
+    "constituency": "Borivali",
+    "name": "Sanjay Upadhyay",
+    "party": "BJP"
+   }
+  ],
   "mayor": {
    "name": "Ritu Tawde",
    "party": "BJP"
   },
-  "roadContractorNote": ""
+  "roadContractorNote": "",
+  "mp": {
+   "constituency": "Mumbai North",
+   "name": "Piyush Goyal",
+   "party": "BJP"
+  }
  },
  "cityContext": {
   "wardShare2021": 18,
@@ -372,10 +398,11 @@
   {
    "name": "BMC / MyBMC official website",
    "url": "https://portal.mcgm.gov.in/"
+  },
+  {
+   "name": "MajhaWard — BMC ward offices, corporators and MLAs",
+   "url": "https://majhaward.com/"
   }
  ],
- "todo": [
-  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
-  "mlas: assembly constituency mapping not yet verified"
- ]
+ "todo": []
 }

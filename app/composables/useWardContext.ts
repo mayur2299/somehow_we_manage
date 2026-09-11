@@ -19,15 +19,19 @@ export function useWardContext() {
     try { localStorage.removeItem('wmwmg:pin') } catch {}
     navigateTo('/')
   }
-  onMounted(() => {
+  // resolve the pin as early as possible, then redirect only if there is genuinely none
+  const resolveNow = (redirectIfMissing: boolean) => {
     if (ready.value) return
     try {
-      const q = (route.query.pin as string) || new URLSearchParams(location.search).get('pin')
-      const saved = localStorage.getItem('wmwmg:pin')
+      const q = (route.query.pin as string) || (import.meta.client ? new URLSearchParams(location.search).get('pin') : null)
+      const saved = import.meta.client ? localStorage.getItem('wmwmg:pin') : null
       const p = q || saved
-      if (p) apply(p)
+      if (p && apply(p)) return
+      if (redirectIfMissing && import.meta.client && route.path !== '/') navigateTo('/')
     } catch {}
-  })
+  }
+  if (import.meta.client) resolveNow(false)
+  onMounted(() => resolveNow(true))
   const ward = computed(() => WARDS[slug.value])
   return { slug, pin, area, ready, ward, apply, clear }
 }

@@ -283,18 +283,77 @@
   "electedOn": "16 January 2026",
   "administratorPeriod": "March 2022 to January 2026",
   "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
-  "electoralWards": null,
+  "electoralWards": "103 to 108",
   "electoralWardsSource": null,
   "kNorthNote": "",
   "kNorthSource": null,
-  "corporators": [],
-  "wardOffice": null,
-  "mlas": [],
+  "corporators": [
+   {
+    "ward": 103,
+    "name": "Dr. Hetal Gala Morvekar",
+    "party": "BJP",
+    "votes": 17334,
+    "nowKNorth": false
+   },
+   {
+    "ward": 104,
+    "name": "Prakash Kashinath Gangadhare",
+    "party": "BJP",
+    "votes": 15569,
+    "nowKNorth": false
+   },
+   {
+    "ward": 105,
+    "name": "Anita Nandkumar Vaiti",
+    "party": "BJP",
+    "votes": 14742,
+    "nowKNorth": false
+   },
+   {
+    "ward": 106,
+    "name": "Prabhakar Shinde",
+    "party": "BJP",
+    "votes": 11897,
+    "nowKNorth": false
+   },
+   {
+    "ward": 107,
+    "name": "Dr. Neil Kirit Somaiya",
+    "party": "BJP",
+    "votes": 21229,
+    "nowKNorth": false
+   },
+   {
+    "ward": 108,
+    "name": "Deepika Sandesh Ghag",
+    "party": "BJP",
+    "votes": 16300,
+    "nowKNorth": false
+   }
+  ],
+  "wardOffice": {
+   "title": "Assistant Municipal Commissioner, T",
+   "address": "1st floor, Lala Devidayal Road, Mulund West, Mumbai 400080",
+   "phone": "022-25645289",
+   "note": "The RTI on this page is addressed to this office."
+  },
+  "mlas": [
+   {
+    "constituency": "Mulund",
+    "name": "Mihir Kotecha",
+    "party": "BJP"
+   }
+  ],
   "mayor": {
    "name": "Ritu Tawde",
    "party": "BJP"
   },
-  "roadContractorNote": ""
+  "roadContractorNote": "",
+  "mp": {
+   "constituency": "Mumbai North East",
+   "name": "Sanjay Dina Patil",
+   "party": "SHS-UBT"
+  }
  },
  "cityContext": {
   "wardShare2021": 18,
@@ -323,11 +382,11 @@
   {
    "name": "BMC / MyBMC official website",
    "url": "https://portal.mcgm.gov.in/"
+  },
+  {
+   "name": "MajhaWard — BMC ward offices, corporators and MLAs",
+   "url": "https://majhaward.com/"
   }
  ],
- "todo": [
-  "corporators: NOT populated — the only FPJ source found lists an identical electoral-ward range (104-122) for both S and T, and electoral wards 83-86 are unaccounted for elsewhere in the same table, so the range for this ward could not be reliably verified without guessing. Needs a dedicated per-ward 'Know Your Ward: S' / 'Know Your Ward: T' article or the official BMC delimitation notification to resolve.",
-  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
-  "mlas: assembly constituency mapping not yet verified"
- ]
+ "todo": []
 }

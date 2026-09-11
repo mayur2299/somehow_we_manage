@@ -334,13 +334,34 @@
     "nowKNorth": false
    }
   ],
-  "wardOffice": null,
-  "mlas": [],
+  "wardOffice": {
+   "title": "Assistant Municipal Commissioner, H/W",
+   "address": "2nd Hasnabad Lane, Khar West, Mumbai 400052",
+   "phone": "022-26007367",
+   "note": "The RTI on this page is addressed to this office."
+  },
+  "mlas": [
+   {
+    "constituency": "Andheri West",
+    "name": "Ameet Satam",
+    "party": "BJP"
+   },
+   {
+    "constituency": "Vandre West",
+    "name": "Ashish Shelar",
+    "party": "BJP"
+   }
+  ],
   "mayor": {
    "name": "Ritu Tawde",
    "party": "BJP"
   },
-  "roadContractorNote": ""
+  "roadContractorNote": "",
+  "mp": {
+   "constituency": "Mumbai North Central",
+   "name": "Varsha Gaikwad",
+   "party": "INC"
+  }
  },
  "cityContext": {
   "wardShare2021": 18,
@@ -369,10 +390,11 @@
   {
    "name": "BMC / MyBMC official website",
    "url": "https://portal.mcgm.gov.in/"
+  },
+  {
+   "name": "MajhaWard — BMC ward offices, corporators and MLAs",
+   "url": "https://majhaward.com/"
   }
  ],
- "todo": [
-  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
-  "mlas: assembly constituency mapping not yet verified"
- ]
+ "todo": []
 }

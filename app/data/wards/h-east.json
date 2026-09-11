@@ -369,13 +369,34 @@
     "nowKNorth": false
    }
   ],
-  "wardOffice": null,
-  "mlas": [],
+  "wardOffice": {
+   "title": "Assistant Municipal Commissioner, H/E",
+   "address": "Terrace Room, Plot No. 137, TPS-5, Prabhat Colony, Santacruz East, Mumbai 400055",
+   "phone": "022-26182217",
+   "note": "The RTI on this page is addressed to this office."
+  },
+  "mlas": [
+   {
+    "constituency": "Bandra East",
+    "name": "Varun Sardesai",
+    "party": "SHS-UBT"
+   },
+   {
+    "constituency": "Vandre West",
+    "name": "Ashish Shelar",
+    "party": "BJP"
+   }
+  ],
   "mayor": {
    "name": "Ritu Tawde",
    "party": "BJP"
   },
-  "roadContractorNote": ""
+  "roadContractorNote": "",
+  "mp": {
+   "constituency": "Mumbai North Central",
+   "name": "Varsha Gaikwad",
+   "party": "INC"
+  }
  },
  "cityContext": {
   "wardShare2021": 18,
@@ -404,10 +425,11 @@
   {
    "name": "BMC / MyBMC official website",
    "url": "https://portal.mcgm.gov.in/"
+  },
+  {
+   "name": "MajhaWard — BMC ward offices, corporators and MLAs",
+   "url": "https://majhaward.com/"
   }
  ],
- "todo": [
-  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
-  "mlas: assembly constituency mapping not yet verified"
- ]
+ "todo": []
 }

@@ -2,7 +2,6 @@
 import { tagLabel } from '~/utils/tags'
 const { ward, pin, area, ready, clear } = useWardContext()
 const { openReceipt, openRti } = useWardModals()
-watchEffect(() => { if (import.meta.client && !ready.value && !localStorage.getItem('wmwmg:pin')) navigateTo('/') })
 const { data: flags, refresh: refreshFlags } = await useFetch(() => `/api/flags?ward=${useState<string>('ward-slug').value}`, { default: () => ({ counts: {} as Record<string, number>, recent: [] as any[] }), watch: [useState<string>('ward-slug')] })
 const posts = computed(() => flags.value?.recent ?? [])
 const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
@@ -69,6 +68,11 @@ useHead({ title: computed(() => `Who represents ${ward.value.code} ${ward.value.
                 <span class="pill">MLA · {{ m.constituency }}</span>
                 <div class="nm">{{ m.name }} <span class="pt">· {{ m.party }}</span></div>
                 <a class="btn sm" :href="affidavit(m.name)" target="_blank" rel="noopener">Declared ↗</a>
+              </div>
+              <div v-if="acc.mp" class="mla">
+                <span class="pill">Lok Sabha MP</span>
+                <div class="nm">{{ acc.mp.name }} <span class="pt">· {{ acc.mp.party }}</span></div>
+                <a class="btn sm" :href="affidavit(acc.mp.name)" target="_blank" rel="noopener">Declared ↗</a>
               </div>
               <div v-if="acc.mayor" class="mla">
                 <span class="pill">Mayor of Mumbai</span>

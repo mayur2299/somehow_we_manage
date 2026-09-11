@@ -430,24 +430,39 @@
    {
     "constituency": "Andheri East",
     "name": "Murji Patel",
-    "party": "Shiv Sena"
+    "party": "SHS"
    },
    {
     "constituency": "Jogeshwari East",
     "name": "Anant Nar",
-    "party": "SS (UBT)"
+    "party": "SHS-UBT"
    },
    {
     "constituency": "Vile Parle",
     "name": "Parag Alavani",
     "party": "BJP"
+   },
+   {
+    "constituency": "Kalina",
+    "name": "Sanjay Potnis",
+    "party": "SHS-UBT"
+   },
+   {
+    "constituency": "Bandra East",
+    "name": "Varun Sardesai",
+    "party": "SHS-UBT"
    }
   ],
   "mayor": {
    "name": "Ritu Tawde",
    "party": "BJP"
   },
-  "roadContractorNote": "Since 2023 the BMC has awarded road concretisation as a handful of zone-level contracts worth thousands of crore. Contractor names per individual work in this ward are not published. Question 1 of the RTI asks for them."
+  "roadContractorNote": "Since 2023 the BMC has awarded road concretisation as a handful of zone-level contracts worth thousands of crore. Contractor names per individual work in this ward are not published. Question 1 of the RTI asks for them.",
+  "mp": {
+   "constituency": "Mumbai North East",
+   "name": "Sanjay Dina Patil",
+   "party": "SHS-UBT"
+  }
  },
  "cityContext": {
   "wardShare2021": 18,
@@ -497,6 +512,10 @@
   {
    "name": "Wikipedia, 2026 Brihanmumbai Municipal Corporation election",
    "url": "https://en.wikipedia.org/wiki/2026_Brihanmumbai_Municipal_Corporation_election"
+  },
+  {
+   "name": "MajhaWard — BMC ward offices, corporators and MLAs",
+   "url": "https://majhaward.com/"
   }
  ],
  "todo": []

@@ -351,13 +351,44 @@
     "nowKNorth": false
    }
   ],
-  "wardOffice": null,
-  "mlas": [],
+  "wardOffice": {
+   "title": "Assistant Municipal Commissioner, R/S",
+   "address": "2nd floor, M.G. Cross Road No. 2, Kandivali West, Mumbai 400067",
+   "phone": "022-28056000",
+   "note": "The RTI on this page is addressed to this office."
+  },
+  "mlas": [
+   {
+    "constituency": "Charkop",
+    "name": "Yogesh Sagar",
+    "party": "BJP"
+   },
+   {
+    "constituency": "Kandivali East",
+    "name": "Atul Bhatkhalkar",
+    "party": "BJP"
+   },
+   {
+    "constituency": "Magathane",
+    "name": "Prakash Surve",
+    "party": "SHS"
+   },
+   {
+    "constituency": "Malad West",
+    "name": "Aslam Shaikh",
+    "party": "INC"
+   }
+  ],
   "mayor": {
    "name": "Ritu Tawde",
    "party": "BJP"
   },
-  "roadContractorNote": ""
+  "roadContractorNote": "",
+  "mp": {
+   "constituency": "Mumbai North",
+   "name": "Piyush Goyal",
+   "party": "BJP"
+  }
  },
  "cityContext": {
   "wardShare2021": 18,
@@ -386,10 +417,11 @@
   {
    "name": "BMC / MyBMC official website",
    "url": "https://portal.mcgm.gov.in/"
+  },
+  {
+   "name": "MajhaWard — BMC ward offices, corporators and MLAs",
+   "url": "https://majhaward.com/"
   }
  ],
- "todo": [
-  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
-  "mlas: assembly constituency mapping not yet verified"
- ]
+ "todo": []
 }

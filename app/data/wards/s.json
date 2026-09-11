@@ -291,18 +291,148 @@
   "electedOn": "16 January 2026",
   "administratorPeriod": "March 2022 to January 2026",
   "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
-  "electoralWards": null,
+  "electoralWards": "109 to 122",
   "electoralWardsSource": null,
   "kNorthNote": "",
   "kNorthSource": null,
-  "corporators": [],
-  "wardOffice": null,
-  "mlas": [],
+  "corporators": [
+   {
+    "ward": 109,
+    "name": "Suresh Atmaram Shinde",
+    "party": "SS (UBT)",
+    "votes": 10520,
+    "nowKNorth": false
+   },
+   {
+    "ward": 110,
+    "name": "Asha Suresh Koparkar",
+    "party": "Congress",
+    "votes": 9179,
+    "nowKNorth": false
+   },
+   {
+    "ward": 111,
+    "name": "Deepak Rajaram Sawant",
+    "party": "SS (UBT)",
+    "votes": 12206,
+    "nowKNorth": false
+   },
+   {
+    "ward": 112,
+    "name": "Sakshi Deepak Dalvi",
+    "party": "BJP",
+    "votes": 14045,
+    "nowKNorth": false
+   },
+   {
+    "ward": 113,
+    "name": "Badhe Dipmala Baban",
+    "party": "SS (UBT)",
+    "votes": 10310,
+    "nowKNorth": false
+   },
+   {
+    "ward": 114,
+    "name": "Rajul Sanjay Patil",
+    "party": "SS (UBT)",
+    "votes": 11819,
+    "nowKNorth": false
+   },
+   {
+    "ward": 115,
+    "name": "Rajbhoj Jyoti Anil",
+    "party": "MNS",
+    "votes": 12452,
+    "nowKNorth": false
+   },
+   {
+    "ward": 116,
+    "name": "Jagruti Pratik Patil",
+    "party": "BJP",
+    "votes": 11038,
+    "nowKNorth": false
+   },
+   {
+    "ward": 117,
+    "name": "Shweta Rajesh Pawaskar",
+    "party": "SS (UBT)",
+    "votes": 13440,
+    "nowKNorth": false
+   },
+   {
+    "ward": 118,
+    "name": "Sunita Chandrashekhar Jadhav",
+    "party": "SS (UBT)",
+    "votes": 16199,
+    "nowKNorth": false
+   },
+   {
+    "ward": 119,
+    "name": "Rajesh Pandharinath Sonawale",
+    "party": "Shiv Sena",
+    "votes": 8121,
+    "nowKNorth": false
+   },
+   {
+    "ward": 120,
+    "name": "Vishwas Tukaram Shinde",
+    "party": "SS (UBT)",
+    "votes": 10378,
+    "nowKNorth": false
+   },
+   {
+    "ward": 121,
+    "name": "Thackeray Priyadarshani Nagesh",
+    "party": "SS (UBT)",
+    "votes": 5547,
+    "nowKNorth": false
+   },
+   {
+    "ward": 122,
+    "name": "Sharma Chandan Chittaranjan",
+    "party": "BJP",
+    "votes": 11320,
+    "nowKNorth": false
+   }
+  ],
+  "wardOffice": {
+   "title": "Assistant Municipal Commissioner, S",
+   "address": "2nd floor, LBS Road, Near Mangatram Petrol Pump, Bhandup West, Mumbai 400078",
+   "phone": "022-25947570",
+   "note": "The RTI on this page is addressed to this office."
+  },
+  "mlas": [
+   {
+    "constituency": "Bhandup West",
+    "name": "Ashok Patil",
+    "party": "SHS"
+   },
+   {
+    "constituency": "Vikhroli",
+    "name": "Sunil Raut",
+    "party": "SHS-UBT"
+   },
+   {
+    "constituency": "Ghatkopar West",
+    "name": "Ram Kadam",
+    "party": "BJP"
+   },
+   {
+    "constituency": "Ghatkopar East",
+    "name": "Parag Shah",
+    "party": "BJP"
+   }
+  ],
   "mayor": {
    "name": "Ritu Tawde",
    "party": "BJP"
   },
-  "roadContractorNote": ""
+  "roadContractorNote": "",
+  "mp": {
+   "constituency": "Mumbai North East",
+   "name": "Sanjay Dina Patil",
+   "party": "SHS-UBT"
+  }
  },
  "cityContext": {
   "wardShare2021": 18,
@@ -331,11 +461,11 @@
   {
    "name": "BMC / MyBMC official website",
    "url": "https://portal.mcgm.gov.in/"
+  },
+  {
+   "name": "MajhaWard — BMC ward offices, corporators and MLAs",
+   "url": "https://majhaward.com/"
   }
  ],
- "todo": [
-  "corporators: NOT populated — the only FPJ source found lists an identical electoral-ward range (104-122) for both S and T, and electoral wards 83-86 are unaccounted for elsewhere in the same table, so the range for this ward could not be reliably verified without guessing. Needs a dedicated per-ward 'Know Your Ward: S' / 'Know Your Ward: T' article or the official BMC delimitation notification to resolve.",
-  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
-  "mlas: assembly constituency mapping not yet verified"
- ]
+ "todo": []
 }

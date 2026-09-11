@@ -369,13 +369,39 @@
     "nowKNorth": false
    }
   ],
-  "wardOffice": null,
-  "mlas": [],
+  "wardOffice": {
+   "title": "Assistant Municipal Commissioner, N",
+   "address": "2nd floor, Jawahar Road, Ghatkopar East, Mumbai 400077",
+   "phone": "022-25010161",
+   "note": "The RTI on this page is addressed to this office."
+  },
+  "mlas": [
+   {
+    "constituency": "Ghatkopar West",
+    "name": "Ram Kadam",
+    "party": "BJP"
+   },
+   {
+    "constituency": "Ghatkopar East",
+    "name": "Parag Shah",
+    "party": "BJP"
+   },
+   {
+    "constituency": "Mankhurd-Shivajinagar",
+    "name": "Abu Asim Azmi",
+    "party": "SP"
+   }
+  ],
   "mayor": {
    "name": "Ritu Tawde",
    "party": "BJP"
   },
-  "roadContractorNote": ""
+  "roadContractorNote": "",
+  "mp": {
+   "constituency": "Mumbai North East",
+   "name": "Sanjay Dina Patil",
+   "party": "SHS-UBT"
+  }
  },
  "cityContext": {
   "wardShare2021": 18,
@@ -404,10 +430,11 @@
   {
    "name": "BMC / MyBMC official website",
    "url": "https://portal.mcgm.gov.in/"
+  },
+  {
+   "name": "MajhaWard — BMC ward offices, corporators and MLAs",
+   "url": "https://majhaward.com/"
   }
  ],
- "todo": [
-  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
-  "mlas: assembly constituency mapping not yet verified"
- ]
+ "todo": []
 }
