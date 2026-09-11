@@ -1,0 +1,450 @@
+{
+ "code": "M/E",
+ "name": "Chembur, Govandi",
+ "areas": "Chembur, Govandi",
+ "population2025": 850877,
+ "slumPopulation": 245300,
+ "slumShare": 0.3,
+ "years": [
+  "2021-22",
+  "2022-23",
+  "2023-24",
+  "2024-25",
+  "2025-26"
+ ],
+ "note": "Actual spend is only closed two years after allocation. 2024-25 and 2025-26 show budget estimates only.",
+ "total": {
+  "label": "Total ward budget",
+  "ward": {
+   "be": [
+    522,
+    432,
+    436,
+    451,
+    431
+   ],
+   "actual": [
+    686,
+    604,
+    648,
+    null,
+    null
+   ],
+   "perCapita": 7677
+  },
+  "mumbai": {
+   "be": [
+    6963,
+    6718,
+    7651,
+    7996,
+    7984
+   ],
+   "actual": [
+    8840,
+    9026,
+    10344,
+    null,
+    null
+   ],
+   "perCapita": 7250
+  }
+ },
+ "revenue": {
+  "label": "Day-to-day running (revenue)",
+  "ward": {
+   "be": [
+    291,
+    325,
+    350,
+    409,
+    401
+   ],
+   "actual": [
+    415,
+    435,
+    471,
+    null,
+    null
+   ],
+   "perCapita": 5231
+  }
+ },
+ "capital": {
+  "label": "New works (capital)",
+  "ward": {
+   "be": [
+    231,
+    107,
+    87,
+    41,
+    31
+   ],
+   "actual": [
+    271,
+    170,
+    177,
+    null,
+    null
+   ],
+   "perCapita": 2446
+  },
+  "mumbai": {
+   "be": [
+    1927,
+    1138,
+    1606,
+    915,
+    1105
+   ],
+   "actual": [
+    2846,
+    1691,
+    2882,
+    null,
+    null
+   ],
+   "perCapita": 1907
+  }
+ },
+ "propertyTax": {
+  "actual": [
+   95,
+   84,
+   55
+  ],
+  "perCapita": 929
+ },
+ "services": [
+  {
+   "key": "swm",
+   "label": "Garbage collection",
+   "icon": "🗑️",
+   "be": [
+    80,
+    85,
+    85,
+    107,
+    108
+   ],
+   "actual": [
+    84,
+    93,
+    111,
+    null,
+    null
+   ],
+   "avgUtil": 1.15,
+   "perCapita": 1266,
+   "fact": "389 tonnes of garbage lifted every day",
+   "mumbaiAvgUtil": 1.04
+  },
+  {
+   "key": "roads",
+   "label": "Roads",
+   "icon": "🛣️",
+   "be": [
+    19,
+    19,
+    24,
+    23,
+    23
+   ],
+   "actual": [
+    31,
+    40,
+    51,
+    null,
+    null
+   ],
+   "avgUtil": 1.95,
+   "perCapita": 265,
+   "fact": "91 km of roads in the ward",
+   "mumbaiAvgUtil": 1.63
+  },
+  {
+   "key": "swd",
+   "label": "Storm water drains",
+   "icon": "🌧️",
+   "be": [
+    7.0,
+    6.8,
+    6.5,
+    6.6,
+    7.2
+   ],
+   "actual": [
+    32.1,
+    30.3,
+    33.4,
+    null,
+    null
+   ],
+   "avgUtil": 4.72,
+   "perCapita": 85,
+   "fact": "91 km of roadside drains",
+   "mumbaiAvgUtil": 3.83
+  },
+  {
+   "key": "health",
+   "label": "Health services",
+   "icon": "🏥",
+   "be": [
+    10,
+    11,
+    12,
+    28,
+    23
+   ],
+   "actual": [
+    31,
+    17,
+    19,
+    null,
+    null
+   ],
+   "avgUtil": 2.14,
+   "perCapita": 269,
+   "fact": "18 municipal dispensaries",
+   "mumbaiAvgUtil": 2.07
+  },
+  {
+   "key": "parks",
+   "label": "Parks and gardens",
+   "icon": "🌳",
+   "be": [
+    6,
+    8,
+    6,
+    8,
+    8
+   ],
+   "actual": [
+    6,
+    9,
+    7,
+    null,
+    null
+   ],
+   "avgUtil": 1.09,
+   "perCapita": 89,
+   "fact": "",
+   "mumbaiAvgUtil": 1.0
+  },
+  {
+   "key": "markets",
+   "label": "Markets",
+   "icon": "🧺",
+   "be": [
+    0.9,
+    1.0,
+    1.0,
+    1.1,
+    0.6
+   ],
+   "actual": [
+    0.1,
+    0.1,
+    0.1,
+    null,
+    null
+   ],
+   "avgUtil": 0.11,
+   "perCapita": 7,
+   "fact": "2 municipal markets",
+   "mumbaiAvgUtil": 0.86
+  }
+ ],
+ "slumImprovement": {
+  "be": [
+   125.1,
+   44.7,
+   36.3,
+   23.4,
+   11.2
+  ],
+  "changePct": -91
+ },
+ "pincodes": [
+  {
+   "pin": "400043",
+   "area": "Govandi"
+  },
+  {
+   "pin": "400085",
+   "area": "Anushakti Nagar"
+  },
+  {
+   "pin": "400088",
+   "area": "Chembur, Trombay"
+  },
+  {
+   "pin": "400089",
+   "area": "Chembur Colony"
+  },
+  {
+   "pin": "400094",
+   "area": "Mankhurd"
+  }
+ ],
+ "accountable": {
+  "electedOn": "16 January 2026",
+  "administratorPeriod": "March 2022 to January 2026",
+  "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
+  "electoralWards": "134 to 148",
+  "electoralWardsSource": {
+   "name": "Free Press Journal — \"Know Your Ward\" series (BMC Elections 2026)",
+   "url": "https://www.freepressjournal.in/mumbai/bmc-elections-2026-attention-mumbaikars-which-ward-is-your-area-in-full-list-from-dahisar-to-colaba"
+  },
+  "kNorthNote": "",
+  "kNorthSource": null,
+  "corporators": [
+   {
+    "ward": 134,
+    "name": "Mehjabin Atique Ahmed Khan",
+    "party": "AIMIM",
+    "votes": 8414,
+    "nowKNorth": false
+   },
+   {
+    "ward": 135,
+    "name": "Navnath Uttam Ban",
+    "party": "BJP",
+    "votes": 5578,
+    "nowKNorth": false
+   },
+   {
+    "ward": 136,
+    "name": "Qureshi Mo. Zamir",
+    "party": "AIMIM",
+    "votes": 14921,
+    "nowKNorth": false
+   },
+   {
+    "ward": 137,
+    "name": "Shamir Ramzan Patel",
+    "party": "AIMIM",
+    "votes": 9436,
+    "nowKNorth": false
+   },
+   {
+    "ward": 138,
+    "name": "Roshan Irfan Sheikh",
+    "party": "AIMIM",
+    "votes": 7499,
+    "nowKNorth": false
+   },
+   {
+    "ward": 139,
+    "name": "Shabana Atif Sheikh",
+    "party": "AIMIM",
+    "votes": 9940,
+    "nowKNorth": false
+   },
+   {
+    "ward": 140,
+    "name": "Vijay Tatoba Ubale",
+    "party": "AIMIM",
+    "votes": 4945,
+    "nowKNorth": false
+   },
+   {
+    "ward": 141,
+    "name": "Vitthal Govind Lokare",
+    "party": "SS (UBT)",
+    "votes": 6372,
+    "nowKNorth": false
+   },
+   {
+    "ward": 142,
+    "name": "Apexa Gopal Khandekar",
+    "party": "Shiv Sena",
+    "votes": 5438,
+    "nowKNorth": false
+   },
+   {
+    "ward": 143,
+    "name": "Shabana Mohammad Faruk Kazi",
+    "party": "AIMIM",
+    "votes": 5264,
+    "nowKNorth": false
+   },
+   {
+    "ward": 144,
+    "name": "Panchal Dinesh Harishchandra",
+    "party": "BJP",
+    "votes": 8844,
+    "nowKNorth": false
+   },
+   {
+    "ward": 145,
+    "name": "Khairunsa Akbar Hussain",
+    "party": "AIMIM",
+    "votes": 7653,
+    "nowKNorth": false
+   },
+   {
+    "ward": 146,
+    "name": "Samruddhi Ganesh Kate",
+    "party": "Shiv Sena",
+    "votes": 9777,
+    "nowKNorth": false
+   },
+   {
+    "ward": 147,
+    "name": "Pragya Sunil Sadafule",
+    "party": "Shiv Sena",
+    "votes": 5144,
+    "nowKNorth": false
+   },
+   {
+    "ward": 148,
+    "name": "Naik Anjali Sanjay",
+    "party": "Shiv Sena",
+    "votes": 5004,
+    "nowKNorth": false
+   }
+  ],
+  "wardOffice": null,
+  "mlas": [],
+  "mayor": {
+   "name": "Ritu Tawde",
+   "party": "BJP"
+  },
+  "roadContractorNote": ""
+ },
+ "cityContext": {
+  "wardShare2021": 18,
+  "wardShare2025": 11,
+  "bmcBudget2021": 39027,
+  "bmcBudget2025": 74367,
+  "notPublished": [
+   "Actual expenditure for 2024-25 and 2025-26 (ward budgets publish only Budget Estimates for the current year, not revised estimates or actuals of the prior year)",
+   "Ward-wise personnel/staffing costs (no data available from ward budget books or BMC's Human Resource Department)"
+  ],
+  "penaltyExample": {
+   "text": "The Storm Water Drains (SWD) Department has a 57% vacancy rate in BMC HR as of December 2024; the average time to resolve a complaint rose from 33 days in 2023 to 57 days in 2024.",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf",
+   "source": "Praja Foundation, Report on Wardwise Budget in Mumbai 2025, p.20"
+  }
+ },
+ "sources": [
+  {
+   "name": "Praja Foundation — Report on Wardwise Budget in Mumbai 2025",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf"
+  },
+  {
+   "name": "OpenCity — BMC Election Results 2026 (dataset)",
+   "url": "https://data.opencity.in/dataset/bmc-election-results-2026"
+  },
+  {
+   "name": "BMC / MyBMC official website",
+   "url": "https://portal.mcgm.gov.in/"
+  }
+ ],
+ "todo": [
+  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
+  "mlas: assembly constituency mapping not yet verified",
+  "pincodes: India Post locality mapping not yet compiled"
+ ]
+}

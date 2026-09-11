@@ -1,0 +1,354 @@
+{
+"400001": [
+"a",
+"Fort, Ballard Estate"
+],
+"400005": [
+"a",
+"Colaba, Cuffe Parade"
+],
+"400020": [
+"a",
+"Churchgate"
+],
+"400021": [
+"a",
+"Nariman Point"
+],
+"400023": [
+"a",
+"Ballard Estate"
+],
+"400032": [
+"a",
+"Mantralaya"
+],
+"400039": [
+"a",
+"Cuffe Parade"
+],
+"400003": [
+"b",
+"Masjid Bunder, Mandvi"
+],
+"400009": [
+"b",
+"Chinchbunder"
+],
+"400002": [
+"c",
+"Kalbadevi, Marine Lines"
+],
+"400004": [
+"d",
+"Girgaon, Thakurdwar"
+],
+"400006": [
+"d",
+"Malabar Hill"
+],
+"400007": [
+"d",
+"Grant Road, Tardeo"
+],
+"400026": [
+"d",
+"Cumballa Hill, Breach Candy"
+],
+"400034": [
+"d",
+"Tardeo"
+],
+"400036": [
+"d",
+"Walkeshwar"
+],
+"400008": [
+"e",
+"Mumbai Central, Nagpada"
+],
+"400010": [
+"e",
+"Mazgaon"
+],
+"400011": [
+"e",
+"Jacob Circle, Chinchpokli"
+],
+"400027": [
+"e",
+"Kalachowki"
+],
+"400014": [
+"f-north",
+"Dadar East, Naigaon"
+],
+"400017": [
+"f-north",
+"Sion Koliwada, Antop Hill"
+],
+"400019": [
+"f-north",
+"Matunga East"
+],
+"400022": [
+"f-north",
+"Sion"
+],
+"400031": [
+"f-north",
+"Wadala"
+],
+"400037": [
+"f-north",
+"Wadala East"
+],
+"400012": [
+"f-south",
+"Parel"
+],
+"400013": [
+"f-south",
+"Lower Parel"
+],
+"400015": [
+"f-south",
+"Sewri"
+],
+"400033": [
+"f-south",
+"Cotton Green"
+],
+"400016": [
+"g-north",
+"Mahim"
+],
+"400028": [
+"g-north",
+"Dadar West, Shivaji Park"
+],
+"400018": [
+"g-south",
+"Worli"
+],
+"400025": [
+"g-south",
+"Prabhadevi"
+],
+"400030": [
+"g-south",
+"Worli Naka"
+],
+"400051": [
+"h-east",
+"Bandra East, Kalanagar"
+],
+"400055": [
+"h-east",
+"Santacruz East"
+],
+"400098": [
+"h-east",
+"Kalina, Vakola"
+],
+"400050": [
+"h-west",
+"Bandra West"
+],
+"400052": [
+"h-west",
+"Khar West"
+],
+"400054": [
+"h-west",
+"Santacruz West"
+],
+"400057": [
+"k-east",
+"Vile Parle East"
+],
+"400059": [
+"k-east",
+"Marol, Andheri East"
+],
+"400060": [
+"k-east",
+"Jogeshwari East"
+],
+"400069": [
+"k-east",
+"Andheri East (Gundavali)"
+],
+"400072": [
+"k-east",
+"Sakinaka"
+],
+"400093": [
+"k-east",
+"Chakala, MIDC Andheri"
+],
+"400096": [
+"k-east",
+"SEEPZ"
+],
+"400099": [
+"k-east",
+"Sahar, Airport"
+],
+"400053": [
+"k-west",
+"Andheri West, Versova"
+],
+"400056": [
+"k-west",
+"Vile Parle West"
+],
+"400058": [
+"k-west",
+"Andheri West"
+],
+"400061": [
+"k-west",
+"Madh, Versova"
+],
+"400102": [
+"k-west",
+"Andheri West (Lokhandwala)"
+],
+"400070": [
+"l",
+"Kurla East"
+],
+"400024": [
+"l",
+"Kurla West"
+],
+"400084": [
+"l",
+"Kurla (Nehru Nagar)"
+],
+"400071": [
+"m-west",
+"Chembur"
+],
+"400074": [
+"m-west",
+"Chembur, Tilak Nagar"
+],
+"400088": [
+"m-east",
+"Chembur, Trombay"
+],
+"400089": [
+"m-east",
+"Chembur Colony"
+],
+"400094": [
+"m-east",
+"Mankhurd"
+],
+"400085": [
+"m-east",
+"Anushakti Nagar"
+],
+"400043": [
+"m-east",
+"Govandi"
+],
+"400075": [
+"n",
+"Ghatkopar West"
+],
+"400077": [
+"n",
+"Ghatkopar East"
+],
+"400086": [
+"n",
+"Ghatkopar East (Pant Nagar)"
+],
+"400064": [
+"p-north",
+"Malad West"
+],
+"400065": [
+"p-north",
+"Malad East"
+],
+"400097": [
+"p-north",
+"Malad East (Kurar)"
+],
+"400062": [
+"p-south",
+"Goregaon West"
+],
+"400063": [
+"p-south",
+"Goregaon East"
+],
+"400090": [
+"p-south",
+"Goregaon"
+],
+"400066": [
+"r-central",
+"Borivali East"
+],
+"400091": [
+"r-central",
+"Borivali West"
+],
+"400092": [
+"r-central",
+"Borivali West (IC Colony)"
+],
+"400068": [
+"r-north",
+"Dahisar"
+],
+"400103": [
+"r-north",
+"Dahisar East"
+],
+"400067": [
+"r-south",
+"Kandivali West"
+],
+"400101": [
+"r-south",
+"Kandivali East"
+],
+"400076": [
+"s",
+"Powai"
+],
+"400078": [
+"s",
+"Bhandup West"
+],
+"400079": [
+"s",
+"Vikhroli"
+],
+"400083": [
+"s",
+"Vikhroli East, Kannamwar Nagar"
+],
+"400042": [
+"s",
+"Bhandup East"
+],
+"400080": [
+"t",
+"Mulund West"
+],
+"400081": [
+"t",
+"Mulund East"
+],
+"400082": [
+"t",
+"Bhandup (Mulund border)"
+]
+}

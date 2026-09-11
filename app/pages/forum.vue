@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import ward from '~/data/k-east.json'
+import { WARDS, resolvePin, DEFAULT_SLUG } from '~/utils/wards'
 const route = useRoute()
-const wardSlug = 'k-east'
-const initial = typeof route.query.service === 'string' && ward.services.some(s => s.key === route.query.service) ? String(route.query.service) : undefined
+const slug = ref(typeof route.query.ward === 'string' && WARDS[route.query.ward] ? String(route.query.ward) : DEFAULT_SLUG)
+const ward = computed(() => WARDS[slug.value])
+const wardSlug = computed(() => slug.value)
+const initial = typeof route.query.service === 'string' ? String(route.query.service) : undefined
 const openForm = route.query.post === '1'
 
 // PIN context: keep the ward identity; if none, send to the gate
@@ -13,16 +15,18 @@ onMounted(() => {
     const saved = localStorage.getItem('wmwmg:pin')
     pin.value = q || saved
     if (q) localStorage.setItem('wmwmg:pin', q)
-    if (!pin.value) navigateTo('/')
+    if (!pin.value) { navigateTo('/'); return }
+    const hit = resolvePin(pin.value!)
+    if (hit) slug.value = hit.slug
   } catch {}
 })
-const area = computed(() => ward.pincodes.find(p => p.pin === pin.value)?.area ?? ward.name)
+const area = computed(() => ward.value.pincodes.find((p: any) => p.pin === pin.value)?.area ?? ward.value.name)
 
-const { data: flags, refresh: refreshFlags } = await useFetch(`/api/flags?ward=${wardSlug}`, { default: () => ({ counts: {} as Record<string, number>, recent: [] as any[] }) })
+const { data: flags, refresh: refreshFlags } = await useFetch(() => `/api/flags?ward=${slug.value}`, { default: () => ({ counts: {} as Record<string, number>, recent: [] as any[] }) })
 const posts = computed(() => flags.value?.recent ?? [])
 
 const selected = ref(initial ?? 'swd')
-const svc = computed(() => ward.services.find(s => s.key === selected.value)!)
+const svc = computed(() => ward.value.services.find((s: any) => s.key === selected.value) ?? ward.value.services[0])
 const receiptOpen = ref(false)
 const receiptPost = ref<any | null>(null)
 function openReceipt(k: string, post?: any) { selected.value = k; receiptPost.value = post ?? null; receiptOpen.value = true }
@@ -31,7 +35,7 @@ const confettiOn = ref(false)
 function celebrate() { confettiOn.value = true; setTimeout(() => (confettiOn.value = false), 2200) }
 const confetti = Array.from({ length: 28 }, (_, i) => ({ left: `${(i * 37) % 100}vw`, delay: `${(i % 7) * 0.05}s`, bg: ['#ffd84d', '#b7ff4a', '#ff88c7', '#85c7ff'][i % 4] }))
 function toPetitions() { navigateTo({ path: '/', hash: '#petitions' }) }
-useHead({ title: `${ward.code} residents · Where My Ward's Money Goes` })
+useHead({ title: computed(() => `${ward.value.code} residents · Where My Ward's Money Goes`) })
 </script>
 
 <template>

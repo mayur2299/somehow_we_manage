@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import ward from '~/data/k-east.json'
-const wardSlug = 'k-east'
-const { data, refresh } = await useFetch(`/api/petitions?ward=${wardSlug}`, { default: () => ({ petitions: [] as any[] }) })
+import { WARDS, resolvePin, DEFAULT_SLUG } from '~/utils/wards'
+const route = useRoute()
+const slug = ref(typeof route.query.ward === 'string' && WARDS[route.query.ward] ? String(route.query.ward) : DEFAULT_SLUG)
+const ward = computed(() => WARDS[slug.value])
+const { data, refresh } = await useFetch(() => `/api/petitions?ward=${slug.value}`, { default: () => ({ petitions: [] as any[] }) })
 const list = computed(() => data.value?.petitions ?? [])
-const groups = computed(() => ward.services.map(s => ({ ...s, items: list.value.filter((p: any) => p.service === s.key).sort((a: any, b: any) => b.signatures - a.signatures) })).filter(g => g.items.length))
+const groups = computed(() => ward.value.services.map(s => ({ ...s, items: list.value.filter((p: any) => p.service === s.key).sort((a: any, b: any) => b.signatures - a.signatures) })).filter(g => g.items.length))
 const total = computed(() => list.value.reduce((a: number, p: any) => a + p.signatures, 0))
 const signed = ref<Record<string, boolean>>({})
 async function sign(p: any) {
@@ -15,8 +17,8 @@ const statusLabel: Record<string, string> = { open: 'Collecting signatures', sen
 const statusClass: Record<string, string> = { open: 'yellow', sent: 'blue', answered: 'green' }
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
 const pin = ref<string | null>(null)
-onMounted(() => { try { pin.value = new URLSearchParams(location.search).get('pin') || localStorage.getItem('wmwmg:pin') } catch {} })
-useHead({ title: `Petitions · ${ward.code} · Where My Ward's Money Goes` })
+onMounted(() => { try { pin.value = new URLSearchParams(location.search).get('pin') || localStorage.getItem('wmwmg:pin'); const h = pin.value ? resolvePin(pin.value) : null; if (h) { slug.value = h.slug; refresh() } } catch {} })
+useHead({ title: computed(() => `Petitions · ${ward.value.code}`) })
 </script>
 
 <template>
@@ -30,7 +32,7 @@ useHead({ title: `Petitions · ${ward.code} · Where My Ward's Money Goes` })
       <header class="head">
         <span class="pill green">{{ ward.code }} · {{ ward.name }}</span>
         <h1>Petitions.<br>By type.</h1>
-        <p><strong>{{ list.length }}</strong> petitions · <strong>{{ total }}</strong> signatures · no login. Every one carries the ward's own spend figures and is addressed to the ward office.</p>
+        <p><strong>{{ list.length }}</strong> {{ list.length === 1 ? 'petition' : 'petitions' }} · <strong>{{ total }}</strong> {{ total === 1 ? 'signature' : 'signatures' }} · no login. Every one carries the ward's own spend figures and is addressed to the ward office.</p>
         <NuxtLink class="btn primary" :to="{ path: '/', hash: '#petitions' }">✍️ Start a petition</NuxtLink>
       </header>
 
@@ -56,7 +58,7 @@ useHead({ title: `Petitions · ${ward.code} · Where My Ward's Money Goes` })
           </article>
         </div>
       </section>
-      <p v-if="!groups.length" class="empty">No petitions yet for {{ ward.code }}.</p>
+      <p v-if="!groups.length" class="empty">No petitions yet for {{ ward.code }}. Start one from a complaint in the <NuxtLink to="/forum">forum</NuxtLink>.</p>
     </main>
   </div>
 </template>

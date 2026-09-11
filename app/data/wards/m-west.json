@@ -1,0 +1,375 @@
+{
+ "code": "M/W",
+ "name": "Chembur West",
+ "areas": "Chembur West",
+ "population2025": 433900,
+ "slumPopulation": 217200,
+ "slumShare": 0.53,
+ "years": [
+  "2021-22",
+  "2022-23",
+  "2023-24",
+  "2024-25",
+  "2025-26"
+ ],
+ "note": "Actual spend is only closed two years after allocation. 2024-25 and 2025-26 show budget estimates only.",
+ "total": {
+  "label": "Total ward budget",
+  "ward": {
+   "be": [
+    236,
+    242,
+    275,
+    305,
+    282
+   ],
+   "actual": [
+    434,
+    312,
+    343,
+    null,
+    null
+   ],
+   "perCapita": 8452
+  },
+  "mumbai": {
+   "be": [
+    6963,
+    6718,
+    7651,
+    7996,
+    7984
+   ],
+   "actual": [
+    8840,
+    9026,
+    10344,
+    null,
+    null
+   ],
+   "perCapita": 7250
+  }
+ },
+ "revenue": {
+  "label": "Day-to-day running (revenue)",
+  "ward": {
+   "be": [
+    199,
+    223,
+    239,
+    280,
+    268
+   ],
+   "actual": [
+    234,
+    273,
+    286,
+    null,
+    null
+   ],
+   "perCapita": 6156
+  }
+ },
+ "capital": {
+  "label": "New works (capital)",
+  "ward": {
+   "be": [
+    37,
+    19,
+    36,
+    25,
+    14
+   ],
+   "actual": [
+    200,
+    38,
+    57,
+    null,
+    null
+   ],
+   "perCapita": 2295
+  },
+  "mumbai": {
+   "be": [
+    1927,
+    1138,
+    1606,
+    915,
+    1105
+   ],
+   "actual": [
+    2846,
+    1691,
+    2882,
+    null,
+    null
+   ],
+   "perCapita": 1907
+  }
+ },
+ "propertyTax": {
+  "actual": [
+   152,
+   143,
+   73
+  ],
+  "perCapita": 2864
+ },
+ "services": [
+  {
+   "key": "swm",
+   "label": "Garbage collection",
+   "icon": "🗑️",
+   "be": [
+    76,
+    85,
+    91,
+    100,
+    98
+   ],
+   "actual": [
+    82,
+    89,
+    98,
+    null,
+    null
+   ],
+   "avgUtil": 1.07,
+   "perCapita": 2256,
+   "fact": "226 tonnes of garbage lifted every day",
+   "mumbaiAvgUtil": 1.04
+  },
+  {
+   "key": "roads",
+   "label": "Roads",
+   "icon": "🛣️",
+   "be": [
+    17,
+    20,
+    19,
+    21,
+    21
+   ],
+   "actual": [
+    23,
+    26,
+    39,
+    null,
+    null
+   ],
+   "avgUtil": 1.58,
+   "perCapita": 482,
+   "fact": "77 km of roads in the ward",
+   "mumbaiAvgUtil": 1.63
+  },
+  {
+   "key": "swd",
+   "label": "Storm water drains",
+   "icon": "🌧️",
+   "be": [
+    4.1,
+    2.6,
+    4.1,
+    5.2,
+    5.0
+   ],
+   "actual": [
+    19.2,
+    20.0,
+    22.1,
+    null,
+    null
+   ],
+   "avgUtil": 5.95,
+   "perCapita": 115,
+   "fact": "96 km of roadside drains",
+   "mumbaiAvgUtil": 3.83
+  },
+  {
+   "key": "health",
+   "label": "Health services",
+   "icon": "🏥",
+   "be": [
+    10,
+    11,
+    11,
+    19,
+    17
+   ],
+   "actual": [
+    22,
+    14,
+    14,
+    null,
+    null
+   ],
+   "avgUtil": 1.61,
+   "perCapita": 388,
+   "fact": "10 municipal dispensaries",
+   "mumbaiAvgUtil": 2.07
+  },
+  {
+   "key": "parks",
+   "label": "Parks and gardens",
+   "icon": "🌳",
+   "be": [
+    9,
+    10,
+    8,
+    15,
+    12
+   ],
+   "actual": [
+    7,
+    10,
+    8,
+    null,
+    null
+   ],
+   "avgUtil": 0.92,
+   "perCapita": 266,
+   "fact": "",
+   "mumbaiAvgUtil": 1.0
+  },
+  {
+   "key": "markets",
+   "label": "Markets",
+   "icon": "🧺",
+   "be": [
+    1.1,
+    1.0,
+    0.8,
+    0.9,
+    0.9
+   ],
+   "actual": [
+    0.1,
+    0.2,
+    0.1,
+    null,
+    null
+   ],
+   "avgUtil": 0.12,
+   "perCapita": 20,
+   "fact": "2 municipal markets",
+   "mumbaiAvgUtil": 0.86
+  }
+ ],
+ "slumImprovement": {
+  "be": [
+   13.3,
+   7.4,
+   16.3,
+   5.9,
+   6.0
+  ],
+  "changePct": -55
+ },
+ "pincodes": [
+  {
+   "pin": "400071",
+   "area": "Chembur"
+  },
+  {
+   "pin": "400074",
+   "area": "Chembur, Tilak Nagar"
+  }
+ ],
+ "accountable": {
+  "electedOn": "16 January 2026",
+  "administratorPeriod": "March 2022 to January 2026",
+  "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
+  "electoralWards": "149 to 154",
+  "electoralWardsSource": {
+   "name": "Free Press Journal — \"Know Your Ward\" series (BMC Elections 2026)",
+   "url": "https://www.freepressjournal.in/mumbai/bmc-elections-2026-attention-mumbaikars-which-ward-is-your-area-in-full-list-from-dahisar-to-colaba"
+  },
+  "kNorthNote": "",
+  "kNorthSource": null,
+  "corporators": [
+   {
+    "ward": 149,
+    "name": "Susham Gopal Sawant",
+    "party": "BJP",
+    "votes": 13174,
+    "nowKNorth": false
+   },
+   {
+    "ward": 150,
+    "name": "Vaishali Ajit Shendkar",
+    "party": "Congress",
+    "votes": 8859,
+    "nowKNorth": false
+   },
+   {
+    "ward": 151,
+    "name": "Kashish Rajesh Phulwaria",
+    "party": "BJP",
+    "votes": 13606,
+    "nowKNorth": false
+   },
+   {
+    "ward": 152,
+    "name": "Asha Subhash Marathe",
+    "party": "BJP",
+    "votes": 12491,
+    "nowKNorth": false
+   },
+   {
+    "ward": 153,
+    "name": "Meenakshi Anil Patankar",
+    "party": "SS (UBT)",
+    "votes": 16069,
+    "nowKNorth": false
+   },
+   {
+    "ward": 154,
+    "name": "Mahadev Shankar Shivgan",
+    "party": "BJP",
+    "votes": 11349,
+    "nowKNorth": false
+   }
+  ],
+  "wardOffice": null,
+  "mlas": [],
+  "mayor": {
+   "name": "Ritu Tawde",
+   "party": "BJP"
+  },
+  "roadContractorNote": ""
+ },
+ "cityContext": {
+  "wardShare2021": 18,
+  "wardShare2025": 11,
+  "bmcBudget2021": 39027,
+  "bmcBudget2025": 74367,
+  "notPublished": [
+   "Actual expenditure for 2024-25 and 2025-26 (ward budgets publish only Budget Estimates for the current year, not revised estimates or actuals of the prior year)",
+   "Ward-wise personnel/staffing costs (no data available from ward budget books or BMC's Human Resource Department)"
+  ],
+  "penaltyExample": {
+   "text": "The Storm Water Drains (SWD) Department has a 57% vacancy rate in BMC HR as of December 2024; the average time to resolve a complaint rose from 33 days in 2023 to 57 days in 2024.",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf",
+   "source": "Praja Foundation, Report on Wardwise Budget in Mumbai 2025, p.20"
+  }
+ },
+ "sources": [
+  {
+   "name": "Praja Foundation — Report on Wardwise Budget in Mumbai 2025",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf"
+  },
+  {
+   "name": "OpenCity — BMC Election Results 2026 (dataset)",
+   "url": "https://data.opencity.in/dataset/bmc-election-results-2026"
+  },
+  {
+   "name": "BMC / MyBMC official website",
+   "url": "https://portal.mcgm.gov.in/"
+  }
+ ],
+ "todo": [
+  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
+  "mlas: assembly constituency mapping not yet verified",
+  "pincodes: India Post locality mapping not yet compiled"
+ ]
+}

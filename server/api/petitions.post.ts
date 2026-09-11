@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   const service = String(body?.service ?? '')
   const title = String(body?.title ?? '').trim().slice(0, 120)
   const demand = String(body?.demand ?? '').trim().slice(0, 600)
-  if (!WARDS.includes(ward as any)) throw createError({ statusCode: 400, statusMessage: 'Unknown ward' })
+  if (!WARDS.includes(ward)) throw createError({ statusCode: 400, statusMessage: 'Unknown ward' })
   if (!SERVICES.includes(service as any)) throw createError({ statusCode: 400, statusMessage: 'Unknown service' })
   if (title.length < 8) throw createError({ statusCode: 400, statusMessage: 'Give the petition a title' })
   if (demand.length < 20) throw createError({ statusCode: 400, statusMessage: 'Say what you are asking for' })

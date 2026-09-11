@@ -1,0 +1,407 @@
+{
+ "code": "R/C",
+ "name": "Borivali",
+ "areas": "Borivali",
+ "population2025": 592198,
+ "slumPopulation": 104300,
+ "slumShare": 0.19,
+ "years": [
+  "2021-22",
+  "2022-23",
+  "2023-24",
+  "2024-25",
+  "2025-26"
+ ],
+ "note": "Actual spend is only closed two years after allocation. 2024-25 and 2025-26 show budget estimates only.",
+ "total": {
+  "label": "Total ward budget",
+  "ward": {
+   "be": [
+    234,
+    220,
+    238,
+    279,
+    263
+   ],
+   "actual": [
+    301,
+    309,
+    364,
+    null,
+    null
+   ],
+   "perCapita": 5542
+  },
+  "mumbai": {
+   "be": [
+    6963,
+    6718,
+    7651,
+    7996,
+    7984
+   ],
+   "actual": [
+    8840,
+    9026,
+    10344,
+    null,
+    null
+   ],
+   "perCapita": 7250
+  }
+ },
+ "revenue": {
+  "label": "Day-to-day running (revenue)",
+  "ward": {
+   "be": [
+    180,
+    199,
+    214,
+    262,
+    247
+   ],
+   "actual": [
+    238,
+    245,
+    257,
+    null,
+    null
+   ],
+   "perCapita": 4209
+  }
+ },
+ "capital": {
+  "label": "New works (capital)",
+  "ward": {
+   "be": [
+    53,
+    20,
+    23,
+    17,
+    16
+   ],
+   "actual": [
+    62,
+    65,
+    108,
+    null,
+    null
+   ],
+   "perCapita": 1333
+  },
+  "mumbai": {
+   "be": [
+    1927,
+    1138,
+    1606,
+    915,
+    1105
+   ],
+   "actual": [
+    2846,
+    1691,
+    2882,
+    null,
+    null
+   ],
+   "perCapita": 1907
+  }
+ },
+ "propertyTax": {
+  "actual": [
+   201,
+   196,
+   105
+  ],
+  "perCapita": 2857
+ },
+ "services": [
+  {
+   "key": "swm",
+   "label": "Garbage collection",
+   "icon": "🗑️",
+   "be": [
+    56,
+    61,
+    63,
+    85,
+    80
+   ],
+   "actual": [
+    59,
+    66,
+    69,
+    null,
+    null
+   ],
+   "avgUtil": 1.08,
+   "perCapita": 1349,
+   "fact": "168 tonnes of garbage lifted every day",
+   "mumbaiAvgUtil": 1.04
+  },
+  {
+   "key": "roads",
+   "label": "Roads",
+   "icon": "🛣️",
+   "be": [
+    17,
+    18,
+    20,
+    20,
+    20
+   ],
+   "actual": [
+    26,
+    34,
+    32,
+    null,
+    null
+   ],
+   "avgUtil": 1.7,
+   "perCapita": 342,
+   "fact": "132 km of roads in the ward",
+   "mumbaiAvgUtil": 1.63
+  },
+  {
+   "key": "swd",
+   "label": "Storm water drains",
+   "icon": "🌧️",
+   "be": [
+    8.2,
+    8.3,
+    8.1,
+    7.7,
+    8.5
+   ],
+   "actual": [
+    22.2,
+    20.1,
+    19.7,
+    null,
+    null
+   ],
+   "avgUtil": 2.51,
+   "perCapita": 143,
+   "fact": "228 km of roadside drains",
+   "mumbaiAvgUtil": 3.83
+  },
+  {
+   "key": "health",
+   "label": "Health services",
+   "icon": "🏥",
+   "be": [
+    9,
+    10,
+    13,
+    21,
+    18
+   ],
+   "actual": [
+    22,
+    21,
+    15,
+    null,
+    null
+   ],
+   "avgUtil": 1.93,
+   "perCapita": 311,
+   "fact": "13 municipal dispensaries",
+   "mumbaiAvgUtil": 2.07
+  },
+  {
+   "key": "parks",
+   "label": "Parks and gardens",
+   "icon": "🌳",
+   "be": [
+    10,
+    13,
+    16,
+    13,
+    12
+   ],
+   "actual": [
+    9,
+    13,
+    16,
+    null,
+    null
+   ],
+   "avgUtil": 0.96,
+   "perCapita": 204,
+   "fact": "",
+   "mumbaiAvgUtil": 1.0
+  },
+  {
+   "key": "markets",
+   "label": "Markets",
+   "icon": "🧺",
+   "be": [
+    1.0,
+    0.9,
+    1.4,
+    1.8,
+    1.7
+   ],
+   "actual": [
+    1.6,
+    1.8,
+    1.6,
+    null,
+    null
+   ],
+   "avgUtil": 1.6,
+   "perCapita": 29,
+   "fact": "1 municipal markets",
+   "mumbaiAvgUtil": 0.86
+  }
+ ],
+ "slumImprovement": {
+  "be": [
+   9.5,
+   4.1,
+   8.5,
+   2.7,
+   2.8
+  ],
+  "changePct": -70
+ },
+ "pincodes": [
+  {
+   "pin": "400066",
+   "area": "Borivali East"
+  },
+  {
+   "pin": "400091",
+   "area": "Borivali West"
+  },
+  {
+   "pin": "400092",
+   "area": "Borivali West (IC Colony)"
+  }
+ ],
+ "accountable": {
+  "electedOn": "16 January 2026",
+  "administratorPeriod": "March 2022 to January 2026",
+  "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
+  "electoralWards": "8 to 17",
+  "electoralWardsSource": {
+   "name": "Free Press Journal — \"Know Your Ward\" series (BMC Elections 2026)",
+   "url": "https://www.freepressjournal.in/mumbai/bmc-elections-2026-attention-mumbaikars-which-ward-is-your-area-in-full-list-from-dahisar-to-colaba"
+  },
+  "kNorthNote": "",
+  "kNorthSource": null,
+  "corporators": [
+   {
+    "ward": 8,
+    "name": "Yogita Nilesh Patil",
+    "party": "BJP",
+    "votes": 12168,
+    "nowKNorth": false
+   },
+   {
+    "ward": 9,
+    "name": "Shivanand (Shiva) Shetty",
+    "party": "BJP",
+    "votes": 18423,
+    "nowKNorth": false
+   },
+   {
+    "ward": 10,
+    "name": "Jitendra Ambalal Patel",
+    "party": "BJP",
+    "votes": 20126,
+    "nowKNorth": false
+   },
+   {
+    "ward": 11,
+    "name": "Dr. Aditi Bhaskar Khursange",
+    "party": "Shiv Sena",
+    "votes": 14513,
+    "nowKNorth": false
+   },
+   {
+    "ward": 12,
+    "name": "Sarika Shashikant Zhore",
+    "party": "SS (UBT)",
+    "votes": 11232,
+    "nowKNorth": false
+   },
+   {
+    "ward": 13,
+    "name": "Rani Dwivedi (Nighut)",
+    "party": "BJP",
+    "votes": 16360,
+    "nowKNorth": false
+   },
+   {
+    "ward": 14,
+    "name": "Seema Kiran Shinde",
+    "party": "BJP",
+    "votes": 14241,
+    "nowKNorth": false
+   },
+   {
+    "ward": 15,
+    "name": "Jignasa Nikunj Shah",
+    "party": "BJP",
+    "votes": 26088,
+    "nowKNorth": false
+   },
+   {
+    "ward": 16,
+    "name": "Shweta Sharad Korgaonkar",
+    "party": "BJP",
+    "votes": 15753,
+    "nowKNorth": false
+   },
+   {
+    "ward": 17,
+    "name": "Dr. Shilpa Saurabh Sangore",
+    "party": "BJP",
+    "votes": 20390,
+    "nowKNorth": false
+   }
+  ],
+  "wardOffice": null,
+  "mlas": [],
+  "mayor": {
+   "name": "Ritu Tawde",
+   "party": "BJP"
+  },
+  "roadContractorNote": ""
+ },
+ "cityContext": {
+  "wardShare2021": 18,
+  "wardShare2025": 11,
+  "bmcBudget2021": 39027,
+  "bmcBudget2025": 74367,
+  "notPublished": [
+   "Actual expenditure for 2024-25 and 2025-26 (ward budgets publish only Budget Estimates for the current year, not revised estimates or actuals of the prior year)",
+   "Ward-wise personnel/staffing costs (no data available from ward budget books or BMC's Human Resource Department)"
+  ],
+  "penaltyExample": {
+   "text": "The Storm Water Drains (SWD) Department has a 57% vacancy rate in BMC HR as of December 2024; the average time to resolve a complaint rose from 33 days in 2023 to 57 days in 2024.",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf",
+   "source": "Praja Foundation, Report on Wardwise Budget in Mumbai 2025, p.20"
+  }
+ },
+ "sources": [
+  {
+   "name": "Praja Foundation — Report on Wardwise Budget in Mumbai 2025",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf"
+  },
+  {
+   "name": "OpenCity — BMC Election Results 2026 (dataset)",
+   "url": "https://data.opencity.in/dataset/bmc-election-results-2026"
+  },
+  {
+   "name": "BMC / MyBMC official website",
+   "url": "https://portal.mcgm.gov.in/"
+  }
+ ],
+ "todo": [
+  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
+  "mlas: assembly constituency mapping not yet verified",
+  "pincodes: India Post locality mapping not yet compiled"
+ ]
+}

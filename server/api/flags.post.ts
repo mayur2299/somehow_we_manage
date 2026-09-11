@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   const locality = String(body?.locality ?? '').trim().slice(0, 60) || undefined
   const tag = typeof body?.tag === 'string' && TAGS.includes(body.tag as Tag) ? (body.tag as Tag) : undefined
 
-  if (!WARDS.includes(ward as any)) throw createError({ statusCode: 400, statusMessage: 'Unknown ward' })
+  if (!WARDS.includes(ward)) throw createError({ statusCode: 400, statusMessage: 'Unknown ward' })
   if (!SERVICES.includes(service as any)) throw createError({ statusCode: 400, statusMessage: 'Unknown service' })
   if (!tag) throw createError({ statusCode: 400, statusMessage: 'Pick a tag' })
   if (!note && !photo) throw createError({ statusCode: 400, statusMessage: 'Add a note or a photo' })

@@ -1,0 +1,449 @@
+{
+ "code": "P/N",
+ "name": "Malad",
+ "areas": "Malad",
+ "population2025": 991665,
+ "slumPopulation": 504500,
+ "slumShare": 0.54,
+ "years": [
+  "2021-22",
+  "2022-23",
+  "2023-24",
+  "2024-25",
+  "2025-26"
+ ],
+ "note": "Actual spend is only closed two years after allocation. 2024-25 and 2025-26 show budget estimates only.",
+ "total": {
+  "label": "Total ward budget",
+  "ward": {
+   "be": [
+    409,
+    381,
+    387,
+    429,
+    401
+   ],
+   "actual": [
+    558,
+    506,
+    669,
+    null,
+    null
+   ],
+   "perCapita": 5889
+  },
+  "mumbai": {
+   "be": [
+    6963,
+    6718,
+    7651,
+    7996,
+    7984
+   ],
+   "actual": [
+    8840,
+    9026,
+    10344,
+    null,
+    null
+   ],
+   "perCapita": 7250
+  }
+ },
+ "revenue": {
+  "label": "Day-to-day running (revenue)",
+  "ward": {
+   "be": [
+    277,
+    313,
+    335,
+    400,
+    373
+   ],
+   "actual": [
+    321,
+    398,
+    428,
+    null,
+    null
+   ],
+   "perCapita": 3895
+  }
+ },
+ "capital": {
+  "label": "New works (capital)",
+  "ward": {
+   "be": [
+    133,
+    67,
+    52,
+    29,
+    28
+   ],
+   "actual": [
+    237,
+    108,
+    241,
+    null,
+    null
+   ],
+   "perCapita": 1994
+  },
+  "mumbai": {
+   "be": [
+    1927,
+    1138,
+    1606,
+    915,
+    1105
+   ],
+   "actual": [
+    2846,
+    1691,
+    2882,
+    null,
+    null
+   ],
+   "perCapita": 1907
+  }
+ },
+ "propertyTax": {
+  "actual": [
+   222,
+   209,
+   115
+  ],
+  "perCapita": 1854
+ },
+ "services": [
+  {
+   "key": "swm",
+   "label": "Garbage collection",
+   "icon": "🗑️",
+   "be": [
+    101,
+    114,
+    128,
+    143,
+    135
+   ],
+   "actual": [
+    107,
+    118,
+    124,
+    null,
+    null
+   ],
+   "avgUtil": 1.02,
+   "perCapita": 1359,
+   "fact": "310 tonnes of garbage lifted every day",
+   "mumbaiAvgUtil": 1.04
+  },
+  {
+   "key": "roads",
+   "label": "Roads",
+   "icon": "🛣️",
+   "be": [
+    24,
+    24,
+    28,
+    29,
+    29
+   ],
+   "actual": [
+    29,
+    35,
+    53,
+    null,
+    null
+   ],
+   "avgUtil": 1.51,
+   "perCapita": 297,
+   "fact": "179 km of roads in the ward",
+   "mumbaiAvgUtil": 1.63
+  },
+  {
+   "key": "swd",
+   "label": "Storm water drains",
+   "icon": "🌧️",
+   "be": [
+    5.6,
+    6.2,
+    5.9,
+    6.5,
+    6.6
+   ],
+   "actual": [
+    22.0,
+    18.4,
+    19.3,
+    null,
+    null
+   ],
+   "avgUtil": 3.39,
+   "perCapita": 66,
+   "fact": "182 km of roadside drains",
+   "mumbaiAvgUtil": 3.83
+  },
+  {
+   "key": "health",
+   "label": "Health services",
+   "icon": "🏥",
+   "be": [
+    12,
+    13,
+    14,
+    25,
+    24
+   ],
+   "actual": [
+    41,
+    30,
+    22,
+    null,
+    null
+   ],
+   "avgUtil": 2.44,
+   "perCapita": 245,
+   "fact": "18 municipal dispensaries",
+   "mumbaiAvgUtil": 2.07
+  },
+  {
+   "key": "parks",
+   "label": "Parks and gardens",
+   "icon": "🌳",
+   "be": [
+    8,
+    11,
+    12,
+    16,
+    17
+   ],
+   "actual": [
+    8,
+    12,
+    14,
+    null,
+    null
+   ],
+   "avgUtil": 1.01,
+   "perCapita": 172,
+   "fact": "",
+   "mumbaiAvgUtil": 1.0
+  },
+  {
+   "key": "markets",
+   "label": "Markets",
+   "icon": "🧺",
+   "be": [
+    2.1,
+    1.3,
+    1.3,
+    1.6,
+    1.6
+   ],
+   "actual": [
+    1.3,
+    1.0,
+    1.1,
+    null,
+    null
+   ],
+   "avgUtil": 0.74,
+   "perCapita": 16,
+   "fact": "7 municipal markets",
+   "mumbaiAvgUtil": 0.86
+  }
+ ],
+ "slumImprovement": {
+  "be": [
+   58.8,
+   39.7,
+   18.3,
+   9.2,
+   9.1
+  ],
+  "changePct": -85
+ },
+ "pincodes": [
+  {
+   "pin": "400064",
+   "area": "Malad West"
+  },
+  {
+   "pin": "400065",
+   "area": "Malad East"
+  },
+  {
+   "pin": "400097",
+   "area": "Malad East (Kurar)"
+  }
+ ],
+ "accountable": {
+  "electedOn": "16 January 2026",
+  "administratorPeriod": "March 2022 to January 2026",
+  "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
+  "electoralWards": "27 to 42",
+  "electoralWardsSource": {
+   "name": "Free Press Journal — \"Know Your Ward\" series (BMC Elections 2026)",
+   "url": "https://www.freepressjournal.in/mumbai/bmc-elections-2026-attention-mumbaikars-which-ward-is-your-area-in-full-list-from-dahisar-to-colaba"
+  },
+  "kNorthNote": "",
+  "kNorthSource": null,
+  "corporators": [
+   {
+    "ward": 27,
+    "name": "Neelam Sunil Gurav",
+    "party": "BJP",
+    "votes": 10028,
+    "nowKNorth": false
+   },
+   {
+    "ward": 28,
+    "name": "Ajanta R. Yadav",
+    "party": "Congress",
+    "votes": 10579,
+    "nowKNorth": false
+   },
+   {
+    "ward": 29,
+    "name": "Sachin Balkrishna Patil",
+    "party": "SS (UBT)",
+    "votes": 14038,
+    "nowKNorth": false
+   },
+   {
+    "ward": 30,
+    "name": "Dhaval Vora",
+    "party": "BJP",
+    "votes": 23346,
+    "nowKNorth": false
+   },
+   {
+    "ward": 31,
+    "name": "Manisha Kamlesh Yadav",
+    "party": "BJP",
+    "votes": 10501,
+    "nowKNorth": false
+   },
+   {
+    "ward": 32,
+    "name": "Bhandari Gita Kiran",
+    "party": "SS (UBT)",
+    "votes": 8677,
+    "nowKNorth": false
+   },
+   {
+    "ward": 33,
+    "name": "Kamarjahan Mohammad Moin Siddiqui",
+    "party": "Congress",
+    "votes": 12644,
+    "nowKNorth": false
+   },
+   {
+    "ward": 34,
+    "name": "Haiderali Aslam Sheikh",
+    "party": "Congress",
+    "votes": 16622,
+    "nowKNorth": false
+   },
+   {
+    "ward": 35,
+    "name": "Verma Yogesh Rajbahadur",
+    "party": "BJP",
+    "votes": 16862,
+    "nowKNorth": false
+   },
+   {
+    "ward": 36,
+    "name": "Adv. Siddharth Shrikant Sharma",
+    "party": "BJP",
+    "votes": 13203,
+    "nowKNorth": false
+   },
+   {
+    "ward": 37,
+    "name": "Kadam Yogita Prashant",
+    "party": "SS (UBT)",
+    "votes": 10981,
+    "nowKNorth": false
+   },
+   {
+    "ward": 38,
+    "name": "Surekha Parab",
+    "party": "MNS",
+    "votes": 11226,
+    "nowKNorth": false
+   },
+   {
+    "ward": 39,
+    "name": "Pushpa Ramesh Kalambe",
+    "party": "SS (UBT)",
+    "votes": 6411,
+    "nowKNorth": false
+   },
+   {
+    "ward": 40,
+    "name": "Tulshiram Dhondiba Shinde",
+    "party": "SS (UBT)",
+    "votes": 9263,
+    "nowKNorth": false
+   },
+   {
+    "ward": 41,
+    "name": "Adv. Suhas Chandrakant Wadkar",
+    "party": "SS (UBT)",
+    "votes": 7196,
+    "nowKNorth": false
+   },
+   {
+    "ward": 42,
+    "name": "Dhanshree Vaibhav Bharadkar",
+    "party": "Shiv Sena",
+    "votes": 8541,
+    "nowKNorth": false
+   }
+  ],
+  "wardOffice": null,
+  "mlas": [],
+  "mayor": {
+   "name": "Ritu Tawde",
+   "party": "BJP"
+  },
+  "roadContractorNote": ""
+ },
+ "cityContext": {
+  "wardShare2021": 18,
+  "wardShare2025": 11,
+  "bmcBudget2021": 39027,
+  "bmcBudget2025": 74367,
+  "notPublished": [
+   "Actual expenditure for 2024-25 and 2025-26 (ward budgets publish only Budget Estimates for the current year, not revised estimates or actuals of the prior year)",
+   "Ward-wise personnel/staffing costs (no data available from ward budget books or BMC's Human Resource Department)"
+  ],
+  "penaltyExample": {
+   "text": "The Storm Water Drains (SWD) Department has a 57% vacancy rate in BMC HR as of December 2024; the average time to resolve a complaint rose from 33 days in 2023 to 57 days in 2024.",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf",
+   "source": "Praja Foundation, Report on Wardwise Budget in Mumbai 2025, p.20"
+  }
+ },
+ "sources": [
+  {
+   "name": "Praja Foundation — Report on Wardwise Budget in Mumbai 2025",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf"
+  },
+  {
+   "name": "OpenCity — BMC Election Results 2026 (dataset)",
+   "url": "https://data.opencity.in/dataset/bmc-election-results-2026"
+  },
+  {
+   "name": "BMC / MyBMC official website",
+   "url": "https://portal.mcgm.gov.in/"
+  }
+ ],
+ "todo": [
+  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
+  "mlas: assembly constituency mapping not yet verified",
+  "pincodes: India Post locality mapping not yet compiled"
+ ]
+}

@@ -1,0 +1,379 @@
+{
+ "code": "H/W",
+ "name": "Bandra West, Khar West",
+ "areas": "Bandra West, Khar West",
+ "population2025": 324016,
+ "slumPopulation": 118500,
+ "slumShare": 0.39,
+ "years": [
+  "2021-22",
+  "2022-23",
+  "2023-24",
+  "2024-25",
+  "2025-26"
+ ],
+ "note": "Actual spend is only closed two years after allocation. 2024-25 and 2025-26 show budget estimates only.",
+ "total": {
+  "label": "Total ward budget",
+  "ward": {
+   "be": [
+    212,
+    247,
+    250,
+    266,
+    250
+   ],
+   "actual": [
+    18,
+    233,
+    299,
+    null,
+    null
+   ],
+   "perCapita": 5704
+  },
+  "mumbai": {
+   "be": [
+    6963,
+    6718,
+    7651,
+    7996,
+    7984
+   ],
+   "actual": [
+    8840,
+    9026,
+    10344,
+    null,
+    null
+   ],
+   "perCapita": 7250
+  }
+ },
+ "revenue": {
+  "label": "Day-to-day running (revenue)",
+  "ward": {
+   "be": [
+    169,
+    214,
+    204,
+    244,
+    214
+   ],
+   "actual": [
+    -34,
+    186,
+    200,
+    null,
+    null
+   ],
+   "perCapita": 3648
+  }
+ },
+ "capital": {
+  "label": "New works (capital)",
+  "ward": {
+   "be": [
+    43,
+    33,
+    47,
+    21,
+    36
+   ],
+   "actual": [
+    52,
+    47,
+    99,
+    null,
+    null
+   ],
+   "perCapita": 2056
+  },
+  "mumbai": {
+   "be": [
+    1927,
+    1138,
+    1606,
+    915,
+    1105
+   ],
+   "actual": [
+    2846,
+    1691,
+    2882,
+    null,
+    null
+   ],
+   "perCapita": 1907
+  }
+ },
+ "propertyTax": {
+  "actual": [
+   342,
+   322,
+   186
+  ],
+  "perCapita": 8846
+ },
+ "services": [
+  {
+   "key": "swm",
+   "label": "Garbage collection",
+   "icon": "🗑️",
+   "be": [
+    68,
+    104,
+    89,
+    110,
+    88
+   ],
+   "actual": [
+    73,
+    84,
+    93,
+    null,
+    null
+   ],
+   "avgUtil": 0.98,
+   "perCapita": 2701,
+   "fact": "188 tonnes of garbage lifted every day",
+   "mumbaiAvgUtil": 1.04
+  },
+  {
+   "key": "roads",
+   "label": "Roads",
+   "icon": "🛣️",
+   "be": [
+    28,
+    27,
+    30,
+    29,
+    27
+   ],
+   "actual": [
+    30,
+    41,
+    39,
+    null,
+    null
+   ],
+   "avgUtil": 1.29,
+   "perCapita": 841,
+   "fact": "120 km of roads in the ward",
+   "mumbaiAvgUtil": 1.63
+  },
+  {
+   "key": "swd",
+   "label": "Storm water drains",
+   "icon": "🌧️",
+   "be": [
+    2.7,
+    3.2,
+    3.2,
+    4.7,
+    3.5
+   ],
+   "actual": [
+    9.9,
+    7.9,
+    6.9,
+    null,
+    null
+   ],
+   "avgUtil": 2.73,
+   "perCapita": 107,
+   "fact": "164 km of roadside drains",
+   "mumbaiAvgUtil": 3.83
+  },
+  {
+   "key": "health",
+   "label": "Health services",
+   "icon": "🏥",
+   "be": [
+    9,
+    10,
+    11,
+    17,
+    16
+   ],
+   "actual": [
+    20,
+    25,
+    13,
+    null,
+    null
+   ],
+   "avgUtil": 1.99,
+   "perCapita": 499,
+   "fact": "10 municipal dispensaries",
+   "mumbaiAvgUtil": 2.07
+  },
+  {
+   "key": "parks",
+   "label": "Parks and gardens",
+   "icon": "🌳",
+   "be": [
+    8,
+    9,
+    8,
+    10,
+    14
+   ],
+   "actual": [
+    7,
+    8,
+    9,
+    null,
+    null
+   ],
+   "avgUtil": 0.97,
+   "perCapita": 437,
+   "fact": "",
+   "mumbaiAvgUtil": 1.0
+  },
+  {
+   "key": "markets",
+   "label": "Markets",
+   "icon": "🧺",
+   "be": [
+    2.8,
+    2.8,
+    2.9,
+    2.9,
+    3.0
+   ],
+   "actual": [
+    2.6,
+    2.7,
+    2.4,
+    null,
+    null
+   ],
+   "avgUtil": 0.91,
+   "perCapita": 92,
+   "fact": "6 municipal markets",
+   "mumbaiAvgUtil": 0.86
+  }
+ ],
+ "slumImprovement": {
+  "be": [
+   7.1,
+   5.0,
+   3.3,
+   4.7,
+   2.9
+  ],
+  "changePct": -58
+ },
+ "pincodes": [
+  {
+   "pin": "400050",
+   "area": "Bandra West"
+  },
+  {
+   "pin": "400052",
+   "area": "Khar West"
+  },
+  {
+   "pin": "400054",
+   "area": "Santacruz West"
+  }
+ ],
+ "accountable": {
+  "electedOn": "16 January 2026",
+  "administratorPeriod": "March 2022 to January 2026",
+  "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
+  "electoralWards": "98 to 103",
+  "electoralWardsSource": {
+   "name": "Free Press Journal — \"Know Your Ward\" series (BMC Elections 2026)",
+   "url": "https://www.freepressjournal.in/mumbai/bmc-elections-2026-attention-mumbaikars-which-ward-is-your-area-in-full-list-from-dahisar-to-colaba"
+  },
+  "kNorthNote": "",
+  "kNorthSource": null,
+  "corporators": [
+   {
+    "ward": 98,
+    "name": "Alka Subhash Kerker",
+    "party": "BJP",
+    "votes": 14866,
+    "nowKNorth": false
+   },
+   {
+    "ward": 99,
+    "name": "Chintamani Dattaram Niwate",
+    "party": "SS (UBT)",
+    "votes": 11538,
+    "nowKNorth": false
+   },
+   {
+    "ward": 100,
+    "name": "Swapna Virendra Mhatre",
+    "party": "BJP",
+    "votes": 10910,
+    "nowKNorth": false
+   },
+   {
+    "ward": 101,
+    "name": "Karen Cecilia D'Mello",
+    "party": "Congress",
+    "votes": 9424,
+    "nowKNorth": false
+   },
+   {
+    "ward": 102,
+    "name": "Khan Rehbar Siraj (Raja)",
+    "party": "Congress",
+    "votes": 14770,
+    "nowKNorth": false
+   },
+   {
+    "ward": 103,
+    "name": "Dr. Hetal Gala Morvekar",
+    "party": "BJP",
+    "votes": 17334,
+    "nowKNorth": false
+   }
+  ],
+  "wardOffice": null,
+  "mlas": [],
+  "mayor": {
+   "name": "Ritu Tawde",
+   "party": "BJP"
+  },
+  "roadContractorNote": ""
+ },
+ "cityContext": {
+  "wardShare2021": 18,
+  "wardShare2025": 11,
+  "bmcBudget2021": 39027,
+  "bmcBudget2025": 74367,
+  "notPublished": [
+   "Actual expenditure for 2024-25 and 2025-26 (ward budgets publish only Budget Estimates for the current year, not revised estimates or actuals of the prior year)",
+   "Ward-wise personnel/staffing costs (no data available from ward budget books or BMC's Human Resource Department)"
+  ],
+  "penaltyExample": {
+   "text": "The Storm Water Drains (SWD) Department has a 57% vacancy rate in BMC HR as of December 2024; the average time to resolve a complaint rose from 33 days in 2023 to 57 days in 2024.",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf",
+   "source": "Praja Foundation, Report on Wardwise Budget in Mumbai 2025, p.20"
+  }
+ },
+ "sources": [
+  {
+   "name": "Praja Foundation — Report on Wardwise Budget in Mumbai 2025",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf"
+  },
+  {
+   "name": "OpenCity — BMC Election Results 2026 (dataset)",
+   "url": "https://data.opencity.in/dataset/bmc-election-results-2026"
+  },
+  {
+   "name": "BMC / MyBMC official website",
+   "url": "https://portal.mcgm.gov.in/"
+  }
+ ],
+ "todo": [
+  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
+  "mlas: assembly constituency mapping not yet verified",
+  "pincodes: India Post locality mapping not yet compiled"
+ ]
+}

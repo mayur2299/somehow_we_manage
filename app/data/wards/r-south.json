@@ -1,0 +1,396 @@
+{
+ "code": "R/S",
+ "name": "Kandivali",
+ "areas": "Kandivali",
+ "population2025": 728162,
+ "slumPopulation": 399200,
+ "slumShare": 0.58,
+ "years": [
+  "2021-22",
+  "2022-23",
+  "2023-24",
+  "2024-25",
+  "2025-26"
+ ],
+ "note": "Actual spend is only closed two years after allocation. 2024-25 and 2025-26 show budget estimates only.",
+ "total": {
+  "label": "Total ward budget",
+  "ward": {
+   "be": [
+    217,
+    205,
+    229,
+    274,
+    253
+   ],
+   "actual": [
+    307,
+    345,
+    446,
+    null,
+    null
+   ],
+   "perCapita": 5077
+  },
+  "mumbai": {
+   "be": [
+    6963,
+    6718,
+    7651,
+    7996,
+    7984
+   ],
+   "actual": [
+    8840,
+    9026,
+    10344,
+    null,
+    null
+   ],
+   "perCapita": 7250
+  }
+ },
+ "revenue": {
+  "label": "Day-to-day running (revenue)",
+  "ward": {
+   "be": [
+    162,
+    184,
+    207,
+    255,
+    236
+   ],
+   "actual": [
+    193,
+    234,
+    267,
+    null,
+    null
+   ],
+   "perCapita": 3210
+  }
+ },
+ "capital": {
+  "label": "New works (capital)",
+  "ward": {
+   "be": [
+    55,
+    22,
+    22,
+    19,
+    18
+   ],
+   "actual": [
+    113,
+    111,
+    179,
+    null,
+    null
+   ],
+   "perCapita": 1867
+  },
+  "mumbai": {
+   "be": [
+    1927,
+    1138,
+    1606,
+    915,
+    1105
+   ],
+   "actual": [
+    2846,
+    1691,
+    2882,
+    null,
+    null
+   ],
+   "perCapita": 1907
+  }
+ },
+ "propertyTax": {
+  "actual": [
+   200,
+   188,
+   86
+  ],
+  "perCapita": 2196
+ },
+ "services": [
+  {
+   "key": "swm",
+   "label": "Garbage collection",
+   "icon": "🗑️",
+   "be": [
+    61,
+    70,
+    76,
+    96,
+    91
+   ],
+   "actual": [
+    66,
+    74,
+    85,
+    null,
+    null
+   ],
+   "avgUtil": 1.09,
+   "perCapita": 1247,
+   "fact": "160 tonnes of garbage lifted every day",
+   "mumbaiAvgUtil": 1.04
+  },
+  {
+   "key": "roads",
+   "label": "Roads",
+   "icon": "🛣️",
+   "be": [
+    15,
+    16,
+    20,
+    23,
+    24
+   ],
+   "actual": [
+    20,
+    35,
+    32,
+    null,
+    null
+   ],
+   "avgUtil": 1.71,
+   "perCapita": 323,
+   "fact": "91 km of roads in the ward",
+   "mumbaiAvgUtil": 1.63
+  },
+  {
+   "key": "swd",
+   "label": "Storm water drains",
+   "icon": "🌧️",
+   "be": [
+    4.5,
+    5.0,
+    4.7,
+    5.8,
+    5.3
+   ],
+   "actual": [
+    25.3,
+    23.8,
+    28.6,
+    null,
+    null
+   ],
+   "avgUtil": 5.49,
+   "perCapita": 73,
+   "fact": "183 km of roadside drains",
+   "mumbaiAvgUtil": 3.83
+  },
+  {
+   "key": "health",
+   "label": "Health services",
+   "icon": "🏥",
+   "be": [
+    8,
+    9,
+    9,
+    22,
+    18
+   ],
+   "actual": [
+    41,
+    15,
+    15,
+    null,
+    null
+   ],
+   "avgUtil": 2.69,
+   "perCapita": 243,
+   "fact": "14 municipal dispensaries",
+   "mumbaiAvgUtil": 2.07
+  },
+  {
+   "key": "parks",
+   "label": "Parks and gardens",
+   "icon": "🌳",
+   "be": [
+    9,
+    12,
+    19,
+    12,
+    15
+   ],
+   "actual": [
+    7,
+    11,
+    16,
+    null,
+    null
+   ],
+   "avgUtil": 0.87,
+   "perCapita": 209,
+   "fact": "",
+   "mumbaiAvgUtil": 1.0
+  },
+  {
+   "key": "markets",
+   "label": "Markets",
+   "icon": "🧺",
+   "be": [
+    0.4,
+    0.4,
+    0.4,
+    0.4,
+    0.5
+   ],
+   "actual": [
+    0.3,
+    0.2,
+    0.2,
+    null,
+    null
+   ],
+   "avgUtil": 0.49,
+   "perCapita": 8,
+   "fact": "2 municipal markets",
+   "mumbaiAvgUtil": 0.86
+  }
+ ],
+ "slumImprovement": {
+  "be": [
+   8.1,
+   5.5,
+   6.8,
+   4.4,
+   4.2
+  ],
+  "changePct": -49
+ },
+ "pincodes": [
+  {
+   "pin": "400067",
+   "area": "Kandivali West"
+  },
+  {
+   "pin": "400101",
+   "area": "Kandivali East"
+  }
+ ],
+ "accountable": {
+  "electedOn": "16 January 2026",
+  "administratorPeriod": "March 2022 to January 2026",
+  "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
+  "electoralWards": "18 to 26",
+  "electoralWardsSource": {
+   "name": "Free Press Journal — \"Know Your Ward\" series (BMC Elections 2026)",
+   "url": "https://www.freepressjournal.in/mumbai/bmc-elections-2026-attention-mumbaikars-which-ward-is-your-area-in-full-list-from-dahisar-to-colaba"
+  },
+  "kNorthNote": "",
+  "kNorthSource": null,
+  "corporators": [
+   {
+    "ward": 18,
+    "name": "Sandhya Vipul Doshi (Sakre)",
+    "party": "Shiv Sena",
+    "votes": 15569,
+    "nowKNorth": false
+   },
+   {
+    "ward": 19,
+    "name": "Dakshata Shrikant Kavthankar",
+    "party": "BJP",
+    "votes": 13466,
+    "nowKNorth": false
+   },
+   {
+    "ward": 20,
+    "name": "Deepak (Bala) Tawde",
+    "party": "BJP",
+    "votes": 10268,
+    "nowKNorth": false
+   },
+   {
+    "ward": 21,
+    "name": "Leena Patel Deherkar",
+    "party": "BJP",
+    "votes": 20267,
+    "nowKNorth": false
+   },
+   {
+    "ward": 22,
+    "name": "Hemanshu Sunil Parekh",
+    "party": "BJP",
+    "votes": 16919,
+    "nowKNorth": false
+   },
+   {
+    "ward": 23,
+    "name": "Shivkumar Vasukinath Jha",
+    "party": "BJP",
+    "votes": 7090,
+    "nowKNorth": false
+   },
+   {
+    "ward": 24,
+    "name": "Swati Sanjay Jaiswal",
+    "party": "BJP",
+    "votes": 13879,
+    "nowKNorth": false
+   },
+   {
+    "ward": 25,
+    "name": "Nisha Parulekar-Bangera",
+    "party": "BJP",
+    "votes": 12518,
+    "nowKNorth": false
+   },
+   {
+    "ward": 26,
+    "name": "Kale Dharmendra Rajaram",
+    "party": "SS (UBT)",
+    "votes": 6459,
+    "nowKNorth": false
+   }
+  ],
+  "wardOffice": null,
+  "mlas": [],
+  "mayor": {
+   "name": "Ritu Tawde",
+   "party": "BJP"
+  },
+  "roadContractorNote": ""
+ },
+ "cityContext": {
+  "wardShare2021": 18,
+  "wardShare2025": 11,
+  "bmcBudget2021": 39027,
+  "bmcBudget2025": 74367,
+  "notPublished": [
+   "Actual expenditure for 2024-25 and 2025-26 (ward budgets publish only Budget Estimates for the current year, not revised estimates or actuals of the prior year)",
+   "Ward-wise personnel/staffing costs (no data available from ward budget books or BMC's Human Resource Department)"
+  ],
+  "penaltyExample": {
+   "text": "The Storm Water Drains (SWD) Department has a 57% vacancy rate in BMC HR as of December 2024; the average time to resolve a complaint rose from 33 days in 2023 to 57 days in 2024.",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf",
+   "source": "Praja Foundation, Report on Wardwise Budget in Mumbai 2025, p.20"
+  }
+ },
+ "sources": [
+  {
+   "name": "Praja Foundation — Report on Wardwise Budget in Mumbai 2025",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf"
+  },
+  {
+   "name": "OpenCity — BMC Election Results 2026 (dataset)",
+   "url": "https://data.opencity.in/dataset/bmc-election-results-2026"
+  },
+  {
+   "name": "BMC / MyBMC official website",
+   "url": "https://portal.mcgm.gov.in/"
+  }
+ ],
+ "todo": [
+  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
+  "mlas: assembly constituency mapping not yet verified",
+  "pincodes: India Post locality mapping not yet compiled"
+ ]
+}

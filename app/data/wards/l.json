@@ -1,0 +1,456 @@
+{
+ "code": "L",
+ "name": "Kurla",
+ "areas": "Kurla",
+ "population2025": 950431,
+ "slumPopulation": 490400,
+ "slumShare": 0.54,
+ "years": [
+  "2021-22",
+  "2022-23",
+  "2023-24",
+  "2024-25",
+  "2025-26"
+ ],
+ "note": "Actual spend is only closed two years after allocation. 2024-25 and 2025-26 show budget estimates only.",
+ "total": {
+  "label": "Total ward budget",
+  "ward": {
+   "be": [
+    710,
+    787,
+    907,
+    739,
+    792
+   ],
+   "actual": [
+    769,
+    743,
+    755,
+    null,
+    null
+   ],
+   "perCapita": 8039
+  },
+  "mumbai": {
+   "be": [
+    6963,
+    6718,
+    7651,
+    7996,
+    7984
+   ],
+   "actual": [
+    8840,
+    9026,
+    10344,
+    null,
+    null
+   ],
+   "perCapita": 7250
+  }
+ },
+ "revenue": {
+  "label": "Day-to-day running (revenue)",
+  "ward": {
+   "be": [
+    298,
+    321,
+    344,
+    417,
+    400
+   ],
+   "actual": [
+    471,
+    515,
+    488,
+    null,
+    null
+   ],
+   "perCapita": 5224
+  }
+ },
+ "capital": {
+  "label": "New works (capital)",
+  "ward": {
+   "be": [
+    412,
+    467,
+    563,
+    322,
+    391
+   ],
+   "actual": [
+    298,
+    229,
+    267,
+    null,
+    null
+   ],
+   "perCapita": 2815
+  },
+  "mumbai": {
+   "be": [
+    1927,
+    1138,
+    1606,
+    915,
+    1105
+   ],
+   "actual": [
+    2846,
+    1691,
+    2882,
+    null,
+    null
+   ],
+   "perCapita": 1907
+  }
+ },
+ "propertyTax": {
+  "actual": [
+   264,
+   247,
+   140
+  ],
+  "perCapita": 2308
+ },
+ "services": [
+  {
+   "key": "swm",
+   "label": "Garbage collection",
+   "icon": "🗑️",
+   "be": [
+    118,
+    128,
+    134,
+    162,
+    154
+   ],
+   "actual": [
+    131,
+    137,
+    149,
+    null,
+    null
+   ],
+   "avgUtil": 1.1,
+   "perCapita": 1620,
+   "fact": "357 tonnes of garbage lifted every day",
+   "mumbaiAvgUtil": 1.04
+  },
+  {
+   "key": "roads",
+   "label": "Roads",
+   "icon": "🛣️",
+   "be": [
+    21,
+    21,
+    21,
+    21,
+    22
+   ],
+   "actual": [
+    30,
+    40,
+    46,
+    null,
+    null
+   ],
+   "avgUtil": 1.85,
+   "perCapita": 233,
+   "fact": "121 km of roads in the ward",
+   "mumbaiAvgUtil": 1.63
+  },
+  {
+   "key": "swd",
+   "label": "Storm water drains",
+   "icon": "🌧️",
+   "be": [
+    5.3,
+    5.6,
+    5.7,
+    4.9,
+    8.1
+   ],
+   "actual": [
+    46.6,
+    47.4,
+    43.1,
+    null,
+    null
+   ],
+   "avgUtil": 8.25,
+   "perCapita": 85,
+   "fact": "144 km of roadside drains",
+   "mumbaiAvgUtil": 3.83
+  },
+  {
+   "key": "health",
+   "label": "Health services",
+   "icon": "🏥",
+   "be": [
+    16,
+    17,
+    18,
+    33,
+    28
+   ],
+   "actual": [
+    66,
+    24,
+    25,
+    null,
+    null
+   ],
+   "avgUtil": 2.35,
+   "perCapita": 297,
+   "fact": "22 municipal dispensaries",
+   "mumbaiAvgUtil": 2.07
+  },
+  {
+   "key": "parks",
+   "label": "Parks and gardens",
+   "icon": "🌳",
+   "be": [
+    11,
+    10,
+    10,
+    14,
+    11
+   ],
+   "actual": [
+    10,
+    11,
+    11,
+    null,
+    null
+   ],
+   "avgUtil": 1.03,
+   "perCapita": 118,
+   "fact": "",
+   "mumbaiAvgUtil": 1.0
+  },
+  {
+   "key": "markets",
+   "label": "Markets",
+   "icon": "🧺",
+   "be": [
+    1.1,
+    0.9,
+    1.7,
+    2.0,
+    1.9
+   ],
+   "actual": [
+    0.6,
+    0.6,
+    0.8,
+    null,
+    null
+   ],
+   "avgUtil": 0.59,
+   "perCapita": 20,
+   "fact": "3 municipal markets",
+   "mumbaiAvgUtil": 0.86
+  }
+ ],
+ "slumImprovement": {
+  "be": [
+   58.3,
+   41.2,
+   22.6,
+   13.7,
+   12.9
+  ],
+  "changePct": -78
+ },
+ "pincodes": [
+  {
+   "pin": "400024",
+   "area": "Kurla West"
+  },
+  {
+   "pin": "400070",
+   "area": "Kurla East"
+  },
+  {
+   "pin": "400084",
+   "area": "Kurla (Nehru Nagar)"
+  }
+ ],
+ "accountable": {
+  "electedOn": "16 January 2026",
+  "administratorPeriod": "March 2022 to January 2026",
+  "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
+  "electoralWards": "155 to 171",
+  "electoralWardsSource": {
+   "name": "Free Press Journal — \"Know Your Ward\" series (BMC Elections 2026)",
+   "url": "https://www.freepressjournal.in/mumbai/bmc-elections-2026-attention-mumbaikars-which-ward-is-your-area-in-full-list-from-dahisar-to-colaba"
+  },
+  "kNorthNote": "",
+  "kNorthSource": null,
+  "corporators": [
+   {
+    "ward": 155,
+    "name": "Snehal Vishnu Shivkar",
+    "party": "SS (UBT)",
+    "votes": 10955,
+    "nowKNorth": false
+   },
+   {
+    "ward": 156,
+    "name": "Ashwini Ashok Matekar",
+    "party": "Shiv Sena",
+    "votes": 13533,
+    "nowKNorth": false
+   },
+   {
+    "ward": 157,
+    "name": "Dr. Sarita Ravindra Mhaske",
+    "party": "SS (UBT)",
+    "votes": 14749,
+    "nowKNorth": false
+   },
+   {
+    "ward": 158,
+    "name": "Sangle Chitra Somnath",
+    "party": "SS (UBT)",
+    "votes": 13286,
+    "nowKNorth": false
+   },
+   {
+    "ward": 159,
+    "name": "More Prakash Devji",
+    "party": "BJP",
+    "votes": 6521,
+    "nowKNorth": false
+   },
+   {
+    "ward": 160,
+    "name": "Kiran (Bhau) Landge",
+    "party": "Shiv Sena",
+    "votes": 11316,
+    "nowKNorth": false
+   },
+   {
+    "ward": 161,
+    "name": "Vijayendra (Viju) Omkar Shinde",
+    "party": "Shiv Sena",
+    "votes": 7751,
+    "nowKNorth": false
+   },
+   {
+    "ward": 162,
+    "name": "Amir Naseem Khan",
+    "party": "Congress",
+    "votes": 11307,
+    "nowKNorth": false
+   },
+   {
+    "ward": 163,
+    "name": "Shaila Dilip Lande",
+    "party": "Shiv Sena",
+    "votes": 10007,
+    "nowKNorth": false
+   },
+   {
+    "ward": 164,
+    "name": "Harish Bhandirge",
+    "party": "BJP",
+    "votes": 9803,
+    "nowKNorth": false
+   },
+   {
+    "ward": 165,
+    "name": "Ashraf Azmi",
+    "party": "Congress",
+    "votes": 7782,
+    "nowKNorth": false
+   },
+   {
+    "ward": 166,
+    "name": "Meenal Sanjay Turde",
+    "party": "Shiv Sena",
+    "votes": 6435,
+    "nowKNorth": false
+   },
+   {
+    "ward": 167,
+    "name": "Dr. Saman Arshad Azmi",
+    "party": "Congress",
+    "votes": 11551,
+    "nowKNorth": false
+   },
+   {
+    "ward": 168,
+    "name": "Dr. Saeeda Khan",
+    "party": "NCP",
+    "votes": 8277,
+    "nowKNorth": false
+   },
+   {
+    "ward": 169,
+    "name": "Pravina Manish Morajkar",
+    "party": "SS (UBT)",
+    "votes": 8021,
+    "nowKNorth": false
+   },
+   {
+    "ward": 170,
+    "name": "Bushra Nadeem (Kaptan) Malik",
+    "party": "NCP",
+    "votes": 9252,
+    "nowKNorth": false
+   },
+   {
+    "ward": 171,
+    "name": "Adv. Rani Swapnil Yerunkar",
+    "party": "SS (UBT)",
+    "votes": 9927,
+    "nowKNorth": false
+   }
+  ],
+  "wardOffice": null,
+  "mlas": [],
+  "mayor": {
+   "name": "Ritu Tawde",
+   "party": "BJP"
+  },
+  "roadContractorNote": ""
+ },
+ "cityContext": {
+  "wardShare2021": 18,
+  "wardShare2025": 11,
+  "bmcBudget2021": 39027,
+  "bmcBudget2025": 74367,
+  "notPublished": [
+   "Actual expenditure for 2024-25 and 2025-26 (ward budgets publish only Budget Estimates for the current year, not revised estimates or actuals of the prior year)",
+   "Ward-wise personnel/staffing costs (no data available from ward budget books or BMC's Human Resource Department)"
+  ],
+  "penaltyExample": {
+   "text": "The Storm Water Drains (SWD) Department has a 57% vacancy rate in BMC HR as of December 2024; the average time to resolve a complaint rose from 33 days in 2023 to 57 days in 2024.",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf",
+   "source": "Praja Foundation, Report on Wardwise Budget in Mumbai 2025, p.20"
+  }
+ },
+ "sources": [
+  {
+   "name": "Praja Foundation — Report on Wardwise Budget in Mumbai 2025",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf"
+  },
+  {
+   "name": "OpenCity — BMC Election Results 2026 (dataset)",
+   "url": "https://data.opencity.in/dataset/bmc-election-results-2026"
+  },
+  {
+   "name": "BMC / MyBMC official website",
+   "url": "https://portal.mcgm.gov.in/"
+  }
+ ],
+ "todo": [
+  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
+  "mlas: assembly constituency mapping not yet verified",
+  "pincodes: India Post locality mapping not yet compiled"
+ ]
+}

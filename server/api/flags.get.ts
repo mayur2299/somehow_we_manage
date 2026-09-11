@@ -1,7 +1,7 @@
 // GET /api/flags?ward=k-east — counts per service plus recent flags
 export default defineEventHandler(async (event) => {
   const { ward } = getQuery(event)
-  if (typeof ward !== 'string' || !WARDS.includes(ward as any)) {
+  if (typeof ward !== 'string' || !WARDS.includes(ward)) {
     throw createError({ statusCode: 400, statusMessage: 'Unknown ward' })
   }
   const store = flagStore()

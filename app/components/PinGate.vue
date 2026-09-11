@@ -1,18 +1,20 @@
 <script setup lang="ts">
-const props = defineProps<{ pincodes: { pin: string; area: string }[]; wardCode: string; wardName: string }>()
+const props = defineProps<{ pincodes: { pin: string; area: string; slug: string }[] }>()
 const emit = defineEmits<{ (e: 'found', payload: { pin: string; area: string }): void }>()
+import { WARDS } from '~/utils/wards'
+const wardOf = (slug: string) => WARDS[slug]
 const pin = ref('')
 const error = ref('')
-const reveal = ref<{ pin: string; area: string } | null>(null)
+const reveal = ref<{ pin: string; area: string; code: string; name: string } | null>(null)
 
 function fill() { pin.value = '400069'; error.value = '' }
 function lookup() {
   const v = pin.value.trim()
   if (!/^\d{6}$/.test(v)) { error.value = 'That PIN looks a little lost. Enter exactly 6 digits.'; return }
   const hit = props.pincodes.find(p => p.pin === v)
-  if (!hit) { error.value = `A perfectly respectable PIN, but the pilot only covers ${props.wardCode} (Andheri East). Try 400069.`; return }
+  if (!hit) { error.value = 'That PIN is not in our Mumbai map yet. Try 400069 (Andheri East) or 400050 (Bandra West).'; return }
   error.value = ''
-  reveal.value = { pin: v, area: hit.area }
+  reveal.value = { pin: v, area: hit.area, code: (wardOf(hit.slug)?.code ?? ''), name: (wardOf(hit.slug)?.name ?? hit.area) }
 }
 function enter() { if (reveal.value) emit('found', reveal.value) }
 </script>
@@ -23,13 +25,13 @@ function enter() { if (reveal.value) emit('found', reveal.value) }
       <main class="main">
         <span class="pill green tilt">Where my ward's money goes</span>
         <h1>Start with<br>your PIN.</h1>
-        <p>You shouldn't need to know your BMC ward number to ask where your neighbourhood's money went. Give us your six-digit Mumbai PIN. We'll do the civic alphabet soup.</p>
+        <p>You shouldn't need to know your BMC ward number to ask where your neighbourhood's money went. Give us your six-digit Mumbai PIN. All 24 wards, {{ pincodes.length }} pincodes. We'll do the civic alphabet soup.</p>
         <form class="pin-form" @submit.prevent="lookup">
           <input v-model="pin" class="pin-input" inputmode="numeric" maxlength="6" autocomplete="postal-code" placeholder="e.g. 400069" aria-label="Mumbai PIN code" />
           <button class="btn act" type="submit">Find my ward →</button>
         </form>
         <p class="err" aria-live="polite">{{ error }}</p>
-        <p class="sample">Demo data for <button type="button" class="link" @click="fill">400069 · Andheri East</button></p>
+        <p class="sample">Try <button type="button" class="link" @click="fill">400069 · Andheri East</button> · <button type="button" class="link" @click="pin = '400050'; error = ''">400050 · Bandra West</button> · <button type="button" class="link" @click="pin = '400080'; error = ''">400080 · Mulund</button></p>
       </main>
       <aside class="side">
         <div>
@@ -50,9 +52,9 @@ function enter() { if (reveal.value) emit('found', reveal.value) }
     <div v-else class="reveal">
       <div class="reveal-card">
         <span class="pill">📍 {{ reveal.pin }} · {{ reveal.area }}</span>
-        <h2>{{ wardCode }}</h2>
+        <h2>{{ reveal.code }}</h2>
         <p class="bigline">Found your ward.<br>Now let's find your money.</p>
-        <p class="micro">{{ wardName }}. Figures from RTI-sourced ward budgets, 2021-22 to 2025-26.</p>
+        <p class="micro">{{ reveal.name }}. Figures from RTI-sourced ward budgets, 2021-22 to 2025-26.</p>
         <button class="btn primary" @click="enter">Show me the receipts →</button>
       </div>
     </div>

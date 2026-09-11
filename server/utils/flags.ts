@@ -1,4 +1,4 @@
-export const WARDS = ['k-east'] as const
+export const WARDS = WARD_SLUGS
 export const SERVICES = ['swm', 'roads', 'swd', 'health', 'parks', 'markets'] as const
 export const TAGS = ['not-started', 'half-done', 'poor-quality', 'abandoned', 'never-existed', 'other'] as const
 export type Tag = typeof TAGS[number]

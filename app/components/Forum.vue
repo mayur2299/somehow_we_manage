@@ -244,7 +244,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
       </div>
 
       <template v-if="tab === 'residents'">
-        <p v-if="!chatOrder.length" class="empty">Nobody has posted about {{ service === 'all' ? 'this ward' : svcOf(service)?.label.toLowerCase() }} yet. Be the first.</p>
+        <p v-if="!chatOrder.length" class="empty">No complaints yet for {{ wardCode }}{{ service === 'all' ? '' : ' · ' + svcOf(service)?.label.toLowerCase() }}.<br>The money was spent. If you don't see it, be the first to say so.</p>
         <template v-for="(p, i) in chatOrder" :key="p.id">
           <div v-if="showDay(i)" class="day"><span>{{ dayLabel(p.ts) }}</span></div>
           <article :id="`post-${p.id}`" class="msg">

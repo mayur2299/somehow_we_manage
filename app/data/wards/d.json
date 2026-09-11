@@ -1,0 +1,398 @@
+{
+ "code": "D",
+ "name": "Malabar Hill, Grant Road",
+ "areas": "Malabar Hill, Grant Road",
+ "population2025": 365399,
+ "slumPopulation": 33000,
+ "slumShare": 0.1,
+ "years": [
+  "2021-22",
+  "2022-23",
+  "2023-24",
+  "2024-25",
+  "2025-26"
+ ],
+ "note": "Actual spend is only closed two years after allocation. 2024-25 and 2025-26 show budget estimates only.",
+ "total": {
+  "label": "Total ward budget",
+  "ward": {
+   "be": [
+    237,
+    238,
+    309,
+    281,
+    280
+   ],
+   "actual": [
+    287,
+    376,
+    369,
+    null,
+    null
+   ],
+   "perCapita": 9520
+  },
+  "mumbai": {
+   "be": [
+    6963,
+    6718,
+    7651,
+    7996,
+    7984
+   ],
+   "actual": [
+    8840,
+    9026,
+    10344,
+    null,
+    null
+   ],
+   "perCapita": 7250
+  }
+ },
+ "revenue": {
+  "label": "Day-to-day running (revenue)",
+  "ward": {
+   "be": [
+    206,
+    222,
+    244,
+    265,
+    266
+   ],
+   "actual": [
+    240,
+    333,
+    305,
+    null,
+    null
+   ],
+   "perCapita": 8102
+  }
+ },
+ "capital": {
+  "label": "New works (capital)",
+  "ward": {
+   "be": [
+    31,
+    15,
+    65,
+    16,
+    14
+   ],
+   "actual": [
+    47,
+    43,
+    64,
+    null,
+    null
+   ],
+   "perCapita": 1419
+  },
+  "mumbai": {
+   "be": [
+    1927,
+    1138,
+    1606,
+    915,
+    1105
+   ],
+   "actual": [
+    2846,
+    1691,
+    2882,
+    null,
+    null
+   ],
+   "perCapita": 1907
+  }
+ },
+ "propertyTax": {
+  "actual": [
+   244,
+   236,
+   114
+  ],
+  "perCapita": 5488
+ },
+ "services": [
+  {
+   "key": "swm",
+   "label": "Garbage collection",
+   "icon": "🗑️",
+   "be": [
+    120,
+    128,
+    139,
+    148,
+    155
+   ],
+   "actual": [
+    126,
+    153,
+    167,
+    null,
+    null
+   ],
+   "avgUtil": 1.15,
+   "perCapita": 4255,
+   "fact": "97 tonnes of garbage lifted every day",
+   "mumbaiAvgUtil": 1.04
+  },
+  {
+   "key": "roads",
+   "label": "Roads",
+   "icon": "🛣️",
+   "be": [
+    19,
+    20,
+    23,
+    25,
+    24
+   ],
+   "actual": [
+    26,
+    31,
+    38,
+    null,
+    null
+   ],
+   "avgUtil": 1.5,
+   "perCapita": 645,
+   "fact": "79 km of roads in the ward",
+   "mumbaiAvgUtil": 1.63
+  },
+  {
+   "key": "swd",
+   "label": "Storm water drains",
+   "icon": "🌧️",
+   "be": [
+    3.1,
+    3.5,
+    5.0,
+    3.9,
+    4.5
+   ],
+   "actual": [
+    6.8,
+    7.9,
+    7.5,
+    null,
+    null
+   ],
+   "avgUtil": 1.98,
+   "perCapita": 123,
+   "fact": "",
+   "mumbaiAvgUtil": 3.83
+  },
+  {
+   "key": "health",
+   "label": "Health services",
+   "icon": "🏥",
+   "be": [
+    11,
+    12,
+    14,
+    18,
+    19
+   ],
+   "actual": [
+    31,
+    16,
+    15,
+    null,
+    null
+   ],
+   "avgUtil": 1.75,
+   "perCapita": 519,
+   "fact": "8 municipal dispensaries",
+   "mumbaiAvgUtil": 2.07
+  },
+  {
+   "key": "parks",
+   "label": "Parks and gardens",
+   "icon": "🌳",
+   "be": [
+    6,
+    6,
+    6,
+    7,
+    6
+   ],
+   "actual": [
+    5,
+    7,
+    6,
+    null,
+    null
+   ],
+   "avgUtil": 0.96,
+   "perCapita": 160,
+   "fact": "",
+   "mumbaiAvgUtil": 1.0
+  },
+  {
+   "key": "markets",
+   "label": "Markets",
+   "icon": "🧺",
+   "be": [
+    1.5,
+    1.7,
+    1.8,
+    2.0,
+    1.9
+   ],
+   "actual": [
+    1.5,
+    1.5,
+    1.3,
+    null,
+    null
+   ],
+   "avgUtil": 0.87,
+   "perCapita": 52,
+   "fact": "6 municipal markets",
+   "mumbaiAvgUtil": 0.86
+  }
+ ],
+ "slumImprovement": {
+  "be": [
+   6.3,
+   3.0,
+   2.6,
+   2.3,
+   1.2
+  ],
+  "changePct": -80
+ },
+ "pincodes": [
+  {
+   "pin": "400004",
+   "area": "Girgaon, Thakurdwar"
+  },
+  {
+   "pin": "400006",
+   "area": "Malabar Hill"
+  },
+  {
+   "pin": "400007",
+   "area": "Grant Road, Tardeo"
+  },
+  {
+   "pin": "400026",
+   "area": "Cumballa Hill, Breach Candy"
+  },
+  {
+   "pin": "400034",
+   "area": "Tardeo"
+  },
+  {
+   "pin": "400036",
+   "area": "Walkeshwar"
+  }
+ ],
+ "accountable": {
+  "electedOn": "16 January 2026",
+  "administratorPeriod": "March 2022 to January 2026",
+  "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
+  "electoralWards": "210 to 216",
+  "electoralWardsSource": {
+   "name": "Free Press Journal — \"Know Your Ward\" series (BMC Elections 2026)",
+   "url": "https://www.freepressjournal.in/mumbai/bmc-elections-2026-attention-mumbaikars-which-ward-is-your-area-in-full-list-from-dahisar-to-colaba"
+  },
+  "kNorthNote": "",
+  "kNorthSource": null,
+  "corporators": [
+   {
+    "ward": 210,
+    "name": "Sonam Manoj Jamsutkar",
+    "party": "SS (UBT)",
+    "votes": 10116,
+    "nowKNorth": false
+   },
+   {
+    "ward": 211,
+    "name": "Waqar Khan",
+    "party": "Congress",
+    "votes": 13505,
+    "nowKNorth": false
+   },
+   {
+    "ward": 212,
+    "name": "Abrahani Amreen Shehzad",
+    "party": "SP",
+    "votes": 8848,
+    "nowKNorth": false
+   },
+   {
+    "ward": 213,
+    "name": "Nasima Javed Juneja",
+    "party": "Congress",
+    "votes": 12162,
+    "nowKNorth": false
+   },
+   {
+    "ward": 214,
+    "name": "Ajay Kisan Patil",
+    "party": "BJP",
+    "votes": 13847,
+    "nowKNorth": false
+   },
+   {
+    "ward": 215,
+    "name": "Santosh Pandurang Dhale",
+    "party": "BJP",
+    "votes": 11924,
+    "nowKNorth": false
+   },
+   {
+    "ward": 216,
+    "name": "Bhatankar Rajeshri Mahesh",
+    "party": "Congress",
+    "votes": 11048,
+    "nowKNorth": false
+   }
+  ],
+  "wardOffice": null,
+  "mlas": [],
+  "mayor": {
+   "name": "Ritu Tawde",
+   "party": "BJP"
+  },
+  "roadContractorNote": ""
+ },
+ "cityContext": {
+  "wardShare2021": 18,
+  "wardShare2025": 11,
+  "bmcBudget2021": 39027,
+  "bmcBudget2025": 74367,
+  "notPublished": [
+   "Actual expenditure for 2024-25 and 2025-26 (ward budgets publish only Budget Estimates for the current year, not revised estimates or actuals of the prior year)",
+   "Ward-wise personnel/staffing costs (no data available from ward budget books or BMC's Human Resource Department)"
+  ],
+  "penaltyExample": {
+   "text": "The Storm Water Drains (SWD) Department has a 57% vacancy rate in BMC HR as of December 2024; the average time to resolve a complaint rose from 33 days in 2023 to 57 days in 2024.",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf",
+   "source": "Praja Foundation, Report on Wardwise Budget in Mumbai 2025, p.20"
+  }
+ },
+ "sources": [
+  {
+   "name": "Praja Foundation — Report on Wardwise Budget in Mumbai 2025",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf"
+  },
+  {
+   "name": "OpenCity — BMC Election Results 2026 (dataset)",
+   "url": "https://data.opencity.in/dataset/bmc-election-results-2026"
+  },
+  {
+   "name": "BMC / MyBMC official website",
+   "url": "https://portal.mcgm.gov.in/"
+  }
+ ],
+ "todo": [
+  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
+  "mlas: assembly constituency mapping not yet verified",
+  "pincodes: India Post locality mapping not yet compiled"
+ ]
+}

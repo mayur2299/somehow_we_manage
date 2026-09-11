@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import ward from '~/data/k-east.json'
+import { WARDS, DEFAULT_SLUG } from '~/utils/wards'
 const route = useRoute()
 const id = String(route.params.id)
 const { data, refresh } = await useFetch<{ petition: any }>(`/api/petitions/${encodeURIComponent(id)}`)
 const p = computed(() => data.value?.petition)
-const svc = computed(() => ward.services.find(s => s.key === p.value?.service))
+const ward = computed(() => WARDS[p.value?.ward ?? DEFAULT_SLUG] ?? WARDS[DEFAULT_SLUG])
+const svc = computed(() => ward.value.services.find((s: any) => s.key === p.value?.service))
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
 const signed = ref(false)
 const status = ref('')
@@ -16,7 +17,7 @@ async function sign() {
 function url() { return `${location.origin}/petitions/${id}` }
 async function share(kind: 'wa' | 'x' | 'copy' | 'native') {
   if (!p.value) return
-  const text = `${p.value.title} — ${p.value.signatures} residents of ${ward.code} ${ward.name} have signed. Sign it: ${url()}`
+  const text = `${p.value.title} — ${p.value.signatures} residents of ${ward.value.code} ${ward.value.name} have signed. Sign it: ${url()}`
   if (kind === 'wa') window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank')
   else if (kind === 'x') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text.slice(0, 260))}`, '_blank')
   else if (kind === 'copy') { try { await navigator.clipboard.writeText(url()); status.value = 'Link copied.' } catch {} }
@@ -24,11 +25,11 @@ async function share(kind: 'wa' | 'x' | 'copy' | 'native') {
 }
 const statusLabel: Record<string, string> = { open: 'Collecting signatures', sent: 'Sent to ward office', answered: 'Answered' }
 const statusClass: Record<string, string> = { open: 'yellow', sent: 'blue', answered: 'green' }
-const steps = [
+const steps = computed(() => [
   { k: 'open', t: 'Collecting signatures', d: 'Residents sign. The count is public.' },
-  { k: 'sent', t: 'Sent to ward office', d: `Delivered to the Assistant Municipal Commissioner, ${ward.code}.` },
+  { k: 'sent', t: 'Sent to ward office', d: `Delivered to the Assistant Municipal Commissioner, ${ward.value.code}.` },
   { k: 'answered', t: 'Answered', d: 'The ward office replied. Reply is published here.' },
-]
+])
 const stepIdx = computed(() => ['open', 'sent', 'answered'].indexOf(p.value?.status ?? 'open'))
 useHead({ title: computed(() => p.value ? `${p.value.title} · Petition` : 'Petition') })
 </script>
@@ -55,7 +56,7 @@ useHead({ title: computed(() => p.value ? `${p.value.title} · Petition` : 'Peti
         <article class="card span7">
           <span class="pill">The ask</span>
           <p class="demand">{{ p.demand }}</p>
-          <p class="mini">Addressed to the Assistant Municipal Commissioner, {{ ward.code }} Ward, {{ ward.accountable.wardOffice.address }}.</p>
+          <p class="mini">Addressed to the Assistant Municipal Commissioner, {{ ward.code }} Ward, {{ ward.accountable?.wardOffice?.address ?? 'the ward office' }}.</p>
         </article>
         <article class="card pink span5">
           <span class="pill">On paper</span>

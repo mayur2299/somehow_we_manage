@@ -1,0 +1,306 @@
+[
+ {
+  "slug": "a",
+  "code": "A",
+  "name": "Colaba, Fort, Churchgate",
+  "zone": "Island City",
+  "population2025": 194900,
+  "pincodes": [
+   "400001",
+   "400005",
+   "400020",
+   "400021",
+   "400023",
+   "400032",
+   "400039"
+  ]
+ },
+ {
+  "slug": "b",
+  "code": "B",
+  "name": "Masjid Bunder",
+  "zone": "Island City",
+  "population2025": 134091,
+  "pincodes": [
+   "400003",
+   "400009"
+  ]
+ },
+ {
+  "slug": "c",
+  "code": "C",
+  "name": "Marine Lines, Kalbadevi",
+  "zone": "Island City",
+  "population2025": 175039,
+  "pincodes": [
+   "400002"
+  ]
+ },
+ {
+  "slug": "d",
+  "code": "D",
+  "name": "Malabar Hill, Grant Road",
+  "zone": "Island City",
+  "population2025": 365399,
+  "pincodes": [
+   "400004",
+   "400006",
+   "400007",
+   "400026",
+   "400034",
+   "400036"
+  ]
+ },
+ {
+  "slug": "e",
+  "code": "E",
+  "name": "Byculla, Mazgaon",
+  "zone": "Island City",
+  "population2025": 414299,
+  "pincodes": [
+   "400008",
+   "400010",
+   "400011",
+   "400027"
+  ]
+ },
+ {
+  "slug": "f-north",
+  "code": "F/N",
+  "name": "Matunga, Sion",
+  "zone": "Island City",
+  "population2025": 557301,
+  "pincodes": [
+   "400014",
+   "400017",
+   "400019",
+   "400022",
+   "400031",
+   "400037"
+  ]
+ },
+ {
+  "slug": "f-south",
+  "code": "F/S",
+  "name": "Parel, Lower Parel",
+  "zone": "Island City",
+  "population2025": 380259,
+  "pincodes": [
+   "400012",
+   "400013",
+   "400015",
+   "400033"
+  ]
+ },
+ {
+  "slug": "g-north",
+  "code": "G/N",
+  "name": "Dadar, Mahim",
+  "zone": "Island City",
+  "population2025": 631046,
+  "pincodes": [
+   "400016",
+   "400028"
+  ]
+ },
+ {
+  "slug": "g-south",
+  "code": "G/S",
+  "name": "Worli, Prabhadevi",
+  "zone": "Island City",
+  "population2025": 397932,
+  "pincodes": [
+   "400018",
+   "400025",
+   "400030"
+  ]
+ },
+ {
+  "slug": "h-east",
+  "code": "H/E",
+  "name": "Bandra East, Khar East",
+  "zone": "Western Suburbs",
+  "population2025": 587012,
+  "pincodes": [
+   "400051",
+   "400055",
+   "400098"
+  ]
+ },
+ {
+  "slug": "h-west",
+  "code": "H/W",
+  "name": "Bandra West, Khar West",
+  "zone": "Western Suburbs",
+  "population2025": 324016,
+  "pincodes": [
+   "400050",
+   "400052",
+   "400054"
+  ]
+ },
+ {
+  "slug": "k-east",
+  "code": "K/E",
+  "name": "Andheri East",
+  "zone": "Western Suburbs",
+  "population2025": 867906,
+  "pincodes": [
+   "400057",
+   "400059",
+   "400060",
+   "400069",
+   "400072",
+   "400093",
+   "400096",
+   "400099"
+  ]
+ },
+ {
+  "slug": "k-west",
+  "code": "K/W",
+  "name": "Andheri West",
+  "zone": "Western Suburbs",
+  "population2025": 788691,
+  "pincodes": [
+   "400053",
+   "400056",
+   "400058",
+   "400061",
+   "400102"
+  ]
+ },
+ {
+  "slug": "p-north",
+  "code": "P/N",
+  "name": "Malad",
+  "zone": "Western Suburbs",
+  "population2025": 991665,
+  "pincodes": [
+   "400064",
+   "400065",
+   "400097"
+  ]
+ },
+ {
+  "slug": "p-south",
+  "code": "P/S",
+  "name": "Goregaon",
+  "zone": "Western Suburbs",
+  "population2025": 488273,
+  "pincodes": [
+   "400062",
+   "400063",
+   "400090"
+  ]
+ },
+ {
+  "slug": "r-central",
+  "code": "R/C",
+  "name": "Borivali",
+  "zone": "Western Suburbs",
+  "population2025": 592198,
+  "pincodes": [
+   "400066",
+   "400091",
+   "400092"
+  ]
+ },
+ {
+  "slug": "r-north",
+  "code": "R/N",
+  "name": "Dahisar",
+  "zone": "Western Suburbs",
+  "population2025": 454416,
+  "pincodes": [
+   "400068",
+   "400103"
+  ]
+ },
+ {
+  "slug": "r-south",
+  "code": "R/S",
+  "name": "Kandivali",
+  "zone": "Western Suburbs",
+  "population2025": 728162,
+  "pincodes": [
+   "400067",
+   "400101"
+  ]
+ },
+ {
+  "slug": "l",
+  "code": "L",
+  "name": "Kurla",
+  "zone": "Eastern Suburbs",
+  "population2025": 950431,
+  "pincodes": [
+   "400070",
+   "400024",
+   "400084"
+  ]
+ },
+ {
+  "slug": "m-east",
+  "code": "M/E",
+  "name": "Chembur, Govandi",
+  "zone": "Eastern Suburbs",
+  "population2025": 850877,
+  "pincodes": [
+   "400088",
+   "400089",
+   "400094",
+   "400085",
+   "400043"
+  ]
+ },
+ {
+  "slug": "m-west",
+  "code": "M/W",
+  "name": "Chembur West",
+  "zone": "Eastern Suburbs",
+  "population2025": 433900,
+  "pincodes": [
+   "400071",
+   "400074"
+  ]
+ },
+ {
+  "slug": "n",
+  "code": "N",
+  "name": "Ghatkopar",
+  "zone": "Eastern Suburbs",
+  "population2025": 656132,
+  "pincodes": [
+   "400075",
+   "400077",
+   "400086"
+  ]
+ },
+ {
+  "slug": "s",
+  "code": "S",
+  "name": "Bhandup, Powai",
+  "zone": "Eastern Suburbs",
+  "population2025": 783524,
+  "pincodes": [
+   "400076",
+   "400078",
+   "400079",
+   "400083",
+   "400042"
+  ]
+ },
+ {
+  "slug": "t",
+  "code": "T",
+  "name": "Mulund",
+  "zone": "Eastern Suburbs",
+  "population2025": 359708,
+  "pincodes": [
+   "400080",
+   "400081",
+   "400082"
+  ]
+ }
+]

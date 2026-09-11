@@ -1,0 +1,342 @@
+{
+ "code": "S",
+ "name": "Bhandup, Powai",
+ "areas": "Bhandup, Powai",
+ "population2025": 783524,
+ "slumPopulation": 537900,
+ "slumShare": 0.72,
+ "years": [
+  "2021-22",
+  "2022-23",
+  "2023-24",
+  "2024-25",
+  "2025-26"
+ ],
+ "note": "Actual spend is only closed two years after allocation. 2024-25 and 2025-26 show budget estimates only.",
+ "total": {
+  "label": "Total ward budget",
+  "ward": {
+   "be": [
+    298,
+    302,
+    361,
+    408,
+    512
+   ],
+   "actual": [
+    419,
+    425,
+    651,
+    null,
+    null
+   ],
+   "perCapita": 6424
+  },
+  "mumbai": {
+   "be": [
+    6963,
+    6718,
+    7651,
+    7996,
+    7984
+   ],
+   "actual": [
+    8840,
+    9026,
+    10344,
+    null,
+    null
+   ],
+   "perCapita": 7250
+  }
+ },
+ "revenue": {
+  "label": "Day-to-day running (revenue)",
+  "ward": {
+   "be": [
+    209,
+    245,
+    257,
+    333,
+    310
+   ],
+   "actual": [
+    296,
+    351,
+    438,
+    null,
+    null
+   ],
+   "perCapita": 4659
+  }
+ },
+ "capital": {
+  "label": "New works (capital)",
+  "ward": {
+   "be": [
+    89,
+    57,
+    103,
+    75,
+    202
+   ],
+   "actual": [
+    123,
+    75,
+    213,
+    null,
+    null
+   ],
+   "perCapita": 1764
+  },
+  "mumbai": {
+   "be": [
+    1927,
+    1138,
+    1606,
+    915,
+    1105
+   ],
+   "actual": [
+    2846,
+    1691,
+    2882,
+    null,
+    null
+   ],
+   "perCapita": 1907
+  }
+ },
+ "propertyTax": {
+  "actual": [
+   318,
+   304,
+   226
+  ],
+  "perCapita": 3650
+ },
+ "services": [
+  {
+   "key": "swm",
+   "label": "Garbage collection",
+   "icon": "🗑️",
+   "be": [
+    75,
+    91,
+    82,
+    104,
+    101
+   ],
+   "actual": [
+    79,
+    89,
+    100,
+    null,
+    null
+   ],
+   "avgUtil": 1.08,
+   "perCapita": 1285,
+   "fact": "268 tonnes of garbage lifted every day",
+   "mumbaiAvgUtil": 1.04
+  },
+  {
+   "key": "roads",
+   "label": "Roads",
+   "icon": "🛣️",
+   "be": [
+    16,
+    16,
+    16,
+    17,
+    17
+   ],
+   "actual": [
+    33,
+    32,
+    65,
+    null,
+    null
+   ],
+   "avgUtil": 2.64,
+   "perCapita": 213,
+   "fact": "122 km of roads in the ward",
+   "mumbaiAvgUtil": 1.63
+  },
+  {
+   "key": "swd",
+   "label": "Storm water drains",
+   "icon": "🌧️",
+   "be": [
+    6.0,
+    7.2,
+    7.1,
+    7.2,
+    7.8
+   ],
+   "actual": [
+    29.2,
+    27.0,
+    25.8,
+    null,
+    null
+   ],
+   "avgUtil": 4.08,
+   "perCapita": 99,
+   "fact": "112 km of roadside drains",
+   "mumbaiAvgUtil": 3.83
+  },
+  {
+   "key": "health",
+   "label": "Health services",
+   "icon": "🏥",
+   "be": [
+    12,
+    12,
+    15,
+    28,
+    23
+   ],
+   "actual": [
+    36,
+    17,
+    18,
+    null,
+    null
+   ],
+   "avgUtil": 1.91,
+   "perCapita": 289,
+   "fact": "11 municipal dispensaries",
+   "mumbaiAvgUtil": 2.07
+  },
+  {
+   "key": "parks",
+   "label": "Parks and gardens",
+   "icon": "🌳",
+   "be": [
+    9,
+    9,
+    8,
+    14,
+    12
+   ],
+   "actual": [
+    8,
+    9,
+    8,
+    null,
+    null
+   ],
+   "avgUtil": 0.95,
+   "perCapita": 151,
+   "fact": "",
+   "mumbaiAvgUtil": 1.0
+  },
+  {
+   "key": "markets",
+   "label": "Markets",
+   "icon": "🧺",
+   "be": [
+    1.9,
+    2.0,
+    1.1,
+    1.3,
+    1.3
+   ],
+   "actual": [
+    1.2,
+    0.8,
+    1.0,
+    null,
+    null
+   ],
+   "avgUtil": 0.66,
+   "perCapita": 17,
+   "fact": "2 municipal markets",
+   "mumbaiAvgUtil": 0.86
+  }
+ ],
+ "slumImprovement": {
+  "be": [
+   25.2,
+   15.8,
+   15.6,
+   30.9,
+   26.3
+  ],
+  "changePct": 4
+ },
+ "pincodes": [
+  {
+   "pin": "400042",
+   "area": "Bhandup East"
+  },
+  {
+   "pin": "400076",
+   "area": "Powai"
+  },
+  {
+   "pin": "400078",
+   "area": "Bhandup West"
+  },
+  {
+   "pin": "400079",
+   "area": "Vikhroli"
+  },
+  {
+   "pin": "400083",
+   "area": "Vikhroli East, Kannamwar Nagar"
+  }
+ ],
+ "accountable": {
+  "electedOn": "16 January 2026",
+  "administratorPeriod": "March 2022 to January 2026",
+  "administratorNote": "For almost four years the BMC had no elected council; an administrator appointed by the state government ran civic affairs.",
+  "electoralWards": null,
+  "electoralWardsSource": null,
+  "kNorthNote": "",
+  "kNorthSource": null,
+  "corporators": [],
+  "wardOffice": null,
+  "mlas": [],
+  "mayor": {
+   "name": "Ritu Tawde",
+   "party": "BJP"
+  },
+  "roadContractorNote": ""
+ },
+ "cityContext": {
+  "wardShare2021": 18,
+  "wardShare2025": 11,
+  "bmcBudget2021": 39027,
+  "bmcBudget2025": 74367,
+  "notPublished": [
+   "Actual expenditure for 2024-25 and 2025-26 (ward budgets publish only Budget Estimates for the current year, not revised estimates or actuals of the prior year)",
+   "Ward-wise personnel/staffing costs (no data available from ward budget books or BMC's Human Resource Department)"
+  ],
+  "penaltyExample": {
+   "text": "The Storm Water Drains (SWD) Department has a 57% vacancy rate in BMC HR as of December 2024; the average time to resolve a complaint rose from 33 days in 2023 to 57 days in 2024.",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf",
+   "source": "Praja Foundation, Report on Wardwise Budget in Mumbai 2025, p.20"
+  }
+ },
+ "sources": [
+  {
+   "name": "Praja Foundation — Report on Wardwise Budget in Mumbai 2025",
+   "url": "https://praja.org/praja_docs/praja_downloads/Report%20on%20Wardwise%20Budget%20in%20Mumbai%202025.pdf"
+  },
+  {
+   "name": "OpenCity — BMC Election Results 2026 (dataset)",
+   "url": "https://data.opencity.in/dataset/bmc-election-results-2026"
+  },
+  {
+   "name": "BMC / MyBMC official website",
+   "url": "https://portal.mcgm.gov.in/"
+  }
+ ],
+ "todo": [
+  "corporators: NOT populated — the only FPJ source found lists an identical electoral-ward range (104-122) for both S and T, and electoral wards 83-86 are unaccounted for elsewhere in the same table, so the range for this ward could not be reliably verified without guessing. Needs a dedicated per-ward 'Know Your Ward: S' / 'Know Your Ward: T' article or the official BMC delimitation notification to resolve.",
+  "wardOffice: address/phone not yet sourced from mcgm.gov.in / majhaward.com",
+  "mlas: assembly constituency mapping not yet verified",
+  "pincodes: India Post locality mapping not yet compiled"
+ ]
+}
