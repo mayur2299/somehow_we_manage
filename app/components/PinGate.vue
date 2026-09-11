@@ -11,7 +11,7 @@ function lookup() {
   const v = pin.value.trim()
   if (!/^\d{6}$/.test(v)) { error.value = 'That PIN looks a little lost. Enter exactly 6 digits.'; return }
   const hit = props.pincodes.find(p => p.pin === v)
-  if (!hit) { error.value = 'That PIN is not in our Mumbai map yet. Try 400069 (Andheri East) or 400050 (Bandra West).'; return }
+  if (!hit) { error.value = 'We don\'t have this pincode yet. We\'re working on it. Try 400069 (Andheri East) or 400050 (Bandra West) to see how it works.'; return }
   error.value = ''
   emit('found', { pin: v, area: hit.area })
 }
