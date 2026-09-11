@@ -82,8 +82,8 @@ h2 { font-size: 34px; letter-spacing: -.05em; flex: 1; }
 .sig { font-weight: 800; }
 .sig .n { font-family: var(--display); font-size: 30px; letter-spacing: -.04em; margin-right: 4px; }
 .acts { display: flex; gap: 8px; }
-.mini { font-size: 12px; font-weight: 700; color: #3f3b34; }
-.from { text-decoration: underline; color: #3f3b34; }
+.mini { font-size: 12px; font-weight: 700; color: var(--muted); }
+.from { text-decoration: underline; color: var(--muted); }
 .empty { font-weight: 800; }
 @media (max-width: 600px) { .logo { display: none; } }
 </style>

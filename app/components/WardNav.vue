@@ -42,9 +42,9 @@ const tiles = computed(() => [
 </template>
 
 <style scoped>
-nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px max(5vw, calc((100vw - 1440px) / 2)); background: rgba(244,239,223,.96); backdrop-filter: blur(10px); border-bottom: 2px solid var(--ink); }
+nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px max(5vw, calc((100vw - 1440px) / 2)); background: rgba(246,244,241,.96); backdrop-filter: blur(10px); border-bottom: 2px solid var(--ink); }
 .logo { font-weight: 900; font-size: 20px; letter-spacing: -0.045em; white-space: nowrap; text-decoration: none; color: var(--ink); }
-.logo b { background: var(--yellow); padding: 3px 7px; border: 2px solid var(--ink); border-radius: 7px; box-shadow: 3px 3px 0 var(--ink); }
+.logo b { background: var(--coral); color: var(--white); padding: 3px 7px; border: 2px solid var(--ink); border-radius: 7px; box-shadow: 3px 3px 0 var(--ink); }
 .right { display: flex; gap: 8px; align-items: center; }
 .hub { position: sticky; top: var(--navh, 64px); z-index: 25; background: var(--ink); border-bottom: 3px solid var(--ink); padding: 14px max(6vw, calc((100vw - 1440px) / 2)); transition: padding 160ms ease; }
 .hub.compact { padding-top: 8px; padding-bottom: 8px; }
@@ -53,10 +53,11 @@ nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center;
 .hub.compact .tile .t { font-size: 15px; }
 .hub.compact .tile .d { display: none; }
 .hubgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.tile { display: grid; gap: 3px; border: 3px solid var(--ink); border-radius: 16px; padding: 12px; text-decoration: none; color: var(--ink); box-shadow: 5px 5px 0 rgba(255,255,255,.9); transition: transform 120ms, box-shadow 120ms; }
+.tile { display: grid; gap: 3px; border: 2px solid var(--ink); border-radius: 16px; padding: 12px; text-decoration: none; color: var(--ink); box-shadow: 5px 5px 0 rgba(255,255,255,.9); transition: transform 120ms, box-shadow 120ms; }
 .tile:hover { transform: translate(3px, 3px); box-shadow: 2px 2px 0 rgba(255,255,255,.9); }
-.tile.on { outline: 3px solid var(--white); outline-offset: 3px; }
-.tile.blue { background: var(--blue); } .tile.yellow { background: var(--yellow); } .tile.green { background: var(--green); } .tile.pink { background: var(--pink); } .tile.purple { background: var(--purple); }
+
+.tile { background: var(--white); }
+.tile.on { background: var(--coral); color: var(--white); }
 .tile .ic { font-size: 24px; }
 .tile .t { font-family: var(--display); font-size: 17px; letter-spacing: -.04em; line-height: 1; }
 .tile .d { font-size: 12px; font-weight: 700; }

@@ -33,7 +33,7 @@ function openReceipt(k: string, post?: any) { selected.value = k; receiptPost.va
 const siteUrl = computed(() => (typeof location !== 'undefined' ? location.origin : 'https://somehow-we-manage.netlify.app'))
 const confettiOn = ref(false)
 function celebrate() { confettiOn.value = true; setTimeout(() => (confettiOn.value = false), 2200) }
-const confetti = Array.from({ length: 28 }, (_, i) => ({ left: `${(i * 37) % 100}vw`, delay: `${(i % 7) * 0.05}s`, bg: ['#ffd84d', '#b7ff4a', '#ff88c7', '#85c7ff'][i % 4] }))
+const confetti = Array.from({ length: 28 }, (_, i) => ({ left: `${(i * 37) % 100}vw`, delay: `${(i % 7) * 0.05}s`, bg: ['#F95C4B', '#E4DED2', '#000000', '#F95C4B'][i % 4] }))
 function toPetitions() { navigateTo({ path: '/', hash: '#petitions' }) }
 useHead({ title: computed(() => `${ward.value.code} residents · Where My Ward's Money Goes`) })
 </script>
@@ -66,10 +66,10 @@ nav { height: 70px; display: flex; align-items: center; justify-content: space-b
 .svc-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
 .svc-tabs .pill { cursor: pointer; min-height: 36px; }
 .modal { position: fixed; inset: 0; background: rgba(17,17,17,.74); display: grid; place-items: center; padding: 20px; z-index: 99; }
-.modal-card { background: var(--paper); border: 3px solid var(--ink); border-radius: 22px; padding: 22px; max-width: 760px; width: 100%; box-shadow: 10px 10px 0 var(--yellow); max-height: 92vh; overflow: auto; display: grid; gap: 14px; }
+.modal-card { background: var(--paper); border: 2px solid var(--ink); border-radius: 22px; padding: 22px; max-width: 760px; width: 100%; box-shadow: 10px 10px 0 var(--yellow); max-height: 92vh; overflow: auto; display: grid; gap: 14px; }
 .modal-top { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
 .modal-top h3 { font-size: 32px; margin: 8px 0 4px; }
-.x { border: 3px solid var(--ink); background: var(--white); border-radius: 10px; padding: 6px 10px; font-weight: 900; cursor: pointer; }
+.x { border: 2px solid var(--ink); background: var(--white); border-radius: 10px; padding: 6px 10px; font-weight: 900; cursor: pointer; }
 .confetti { position: fixed; inset: 0; pointer-events: none; z-index: 100; }
 .piece { position: absolute; width: 10px; height: 18px; top: -30px; animation: fall 1.8s linear forwards; }
 @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }

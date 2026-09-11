@@ -62,7 +62,7 @@ async function draw() {
   try { await (document as any).fonts?.load(`900 100px ${D}`); await (document as any).fonts?.load(`800 40px ${B}`) } catch {}
 
   // background: photo if we have one, else paper
-  ctx.fillStyle = '#F4EFDF'; ctx.fillRect(0, 0, W, H)
+  ctx.fillStyle = '#F6F4F1'; ctx.fillRect(0, 0, W, H)
   if (photoPost.value?.photo) {
     try {
       const img = await loadImg(photoPost.value.photo)
@@ -71,11 +71,11 @@ async function draw() {
       ctx.filter = 'grayscale(0.35) contrast(1.05)'
       ctx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh)
       ctx.filter = 'none'
-      const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, 'rgba(17,17,17,.78)'); g.addColorStop(1, 'rgba(17,17,17,.92)')
+      const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, 'rgba(0,0,0,.72)'); g.addColorStop(1, 'rgba(0,0,0,.92)')
       ctx.fillStyle = g; ctx.fillRect(0, 0, W, H)
     } catch {}
   } else {
-    ctx.fillStyle = '#111'; ctx.fillRect(0, 0, W, H)
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H)
   }
 
   const pad = Math.round(W * 0.07)
@@ -86,8 +86,8 @@ async function draw() {
   const kick = `${props.wardCode.toUpperCase()} WARD — ${props.service.label.toUpperCase()}`
   ctx.font = `900 ${wide ? 22 : 30}px ${B}`
   const kw = ctx.measureText(kick).width + 44, kh = wide ? 44 : 58
-  ctx.fillStyle = '#FFD84D'; rr(ctx, pad, y, kw, kh, 999); ctx.fill(); ctx.lineWidth = 4; ctx.strokeStyle = '#111'; ctx.stroke()
-  ctx.fillStyle = '#111'; ctx.textBaseline = 'middle'; ctx.fillText(kick, pad + 22, y + kh / 2)
+  ctx.fillStyle = '#F95C4B'; rr(ctx, pad, y, kw, kh, 999); ctx.fill(); ctx.lineWidth = 4; ctx.strokeStyle = '#000'; ctx.stroke()
+  ctx.fillStyle = '#fff'; ctx.textBaseline = 'middle'; ctx.fillText(kick, pad + 22, y + kh / 2)
   y += kh + (wide ? 22 : 40)
   ctx.textBaseline = 'alphabetic'
 
@@ -97,13 +97,13 @@ async function draw() {
     const hs = wide ? 44 : 64
     ctx.font = `900 ${hs}px ${D}`
     for (const line of wrap(ctx, (props.post.title || props.post.note).toUpperCase(), W - pad * 2).slice(0, wide ? 3 : 4)) { y += hs * 0.95; ctx.fillText(line, pad - 2, y) }
-    ctx.font = `800 ${wide ? 26 : 40}px ${B}`; ctx.fillStyle = '#FF88C7'; y += wide ? 40 : 60
+    ctx.font = `800 ${wide ? 26 : 40}px ${B}`; ctx.fillStyle = '#F95C4B'; y += wide ? 40 : 60
     ctx.fillText(`${props.post.confirms ?? 0} PEOPLE SAY IT'S STILL HERE`, pad, y)
   } else {
     const big = crore(spent.value)
     const bs = fit(ctx, big, W - pad * 2, wide ? 96 : 150, 60, D)
     ctx.font = `900 ${bs}px ${D}`; y += bs * 0.9; ctx.fillText(big, pad - 4, y)
-    ctx.font = `800 ${wide ? 26 : 40}px ${B}`; ctx.fillStyle = '#FF88C7'; y += wide ? 40 : 60
+    ctx.font = `800 ${wide ? 26 : 40}px ${B}`; ctx.fillStyle = '#F95C4B'; y += wide ? 40 : 60
     ctx.fillText(`SPENT · ${util.value}% OF BUDGET`, pad, y)
   }
 
@@ -117,13 +117,13 @@ async function draw() {
     svcPosts.value.length ? `Oldest report: ${oldestDays.value} day${oldestDays.value === 1 ? '' : 's'} ago` : `Allotted: ${crore(allotted.value)}`,
     perPost.value != null ? `₹${perPost.value.toLocaleString('en-IN', { maximumFractionDigits: 1 })} crore spent per reported issue` : `Mumbai average: ${props.service.mumbaiAvgUtil ? Math.round(props.service.mumbaiAvgUtil * 100) + '%' : 'n/a'}`,
   ]
-  ctx.fillStyle = '#F4EFDF'; ctx.font = `700 ${wide ? 24 : 36}px ${B}`
+  ctx.fillStyle = '#F6F4F1'; ctx.font = `700 ${wide ? 24 : 36}px ${B}`
   y += wide ? 44 : 70
   for (const s of stats) { ctx.fillText(s, pad, y); y += wide ? 34 : 52 }
 
   // punchline
   y += wide ? 10 : 30
-  ctx.fillStyle = '#B7FF4A'
+  ctx.fillStyle = '#fff'
   const ps = wide ? 44 : 64
   ctx.font = `900 ${ps}px ${D}`
   for (const line of wrap(ctx, punch.value, W - pad * 2)) { y += ps * 0.95; ctx.fillText(line, pad - 2, y) }
@@ -131,14 +131,14 @@ async function draw() {
   // footer block pinned to bottom
   const fh = wide ? 120 : 200
   const fy = H - fh
-  ctx.fillStyle = '#FFD84D'; ctx.fillRect(0, fy, W, fh)
-  ctx.fillStyle = '#111'; ctx.fillRect(0, fy, W, 5)
+  ctx.fillStyle = '#F95C4B'; ctx.fillRect(0, fy, W, fh)
+  ctx.fillStyle = '#000'; ctx.fillRect(0, fy, W, 5)
   ctx.font = `900 ${wide ? 30 : 46}px ${D}`
   const cta = 'Is your ward any better?'
   ctx.fillText(cta, pad, fy + (wide ? 46 : 78))
   ctx.font = `800 ${wide ? 22 : 32}px ${B}`
   ctx.fillText(`→ Check your PIN code at ${props.siteUrl.replace(/^https?:\/\//, '')}`, pad, fy + (wide ? 84 : 132))
-  ctx.font = `700 ${wide ? 14 : 20}px ${B}`; ctx.fillStyle = '#3f3b34'
+  ctx.font = `700 ${wide ? 14 : 20}px ${B}`; ctx.fillStyle = 'rgba(255,255,255,.85)'
   ctx.fillText(`SOURCE: BMC ward budgets 2021-22 to 2023-24 via Praja Foundation (RTI). Resident reports from this site.`, pad, fy + fh - (wide ? 16 : 26))
 }
 watch([fmt, () => props.service.key, () => props.posts.length, () => props.post?.id], () => nextTick(draw))
@@ -179,12 +179,12 @@ async function copyCaption() { try { await navigator.clipboard.writeText(caption
 .receipt { display: grid; gap: 12px; }
 .fmts { display: flex; flex-wrap: wrap; gap: 8px; }
 .fmts .pill { cursor: pointer; min-height: 36px; }
-.stage { display: grid; place-items: center; background: #d9d2bd; border: 3px solid var(--ink); border-radius: 18px; padding: 12px; }
-.stage canvas { max-width: 100%; height: auto; border: 3px solid var(--ink); box-shadow: 7px 7px 0 var(--ink); background: #111; }
+.stage { display: grid; place-items: center; background: var(--stone); border: 2px solid var(--ink); border-radius: 18px; padding: 12px; }
+.stage canvas { max-width: 100%; height: auto; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); background: #111; }
 .stage.square canvas { max-width: 480px; }
 .stage.story canvas { max-height: 640px; width: auto; }
 .stage.wide canvas { max-width: 100%; }
 .acts { display: flex; flex-wrap: wrap; gap: 10px; }
 .status { font-weight: 900; min-height: 22px; margin: 0; }
-.mini { font-size: 12px; font-weight: 700; color: #3f3b34; margin: 0; }
+.mini { font-size: 12px; font-weight: 700; color: var(--muted); margin: 0; }
 </style>

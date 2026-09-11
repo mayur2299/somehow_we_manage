@@ -106,7 +106,7 @@ async function share(p: any) {
 .tags .pill { cursor: pointer; min-height: 36px; }
 .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .fine { font-size: 13px; font-weight: 600; }
-.err { color: #7a0c00; font-weight: 800; margin: 0; }
+.err { color: var(--coral); font-weight: 800; margin: 0; }
 .empty { font-weight: 800; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
 .item { display: flex; flex-direction: column; gap: 10px; }

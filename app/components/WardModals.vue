@@ -32,11 +32,11 @@ const siteUrl = computed(() => (typeof location !== 'undefined' ? location.origi
 
 <style scoped>
 .modal { position: fixed; inset: 0; background: rgba(17,17,17,.74); display: grid; place-items: center; padding: 20px; z-index: 99; }
-.modal-card { background: var(--paper); border: 3px solid var(--ink); border-radius: 22px; padding: 22px; max-width: 780px; width: 100%; box-shadow: 10px 10px 0 var(--yellow); max-height: 92vh; overflow: auto; display: grid; gap: 14px; }
+.modal-card { background: var(--paper); border: 2px solid var(--ink); border-radius: 22px; padding: 22px; max-width: 780px; width: 100%; box-shadow: 10px 10px 0 var(--yellow); max-height: 92vh; overflow: auto; display: grid; gap: 14px; }
 .modal-top { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
 .modal-top h3 { font-size: 32px; margin: 8px 0 4px; letter-spacing: -.05em; }
-.x { border: 3px solid var(--ink); background: var(--white); border-radius: 10px; padding: 6px 10px; font-weight: 900; cursor: pointer; }
+.x { border: 2px solid var(--ink); background: var(--white); border-radius: 10px; padding: 6px 10px; font-weight: 900; cursor: pointer; }
 .svc-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
 .svc-tabs .pill { cursor: pointer; min-height: 36px; }
-.mini { font-size: 12px; font-weight: 700; color: #3f3b34; margin: 0; }
+.mini { font-size: 12px; font-weight: 700; color: var(--muted); margin: 0; }
 </style>

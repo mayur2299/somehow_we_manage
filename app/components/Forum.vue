@@ -341,7 +341,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 </template>
 
 <style scoped>
-.chat { max-width: 760px; margin: 0 auto; width: 100%; border: 3px solid var(--ink); border-radius: 24px; background: var(--surface); box-shadow: 10px 10px 0 var(--ink); display: grid; grid-template-rows: auto auto auto 1fr auto; overflow: hidden; height: min(86vh, 980px); }
+.chat { max-width: 760px; margin: 0 auto; width: 100%; border: 2px solid var(--ink); border-radius: 24px; background: var(--surface); box-shadow: 4px 4px 0 var(--ink); display: grid; grid-template-rows: auto auto auto 1fr auto; overflow: hidden; height: min(86vh, 980px); }
 .chead { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--ink); color: var(--white); }
 .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; font-size: 22px; border: 3px solid var(--white); }
 .cmeta { flex: 1; min-width: 0; }
@@ -350,38 +350,38 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .channels, .filters { display: flex; gap: 6px; padding: 10px 12px; overflow-x: auto; border-bottom: 2px solid var(--ink); background: var(--paper); scrollbar-width: none; }
 .channels::-webkit-scrollbar, .filters::-webkit-scrollbar { display: none; }
 .channels .pill, .filters .pill { cursor: pointer; min-height: 34px; flex: none; }
-.feed { overflow-y: auto; padding: 14px 14px 20px; background: #efe8d3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23ddd4b8'/%3E%3C/svg%3E"); display: grid; gap: 12px; align-content: start; scroll-behavior: smooth; }
+.feed { overflow-y: auto; padding: 14px 14px 20px; background: var(--stone); display: grid; gap: 12px; align-content: start; scroll-behavior: smooth; }
 .day { display: flex; justify-content: center; }
 .day span { background: var(--white); border: 2px solid var(--ink); border-radius: 999px; padding: 3px 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; }
 .msg { max-width: 92%; }
-.msg.system { justify-self: center; max-width: 100%; background: var(--yellow); border: 3px solid var(--ink); border-radius: 16px; padding: 12px 14px; text-align: center; box-shadow: 4px 4px 0 var(--ink); }
-.msg.system.green { background: var(--green); }
-.msg.system.purple { background: var(--purple); }
+.msg.system { justify-self: center; max-width: 100%; background: var(--white); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; text-align: center; box-shadow: 4px 4px 0 var(--ink); }
+.msg.system.green { background: var(--coral); color: var(--white); }
+.msg.system.purple { background: var(--white); }
 .pin { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; }
 .sys-big { font-family: var(--display); font-size: clamp(36px, 6vw, 56px); letter-spacing: -.06em; line-height: 1; margin: 6px 0 2px; }
 .sys-sub { font-weight: 700; font-size: 14px; margin-top: 4px; }
-.who { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; margin: 0 0 4px 4px; color: #3f3b34; }
+.who { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; margin: 0 0 4px 4px; color: var(--muted); }
 .av { width: 26px; height: 26px; border-radius: 50%; background: var(--white); border: 2px solid var(--ink); display: grid; place-items: center; font-size: 14px; }
 .time { margin-left: auto; font-weight: 700; opacity: .7; }
-.bubble { background: var(--white); border: 3px solid var(--ink); border-radius: 4px 18px 18px 18px; padding: 12px; display: grid; gap: 8px; box-shadow: 4px 4px 0 var(--ink); }
+.bubble { background: var(--white); border: 2px solid var(--ink); border-radius: 4px 18px 18px 18px; padding: 12px; display: grid; gap: 8px; box-shadow: 4px 4px 0 var(--ink); }
 .tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .ptitle { font-size: 20px; letter-spacing: -.04em; line-height: 1.05; margin: 0; }
 .note { margin: 0; font-weight: 600; font-size: 15px; line-height: 1.4; }
-.photo { position: relative; border: 3px solid var(--ink); border-radius: 12px; overflow: hidden; }
+.photo { position: relative; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden; }
 .photo img { width: 100%; max-height: 360px; object-fit: cover; display: block; }
 .credit { position: absolute; right: 6px; bottom: 6px; font-size: 10px; font-weight: 700; background: rgba(255,255,255,.85); border-radius: 6px; padding: 2px 6px; }
 .more-photos { display: flex; gap: 6px; }
 .more-photos img { width: 56px; height: 56px; object-fit: cover; border: 2px solid var(--ink); border-radius: 8px; }
 .react { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { display: inline-flex; align-items: center; gap: 4px; border: 2px solid var(--ink); background: var(--paper); border-radius: 999px; padding: 6px 10px; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; text-decoration: none; color: var(--ink); min-height: 34px; }
-.chip.act { background: var(--green); }
+.chip.act { background: var(--coral); color: var(--white); border-color: var(--coral); }
 .chip.ghost { border-color: #bbb; color: #777; background: transparent; }
 .chip:disabled { opacity: .7; cursor: default; }
-.seen { margin: 0; font-size: 11px; font-weight: 700; color: #6b665a; }
+.seen { margin: 0; font-size: 11px; font-weight: 700; color: var(--muted); }
 .sharemenu { display: flex; flex-wrap: wrap; gap: 6px; border-top: 2px dashed var(--ink); padding-top: 8px; }
 .pet { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; border-top: 2px dashed var(--ink); padding-top: 8px; font-size: 13px; font-weight: 700; }
 .petlink { color: var(--ink); text-decoration: underline; font-weight: 800; flex: 1; min-width: 0; }
-.pet.has { background: #f3ffe0; border: 2px solid var(--ink); border-radius: 10px; padding: 8px 10px; border-top-style: solid; }
+.pet.has { background: var(--stone); border: 2px solid var(--ink); border-radius: 10px; padding: 8px 10px; border-top-style: solid; }
 .raise { display: grid; gap: 8px; }
 .raise .btn { justify-self: start; }
 .replies { margin: 8px 0 0 36px; display: grid; gap: 8px; }
@@ -390,17 +390,17 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .ravatar { width: 22px; height: 22px; border-radius: 50%; background: var(--white); border: 2px solid var(--ink); display: grid; place-items: center; font-size: 11px; flex: none; margin-top: 4px; }
 .rbubble { background: var(--white); border: 2px solid var(--ink); border-radius: 4px 14px 14px 14px; padding: 8px 10px; }
 .rbubble p { margin: 0; font-weight: 600; font-size: 14px; }
-.rtime { font-size: 10px; font-weight: 700; color: #6b665a; }
+.rtime { font-size: 10px; font-weight: 700; color: var(--muted); }
 .rform { display: flex; gap: 6px; }
 .rform .input { min-height: 38px; }
 .empty { text-align: center; font-weight: 800; padding: 30px 10px; }
 .msg.thread { text-decoration: none; }
 .composer { border-top: 3px solid var(--ink); background: var(--paper); padding: 10px 12px; }
 .bar { display: flex; gap: 8px; }
-.fake { text-align: left; color: #6b665a; font-weight: 700; cursor: text; flex: 1; }
+.fake { text-align: left; color: var(--muted); font-weight: 700; cursor: text; flex: 1; }
 .form { display: grid; gap: 8px; max-height: 50vh; overflow-y: auto; }
 .form-head { display: flex; justify-content: space-between; align-items: center; }
-.mini { font-size: 12px; font-weight: 700; color: #3f3b34; margin: 0; }
+.mini { font-size: 12px; font-weight: 700; color: var(--muted); margin: 0; }
 .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--white); border-radius: 999px; padding: 10px 16px; font-weight: 800; z-index: 120; }
 .chat.full { height: calc(100vh - 70px); max-width: 860px; border-radius: 0; border-left: 0; border-right: 0; border-bottom: 0; box-shadow: none; }
 @media (max-width: 600px) { .chat { height: 88vh; border-radius: 18px; box-shadow: 6px 6px 0 var(--ink); } .msg { max-width: 100%; } .replies { margin-left: 16px; } }

@@ -85,6 +85,6 @@ async function submit() {
 .loc { flex: 1; min-width: 180px; }
 .file { cursor: pointer; }
 .file input { display: none; }
-.preview { display: block; max-height: 160px; border: 3px solid var(--ink); border-radius: 14px; }
-.err { color: #7a0c00; font-weight: 800; margin: 0; }
+.preview { display: block; max-height: 160px; border: 2px solid var(--ink); border-radius: 14px; }
+.err { color: var(--coral); font-weight: 800; margin: 0; }
 </style>

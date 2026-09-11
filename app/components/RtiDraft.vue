@@ -78,7 +78,7 @@ function download() {
 .rti { display: grid; gap: 12px; }
 .lead { font-weight: 800; margin: 0; }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.doc { white-space: pre-wrap; background: var(--white); border: 3px solid var(--ink); border-radius: 14px; padding: 16px; font-size: 14px; line-height: 1.45; max-height: 320px; overflow: auto; margin: 0; font-family: var(--body); }
+.doc { white-space: pre-wrap; background: var(--white); border: 2px solid var(--ink); border-radius: 14px; padding: 16px; font-size: 14px; line-height: 1.45; max-height: 320px; overflow: auto; margin: 0; font-family: var(--body); }
 .actions { display: flex; gap: 10px; flex-wrap: wrap; }
 .status { font-weight: 900; min-height: 22px; margin: 0; }
 .fine { font-size: 13px; font-weight: 600; margin: 0; }

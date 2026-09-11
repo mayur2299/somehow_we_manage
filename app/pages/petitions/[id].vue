@@ -104,13 +104,13 @@ h1 { font-size: clamp(34px, 5vw, 64px); letter-spacing: -.06em; line-height: .9;
 .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
 .span5 { grid-column: span 5; } .span7 { grid-column: span 7; } .span12 { grid-column: span 12; }
 .demand { font-size: 18px; font-weight: 600; line-height: 1.45; margin: 10px 0; white-space: pre-wrap; }
-.mini { font-size: 12px; font-weight: 700; color: #3f3b34; margin: 0; }
+.mini { font-size: 12px; font-weight: 700; color: var(--muted); margin: 0; }
 .big { font-family: var(--display); font-size: clamp(40px, 6vw, 72px); letter-spacing: -.06em; line-height: .9; margin: 10px 0 4px; }
 .vs { font-weight: 800; margin-bottom: 12px; }
 .steps { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .steps li { display: flex; gap: 10px; align-items: flex-start; opacity: .5; }
 .steps li.done { opacity: 1; }
-.dot { width: 18px; height: 18px; border-radius: 50%; border: 3px solid var(--ink); background: var(--white); flex: none; margin-top: 2px; }
+.dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--ink); background: var(--white); flex: none; margin-top: 2px; }
 .steps li.done .dot { background: var(--ink); }
 .steps li.now .dot { background: var(--green); }
 .steps p { margin: 2px 0 0; font-size: 13px; font-weight: 600; }
