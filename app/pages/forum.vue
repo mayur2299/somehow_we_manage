@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { WARDS, resolvePin, DEFAULT_SLUG } from '~/utils/wards'
+const { clear } = useWardContext()
 const route = useRoute()
 const slug = ref(typeof route.query.ward === 'string' && WARDS[route.query.ward] ? String(route.query.ward) : DEFAULT_SLUG)
 const ward = computed(() => WARDS[slug.value])
@@ -34,13 +35,13 @@ const siteUrl = computed(() => (typeof location !== 'undefined' ? location.origi
 const confettiOn = ref(false)
 function celebrate() { confettiOn.value = true; setTimeout(() => (confettiOn.value = false), 2200) }
 const confetti = Array.from({ length: 28 }, (_, i) => ({ left: `${(i * 37) % 100}vw`, delay: `${(i % 7) * 0.05}s`, bg: ['#F95C4B', '#E4DED2', '#000000', '#F95C4B'][i % 4] }))
-function toPetitions() { navigateTo({ path: '/', hash: '#petitions' }) }
+function toPetitions() { navigateTo('/petitions') }
 useHead({ title: computed(() => `${ward.value.code} residents · Where My Ward's Money Goes`) })
 </script>
 
 <template>
   <div class="fpage">
-    <WardNav :ward="ward" :pin="pin" active="forum" :posts="posts" @change-pin="() => { localStorage.removeItem('wmwmg:pin'); navigateTo('/') }" />
+    <WardNav :ward="ward" :pin="pin" active="forum" :posts="posts" @change-pin="clear" />
     <Forum full :ward-slug="wardSlug" :ward-code="ward.code" :ward-name="ward.name" :services="ward.services" :posts="posts" :counts="flags?.counts ?? {}" :initial-service="initial" :open-form="openForm" @refresh="refreshFlags()" @celebrate="celebrate()" @petition="toPetitions" @petitions-changed="() => {}" @receipt="openReceipt" />
 
     <div v-if="receiptOpen" class="modal" @click.self="receiptOpen = false">

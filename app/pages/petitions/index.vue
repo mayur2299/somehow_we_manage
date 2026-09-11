@@ -3,6 +3,9 @@ import { WARDS, resolvePin, DEFAULT_SLUG } from '~/utils/wards'
 const route = useRoute()
 const slug = ref(typeof route.query.ward === 'string' && WARDS[route.query.ward] ? String(route.query.ward) : DEFAULT_SLUG)
 const ward = computed(() => WARDS[slug.value])
+const { ward: wardCtx, pin: pinCtx, clear } = useWardContext()
+const { data: flags } = await useFetch(() => `/api/flags?ward=${slug.value}`, { default: () => ({ recent: [] as any[] }), watch: [slug] })
+const posts = computed(() => flags.value?.recent ?? [])
 const { data, refresh } = await useFetch(() => `/api/petitions?ward=${slug.value}`, { default: () => ({ petitions: [] as any[] }) })
 const list = computed(() => data.value?.petitions ?? [])
 const groups = computed(() => ward.value.services.map(s => ({ ...s, items: list.value.filter((p: any) => p.service === s.key).sort((a: any, b: any) => b.signatures - a.signatures) })).filter(g => g.items.length))
@@ -13,6 +16,31 @@ async function sign(p: any) {
   signed.value[p.id] = true
   try { await $fetch(`/api/petitions/${encodeURIComponent(`${p.ward}:${p.id}`)}/sign`, { method: 'POST' }); await refresh() } catch { signed.value[p.id] = false }
 }
+// create
+const creating = ref(false)
+const service = ref('')
+const title = ref('')
+const demand = ref('')
+const busy = ref(false)
+const error = ref('')
+function suggest() {
+  if (!service.value) service.value = [...ward.value.services].sort((a: any, b: any) => (b.avgUtil ?? 0) - (a.avgUtil ?? 0))[0].key
+  const s = ward.value.services.find((x: any) => x.key === service.value)!
+  const util = Math.round((s.avgUtil ?? 0) * 100)
+  if (!title.value) title.value = `Show us the ${s.label.toLowerCase()} work in ${ward.value.code}`
+  if (!demand.value) demand.value = `${ward.value.code} (${ward.value.name}) recorded ₹${Math.round(sum3(s.actual))} crore spent on ${s.label.toLowerCase()} between 2021-22 and 2023-24, about ${util}% of what was allotted. We, residents of this ward, ask the Assistant Municipal Commissioner to publish the list of works, their contractors and completion dates, and to inspect the locations residents have flagged on this site.`
+}
+async function create() {
+  error.value = ''
+  busy.value = true
+  try {
+    await $fetch('/api/petitions', { method: 'POST', body: { ward: slug.value, service: service.value, title: title.value, demand: demand.value } })
+    creating.value = false; title.value = ''; demand.value = ''
+    await refresh()
+  } catch (e: any) { error.value = e?.data?.statusMessage || 'Could not publish.' }
+  finally { busy.value = false }
+}
+
 const statusLabel: Record<string, string> = { open: 'Collecting signatures', sent: 'Sent to ward office', answered: 'Answered' }
 const statusClass: Record<string, string> = { open: 'yellow', sent: 'blue', answered: 'green' }
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
@@ -23,14 +51,28 @@ useHead({ title: computed(() => `Petitions · ${ward.value.code}`) })
 
 <template>
   <div class="ppage">
-    <WardNav :ward="ward" :pin="pin" active="petitions" @change-pin="() => { localStorage.removeItem('wmwmg:pin'); navigateTo('/') }" />
+    <WardNav :ward="ward" :pin="pin" :posts="posts" active="petitions" @change-pin="clear" />
     <main>
       <header class="head">
         <span class="pill green">{{ ward.code }} · {{ ward.name }}</span>
         <h1>Petitions.<br>By type.</h1>
         <p><strong>{{ list.length }}</strong> {{ list.length === 1 ? 'petition' : 'petitions' }} · <strong>{{ total }}</strong> {{ total === 1 ? 'signature' : 'signatures' }} · no login. Every one carries the ward's own spend figures and is addressed to the ward office.</p>
-        <NuxtLink class="btn primary" :to="{ path: '/', hash: '#petitions' }">✍️ Start a petition</NuxtLink>
+        <button class="btn primary" @click="creating = !creating; if (creating) suggest()">{{ creating ? 'Cancel' : '✍️ Start a petition' }}</button>
       </header>
+
+      <form v-if="creating" class="card make" @submit.prevent="create">
+        <p class="label">What is it about</p>
+        <div class="tags">
+          <button v-for="s in ward.services" :key="s.key" type="button" class="pill" :class="{ ink: service === s.key }" @click="service = s.key; title = ''; demand = ''; suggest()">{{ s.icon }} {{ s.label }}</button>
+        </div>
+        <input v-model="title" class="input" maxlength="120" placeholder="Petition title" />
+        <textarea v-model="demand" class="input" rows="6" maxlength="600" placeholder="What are you asking the ward office to do?"></textarea>
+        <div class="row">
+          <button class="btn act" type="submit" :disabled="busy">{{ busy ? 'Publishing…' : 'Publish petition' }}</button>
+          <span class="mini">Publishes with your signature as the first. The ward's own figures are pre-filled.</span>
+        </div>
+        <p v-if="error" class="err">{{ error }}</p>
+      </form>
 
       <section v-for="g in groups" :key="g.key" class="group">
         <div class="ghead">
@@ -54,7 +96,14 @@ useHead({ title: computed(() => `Petitions · ${ward.value.code}`) })
           </article>
         </div>
       </section>
-      <p v-if="!groups.length" class="empty">No petitions yet for {{ ward.code }}. Start one from a complaint in the <NuxtLink to="/forum">forum</NuxtLink>.</p>
+      <div v-if="!groups.length && !creating" class="card empty">
+        <h2>No petitions yet for {{ ward.code }}.</h2>
+        <p>A petition is a grievance with the ward's own numbers attached. Start one here, or raise one from any complaint in the forum.</p>
+        <div class="row">
+          <button class="btn primary" @click="creating = true; suggest()">✍️ Start a petition</button>
+          <NuxtLink class="btn" to="/forum">Go to the forum →</NuxtLink>
+        </div>
+      </div>
     </main>
   </div>
 </template>
@@ -86,4 +135,14 @@ h2 { font-size: 34px; letter-spacing: -.05em; flex: 1; }
 .from { text-decoration: underline; color: var(--muted); }
 .empty { font-weight: 800; }
 @media (max-width: 600px) { .logo { display: none; } }
+
+.make { display: grid; gap: 10px; }
+.make .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.make .tags .pill { cursor: pointer; min-height: 36px; }
+.make .row, .empty .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.label { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; margin: 0; }
+.err { color: var(--coral); font-weight: 800; margin: 0; }
+.empty { display: grid; gap: 10px; }
+.empty h2 { font-size: 30px; }
+.empty p { margin: 0; font-weight: 700; }
 </style>
