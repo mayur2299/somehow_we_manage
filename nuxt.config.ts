@@ -14,6 +14,9 @@ export default defineNuxtConfig({
       petitions: process.env.NETLIFY
         ? { driver: 'netlify-blobs', name: 'ward-petitions', consistency: 'strong' }
         : { driver: 'fs', base: './.data/petitions' },
+      comments: process.env.NETLIFY
+        ? { driver: 'netlify-blobs', name: 'ward-comments', consistency: 'strong' }
+        : { driver: 'fs', base: './.data/comments' },
       cache: process.env.NETLIFY
         ? { driver: 'netlify-blobs', name: 'ward-cache' }
         : { driver: 'fs', base: './.data/cache' },

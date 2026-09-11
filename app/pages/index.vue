@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ward from '~/data/k-east.json'
-import { tagLabel } from '~/utils/tags'
 
 // ---------- helpers ----------
 const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
@@ -58,28 +57,13 @@ const compare = (s: typeof ward.services[number]) => {
 const wardSlug = 'k-east'
 const { data: flags, refresh: refreshFlags } = await useFetch(`/api/flags?ward=${wardSlug}`, { default: () => ({ counts: {} as Record<string, number>, recent: [] as any[] }) })
 const posts = computed(() => flags.value?.recent ?? [])
-const svcPosts = computed(() => posts.value.filter((f: any) => f.service === selected.value))
 const photoCount = (k: string) => posts.value.filter((f: any) => f.service === k && f.photo).length
-const liked = ref<Record<string, boolean>>({})
-async function like(f: any) {
-  if (liked.value[f.id]) return
-  liked.value[f.id] = true
-  try { await $fetch(`/api/flags/${encodeURIComponent(`${f.ward}:${f.service}:${f.id}`)}/like`, { method: 'POST' }); await refreshFlags() } catch { liked.value[f.id] = false }
-}
-async function sharePost(f: any) {
-  const text = `${svcLabel(f.service)} in ${ward.code} ${ward.name}: ${tagLabel(f.tag)}. "${f.note}" — ${ward.code} spent ${cr(sum3(svc.value.actual))} on ${svcLabel(f.service).toLowerCase()} (${Math.round(svc.value.avgUtil * 100)}% of budget). ${location.href.split('#')[0]}#forum`
-  if (navigator.share) { try { await navigator.share({ text }) } catch {} } else { try { await navigator.clipboard.writeText(text); toast.value = 'Copied to clipboard.' } catch {} }
-}
-const toast = ref('')
-watch(toast, v => { if (v) setTimeout(() => (toast.value = ''), 2000) })
 const showPostForm = ref(false)
+const forumService = ref<string | undefined>()
 const confettiOn = ref(false)
 function celebrate() { confettiOn.value = true; setTimeout(() => (confettiOn.value = false), 2200) }
 const confetti = Array.from({ length: 28 }, (_, i) => ({ left: `${(i * 37) % 100}vw`, delay: `${(i % 7) * 0.05}s`, bg: ['#ffd84d', '#b7ff4a', '#ff88c7', '#85c7ff'][i % 4] }))
 
-// threads
-const threads = ref<{ source: string; items: any[] }>({ source: 'snapshot', items: [] })
-onMounted(async () => { try { threads.value = await $fetch(`/api/threads?q=${encodeURIComponent('Andheri East')}`) } catch {} })
 
 // ---------- RTI modal ----------
 const rtiOpen = ref(false)
@@ -93,7 +77,7 @@ function go(id: string) { document.querySelector(id)?.scrollIntoView({ behavior:
 function pickService(k: string, then: 'forum' | 'rti') {
   selected.value = k
   if (then === 'rti') openRti()
-  else { showPostForm.value = true; go('#forum') }
+  else { forumService.value = k; showPostForm.value = true; go('#forum') }
 }
 useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
 </script>
@@ -264,52 +248,9 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
       <section id="forum" class="forum">
         <div class="section-head">
           <h2>On paper<br>vs on the ground.</h2>
-          <p>{{ ward.code }} recorded <strong>{{ cr(sum3(svc.actual)) }}</strong> spent on {{ svc.label.toLowerCase() }} over three years. Here is what residents see.</p>
+          <p>The BMC's numbers, next to what residents of {{ ward.name }} actually see. Post, like, reply, share, or turn a post into a petition.</p>
         </div>
-        <div class="svc-tabs">
-          <button v-for="s in ward.services" :key="s.key" class="pill" :class="{ ink: selected === s.key }" @click="selected = s.key">{{ s.icon }} {{ s.label }}<span v-if="flags?.counts?.[s.key]"> · {{ flags.counts[s.key] }}</span></button>
-        </div>
-        <div class="grid">
-          <article class="card pink span5 contrast-card">
-            <span class="pill">{{ svc.icon }} {{ svc.label }} · {{ Math.round(svc.avgUtil * 100) }}%</span>
-            <div class="big">{{ cr(sum3(svc.actual)) }}</div>
-            <div class="vs">spent, on paper</div>
-            <div class="big">{{ svcPosts.length }}</div>
-            <div class="vs">resident post{{ svcPosts.length === 1 ? '' : 's' }} saying otherwise<span v-if="photoCount(svc.key)">, {{ photoCount(svc.key) }} with photos</span></div>
-            <button class="btn flag" @click="showPostForm = !showPostForm">{{ showPostForm ? 'Close' : '🚩 I don\'t see this on the ground' }}</button>
-          </article>
-          <article v-if="showPostForm" class="card span7">
-            <h3 class="h-sm">Post what you see.</h3>
-            <FlagIssue :ward-slug="wardSlug" :service-key="svc.key" :services="ward.services" @flagged="refreshFlags(); celebrate()" />
-          </article>
-          <article v-for="f in svcPosts" :key="f.id" class="card post" :class="showPostForm ? 'span4' : 'span4'">
-            <img v-if="f.photo" :src="f.photo" alt="" />
-            <div class="post-body">
-              <div class="post-tags"><span class="pill red">{{ tagLabel(f.tag) }}</span><span v-if="f.locality" class="pill">📍 {{ f.locality }}</span></div>
-              <p class="note">{{ f.note || 'Photo only' }}</p>
-              <div class="post-foot">
-                <span class="mini">{{ new Date(f.ts).toLocaleString('en-IN', { day: 'numeric', month: 'short' }) }}</span>
-                <div class="acts">
-                  <button class="btn sm" :disabled="liked[f.id]" @click="like(f)">👍 {{ f.likes ?? 0 }}</button>
-                  <button class="btn sm" @click="sharePost(f)">Share</button>
-                  <button class="btn sm act" @click="startPetition(f.service)">✍️ Petition</button>
-                </div>
-              </div>
-            </div>
-          </article>
-          <p v-if="!svcPosts.length" class="span12 empty">No posts yet on {{ svc.label.toLowerCase() }}. Be the first to say what you see.</p>
-        </div>
-
-        <div class="threads">
-          <div class="threads-head"><h3 class="h-sm">What the neighbourhood is already saying</h3><span class="pill" :class="threads?.source === 'snapshot' ? 'purple' : 'green'">{{ threads?.source === 'snapshot' ? 'Cached snapshot' : 'Live · r/mumbai' }}</span></div>
-          <div class="thread-list">
-            <a v-for="t in (threads?.items ?? []).slice(0, 6)" :key="t.url + t.title" class="thread" :href="t.url" target="_blank" rel="noopener">
-              <span class="t-title">{{ t.title }}</span>
-              <span class="mini">r/{{ t.sub }} · ▲ {{ t.score }} · 💬 {{ t.comments }}</span>
-            </a>
-          </div>
-          <p class="mini">Public Reddit search for "Andheri East" in r/mumbai, cached hourly. Threads are residents' words, not verified facts.</p>
-        </div>
+        <Forum :ward-slug="wardSlug" :ward-code="ward.code" :ward-name="ward.name" :services="ward.services" :posts="posts" :counts="flags?.counts ?? {}" :initial-service="forumService" :open-form="showPostForm" @refresh="refreshFlags()" @celebrate="celebrate()" @petition="startPetition" />
       </section>
 
       <!-- 5. PETITIONS -->
@@ -396,7 +337,6 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
       </div>
 
       <div v-if="confettiOn" class="confetti" aria-hidden="true"><i v-for="(c, i) in confetti" :key="i" class="piece" :style="{ left: c.left, animationDelay: c.delay, background: c.bg }"></i></div>
-      <div v-if="toast" class="toast">{{ toast }}</div>
     </div>
   </div>
 </template>

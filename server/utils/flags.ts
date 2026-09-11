@@ -13,7 +13,11 @@ export interface Flag {
   ts: number
   likes?: number
   locality?: string
+  comments?: number
 }
+
+export interface Comment { id: string; flagId: string; text: string; ts: number }
+export const commentStore = () => useStorage<Comment>('comments')
 
 export const flagStore = () => useStorage<Flag>('flags')
 
