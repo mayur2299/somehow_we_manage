@@ -1,5 +1,13 @@
 <script setup lang="ts">
-const props = defineProps<{ wardSlug: string; serviceKey: string; serviceLabel: string }>()
+const props = defineProps<{
+  wardSlug: string
+  serviceKey: string
+  serviceLabel: string
+  services: { key: string; label: string; icon: string }[]
+}>()
+const service = ref(props.serviceKey)
+watch(() => props.serviceKey, v => (service.value = v))
+const serviceLabelNow = computed(() => props.services.find(s => s.key === service.value)?.label ?? props.serviceLabel)
 const emit = defineEmits<{ (e: 'flagged'): void }>()
 
 import { FLAG_TAGS } from '~/utils/tags'
@@ -31,7 +39,7 @@ async function submit() {
   if (!note.value.trim() && !photo.value) { error.value = 'Add a short note or a photo.'; return }
   busy.value = true
   try {
-    await $fetch('/api/flags', { method: 'POST', body: { ward: props.wardSlug, service: props.serviceKey, note: note.value, tag: tag.value, photo: photo.value } })
+    await $fetch('/api/flags', { method: 'POST', body: { ward: props.wardSlug, service: service.value, note: note.value, tag: tag.value, photo: photo.value } })
     done.value = true; note.value = ''; tag.value = ''; photo.value = undefined
     emit('flagged')
     setTimeout(() => (done.value = false), 2500)
@@ -43,7 +51,12 @@ async function submit() {
 
 <template>
   <div class="flag">
-    <p class="lead">Budgeted for {{ serviceLabel.toLowerCase() }}, but you don't see it on the ground? Say where.</p>
+    <p class="lead">Budgeted for {{ serviceLabelNow.toLowerCase() }}, but you don't see it on the ground? Say where.</p>
+    <p class="lbl">What is it about</p>
+    <div class="tags">
+      <button v-for="s in services" :key="s.key" type="button" class="tag svc" :class="{ on: service === s.key }" @click="service = s.key">{{ s.icon }} {{ s.label }}</button>
+    </div>
+    <p class="lbl">What is wrong</p>
     <div class="tags">
       <button v-for="t in FLAG_TAGS" :key="t.key" type="button" class="tag" :class="{ on: tag === t.key }" :title="t.hint" @click="tag = t.key">{{ t.label }}</button>
     </div>
@@ -67,6 +80,9 @@ async function submit() {
 .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.55rem; }
 .tag { border: 1px solid #b9c6f5; background: #fff; color: #2b3a8a; border-radius: 999px; padding: 0.3rem 0.7rem; font: inherit; font-size: 0.8rem; cursor: pointer; }
 .tag.on { background: #3b5bdb; border-color: #3b5bdb; color: #fff; }
+.tag.svc { border-color: #ccc; color: #333; }
+.tag.svc.on { background: #111; border-color: #111; color: #fff; }
+.lbl { margin: 0 0 0.3rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #666; font-weight: 600; }
 textarea { width: 100%; box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 0.5rem 0.6rem; font: inherit; font-size: 0.9rem; background: #fff; resize: vertical; }
 .row { display: flex; gap: 0.5rem; margin-top: 0.5rem; align-items: center; }
 .file { border: 1px solid #ccc; background: #fff; border-radius: 8px; padding: 0.5rem 0.9rem; cursor: pointer; font-size: 0.9rem; }
