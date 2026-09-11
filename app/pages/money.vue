@@ -101,11 +101,9 @@ useHead({ title: computed(() => `Money · ${ward.value.code} ${ward.value.name}`
         </div>
       </section>
 
-      <!-- RECEIPTS -->
-      <section id="receipts">
-        <div class="section-head"><h2>Every number<br>we have.</h2><p>No "trust us". Source, year, and whether a number is actual, estimate or unavailable.</p></div>
+      <section id="numbers">
         <div class="grid">
-          <article class="card span12">
+<article class="card span12">
             <details class="alltable">
               <summary class="btn">Show every number we have ▾</summary>
             <div class="tablewrap">
@@ -135,24 +133,23 @@ useHead({ title: computed(() => `Money · ${ward.value.code} ${ward.value.name}`
             <p class="mini">₹ crore. <span class="pill red">Red</span> spent over 150% of allotment · <span class="pill blue">Blue</span> under 90% · <span class="pill green">Green</span> within range · <span class="pill purple">est.</span> not closed yet.</p>
             </details>
           </article>
-          <div class="span7 sources">
-            <a v-for="s in ward.sources" :key="s.url" class="source" :href="s.url" target="_blank" rel="noopener">{{ s.name }}<small>{{ s.url.replace(/^https?:\/\//, '').split('/')[0] }}</small></a>
-          </div>
-          <article class="card red span5">
+<article class="card span12 notpub">
             <span class="pill">What the BMC does not publish</span>
             <h3 class="h-sm">The missing columns matter too.</h3>
             <ul><li v-for="n in ctx.notPublished" :key="n">{{ n }}</li><li>Ward-level actuals for the last two years</li></ul>
             <p><strong>We cannot conclude what the dataset does not show.</strong> That is exactly what the RTI asks for.</p>
-          </article>
-        </div>
+          </article>        </div>
       </section>
 
-      
-    </main>
+</main>
     <WardModals :ward="ward" :posts="posts" />
     <footer>
       <div class="logo">Somehow We <b>Manage</b></div>
       <div class="disclaimer"><strong>CREATE 2026 prototype · 11 September 2026.</strong> Ward actuals are not published by the BMC; Praja Foundation obtained them under the Right to Information Act. Utilisation above 100% means recorded spend exceeded the allotment.</div>
+      <details class="srcs">
+        <summary>Where these numbers come from ({{ ward.sources?.length ?? 0 }} sources)</summary>
+        <ul><li v-for="s in (ward.sources ?? [])" :key="s.url"><a :href="s.url" target="_blank" rel="noopener">{{ s.name }}</a></li></ul>
+      </details>
     </footer>
   </div>
 </template>
@@ -332,4 +329,13 @@ footer { padding: 34px max(6vw, calc((100vw - 1440px) / 2)) 50px; font-weight: 7
 .page { background: var(--paper); min-height: 100vh; }
 main { display: block; }
 
+
+#numbers { padding-top: 24px; }
+.notpub { background: var(--stone); }
+.notpub ul { font-weight: 700; line-height: 1.6; padding-left: 20px; margin: 8px 0; }
+.alltable summary { cursor: pointer; }
+.srcs { margin-top: 14px; font-size: 13px; }
+.srcs summary { cursor: pointer; font-weight: 800; text-decoration: underline; }
+.srcs ul { margin: 8px 0 0; padding-left: 18px; line-height: 1.7; }
+.srcs a { color: var(--muted); }
 </style>
