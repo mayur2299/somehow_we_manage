@@ -18,7 +18,8 @@ export default defineEventHandler(async (event) => {
   }
 
   const ts = Date.now()
-  const flag: Flag = { id: `${ts}-${Math.random().toString(36).slice(2, 8)}`, ward, service, note, tag, photo, ts, likes: 0, locality, title }
+  const secret = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)
+  const flag: Flag = { id: `${ts}-${Math.random().toString(36).slice(2, 8)}`, ward, service, note, tag, photo, ts, likes: 0, locality, title, secret }
   await flagStore().setItem(`${ward}:${service}:${flag.id}`, flag)
-  return { ok: true, flag: { ...flag, photo: undefined } }
+  return { ok: true, secret, flag: { ...flag, photo: undefined, secret: undefined } }
 })

@@ -40,7 +40,12 @@ async function submit() {
   if (!note.value.trim() && !photo.value) { error.value = 'Add a line or a photo.'; return }
   busy.value = true
   try {
-    await $fetch('/api/flags', { method: 'POST', body: { ward: props.wardSlug, service: service.value, note: note.value, tag: tag.value, photo: photo.value, locality: locality.value, title: title.value } })
+    const res = await $fetch<{ secret: string; flag: any }>('/api/flags', { method: 'POST', body: { ward: props.wardSlug, service: service.value, note: note.value, tag: tag.value, photo: photo.value, locality: locality.value, title: title.value } })
+    try {
+      const mine = JSON.parse(localStorage.getItem('wmwmg:mine') || '{}')
+      mine[res.flag.id] = res.secret
+      localStorage.setItem('wmwmg:mine', JSON.stringify(mine))
+    } catch {}
     done.value = true; note.value = ''; title.value = ''; tag.value = ''; locality.value = ''; photo.value = undefined
     emit('flagged')
     setTimeout(() => (done.value = false), 2500)

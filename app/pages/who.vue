@@ -13,6 +13,23 @@ const utilClass = (u: number | null) => u == null ? 'purple' : u > 150 ? 'red' :
 const acc = computed(() => ward.value.accountable ?? {})
 const ctx = computed(() => ward.value.cityContext ?? {})
 const partyTally = computed(() => Object.entries((acc.value.corporators ?? []).reduce((t: Record<string, number>, c: any) => { t[c.party] = (t[c.party] ?? 0) + 1; return t }, {})).sort((a: any, b: any) => b[1] - a[1]))
+// match the visitor's own locality to an MLA constituency
+const norm = (t: string) => t.toLowerCase().replace(/[^a-z ]/g, ' ').replace(/\s+/g, ' ').trim()
+const myArea = computed(() => norm(area.value || ''))
+const scoreMatch = (c: string) => {
+  const a = myArea.value, b = norm(c)
+  if (!a || !b) return 0
+  if (a === b) return 100
+  if (a.startsWith(b) || b.startsWith(a)) return 80
+  const aw = new Set(a.split(' ')), bw = b.split(' ')
+  const hit = bw.filter(w => w.length > 3 && aw.has(w)).length
+  return hit * 20
+}
+const myMla = computed(() => {
+  const list = (acc.value.mlas ?? []).map((m: any) => ({ m, s: scoreMatch(m.constituency) }))
+  const best = list.sort((x: any, y: any) => y.s - x.s)[0]
+  return best && best.s >= 40 ? best.m : null
+})
 const affidavit = (name: string) => `https://www.myneta.info/search_myneta.php?q=${encodeURIComponent(name)}`
 useHead({ title: computed(() => `Who represents ${ward.value.code} ${ward.value.name}`) })
 </script>
@@ -63,8 +80,10 @@ useHead({ title: computed(() => `Who represents ${ward.value.code} ${ward.value.
             </div>
             <p v-if="acc.kNorthNote" class="mini">{{ acc.kNorthNote }} Dashed cards now report to K/North.</p>
             <hr class="divider" />
+            <p v-if="myMla" class="mini">Matched to <strong>{{ pin }} · {{ area }}</strong>. Corporator wards are not mapped to pincodes by the BMC, so the full list is shown above.</p>
             <div v-if="acc.mlas?.length || acc.mayor" class="mlas">
-              <div v-for="m in (acc.mlas ?? [])" :key="m.constituency" class="mla">
+              <div v-for="m in (acc.mlas ?? [])" :key="m.constituency" class="mla" :class="{ mine: myMla && m.constituency === myMla.constituency }">
+                <span v-if="myMla && m.constituency === myMla.constituency" class="pill red">Your area</span>
                 <span class="pill">MLA · {{ m.constituency }}</span>
                 <div class="nm">{{ m.name }} <span class="pt">· {{ m.party }}</span></div>
                 <a class="btn sm" :href="affidavit(m.name)" target="_blank" rel="noopener">Declared ↗</a>
@@ -285,4 +304,6 @@ footer { padding: 34px max(6vw, calc((100vw - 1440px) / 2)) 50px; font-weight: 7
 .page { background: var(--paper); min-height: 100vh; }
 main { display: block; }
 
+
+.mla.mine { background: var(--stone); outline: 2px solid var(--coral); outline-offset: 2px; }
 </style>

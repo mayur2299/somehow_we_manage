@@ -120,6 +120,21 @@ async function shareAsk(p: any) {
   else { try { await navigator.clipboard.writeText(text); toast.value = 'Copied. Send it to your building group.' } catch {} }
 }
 
+// posts made from this browser can be deleted
+const mine = ref<Record<string, string>>({})
+function loadMine() { try { mine.value = JSON.parse(localStorage.getItem('wmwmg:mine') || '{}') } catch { mine.value = {} } }
+onMounted(loadMine)
+const isMine = (p: any) => !!mine.value[p.id]
+async function removePost(p: any) {
+  if (!confirm('Delete your post? This also removes its replies.')) return
+  try {
+    await $fetch(`/api/flags/${encodeURIComponent(`${p.ward}:${p.service}:${p.id}`)}/delete`, { method: 'POST', body: { secret: mine.value[p.id] } })
+    const m = { ...mine.value }; delete m[p.id]; mine.value = m
+    try { localStorage.setItem('wmwmg:mine', JSON.stringify(m)) } catch {}
+    emit('refresh'); toast.value = 'Post deleted.'
+  } catch { toast.value = 'Could not delete.' }
+}
+
 // share menu (per platform) + report
 const shareOpen = ref<Record<string, boolean>>({})
 function shareText(p: any) {
@@ -145,7 +160,7 @@ async function report(p: any) {
 const toast = ref('')
 watch(toast, v => { if (v) setTimeout(() => (toast.value = ''), 2200) })
 const justPosted = ref(false)
-function onPosted() { emit('refresh'); emit('celebrate'); showForm.value = false; justPosted.value = true; scrollBottom(); setTimeout(() => (justPosted.value = false), 12000) }
+function onPosted() { loadMine(); emit('refresh'); emit('celebrate'); showForm.value = false; justPosted.value = true; scrollBottom(); setTimeout(() => (justPosted.value = false), 12000) }
 function permalink(p: any) { return `${location.origin}${location.pathname}?pin=${new URLSearchParams(location.search).get('pin') ?? '400069'}#post-${p.id}` }
 async function share(p: any) {
   const s = svcOf(p.service)!
@@ -250,7 +265,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
           <article :id="`post-${p.id}`" class="msg">
             <div class="who"><span class="av">{{ svcOf(p.service)?.icon }}</span><span class="name">Resident<span v-if="p.locality"> · {{ p.locality }}</span></span><span class="time">{{ hhmm(p.ts) }}</span></div>
             <div class="bubble">
-              <div class="tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcOf(p.service)?.label }}</span></div>
+              <div class="tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcOf(p.service)?.label }}</span><span v-if="isMine(p)" class="pill ink">Your post</span></div>
               <h4 v-if="p.title" class="ptitle">{{ p.title }}</h4>
               <p class="note">{{ p.note }}</p>
               <div v-if="p.photo" class="photo"><img :src="p.photo" alt="" referrerpolicy="no-referrer" /><span v-if="p.photoCredit" class="credit">{{ p.photoCredit }}</span></div>
@@ -262,7 +277,8 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
                 <button class="chip" @click="toggle(p)">💬 {{ p.comments ?? 0 }}</button>
                 <label class="chip"><input type="file" accept="image/*" capture="environment" hidden @change="onConfirmPhoto(p, $event)" />📸</label>
                 <button class="chip" @click="shareOpen[p.id] = !shareOpen[p.id]">↗ Share this</button>
-                <button class="chip ghost" :disabled="reported[p.id]" @click="report(p)">⚑</button>
+                <button v-if="!isMine(p)" class="chip ghost" :disabled="reported[p.id]" @click="report(p)">⚑</button>
+                <button v-else class="chip ghost" @click="removePost(p)">🗑 Delete</button>
               </div>
               <p v-if="p.lastConfirmed" class="seen">Last seen {{ daysSince(p.lastConfirmed) === 0 ? 'today' : daysSince(p.lastConfirmed) + ' days ago' }}</p>
 

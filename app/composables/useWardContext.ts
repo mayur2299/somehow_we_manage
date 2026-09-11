@@ -21,9 +21,10 @@ export function useWardContext() {
   }
   // resolve the pin as early as possible, then redirect only if there is genuinely none
   const resolveNow = (redirectIfMissing: boolean) => {
-    if (ready.value) return
     try {
       const q = (route.query.pin as string) || (import.meta.client ? new URLSearchParams(location.search).get('pin') : null)
+      if (q && q !== pin.value) { apply(q); return }      // an explicit ?pin always wins
+      if (ready.value) return
       const saved = import.meta.client ? localStorage.getItem('wmwmg:pin') : null
       const p = q || saved
       if (p && apply(p)) return
