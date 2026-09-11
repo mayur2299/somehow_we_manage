@@ -5,13 +5,12 @@ export default defineNuxtConfig({
 
   // Netlify: Nitro auto-detects the platform and ships server/api/* as Netlify Functions.
   nitro: {
-    // Citizen flags live in Netlify Blobs in production...
+    // Citizen flags live in Netlify Blobs when built on Netlify (NETLIFY=true is set by
+    // the Netlify build image), and on the local filesystem for dev and local builds.
     storage: {
-      flags: { driver: 'netlify-blobs', name: 'ward-flags', consistency: 'strong' },
-    },
-    // ...and on the local filesystem during `npm run dev`.
-    devStorage: {
-      flags: { driver: 'fs', base: './.data/flags' },
+      flags: process.env.NETLIFY
+        ? { driver: 'netlify-blobs', name: 'ward-flags', consistency: 'strong' }
+        : { driver: 'fs', base: './.data/flags' },
     },
   },
 
