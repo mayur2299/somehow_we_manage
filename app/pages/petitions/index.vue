@@ -4,10 +4,13 @@ const route = useRoute()
 const slug = ref(typeof route.query.ward === 'string' && WARDS[route.query.ward] ? String(route.query.ward) : DEFAULT_SLUG)
 const ward = computed(() => WARDS[slug.value])
 const { ward: wardCtx, pin: pinCtx, clear } = useWardContext()
-const { data: flags } = await useFetch(() => `/api/flags?ward=${slug.value}`, { default: () => ({ recent: [] as any[] }), watch: [slug] })
-const posts = computed(() => flags.value?.recent ?? [])
-const { data, refresh } = await useFetch(() => `/api/petitions?ward=${slug.value}`, { default: () => ({ petitions: [] as any[] }) })
-const list = computed(() => data.value?.petitions ?? [])
+const flags = ref<{ recent: any[] }>({ recent: [] })
+onMounted(async () => { try { flags.value = await $fetch(`/api/flags?ward=${slug.value}`) } catch {} })
+const posts = computed(() => flags.value.recent ?? [])
+const data = ref<{ petitions: any[] }>({ petitions: [] })
+async function refresh() { try { data.value = await $fetch(`/api/petitions?ward=${slug.value}`) } catch {} }
+onMounted(refresh); watch(slug, refresh)
+const list = computed(() => data.value.petitions ?? [])
 const groups = computed(() => ward.value.services.map(s => ({ ...s, items: list.value.filter((p: any) => p.service === s.key).sort((a: any, b: any) => b.signatures - a.signatures) })).filter(g => g.items.length))
 const total = computed(() => list.value.reduce((a: number, p: any) => a + p.signatures, 0))
 const signed = ref<Record<string, boolean>>({})
@@ -112,7 +115,8 @@ useHead({ title: computed(() => `Petitions · ${ward.value.code}`) })
 .ppage { min-height: 100vh; background: var(--paper); }
 nav { height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 max(4vw, calc((100vw - 1100px) / 2)); border-bottom: 3px solid var(--ink); position: sticky; top: 0; background: var(--paper); z-index: 30; }
 .logo { font-weight: 900; font-size: 18px; letter-spacing: -0.045em; white-space: nowrap; }
-.logo b { background: var(--yellow); padding: 3px 7px; border: 2px solid var(--ink); border-radius: 7px; box-shadow: 3px 3px 0 var(--ink); }
+.kye { display: inline-grid; gap: 1px; background: var(--ink); border: 2px solid var(--coral); border-radius: 4px; padding: 4px 7px; transform: rotate(-1.5deg); line-height: .86; }
+.kye b { font-family: var(--display); font-size: 15px; letter-spacing: -.03em; color: var(--white); text-transform: uppercase; }
 .pins { display: flex; gap: 6px; align-items: center; }
 main { max-width: 1100px; margin: 0 auto; padding: 40px 4vw 80px; display: grid; gap: 40px; }
 .head { display: grid; gap: 14px; justify-items: start; }

@@ -23,10 +23,12 @@ onMounted(() => {
 })
 const area = computed(() => ward.value.pincodes.find((p: any) => p.pin === pin.value)?.area ?? ward.value.name)
 
-const { data: flags, refresh: refreshFlags } = await useFetch(() => `/api/flags?ward=${slug.value}`, { default: () => ({ counts: {} as Record<string, number>, recent: [] as any[] }) })
-const posts = computed(() => flags.value?.recent ?? [])
+const flags = ref<{ counts: Record<string, number>; recent: any[] }>({ counts: {}, recent: [] })
+async function refreshFlags() { try { flags.value = await $fetch(`/api/flags?ward=${slug.value}`) } catch {} }
+onMounted(refreshFlags); watch(slug, refreshFlags)
+const posts = computed(() => flags.value.recent ?? [])
 
-const selected = ref(initial ?? 'swd')
+const selected = ref(initial ?? ward.value.services[0].key)
 const svc = computed(() => ward.value.services.find((s: any) => s.key === selected.value) ?? ward.value.services[0])
 const receiptOpen = ref(false)
 const receiptPost = ref<any | null>(null)
@@ -36,7 +38,7 @@ const confettiOn = ref(false)
 function celebrate() { confettiOn.value = true; setTimeout(() => (confettiOn.value = false), 2200) }
 const confetti = Array.from({ length: 28 }, (_, i) => ({ left: `${(i * 37) % 100}vw`, delay: `${(i % 7) * 0.05}s`, bg: ['#F95C4B', '#E4DED2', '#000000', '#F95C4B'][i % 4] }))
 function toPetitions() { navigateTo('/petitions') }
-useHead({ title: computed(() => `${ward.value.code} residents · Where My Ward's Money Goes`) })
+useHead({ title: computed(() => `${ward.value.code} residents · Know Your Enemy`) })
 </script>
 
 <template>
@@ -62,7 +64,8 @@ useHead({ title: computed(() => `${ward.value.code} residents · Where My Ward's
 .fpage { min-height: 100vh; background: var(--paper); }
 nav { height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 max(4vw, calc((100vw - 860px) / 2)); border-bottom: 3px solid var(--ink); background: var(--paper); position: sticky; top: 0; z-index: 30; }
 .logo { font-weight: 900; font-size: 18px; letter-spacing: -0.045em; white-space: nowrap; }
-.logo b { background: var(--yellow); padding: 3px 7px; border: 2px solid var(--ink); border-radius: 7px; box-shadow: 3px 3px 0 var(--ink); }
+.kye { display: inline-grid; gap: 1px; background: var(--ink); border: 2px solid var(--coral); border-radius: 4px; padding: 4px 7px; transform: rotate(-1.5deg); line-height: .86; }
+.kye b { font-family: var(--display); font-size: 15px; letter-spacing: -.03em; color: var(--white); text-transform: uppercase; }
 .pins { display: flex; gap: 6px; }
 .svc-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
 .svc-tabs .pill { cursor: pointer; min-height: 36px; }

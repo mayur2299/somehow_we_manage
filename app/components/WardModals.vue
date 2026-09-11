@@ -2,6 +2,7 @@
 const props = defineProps<{ ward: any; posts: any[] }>()
 const { receiptOpen, rtiOpen, service, receiptPost } = useWardModals()
 const svc = computed(() => props.ward.services.find((s: any) => s.key === service.value) ?? props.ward.services[0])
+onMounted(() => { if (!service.value) service.value = props.ward.services[0].key })
 const siteUrl = computed(() => (typeof location !== 'undefined' ? location.origin : 'https://somehow-we-manage.netlify.app'))
 </script>
 

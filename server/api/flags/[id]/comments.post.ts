@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   if (text.length < 2) throw createError({ statusCode: 400, statusMessage: 'Write something' })
   const flags = flagStore()
   const fkey = `${ward}:${service}:${id}`
-  const flag = await flags.getItem(fkey)
+  const flag = await ensureFlag(ward, service, id)
   if (!flag) throw createError({ statusCode: 404, statusMessage: 'Post not found' })
   const ts = Date.now()
   const c: Comment = { id: `${ts}-${Math.random().toString(36).slice(2, 7)}`, flagId: id, text, ts }

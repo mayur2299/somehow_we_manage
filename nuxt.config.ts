@@ -25,14 +25,14 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     aiApiKey: '',
-    public: { appName: 'Where My Ward\'s Money Goes' },
+    public: { appName: 'Know Your Enemy' },
   },
 
   css: ['~/assets/css/main.css'],
 
   app: {
     head: {
-      title: 'Where My Ward\'s Money Goes',
+      title: 'Know Your Enemy — Mumbai ward budgets',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Your ward\'s budget, what was actually spent, and one tap to ask the BMC why.' },

@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   if (!ward || !id) throw createError({ statusCode: 400, statusMessage: 'Bad id' })
   const store = petitionStore()
   const key = `${ward}:${id}`
-  const p = await store.getItem(key)
+  const p = await ensurePetition(ward, id)
   if (!p) throw createError({ statusCode: 404, statusMessage: 'Not found' })
   p.signatures += 1
   await store.setItem(key, p)

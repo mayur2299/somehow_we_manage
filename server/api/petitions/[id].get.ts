@@ -6,5 +6,7 @@ export default defineEventHandler(async (event) => {
     const p = await store.getItem(`${ward}:${id}`)
     if (p) return { petition: p }
   }
+  const s = seedPetitionById(id)
+  if (s) return { petition: s }
   throw createError({ statusCode: 404, statusMessage: 'Petition not found' })
 })

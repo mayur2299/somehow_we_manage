@@ -26,7 +26,7 @@ const tiles = computed(() => [
 <template>
   <div>
     <nav ref="navEl">
-      <NuxtLink class="logo" to="/">Where My Ward's <b>Money Goes</b></NuxtLink>
+      <NuxtLink class="logo" to="/"><span class="kye" aria-label="Know Your Enemy"><b>Know Your</b><b>Enemy</b></span></NuxtLink>
       <div class="right">
         <span class="pill yellow">{{ ward.code }} · {{ ward.name }}</span>
         <button class="btn sm" @click="emit('changePin')">📍 {{ pin ?? '——' }} · change</button>
@@ -45,7 +45,10 @@ const tiles = computed(() => [
 <style scoped>
 nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px max(5vw, calc((100vw - 1440px) / 2)); background: rgba(246,244,241,.96); backdrop-filter: blur(10px); border-bottom: 2px solid var(--ink); }
 .logo { font-weight: 900; font-size: 20px; letter-spacing: -0.045em; white-space: nowrap; text-decoration: none; color: var(--ink); }
-.logo b { background: var(--coral); color: var(--white); padding: 3px 7px; border: 2px solid var(--ink); border-radius: 7px; box-shadow: 3px 3px 0 var(--ink); }
+
+.kye { display: inline-grid; gap: 1px; background: var(--ink); border: 2px solid var(--coral); border-radius: 4px; padding: 4px 7px; transform: rotate(-1.5deg); line-height: .86; }
+.kye b { font-family: var(--display); font-size: 15px; letter-spacing: -.03em; color: var(--white); text-transform: uppercase; }
+
 .right { display: flex; gap: 8px; align-items: center; }
 .hub { position: sticky; top: var(--navh, 64px); z-index: 25; background: var(--ink); border-bottom: 3px solid var(--ink); padding: 14px max(6vw, calc((100vw - 1440px) / 2)); transition: padding 160ms ease; }
 .hub.compact { padding-top: 8px; padding-bottom: 8px; }

@@ -6,7 +6,12 @@ export default defineEventHandler(async (event) => {
   }
   const store = flagStore()
   const keys = await store.getKeys(ward)
-  const items = (await Promise.all(keys.map(k => store.getItem(k)))).filter((f): f is Flag => !!f && (f.reports ?? 0) < 3)
+  const stored = (await Promise.all(keys.map(k => store.getItem(k)))).filter((f): f is Flag => !!f)
+  const byId = new Map<string, Flag>()
+  for (const f of seedFlagsFor(ward)) byId.set(f.id, f as Flag)
+  for (const f of stored) byId.set(f.id, f)          // live rows win
+  const deleted = new Set(stored.filter(f => (f as any).deleted).map(f => f.id))
+  const items = [...byId.values()].filter(f => (f.reports ?? 0) < 3 && !deleted.has(f.id) && !(f as any).deleted)
   items.sort((a, b) => b.ts - a.ts)
   for (const f of items) delete (f as any).secret
   const counts: Record<string, number> = {}

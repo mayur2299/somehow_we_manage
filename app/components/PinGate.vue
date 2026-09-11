@@ -23,7 +23,7 @@ function enter() { if (reveal.value) emit('found', reveal.value) }
   <div class="gate">
     <div v-if="!reveal" class="shell">
       <main class="main">
-        <span class="pill green tilt">Where my ward's money goes</span>
+        <span class="kye big" aria-label="Know Your Enemy"><b>Know Your</b><b>Enemy</b></span>
         <h1>Start with<br>your PIN.</h1>
         <p>You shouldn't need to know your BMC ward number to ask where your neighbourhood's money went. Give us your six-digit Mumbai PIN. All 24 wards, {{ pincodes.length }} pincodes. We'll do the civic alphabet soup.</p>
         <form class="pin-form" @submit.prevent="lookup">
@@ -86,4 +86,6 @@ h1 { font-size: clamp(56px, 8vw, 116px); margin: 18px 0 22px; text-transform: up
 .micro { font-weight: 700; max-width: 600px; margin: 14px auto 24px; }
 @keyframes pop { from { transform: scale(.92); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (max-width: 820px) { .shell { grid-template-columns: 1fr; } .side { display: none; } .pin-form { flex-direction: column; } .main { padding: 28px; } h1 { font-size: 56px; } .reveal-card { padding: 28px; } }
+.kye.big { transform: rotate(-2deg); padding: 8px 12px; }
+.kye.big b { font-size: 26px; }
 </style>

@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   const flag = await store.getItem(key)
   if (!flag) throw createError({ statusCode: 404, statusMessage: 'Not found' })
   if (!flag.secret || flag.secret !== body?.secret) throw createError({ statusCode: 403, statusMessage: 'Not your post' })
-  await store.removeItem(key)
+  await store.setItem(key, { ...flag, deleted: true } as any)
   const cs = commentStore()
   for (const k of await cs.getKeys(`${ward}:${id}`)) await cs.removeItem(k)
   return { ok: true }

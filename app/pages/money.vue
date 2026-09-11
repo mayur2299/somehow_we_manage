@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { tagLabel } from '~/utils/tags'
-const { ward, pin, area, ready, clear } = useWardContext()
+const { ward, pin, area, ready, clear, slug } = useWardContext()
 const { openReceipt, openRti } = useWardModals()
-const { data: flags, refresh: refreshFlags } = await useFetch(() => `/api/flags?ward=${useState<string>('ward-slug').value}`, { default: () => ({ counts: {} as Record<string, number>, recent: [] as any[] }), watch: [useState<string>('ward-slug')] })
-const posts = computed(() => flags.value?.recent ?? [])
+const flags = ref<{ counts: Record<string, number>; recent: any[] }>({ counts: {}, recent: [] })
+async function refreshFlags() { try { flags.value = await $fetch(`/api/flags?ward=${slug.value}`) } catch {} }
+const posts = computed(() => flags.value.recent ?? [])
+onMounted(refreshFlags); watch(slug, refreshFlags)
 const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
 const rs = (n: number) => `₹${n.toLocaleString('en-IN')}`
 const pct = (a: number | null, b: number) => a == null ? null : Math.round((a / b) * 100)
@@ -143,7 +145,7 @@ useHead({ title: computed(() => `Money · ${ward.value.code} ${ward.value.name}`
 </main>
     <WardModals :ward="ward" :posts="posts" />
     <footer>
-      <div class="logo">Somehow We <b>Manage</b></div>
+      <NuxtLink class="logo" to="/"><span class="kye" aria-label="Know Your Enemy"><b>Know Your</b><b>Enemy</b></span></NuxtLink><p class="by">Built by Somehow We Manage · CREATE 2026</p>
       <div class="disclaimer"><strong>CREATE 2026 prototype · 11 September 2026.</strong> Ward actuals are not published by the BMC; Praja Foundation obtained them under the Right to Information Act. Utilisation above 100% means recorded spend exceeded the allotment.</div>
       <details class="srcs">
         <summary>Where these numbers come from ({{ ward.sources?.length ?? 0 }} sources)</summary>
@@ -161,7 +163,8 @@ useHead({ title: computed(() => `Money · ${ward.value.code} ${ward.value.name}`
 @keyframes ticker { to { transform: translateX(-50%); } }
 nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px max(5vw, calc((100vw - 1440px) / 2)); background: rgba(246,244,241,.94); backdrop-filter: blur(10px); border-bottom: 2px solid var(--ink); }
 .logo { font-weight: 900; font-size: 20px; letter-spacing: -0.045em; white-space: nowrap; }
-.logo b { background: var(--yellow); padding: 3px 7px; border: 2px solid var(--ink); border-radius: 7px; box-shadow: 3px 3px 0 var(--ink); }
+.kye { display: inline-grid; gap: 1px; background: var(--ink); border: 2px solid var(--coral); border-radius: 4px; padding: 4px 7px; transform: rotate(-1.5deg); line-height: .86; }
+.kye b { font-family: var(--display); font-size: 15px; letter-spacing: -.03em; color: var(--white); text-transform: uppercase; }
 nav .links { display: flex; gap: 16px; font-weight: 900; font-size: 13px; text-transform: uppercase; }
 nav a { text-decoration: none; }
 .hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 34px; padding: 64px max(6vw, calc((100vw - 1440px) / 2)) 48px; align-items: center; border-bottom: 3px solid var(--ink); }

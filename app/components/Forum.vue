@@ -20,7 +20,7 @@ const svcOf = (k: string) => props.services.find(s => s.key === k)
 // filters
 const tab = ref<'residents' | 'elsewhere'>('residents')
 // default to the service with the most complaints, else drains
-const busiest = () => { const e = Object.entries(props.counts).sort((a, b) => b[1] - a[1])[0]; return e && e[1] > 0 ? e[0] : 'swd' }
+const busiest = () => props.services[0]?.key ?? 'swm'
 const service = ref<string>(props.initialService ?? 'all')
 const tag = ref<string>('all')
 const sort = ref<'new' | 'top' | 'talked'>('new')
@@ -47,9 +47,9 @@ const spentLine = computed(() => {
   const s = svcOf(service.value)!; return { amount: cr(sum3(s.actual)), what: `on ${s.label.toLowerCase()}, 2021-22 to 2023-24`, util: Math.round(s.avgUtil * 100) }
 })
 // chat order: oldest first, newest at the bottom
-const chatOrder = computed(() => filtered.value.slice().sort((a, b) => a.ts - b.ts))
+const chatOrder = computed(() => filtered.value.slice().sort((a, b) => b.ts - a.ts))
 const feed = ref<HTMLElement | null>(null)
-function scrollBottom() { nextTick(() => { const el = feed.value; if (el) el.scrollTop = el.scrollHeight }) }
+function scrollBottom() { nextTick(() => { const el = feed.value; if (el) el.scrollTop = 0 }) }
 watch([service, () => props.posts.length], scrollBottom)
 onMounted(scrollBottom)
 const dayLabel = (ts: number) => { const d = new Date(ts); const today = new Date(); const diff = Math.round((today.setHours(0,0,0,0) - new Date(d).setHours(0,0,0,0)) / 86400000); return diff === 0 ? 'Today' : diff === 1 ? 'Yesterday' : d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) }
@@ -233,7 +233,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
         <div class="cname">{{ wardCode }} · {{ wardName }} residents</div>
         <div class="csub">{{ posts.length }} complaints · {{ totalMeToo }} "me too" · no login, no names</div>
       </div>
-      <button class="btn sm primary" @click="emitReceipt(service === 'all' ? 'swd' : service)">🧾 Make public</button>
+      <button class="btn sm primary" @click="emitReceipt(service === 'all' ? services[0].key : service)">🧾 Make public</button>
     </header>
 
     <!-- channels -->
@@ -324,7 +324,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
         <div v-if="justPosted" class="msg system green">
           <div class="pin">✅ Posted</div>
           <div class="sys-sub">Now make it travel. The share card carries this count and the ward's spend.</div>
-          <button class="btn sm primary" @click="emitReceipt(service === 'all' ? 'swd' : service)">🧾 Generate share card</button>
+          <button class="btn sm primary" @click="emitReceipt(service === 'all' ? services[0].key : service)">🧾 Generate share card</button>
         </div>
       </template>
 

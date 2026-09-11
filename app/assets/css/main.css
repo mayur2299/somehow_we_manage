@@ -75,3 +75,7 @@ textarea.input { resize: vertical; max-height: 220px; min-height: 48px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+.kye { display: inline-grid; gap: 1px; background: var(--ink); border: 2px solid var(--coral); border-radius: 4px; padding: 4px 7px; transform: rotate(-1.5deg); line-height: .86; }
+.kye b { font-family: var(--display); font-size: 15px; letter-spacing: -.03em; color: var(--white); text-transform: uppercase; }
+.by { font-size: 12px; font-weight: 700; color: var(--muted); margin: 8px 0 0; }

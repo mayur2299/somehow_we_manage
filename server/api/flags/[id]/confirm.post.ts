@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   if (photo && (!photo.startsWith('data:image/jpeg;base64,') || photo.length > 700_000)) throw createError({ statusCode: 413, statusMessage: 'Photo too large' })
   const store = flagStore()
   const key = `${ward}:${service}:${id}`
-  const flag = await store.getItem(key)
+  const flag = await ensureFlag(ward, service, id)
   if (!flag) throw createError({ statusCode: 404, statusMessage: 'Not found' })
   flag.confirms = (flag.confirms ?? 0) + 1
   flag.lastConfirmed = Date.now()

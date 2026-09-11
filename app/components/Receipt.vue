@@ -137,7 +137,7 @@ async function draw() {
   const cta = 'Is your ward any better?'
   ctx.fillText(cta, pad, fy + (wide ? 46 : 78))
   ctx.font = `800 ${wide ? 22 : 32}px ${B}`
-  ctx.fillText(`→ Check your PIN code at ${props.siteUrl.replace(/^https?:\/\//, '')}`, pad, fy + (wide ? 84 : 132))
+  ctx.fillText(`KNOW YOUR ENEMY · ${props.siteUrl.replace(/^https?:\/\//, '')}`, pad, fy + (wide ? 84 : 132))
   ctx.font = `700 ${wide ? 14 : 20}px ${B}`; ctx.fillStyle = 'rgba(255,255,255,.85)'
   ctx.fillText(`SOURCE: BMC ward budgets 2021-22 to 2023-24 via Praja Foundation (RTI). Resident reports from this site.`, pad, fy + fh - (wide ? 16 : 26))
 }
@@ -156,7 +156,6 @@ async function share() {
   if (n.share && n.canShare?.({ files: [file] })) { try { await n.share({ files: [file], text: caption.value }); status.value = 'Shared.' } catch {} }
   else { try { await navigator.clipboard.writeText(caption.value); await download(); status.value = 'Image saved, caption copied. Paste both.' } catch { await download() } }
 }
-async function copyCaption() { try { await navigator.clipboard.writeText(caption.value); status.value = 'Caption copied.' } catch {} }
 </script>
 
 <template>
@@ -168,7 +167,6 @@ async function copyCaption() { try { await navigator.clipboard.writeText(caption
     <div class="acts">
       <button class="btn primary" @click="share">Make this public</button>
       <button class="btn" @click="download">Download card</button>
-      <button class="btn" @click="copyCaption">Copy caption</button>
     </div>
     <p class="status" aria-live="polite">{{ status }}</p>
     <p class="mini">{{ post ? 'This card is about your complaint, with the ward\'s spend for context.' : 'Built from this page\'s numbers.' }} {{ photoPost ? 'Background: the complaint photo.' : 'Add a photo to a post and it becomes the background.' }}</p>

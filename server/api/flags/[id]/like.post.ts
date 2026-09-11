@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   if (!ward || !service || !id) throw createError({ statusCode: 400, statusMessage: 'Bad id' })
   const store = flagStore()
   const key = `${ward}:${service}:${id}`
-  const flag = await store.getItem(key)
+  const flag = await ensureFlag(ward, service, id)
   if (!flag) throw createError({ statusCode: 404, statusMessage: 'Not found' })
   flag.likes = (flag.likes ?? 0) + 1
   await store.setItem(key, flag)
