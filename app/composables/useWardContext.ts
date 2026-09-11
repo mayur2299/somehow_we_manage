@@ -11,37 +11,40 @@ export function useWardContext() {
     const hit = resolvePin(p)
     if (!hit) return false
     slug.value = hit.slug; pin.value = p; area.value = hit.area; ready.value = true
-    try { localStorage.setItem('wmwmg:pin', p) } catch {}
+    if (import.meta.client) { try { localStorage.setItem('wmwmg:pin', p) } catch {} }
     return true
   }
   function clear() {
-    ready.value = false; pin.value = null
-    try { localStorage.removeItem('wmwmg:pin') } catch {}
+    ready.value = false; pin.value = null; area.value = ''
+    if (import.meta.client) { try { localStorage.removeItem('wmwmg:pin') } catch {} }
     navigateTo('/')
   }
-  // resolve the pin as early as possible, then redirect only if there is genuinely none
-  const resolveNow = (redirectIfMissing: boolean) => {
-    try {
-      const q = (route.query.pin as string) || (import.meta.client ? new URLSearchParams(location.search).get('pin') : null)
-      if (q && q !== pin.value) { apply(q); return }      // an explicit ?pin always wins
-      if (ready.value) return
-      const saved = import.meta.client ? localStorage.getItem('wmwmg:pin') : null
-      const p = q || saved
-      if (p && apply(p)) return
-      if (redirectIfMissing && import.meta.client && route.path !== '/') navigateTo('/')
-    } catch {}
-  }
-  if (import.meta.client) resolveNow(false)
-  onMounted(() => resolveNow(true))
+
+  // 1. A pin in the URL resolves on server AND client, so SSR and hydration agree
+  //    and shared deep links render the ward directly.
+  const q = route.query.pin
+  if (typeof q === 'string' && q && q !== pin.value) apply(q)
+
+  // 2. A remembered pin is client-only, so it is applied after mount. Never during
+  //    render, or the server and client would disagree and hydration would break.
+  onMounted(() => {
+    if (!ready.value) {
+      try {
+        const saved = localStorage.getItem('wmwmg:pin')
+        if (saved && apply(saved)) return
+      } catch {}
+      if (route.path !== '/') navigateTo('/')
+    }
+  })
+
   const ward = computed(() => WARDS[slug.value])
   return { slug, pin, area, ready, ward, apply, clear }
 }
 
-// shared modal state so any page can open the receipt / RTI
 export function useWardModals() {
   const receiptOpen = useState('m-receipt', () => false)
   const rtiOpen = useState('m-rti', () => false)
-  const service = useState('m-service', () => 'swd')
+  const service = useState('m-service', () => '')
   const receiptPost = useState<any>('m-post', () => null)
   function openReceipt(k?: string, post?: any) { if (k) service.value = k; receiptPost.value = post ?? null; receiptOpen.value = true }
   function openRti(k?: string) { if (k) service.value = k; rtiOpen.value = true }
