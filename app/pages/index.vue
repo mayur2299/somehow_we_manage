@@ -15,15 +15,18 @@ function go(id: string) {
   const hub = (document.querySelector('.hub') as HTMLElement)?.offsetHeight ?? 0
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - off - hub - 8, behavior: 'smooth' })
 }
+const { data: pets } = await useFetch(() => `/api/petitions?ward=${useState<string>('ward-slug').value}`, { default: () => ({ petitions: [] as any[] }), watch: [useState<string>('ward-slug')] })
+const petitionCount = computed(() => pets.value?.petitions?.length ?? 0)
 const heroPost = computed(() => posts.value.find((p: any) => p.photo && p.title) ?? posts.value[0] ?? null)
 const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
 const rs = (n: number) => `₹${n.toLocaleString('en-IN')}`
 const pct = (a: number | null, b: number) => a == null ? null : Math.round((a / b) * 100)
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
 const utilClass = (u: number | null) => u == null ? 'purple' : u > 150 ? 'red' : u < 90 ? 'blue' : 'green'
-const latestIdx = computed(() => ward.value.total.ward.actual.map((v: any, i: number) => v == null ? -1 : i).filter((i: number) => i >= 0).pop() ?? 2)
-const latestBE = computed(() => ward.value.total.ward.be[latestIdx.value])
-const latestActual = computed(() => ward.value.total.ward.actual[latestIdx.value])
+const latestIdxC = computed(() => ward.value.total.ward.actual.map((v: any, i: number) => v == null ? -1 : i).filter((i: number) => i >= 0).pop() ?? 2)
+const latestIdx = computed(() => latestIdxC.value)
+const latestBE = computed(() => ward.value.total.ward.be[latestIdxC.value])
+const latestActual = computed(() => ward.value.total.ward.actual[latestIdxC.value])
 const ctx = computed(() => ward.value.cityContext ?? {})
 const pinInfo = computed(() => ({ pin: pin.value ?? '', area: area.value }))
 function onFound(p: { pin: string; area: string }) { apply(p.pin); window.scrollTo({ top: 0 }) }
@@ -34,79 +37,82 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
   <div>
     <PinGate v-if="!ready" :pincodes="allPins" @found="onFound" />
     <div v-else class="page">
-      <WardNav :ward="ward" :pin="pin" active="act" :posts="posts" @change-pin="clear" />
+      <WardNav :ward="ward" :pin="pin" active="" :posts="posts" :hub="false" @change-pin="clear" />
       <main>
-<!-- HERO -->
-      <header class="hero">
-        <div>
-          <div class="idbar">
-            <span class="pill">📍 {{ pin }}</span>
-            <span class="pill yellow">{{ ward.code }} ward</span>
-            <span class="pill">{{ pinInfo?.area }}</span>
+        <section class="branches">
+          <div class="idline">
+            <span class="pill yellow">📍 {{ pin }} · {{ area }}</span>
+            <span class="pill">{{ ward.code }} ward · {{ ward.name }}</span>
+            <span class="pill">{{ ward.population2025.toLocaleString('en-IN') }} residents</span>
           </div>
-          <h1>Your ward<br>got money.<br>Now what?</h1>
-          <p>See what {{ ward.name }} was allotted, what it actually spent, and where it went. Then post what you see on the ground, sign a petition, or send the BMC an RTI with the numbers already filled in.</p>
-          <div class="cta-row">
-            <NuxtLink class="btn flag" :to="{ path: '/forum', query: { post: '1' } }">🚩 Report a problem</NuxtLink>
-            <button class="btn primary" @click="openReceipt()">🧾 Get the receipt</button>
-            <button class="btn act" @click="openRti()">Ask the BMC</button>
-          </div>
-        </div>
-        <NuxtLink v-if="heroPost" class="card feature pink herocard live" :to="{ path: '/forum', hash: `#post-${heroPost.id}` }">
-          <div class="live-top"><span class="pill red">● Live · {{ ward.code }}</span><span class="pill">{{ posts.length }} complaints</span></div>
-          <img v-if="heroPost.photo" :src="heroPost.photo" alt="" referrerpolicy="no-referrer" />
-          <div class="live-title">{{ heroPost.title || heroPost.note }}</div>
-          <div class="live-meta">👀 {{ heroPost.confirms ?? 0 }} people say this is still here<span v-if="heroPost.locality"> · 📍 {{ heroPost.locality }}</span></div>
-          <div class="live-cta">Open the forum →</div>
-        </NuxtLink>
-        <div v-else class="card feature pink herocard">
-          <span class="pill">Ward share of total BMC budget</span>
-          <div class="slash">{{ ctx.wardShare2021 ?? 18 }}% → {{ ctx.wardShare2025 ?? 11 }}%</div>
-          <p>The total BMC budget nearly doubled. The share reaching wards fell.</p>
-        </div>
-      </header>
+          <h1>Your ward.<br>Four questions.</h1>
 
-      <!-- ACT -->
-      <section id="act" class="actsec">
-        <div class="section-head"><h2>Don't just<br>look. Act.</h2><p>Four things you can do right now, no login. Each one carries the ward's own numbers.</p></div>
-        <div class="actgrid">
-          <NuxtLink class="card red actcard" :to="{ path: '/forum', query: { post: '1' } }"><span class="ic">🚩</span><h3>Report a problem</h3><p>Photo, location, what's wrong. It goes public in the ward chat.</p><span class="go">Post →</span></NuxtLink>
-          <button class="card yellow actcard" @click="openReceipt()"><span class="ic">🧾</span><h3>Share the receipt</h3><p>A savage, sourced card for WhatsApp, Instagram, X. Ends with "Is your ward any better?"</p><span class="go">Generate →</span></button>
-          <button class="card green actcard" @click="openRti()"><span class="ic">📄</span><h3>Ask the BMC</h3><p>An RTI application already filled with the allotted and spent figures. Copy, file, 30-day clock starts.</p><span class="go">Fill it →</span></button>
-          <a class="card purple actcard" href="#petitions" @click.prevent="go('#petitions')"><span class="ic">✍️</span><h3>Sign a petition</h3><p>Grievances with numbers on them. Sign one, or raise your own from any complaint.</p><span class="go">Sign →</span></a>
-        </div>
-      </section>
+          <div class="bgrid">
+            <NuxtLink class="branch yellow" to="/money">
+              <span class="ic">💸</span>
+              <h2>Money received<br>vs money spent</h2>
+              <div class="num">{{ cr(latestActual) }}</div>
+              <p class="d">spent in {{ ward.years[latestIdx] }} against {{ cr(latestBE) }} allotted · <strong>{{ pct(latestActual, latestBE) }}%</strong></p>
+              <span class="go">See the split by department →</span>
+            </NuxtLink>
 
-      <!-- 4. FORUM / GROUND -->
-      <section id="forum" class="forum">
-        <div class="section-head">
-          <h2>On paper<br>vs on the ground.</h2>
-          <p>The ward's group chat. No login, no names. What the BMC spent, pinned at the top. What residents see, underneath.</p>
-        </div>
-        <div class="grid">
-          <article class="card pink span5 teaser">
-            <span class="pill">{{ ward.code }} residents</span>
-            <div class="big">{{ posts.length }}</div>
-            <div class="vs">complaints · {{ posts.reduce((a: number, p: any) => a + (p.confirms ?? 0), 0) }} "me too" · {{ posts.filter((p: any) => p.photo).length }} photos</div>
-            <div class="cta-row">
-              <NuxtLink class="btn primary" to="/forum">💬 Go to forum →</NuxtLink>
-              <NuxtLink class="btn flag" :to="{ path: '/forum', query: { post: '1' } }">🚩 Report a problem</NuxtLink>
-            </div>
-          </article>
-          <div class="span7 latest">
-            <NuxtLink v-for="p in posts.slice(0, 3)" :key="p.id" class="card lp" :to="{ path: '/forum', hash: `#post-${p.id}` }">
-              <img v-if="p.photo" :src="p.photo" alt="" referrerpolicy="no-referrer" />
-              <div>
-                <div class="lp-tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcIcon(p.service) }} {{ svcLabel(p.service) }}</span></div>
-                <p class="lp-title">{{ p.title || p.note }}</p>
-                <p class="mini">👀 {{ p.confirms ?? 0 }} me too · 💬 {{ p.comments ?? 0 }}<span v-if="p.locality"> · 📍 {{ p.locality }}</span></p>
-              </div>
+            <NuxtLink class="branch pink" to="/forum">
+              <span class="ic">💬</span>
+              <h2>What residents<br>actually see</h2>
+              <div class="num">{{ posts.length }}</div>
+              <p class="d">complaints from this ward · {{ posts.filter((p: any) => p.photo).length }} with photos · {{ posts.reduce((a: number, p: any) => a + (p.confirms ?? 0), 0) }} "me too"</p>
+              <span class="go">Open the ward chat →</span>
+            </NuxtLink>
+
+            <NuxtLink class="branch blue" to="/who">
+              <span class="ic">🗳️</span>
+              <h2>Who is<br>accountable</h2>
+              <div class="num">{{ ward.accountable?.corporators?.length ?? 0 }}</div>
+              <p class="d">corporators elected Jan 2026 · ward office · MLAs · four years with no council</p>
+              <span class="go">See the names →</span>
+            </NuxtLink>
+
+            <NuxtLink class="branch purple" to="/petitions">
+              <span class="ic">✍️</span>
+              <h2>Petitions<br>and RTI</h2>
+              <div class="num">{{ petitionCount }}</div>
+              <p class="d">running for this ward · sign one, raise one, or send the BMC a filled RTI</p>
+              <span class="go">Take it further →</span>
             </NuxtLink>
           </div>
-        </div>
-      </section>
 
-      <section class="close">
+          <div class="actbar">
+            <span class="label">Do something now</span>
+            <NuxtLink class="btn flag" :to="{ path: '/forum', query: { post: '1' } }">🚩 Report a problem</NuxtLink>
+            <button class="btn primary" @click="openReceipt()">🧾 Share the receipt</button>
+            <button class="btn act" @click="openRti()">📄 Ask the BMC</button>
+          </div>
+        </section>
+
+        <section v-if="heroPost" class="live">
+          <div class="section-head"><h2>Latest from {{ ward.code }}</h2><p>The BMC's numbers are above. This is what a resident posted.</p></div>
+          <div class="livegrid">
+            <NuxtLink class="card feature pink herocard live" :to="{ path: '/forum', hash: `#post-${heroPost.id}` }">
+              <div class="live-top"><span class="pill red">● Live</span><span class="pill">{{ svcIcon(heroPost.service) }} {{ svcLabel(heroPost.service) }}</span></div>
+              <img v-if="heroPost.photo" :src="heroPost.photo" alt="" referrerpolicy="no-referrer" />
+              <div class="live-title">{{ heroPost.title || heroPost.note }}</div>
+              <div class="live-meta">👀 {{ heroPost.confirms ?? 0 }} people say this is still here<span v-if="heroPost.locality"> · 📍 {{ heroPost.locality }}</span></div>
+              <div class="live-cta">Open the forum →</div>
+            </NuxtLink>
+            <div class="latest">
+              <NuxtLink v-for="p in posts.slice(1, 4)" :key="p.id" class="card lp" :to="{ path: '/forum', hash: `#post-${p.id}` }">
+                <img v-if="p.photo" :src="p.photo" alt="" referrerpolicy="no-referrer" />
+                <div>
+                  <div class="lp-tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcIcon(p.service) }} {{ svcLabel(p.service) }}</span></div>
+                  <p class="lp-title">{{ p.title || p.note }}</p>
+                  <p class="mini">👀 {{ p.confirms ?? 0 }} me too · 💬 {{ p.comments ?? 0 }}<span v-if="p.locality"> · 📍 {{ p.locality }}</span></p>
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
+        </section>
+
+<section class="close">
         <h2>You paid.<br>You should know.</h2>
         <p>The BMC is called the richest municipal corporation in the country. Every Mumbai resident pays for their ward. This makes the money visible, and turns "where did it go?" into a question the BMC has to answer.</p>
         <div class="cta-row center"><button class="btn primary" @click="openReceipt()">🧾 Share the receipt</button><button class="btn" @click="openRti()">Ask the BMC</button><button class="btn act" @click="navigateTo('/petitions')">✍️ Sign a petition</button></div>
@@ -120,11 +126,11 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
         </div>
       </section>
 
-            </main>
+                  </main>
       <WardModals :ward="ward" :posts="posts" />
       <footer>
         <div class="logo">Somehow We <b>Manage</b></div>
-        <div class="disclaimer"><strong>CREATE 2026 prototype · 11 September 2026.</strong> Pilot ward K/E has seeded complaints to show the loop. Ward actuals come from Praja Foundation's RTI-sourced report.</div>
+        <div class="disclaimer"><strong>CREATE 2026 prototype · 11 September 2026.</strong> Ward actuals are not published by the BMC; Praja Foundation obtained them under the Right to Information Act. Utilisation above 100% means recorded spend exceeded the allotment.</div>
       </footer>
     </div>
   </div>
@@ -311,4 +317,21 @@ footer { padding: 34px max(6vw, calc((100vw - 1440px) / 2)) 50px; font-weight: 7
 }
 
 .page { background: var(--paper); min-height: 100vh; }
+
+.branches { padding-top: 40px; }
+.idline { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.branches h1 { font-size: clamp(44px, 7vw, 104px); line-height: .86; letter-spacing: -.07em; text-transform: uppercase; margin: 0 0 28px; }
+.bgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.branch { display: grid; gap: 6px; align-content: start; border: 3px solid var(--ink); border-radius: 24px; padding: 24px; text-decoration: none; color: var(--ink); box-shadow: 8px 8px 0 var(--ink); transition: transform 130ms, box-shadow 130ms; min-height: 260px; }
+.branch:hover { transform: translate(4px, 4px); box-shadow: 4px 4px 0 var(--ink); }
+.branch.yellow { background: var(--yellow); } .branch.pink { background: var(--pink); } .branch.blue { background: var(--blue); } .branch.purple { background: var(--purple); }
+.branch .ic { font-size: 34px; }
+.branch h2 { font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -.05em; line-height: .98; margin: 2px 0 4px; text-transform: none; }
+.branch .num { font-family: var(--display); font-size: clamp(44px, 5vw, 68px); letter-spacing: -.06em; line-height: 1; }
+.branch .d { margin: 0; font-weight: 700; font-size: 14px; line-height: 1.35; }
+.branch .go { margin-top: auto; font-weight: 900; text-decoration: underline; padding-top: 10px; }
+.actbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 22px; border: 3px dashed var(--ink); border-radius: 18px; padding: 16px 18px; }
+.actbar .label { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; margin-right: 4px; }
+.live .livegrid { display: grid; grid-template-columns: 5fr 7fr; gap: 18px; }
+@media (max-width: 920px) { .bgrid { grid-template-columns: 1fr; } .live .livegrid { grid-template-columns: 1fr; } }
 </style>

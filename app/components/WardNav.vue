@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{ ward: any; pin: string | null; active: string; posts?: any[] }>()
+const props = defineProps<{ ward: any; pin: string | null; active: string; posts?: any[]; hub?: boolean }>()
 const emit = defineEmits<{ (e: 'changePin'): void }>()
 const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
 const latestIdx = computed(() => props.ward.total.ward.actual.map((v: any, i: number) => v == null ? -1 : i).filter((i: number) => i >= 0).pop() ?? 2)
@@ -19,7 +19,6 @@ const tiles = computed(() => [
   { key: 'money', to: '/money', cls: 'yellow', ic: '💸', t: 'Money received vs spent', d: `${cr(props.ward.total.ward.be[latestIdx.value])} allotted · ${cr(props.ward.total.ward.actual[latestIdx.value])} spent` },
   { key: 'forum', to: '/forum', cls: 'pink', ic: '💬', t: `Forum for ${props.pin ?? props.ward.code}`, d: `${props.posts?.length ?? 0} complaints · photos · me too` },
   { key: 'petitions', to: '/petitions', cls: 'purple', ic: '✍️', t: 'Petitions', d: 'Sign, check status, raise one' },
-  { key: 'act', to: '/', cls: 'green', ic: '⚡', t: 'Act', d: 'Report, receipt, RTI' },
 ])
 </script>
 
@@ -32,7 +31,7 @@ const tiles = computed(() => [
         <button class="btn sm" @click="emit('changePin')">📍 {{ pin ?? '——' }} · change</button>
       </div>
     </nav>
-    <div class="hub" :class="{ compact }">
+    <div v-if="hub !== false" class="hub" :class="{ compact }">
       <div class="hubgrid">
         <NuxtLink v-for="t in tiles" :key="t.key" class="tile" :class="[t.cls, { on: active === t.key }]" :to="t.to">
           <span class="ic">{{ t.ic }}</span><span class="t">{{ t.t }}</span><span class="d">{{ t.d }}</span>
@@ -53,7 +52,7 @@ nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center;
 .hub.compact .tile .ic { font-size: 17px; }
 .hub.compact .tile .t { font-size: 15px; }
 .hub.compact .tile .d { display: none; }
-.hubgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.hubgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .tile { display: grid; gap: 3px; border: 3px solid var(--ink); border-radius: 16px; padding: 12px; text-decoration: none; color: var(--ink); box-shadow: 5px 5px 0 rgba(255,255,255,.9); transition: transform 120ms, box-shadow 120ms; }
 .tile:hover { transform: translate(3px, 3px); box-shadow: 2px 2px 0 rgba(255,255,255,.9); }
 .tile.on { outline: 3px solid var(--white); outline-offset: 3px; }
