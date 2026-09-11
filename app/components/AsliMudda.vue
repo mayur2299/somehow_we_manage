@@ -2,8 +2,8 @@
 // The one place Hind is used: the name, alternating Devanagari and Latin.
 // Split by grapheme cluster, never by code point, or Devanagari matras detach.
 const WORDS = [
-  { text: 'असली मुद्दा', lang: 'hi' },
-  { text: 'Asli Mudda', lang: 'en' },
+  { text: 'असली मुद्दा', lang: 'hi', script: 'deva' },
+  { text: 'Asli Mudda', lang: 'en', script: 'latn' },
 ]
 const LABEL = 'Asli Mudda'
 
@@ -49,7 +49,7 @@ const delay = (n: number) => `${(phase.value === 'out' ? chars.value.length - 1 
 <template>
   <h1 class="am" :aria-label="LABEL">
     <span class="sr">{{ LABEL }}</span>
-    <span :key="current.text + phase" class="word" :lang="current.lang" :class="phase" aria-hidden="true">
+    <span :key="current.text + phase" class="word" :lang="current.lang" :class="[phase, current.script]" aria-hidden="true">
       <span
         v-for="(c, n) in chars"
         :key="n"
@@ -63,14 +63,27 @@ const delay = (n: number) => `${(phase.value === 'out' ? chars.value.length - 1 
 
 <style scoped>
 .am {
+  margin: 0 0 26px;
+  min-height: 1.15em;
+  line-height: 1.2;
+  text-transform: none;
+  font-weight: 700;
+}
+/* Hind carries the Devanagari only. The Latin keeps the site's display face. */
+.word.deva {
   font-family: 'Hind', system-ui, sans-serif;
   font-weight: 700;
-  font-size: clamp(46px, 8.5vw, 120px);
-  line-height: 1.25;
+  font-size: clamp(46px, 8.4vw, 116px);
   letter-spacing: -0.01em;
-  text-transform: none;
-  margin: 0 0 26px;
-  min-height: 1.3em;
+  line-height: 1.3;
+}
+.word.latn {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(48px, 8.6vw, 124px);
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+  line-height: 1.02;
 }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .word { display: inline-flex; flex-wrap: wrap; }
