@@ -49,6 +49,8 @@ const spentLine = computed(() => {
 // chat order: oldest first, newest at the bottom
 const chatOrder = computed(() => filtered.value.slice().sort((a, b) => b.ts - a.ts))
 const feed = ref<HTMLElement | null>(null)
+const mounted = ref(false)
+onMounted(() => { mounted.value = true })
 function scrollBottom() { nextTick(() => { const el = feed.value; if (el) el.scrollTop = 0 }) }
 watch([service, () => props.posts.length], scrollBottom)
 onMounted(scrollBottom)
@@ -260,9 +262,9 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
       <template v-if="tab === 'residents'">
         <p v-if="!chatOrder.length" class="empty">No complaints yet for {{ wardCode }}{{ service === 'all' ? '' : ' · ' + svcOf(service)?.label.toLowerCase() }}.<br>The money was spent. If you don't see it, be the first to say so.</p>
         <template v-for="(p, i) in chatOrder" :key="p.id">
-          <div v-if="showDay(i)" class="day"><span>{{ dayLabel(p.ts) }}</span></div>
+          <div v-if="mounted && showDay(i)" class="day"><span>{{ dayLabel(p.ts) }}</span></div>
           <article :id="`post-${p.id}`" class="msg">
-            <div class="who"><span class="av">{{ svcOf(p.service)?.icon }}</span><span class="name">Resident<span v-if="p.locality"> · {{ p.locality }}</span></span><span class="time">{{ hhmm(p.ts) }}</span><button v-if="canDelete(p)" class="del" :class="{ armed: armed[p.id] }" :title="armed[p.id] ? 'Click again to delete' : 'Delete this post'" aria-label="Delete this post" @click="askDelete(p)">{{ armed[p.id] ? 'Delete?' : '✕' }}</button></div>
+            <div class="who"><span class="av">{{ svcOf(p.service)?.icon }}</span><span class="name">Resident<span v-if="p.locality"> · {{ p.locality }}</span></span><span class="time">{{ mounted ? hhmm(p.ts) : '' }}</span><button v-if="canDelete(p)" class="del" :class="{ armed: armed[p.id] }" :title="armed[p.id] ? 'Click again to delete' : 'Delete this post'" aria-label="Delete this post" @click="askDelete(p)">{{ armed[p.id] ? 'Delete?' : '✕' }}</button></div>
             <div class="bubble">
               <div class="tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcOf(p.service)?.label }}</span><span v-if="isMine(p)" class="pill ink">Your post</span></div>
               <h4 v-if="p.title" class="ptitle">{{ p.title }}</h4>
@@ -277,7 +279,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
                 <button class="chip" @click="shareOpen[p.id] = !shareOpen[p.id]">↗ Share this</button>
                 <button v-if="!canDelete(p)" class="chip ghost" :disabled="reported[p.id]" @click="report(p)">⚑</button>
               </div>
-              <p v-if="p.lastConfirmed" class="seen">Last seen {{ daysSince(p.lastConfirmed) === 0 ? 'today' : daysSince(p.lastConfirmed) + ' days ago' }}</p>
+              <p v-if="mounted && p.lastConfirmed" class="seen">Last seen {{ daysSince(p.lastConfirmed) === 0 ? 'today' : daysSince(p.lastConfirmed) + ' days ago' }}</p>
 
               <div v-if="shareOpen[p.id]" class="sharemenu">
                 <a class="chip" :href="links(p).whatsapp" target="_blank" rel="noopener">WhatsApp</a>
@@ -309,7 +311,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
             <div v-if="open[p.id]" class="replies">
               <p v-if="!comments[p.id]" class="mini">Loading…</p>
               <div v-else class="rlist">
-                <div v-for="c in comments[p.id] ?? []" :key="c.id" class="reply"><span class="ravatar">💬</span><div class="rbubble"><p>{{ c.text }}</p><span class="rtime">{{ hhmm(c.ts) }} · {{ dayLabel(c.ts) }}</span></div></div>
+                <div v-for="c in comments[p.id] ?? []" :key="c.id" class="reply"><span class="ravatar">💬</span><div class="rbubble"><p>{{ c.text }}</p><span class="rtime">{{ mounted ? hhmm(c.ts) + ' · ' + dayLabel(c.ts) : '' }}</span></div></div>
               </div>
               <form class="rform" @submit.prevent="comment(p)">
                 <input v-model="draft[p.id]" class="input" maxlength="400" placeholder="Reply…" />
