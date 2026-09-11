@@ -7,7 +7,7 @@ const props = defineProps<{
 }>()
 const service = ref(props.serviceKey)
 watch(() => props.serviceKey, v => (service.value = v))
-const serviceLabelNow = computed(() => props.services.find(s => s.key === service.value)?.label ?? props.serviceLabel)
+const serviceLabelNow = computed(() => (props.services ?? []).find(s => s.key === service.value)?.label ?? props.serviceLabel)
 const emit = defineEmits<{ (e: 'flagged'): void }>()
 
 import { FLAG_TAGS } from '~/utils/tags'
@@ -54,7 +54,7 @@ async function submit() {
     <p class="lead">Budgeted for {{ serviceLabelNow.toLowerCase() }}, but you don't see it on the ground? Say where.</p>
     <p class="lbl">What is it about</p>
     <div class="tags">
-      <button v-for="s in services" :key="s.key" type="button" class="tag svc" :class="{ on: service === s.key }" @click="service = s.key">{{ s.icon }} {{ s.label }}</button>
+      <button v-for="s in (services ?? [])" :key="s.key" type="button" class="tag svc" :class="{ on: service === s.key }" @click="service = s.key">{{ s.icon }} {{ s.label }}</button>
     </div>
     <p class="lbl">What is wrong</p>
     <div class="tags">
