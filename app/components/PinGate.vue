@@ -5,7 +5,6 @@ import { WARDS } from '~/utils/wards'
 const wardOf = (slug: string) => WARDS[slug]
 const pin = ref('')
 const error = ref('')
-const reveal = ref<{ pin: string; area: string; code: string; name: string } | null>(null)
 
 function fill() { pin.value = '400069'; error.value = '' }
 function lookup() {
@@ -14,14 +13,13 @@ function lookup() {
   const hit = props.pincodes.find(p => p.pin === v)
   if (!hit) { error.value = 'That PIN is not in our Mumbai map yet. Try 400069 (Andheri East) or 400050 (Bandra West).'; return }
   error.value = ''
-  reveal.value = { pin: v, area: hit.area, code: (wardOf(hit.slug)?.code ?? ''), name: (wardOf(hit.slug)?.name ?? hit.area) }
+  emit('found', { pin: v, area: hit.area })
 }
-function enter() { if (reveal.value) emit('found', reveal.value) }
 </script>
 
 <template>
   <div class="gate">
-    <div v-if="!reveal" class="shell">
+    <div class="shell">
       <main class="main">
         <span class="kye big" aria-label="Know Your Enemy"><b>Know Your</b><b>Enemy</b></span>
         <h1>Start with<br>your PIN.</h1>
@@ -49,15 +47,6 @@ function enter() { if (reveal.value) emit('found', reveal.value) }
       </aside>
     </div>
 
-    <div v-else class="reveal">
-      <div class="reveal-card">
-        <span class="pill">📍 {{ reveal.pin }} · {{ reveal.area }}</span>
-        <h2>{{ reveal.code }}</h2>
-        <p class="bigline">Found your ward.<br>Now let's find your money.</p>
-        <p class="micro">{{ reveal.name }}. Figures from RTI-sourced ward budgets, 2021-22 to 2025-26.</p>
-        <button class="btn primary" @click="enter">Show me the numbers →</button>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -79,13 +68,10 @@ h1 { font-size: clamp(56px, 8vw, 116px); margin: 18px 0 22px; text-transform: up
 .list { display: grid; gap: 10px; margin-top: 16px; }
 .item { background: var(--white); border: 2px solid var(--ink); border-radius: 14px; padding: 12px; font-weight: 800; box-shadow: 3px 3px 0 var(--ink); }
 .joke { font-family: var(--display); font-size: 30px; line-height: 1; letter-spacing: -0.04em; margin: 0; }
-.reveal { position: fixed; inset: 0; background: var(--ink); display: grid; place-items: center; padding: 24px; }
-.reveal-card { width: min(860px, 100%); background: var(--coral); color: var(--white); border: 3px solid var(--white); border-radius: 30px; padding: 40px; box-shadow: 12px 12px 0 var(--white); text-align: center; animation: pop 400ms cubic-bezier(.2,.9,.3,1.2); }
-.reveal-card h2 { font-size: clamp(64px, 10vw, 120px); letter-spacing: -0.07em; line-height: 0.84; margin: 14px 0; }
 .bigline { font-family: var(--display); font-size: clamp(24px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.04em; margin: 0; }
 .micro { font-weight: 700; max-width: 600px; margin: 14px auto 24px; }
 @keyframes pop { from { transform: scale(.92); opacity: 0; } to { transform: none; opacity: 1; } }
-@media (max-width: 820px) { .shell { grid-template-columns: 1fr; } .side { display: none; } .pin-form { flex-direction: column; } .main { padding: 28px; } h1 { font-size: 56px; } .reveal-card { padding: 28px; } }
+@media (max-width: 820px) { .shell { grid-template-columns: 1fr; } .side { display: none; } .pin-form { flex-direction: column; } .main { padding: 28px; } h1 { font-size: 56px; } }
 .kye.big { transform: rotate(-2deg); padding: 8px 12px; }
 .kye.big b { font-size: 26px; }
 </style>

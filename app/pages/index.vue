@@ -55,7 +55,7 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
             <span class="pill">{{ ward.code }} ward · {{ ward.name }}</span>
             <span class="pill">{{ ward.population2025.toLocaleString('en-IN') }} residents</span>
           </div>
-          <h1>Asli Mudda</h1>
+          <AsliMudda />
 
           <div class="bgrid">
             <NuxtLink class="branch stone withpic" to="/money">
@@ -345,7 +345,7 @@ footer { padding: 34px max(6vw, calc((100vw - 1440px) / 2)) 50px; font-weight: 7
 
 .branches { padding-top: 40px; }
 .idline { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
-.branches h1 { font-size: clamp(44px, 7vw, 104px); line-height: .86; letter-spacing: -.07em; text-transform: uppercase; margin: 0 0 28px; }
+
 .bgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .branch { display: grid; gap: 6px; align-content: start; border: 2px solid var(--ink); border-radius: 24px; padding: 24px; text-decoration: none; color: var(--ink); box-shadow: 4px 4px 0 var(--ink); transition: transform 130ms, box-shadow 130ms; min-height: 260px; }
 .branch:hover { transform: translate(4px, 4px); box-shadow: 4px 4px 0 var(--ink); }
