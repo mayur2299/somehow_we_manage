@@ -72,6 +72,37 @@ async function comment(p: any) {
   } catch {} finally { busy.value[p.id] = false }
 }
 
+// "still there?" confirmations
+const confirmed = ref<Record<string, boolean>>({})
+async function compress(file: File) {
+  const img = new Image(); img.src = URL.createObjectURL(file); await new Promise(r => (img.onload = r))
+  const max = 900, sc = Math.min(1, max / Math.max(img.width, img.height))
+  const c = document.createElement('canvas'); c.width = Math.round(img.width * sc); c.height = Math.round(img.height * sc)
+  c.getContext('2d')!.drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(img.src)
+  return c.toDataURL('image/jpeg', 0.7)
+}
+async function confirm(p: any, file?: File) {
+  if (confirmed.value[p.id] && !file) return
+  confirmed.value[p.id] = true
+  try {
+    const photo = file ? await compress(file) : undefined
+    await $fetch(`/api/flags/${encodeURIComponent(`${p.ward}:${p.service}:${p.id}`)}/confirm`, { method: 'POST', body: { photo } })
+    emit('refresh'); toast.value = file ? 'Photo added. Still there, on record.' : 'Counted. Still there, on record.'
+  } catch { confirmed.value[p.id] = false }
+}
+function onConfirmPhoto(p: any, e: Event) { const f = (e.target as HTMLInputElement).files?.[0]; if (f) confirm(p, f) }
+const daysSince = (ts: number) => Math.max(0, Math.round((Date.now() - ts) / 86400000))
+function askConfirm(p: any) {
+  const where = p.locality ? ` near ${p.locality}` : ` in ${props.wardName}`
+  const text = `Can anyone${where} confirm this ${tagLabel(p.tag).toLowerCase()} ${svcOf(p.service)?.label.toLowerCase()} issue is still there? "${p.note}"\n${p.confirms ?? 0} people say it is. Tap YES, I'VE SEEN IT or add a photo:\n${permalink(p)}`
+  return text
+}
+async function shareAsk(p: any) {
+  const text = askConfirm(p)
+  if (navigator.share) { try { await navigator.share({ text }) } catch {} }
+  else { try { await navigator.clipboard.writeText(text); toast.value = 'Copied. Send it to your building group.' } catch {} }
+}
+
 // share + permalink
 const toast = ref('')
 watch(toast, v => { if (v) setTimeout(() => (toast.value = ''), 2000) })
@@ -195,6 +226,19 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
               </div>
             </div>
 
+            <div class="still">
+              <div class="still-head">
+                <span class="still-n">{{ p.confirms ?? 0 }}</span>
+                <span class="still-t">{{ (p.confirms ?? 0) === 1 ? 'person says' : 'people say' }} this is still here<span v-if="p.lastConfirmed"> · last seen {{ daysSince(p.lastConfirmed) === 0 ? 'today' : daysSince(p.lastConfirmed) + 'd ago' }}</span></span>
+              </div>
+              <div class="still-acts">
+                <button class="btn sm act" :disabled="confirmed[p.id]" @click="confirm(p)">{{ confirmed[p.id] ? '✓ Counted' : '👀 Yes, I\'ve seen it' }}</button>
+                <label class="btn sm"><input type="file" accept="image/*" capture="environment" hidden @change="onConfirmPhoto(p, $event)" />📸 Add photo</label>
+                <button class="btn sm" @click="shareAsk(p)">Ask neighbours</button>
+              </div>
+              <div v-if="(p.photos ?? []).length > 1" class="still-photos"><img v-for="(ph, i) in p.photos.slice(-4)" :key="i" :src="ph" alt="" /></div>
+            </div>
+
             <div class="pet-strip" :class="petitionFor(p) ? 'has' : ''">
               <template v-if="petitionFor(p)">
                 <div class="pet-info">
@@ -260,6 +304,14 @@ h3 { font-size: 26px; letter-spacing: -.05em; margin: 0 0 12px; }
 .note { margin: 0; font-weight: 700; }
 .foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
 .acts { display: flex; gap: 6px; flex-wrap: wrap; }
+.still { border-top: 2px dashed var(--ink); padding-top: 10px; display: grid; gap: 8px; }
+.still-head { display: flex; align-items: baseline; gap: 8px; }
+.still-n { font-family: var(--display); font-size: 34px; letter-spacing: -.05em; line-height: 1; }
+.still-t { font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; }
+.still-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.still-acts label { cursor: pointer; }
+.still-photos { display: flex; gap: 6px; }
+.still-photos img { width: 56px; height: 56px; object-fit: cover; border: 2px solid var(--ink); border-radius: 8px; }
 .pet-strip { border-top: 2px dashed var(--ink); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
 .pet-strip.has { background: #f3ffe0; border: 2px solid var(--ink); border-radius: 12px; padding: 10px; }
 .pet-info { display: grid; gap: 4px; min-width: 0; flex: 1; }

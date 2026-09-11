@@ -65,6 +65,11 @@ function celebrate() { confettiOn.value = true; setTimeout(() => (confettiOn.val
 const confetti = Array.from({ length: 28 }, (_, i) => ({ left: `${(i * 37) % 100}vw`, delay: `${(i % 7) * 0.05}s`, bg: ['#ffd84d', '#b7ff4a', '#ff88c7', '#85c7ff'][i % 4] }))
 
 
+// ---------- Receipt modal ----------
+const receiptOpen = ref(false)
+function openReceipt(k?: string) { if (k) selected.value = k; receiptOpen.value = true }
+const siteUrl = computed(() => (typeof location !== 'undefined' ? location.origin : 'https://somehow-we-manage.netlify.app'))
+
 // ---------- RTI modal ----------
 const rtiOpen = ref(false)
 function openRti(k?: string) { if (k) selected.value = k; rtiOpen.value = true }
@@ -124,6 +129,7 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
           <div class="cta-row">
             <button class="btn primary" @click="go('#money')">Show me the money ↓</button>
             <button class="btn" @click="go('#reps')">Who represents me?</button>
+            <button class="btn pinkbtn" @click="openReceipt()">🧾 Get the receipt</button>
           </div>
         </div>
         <div class="card feature pink herocard">
@@ -239,6 +245,7 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
                 <button class="btn sm flag" @click="pickService(s.key, 'forum')">🚩 I don't see this</button>
                 <button class="btn sm act" @click="pickService(s.key, 'rti')">🧾 Ask BMC</button>
                 <button class="btn sm" @click="startPetition(s.key)">✍️ Petition</button>
+                <button class="btn sm primary" @click="openReceipt(s.key)">🧾 Receipt</button>
               </div>
             </div>
           </article>
@@ -317,13 +324,25 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
       <section class="close">
         <h2>You paid.<br>You should know.</h2>
         <p>The BMC is called the richest municipal corporation in the country. Every Mumbai resident pays for their ward. This makes the money visible, and turns "where did it go?" into a question the BMC has to answer.</p>
-        <div class="cta-row center"><button class="btn primary" @click="openRti()">🧾 Ask the BMC</button><button class="btn act" @click="go('#petitions')">✍️ Sign a petition</button></div>
+        <div class="cta-row center"><button class="btn primary" @click="openReceipt()">🧾 Share the receipt</button><button class="btn" @click="openRti()">Ask the BMC</button><button class="btn act" @click="go('#petitions')">✍️ Sign a petition</button></div>
       </section>
 
       <footer>
         <div class="logo">Somehow We <b>Manage</b></div>
         <div class="disclaimer"><strong>CREATE 2026 prototype · 11 September 2026.</strong> Pilot ward: {{ ward.code }}, {{ ward.name }}. Ward actuals are not published by the BMC; Praja Foundation obtained them under the Right to Information Act. Utilisation above 100% means recorded spend exceeded the allotment. Humour targets bureaucracy, never residents or individuals.</div>
       </footer>
+
+      <!-- RECEIPT MODAL -->
+      <div v-if="receiptOpen" class="modal" @click.self="receiptOpen = false">
+        <div class="modal-card">
+          <div class="modal-top">
+            <div><span class="pill pink">The receipt</span><h3>Savage. Sourced. Shareable.</h3><p class="mini">Pick a service, pick a size, share. Every card ends with "Is your ward any better?"</p></div>
+            <button class="x" @click="receiptOpen = false" aria-label="Close">✕</button>
+          </div>
+          <div class="svc-tabs"><button v-for="s in ward.services" :key="s.key" class="pill" :class="{ ink: selected === s.key }" @click="selected = s.key">{{ s.icon }} {{ s.label }}</button></div>
+          <Receipt :ward-code="ward.code" :ward-name="ward.name" :service="svc" :posts="posts" :site-url="siteUrl" />
+        </div>
+      </div>
 
       <!-- RTI MODAL -->
       <div v-if="rtiOpen" class="modal" @click.self="rtiOpen = false">
@@ -451,6 +470,7 @@ tr.sep th { padding-top: 16px; text-transform: uppercase; font-size: 11px; lette
 .close p { font-size: 20px; font-weight: 700; max-width: 800px; margin: 24px auto; }
 footer { padding: 34px 6vw 50px; font-weight: 700; }
 .disclaimer { background: var(--white); border: 2px dashed var(--ink); padding: 14px; border-radius: 12px; margin-top: 14px; font-size: 14px; }
+.pinkbtn { background: var(--pink); }
 .modal { position: fixed; inset: 0; background: rgba(17,17,17,.74); display: grid; place-items: center; padding: 20px; z-index: 99; }
 .modal-card { background: var(--paper); border: 3px solid var(--ink); border-radius: 22px; padding: 22px; max-width: 760px; width: 100%; box-shadow: 10px 10px 0 var(--yellow); max-height: 92vh; overflow: auto; display: grid; gap: 14px; }
 .modal-top { display: flex; justify-content: space-between; gap: 16px; align-items: start; }

@@ -14,6 +14,9 @@ export interface Flag {
   likes?: number
   locality?: string
   comments?: number
+  confirms?: number
+  lastConfirmed?: number
+  photos?: string[]
 }
 
 export interface Comment { id: string; flagId: string; text: string; ts: number }
