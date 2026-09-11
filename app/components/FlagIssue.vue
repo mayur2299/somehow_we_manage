@@ -10,6 +10,7 @@ const emit = defineEmits<{ (e: 'flagged'): void }>()
 const service = ref(props.serviceKey)
 watch(() => props.serviceKey, v => (service.value = v))
 const tag = ref('')
+const pickSvc = ref(false)
 const note = ref('')
 const locality = ref('')
 const photo = ref<string | undefined>()
@@ -50,9 +51,9 @@ async function submit() {
 
 <template>
   <form class="flag" @submit.prevent="submit">
-    <p class="label">What is it about</p>
-    <div class="tags">
-      <button v-for="s in (services ?? [])" :key="s.key" type="button" class="pill" :class="{ ink: service === s.key }" @click="service = s.key">{{ s.icon }} {{ s.label }}</button>
+    <p class="label">About <button type="button" class="linkbtn" @click="pickSvc = !pickSvc">{{ (services ?? []).find(s => s.key === service)?.icon }} {{ (services ?? []).find(s => s.key === service)?.label }} · change</button></p>
+    <div v-if="pickSvc" class="tags">
+      <button v-for="s in (services ?? [])" :key="s.key" type="button" class="pill" :class="{ ink: service === s.key }" @click="service = s.key; pickSvc = false">{{ s.icon }} {{ s.label }}</button>
     </div>
     <p class="label">What is wrong</p>
     <div class="tags">
@@ -75,6 +76,7 @@ async function submit() {
 <style scoped>
 .flag { display: grid; gap: 10px; }
 .label { margin: 4px 0 0; }
+.linkbtn { border: 0; background: none; font: inherit; font-weight: 900; text-decoration: underline; cursor: pointer; padding: 0; text-transform: none; letter-spacing: 0; font-size: 14px; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tags .pill { cursor: pointer; min-height: 36px; }
 .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }

@@ -256,9 +256,9 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
       <section id="forum" class="forum">
         <div class="section-head">
           <h2>On paper<br>vs on the ground.</h2>
-          <p>The BMC's numbers, next to what residents of {{ ward.name }} actually see. Post, like, reply, share, or turn a post into a petition.</p>
+          <p>Pick a service. See what was spent. See what residents report. If you have the same problem, say so. Then share the card.</p>
         </div>
-        <Forum :ward-slug="wardSlug" :ward-code="ward.code" :ward-name="ward.name" :services="ward.services" :posts="posts" :counts="flags?.counts ?? {}" :initial-service="forumService" :open-form="showPostForm" @refresh="refreshFlags()" @celebrate="celebrate()" @petition="startPetition" @petitions-changed="petitionsKey++" />
+        <Forum :ward-slug="wardSlug" :ward-code="ward.code" :ward-name="ward.name" :services="ward.services" :posts="posts" :counts="flags?.counts ?? {}" :initial-service="forumService" :open-form="showPostForm" @refresh="refreshFlags()" @celebrate="celebrate()" @petition="startPetition" @petitions-changed="petitionsKey++" @receipt="openReceipt" />
       </section>
 
       <!-- 5. PETITIONS -->

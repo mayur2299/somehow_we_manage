@@ -10,7 +10,7 @@ const props = defineProps<{
   initialService?: string
   openForm?: boolean
 }>()
-const emit = defineEmits<{ (e: 'refresh'): void; (e: 'petition', service: string): void; (e: 'celebrate'): void; (e: 'petitionsChanged'): void }>()
+const emit = defineEmits<{ (e: 'refresh'): void; (e: 'petition', service: string): void; (e: 'celebrate'): void; (e: 'petitionsChanged'): void; (e: 'receipt', service: string): void }>()
 
 const cr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
@@ -18,10 +18,15 @@ const svcOf = (k: string) => props.services.find(s => s.key === k)
 
 // filters
 const tab = ref<'residents' | 'elsewhere'>('residents')
-const service = ref<string>('all')
+// default to the service with the most complaints, else drains
+const busiest = () => { const e = Object.entries(props.counts).sort((a, b) => b[1] - a[1])[0]; return e && e[1] > 0 ? e[0] : 'swd' }
+const service = ref<string>(props.initialService ?? busiest())
 const tag = ref<string>('all')
 const sort = ref<'new' | 'top' | 'talked'>('new')
 const showForm = ref(!!props.openForm)
+const showFilters = ref(false)
+const emitReceipt = (k: string) => emit('receipt', k)
+const totalConfirms = computed(() => filtered.value.reduce((a, p) => a + (p.confirms ?? 0), 0))
 watch(() => props.initialService, v => { if (v) { service.value = v; tab.value = 'residents' } })
 watch(() => props.openForm, v => { if (v) showForm.value = true })
 
@@ -105,7 +110,9 @@ async function shareAsk(p: any) {
 
 // share + permalink
 const toast = ref('')
-watch(toast, v => { if (v) setTimeout(() => (toast.value = ''), 2000) })
+watch(toast, v => { if (v) setTimeout(() => (toast.value = ''), 2200) })
+const justPosted = ref(false)
+function onPosted() { emit('refresh'); emit('celebrate'); showForm.value = false; justPosted.value = true; setTimeout(() => (justPosted.value = false), 12000) }
 function permalink(p: any) { return `${location.origin}${location.pathname}?pin=${new URLSearchParams(location.search).get('pin') ?? '400069'}#post-${p.id}` }
 async function share(p: any) {
   const s = svcOf(p.service)!
@@ -171,95 +178,87 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 
 <template>
   <div class="forum">
-    <div class="grid">
-      <article class="card pink span5 contrast">
-        <span class="pill">{{ service === 'all' ? 'All services' : `${svcOf(service)?.icon} ${svcOf(service)?.label}` }}</span>
-        <div class="big">{{ spentLine.amount }}</div>
-        <div class="vs">spent on paper {{ spentLine.what }}</div>
-        <div class="big">{{ filtered.length }}</div>
-        <div class="vs">resident post{{ filtered.length === 1 ? '' : 's' }} saying otherwise<span v-if="photoCount">, {{ photoCount }} with photos</span></div>
-        <button class="btn flag" @click="showForm = !showForm; tab = 'residents'">{{ showForm ? 'Close' : '🚩 I don\'t see this on the ground' }}</button>
-      </article>
-      <article class="card span7 toolbar">
-        <div class="tabs">
-          <button class="pill" :class="{ ink: tab === 'residents' }" @click="tab = 'residents'">Residents · {{ totalPosts }}</button>
-          <button class="pill" :class="{ ink: tab === 'elsewhere' }" @click="tab = 'elsewhere'">Elsewhere · r/mumbai</button>
+    <!-- STEP 1: pick the service -->
+    <div class="svc-tabs">
+      <button v-for="s in services" :key="s.key" class="svc-tab" :class="{ on: service === s.key }" @click="service = s.key; tab = 'residents'">
+        <span class="ic">{{ s.icon }}</span>
+        <span class="lbl">{{ s.label }}</span>
+        <span class="cnt">{{ counts[s.key] ?? 0 }} complaint{{ (counts[s.key] ?? 0) === 1 ? '' : 's' }}</span>
+      </button>
+    </div>
+
+    <!-- STEP 2: the contrast -->
+    <div class="ledger card pink">
+      <div class="row">
+        <div class="paper">
+          <span class="pill">On paper</span>
+          <div class="big">{{ spentLine.amount }}</div>
+          <div class="vs">spent on {{ svcOf(service)?.label.toLowerCase() }} · {{ Math.round((svcOf(service)?.avgUtil ?? 0) * 100) }}% of budget</div>
         </div>
-        <template v-if="tab === 'residents'">
-          <p class="label">Service</p>
-          <div class="tags">
-            <button class="pill" :class="{ ink: service === 'all' }" @click="service = 'all'">All</button>
-            <button v-for="s in services" :key="s.key" class="pill" :class="{ ink: service === s.key }" @click="service = s.key">{{ s.icon }} {{ s.label }}<span v-if="counts[s.key]"> · {{ counts[s.key] }}</span></button>
-          </div>
-          <p class="label">What is wrong</p>
-          <div class="tags">
-            <button class="pill" :class="{ red: tag === 'all' }" @click="tag = 'all'">All</button>
-            <button v-for="t in FLAG_TAGS" :key="t.key" class="pill" :class="{ red: tag === t.key }" @click="tag = t.key">{{ t.label }}</button>
-          </div>
-          <p class="label">Sort</p>
-          <div class="tags">
-            <button class="pill" :class="{ ink: sort === 'new' }" @click="sort = 'new'">Newest</button>
-            <button class="pill" :class="{ ink: sort === 'top' }" @click="sort = 'top'">Most liked</button>
-            <button class="pill" :class="{ ink: sort === 'talked' }" @click="sort = 'talked'">Most discussed</button>
-          </div>
-        </template>
-        <p v-else class="mini">Public Reddit search for "{{ wardName }}" in r/mumbai, cached hourly. Residents' words, not verified facts. <span class="pill" :class="threads.source === 'snapshot' ? 'purple' : 'green'">{{ threads.source === 'snapshot' ? 'Cached snapshot' : 'Live' }}</span></p>
-      </article>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="ground">
+          <span class="pill red">On the ground</span>
+          <div class="big">{{ filtered.length }}</div>
+          <div class="vs">complaint{{ filtered.length === 1 ? '' : 's' }} from residents<span v-if="photoCount"> · {{ photoCount }} with photos</span><span v-if="totalConfirms"> · {{ totalConfirms }} "me too"</span></div>
+        </div>
+      </div>
+      <div class="ledger-acts">
+        <button class="btn flag" @click="showForm = !showForm">{{ showForm ? 'Cancel' : '🚩 Report a problem' }}</button>
+        <button class="btn primary" @click="emitReceipt(service)">🧾 Generate share card</button>
+        <button class="btn" @click="showFilters = !showFilters">{{ showFilters ? 'Hide filters' : 'Filter' }}</button>
+      </div>
+    </div>
 
-      <article v-if="showForm && tab === 'residents'" class="card span12">
-        <h3>Post what you see.</h3>
-        <FlagIssue :ward-slug="wardSlug" :service-key="service === 'all' ? services[0].key : service" :services="services" @flagged="emit('refresh'); emit('celebrate'); showForm = false" />
-      </article>
+    <!-- posted → share nudge -->
+    <div v-if="justPosted" class="card green nudge">
+      <div><strong>Posted.</strong> Now make it travel: the share card carries your complaint count and the ward's spend.</div>
+      <button class="btn primary" @click="emitReceipt(service)">🧾 Generate share card</button>
+    </div>
 
-      <template v-if="tab === 'residents'">
-        <article v-for="p in filtered" :key="p.id" :id="`post-${p.id}`" class="card post span4">
-          <img v-if="p.photo" :src="p.photo" alt="" />
+    <!-- report form -->
+    <article v-if="showForm" class="card white form">
+      <h3>Report a {{ svcOf(service)?.label.toLowerCase() }} problem</h3>
+      <p class="mini">Where is it, what is wrong, and a photo if you have one. It goes public on this page under {{ wardCode }}.</p>
+      <FlagIssue :ward-slug="wardSlug" :service-key="service" :services="services" @flagged="onPosted" />
+    </article>
+
+    <!-- filters (collapsed) -->
+    <div v-if="showFilters" class="card white filters">
+      <div class="frow"><span class="label">What is wrong</span><div class="tags"><button class="pill" :class="{ red: tag === 'all' }" @click="tag = 'all'">All</button><button v-for="t in FLAG_TAGS" :key="t.key" class="pill" :class="{ red: tag === t.key }" @click="tag = t.key">{{ t.label }}</button></div></div>
+      <div class="frow"><span class="label">Sort</span><div class="tags"><button class="pill" :class="{ ink: sort === 'new' }" @click="sort = 'new'">Newest</button><button class="pill" :class="{ ink: sort === 'top' }" @click="sort = 'top'">Most "me too"</button><button class="pill" :class="{ ink: sort === 'talked' }" @click="sort = 'talked'">Most discussed</button></div></div>
+      <div class="frow"><span class="label">Also see</span><div class="tags"><button class="pill" :class="{ ink: tab === 'elsewhere' }" @click="tab = tab === 'elsewhere' ? 'residents' : 'elsewhere'">Elsewhere · r/mumbai</button></div></div>
+    </div>
+
+    <!-- STEP 3: complaints -->
+    <template v-if="tab === 'residents'">
+      <div v-if="!filtered.length" class="card white empty">
+        <h3>No complaints yet on {{ svcOf(service)?.label.toLowerCase() }}.</h3>
+        <p>{{ spentLine.amount }} was spent. If you don't see it, say so. <button class="btn sm flag" @click="showForm = true">🚩 Report a problem</button></p>
+      </div>
+      <div class="posts">
+        <article v-for="p in filtered" :key="p.id" :id="`post-${p.id}`" class="card post">
+          <div class="photo" :class="{ none: !p.photo }">
+            <img v-if="p.photo" :src="p.photo" alt="" />
+            <div v-else class="nophoto">No photo yet. <label class="linklike"><input type="file" accept="image/*" capture="environment" hidden @change="onConfirmPhoto(p, $event)" />Add one</label></div>
+            <div class="badge"><span class="pill red">{{ tagLabel(p.tag) }}</span><span v-if="p.locality" class="pill">📍 {{ p.locality }}</span></div>
+          </div>
           <div class="body">
-            <div class="tags"><span class="pill">{{ svcOf(p.service)?.icon }} {{ svcOf(p.service)?.label }}</span><span class="pill red">{{ tagLabel(p.tag) }}</span><span v-if="p.locality" class="pill">📍 {{ p.locality }}</span></div>
             <p class="note">{{ p.note || 'Photo only' }}</p>
-            <div class="foot">
-              <span class="mini">{{ when(p.ts) }}</span>
-              <div class="acts">
-                <button class="btn sm" :disabled="liked[p.id]" @click="like(p)">👍 {{ p.likes ?? 0 }}</button>
-                <button class="btn sm" @click="toggle(p)">💬 {{ p.comments ?? 0 }}</button>
-                <button class="btn sm" @click="share(p)">Share</button>
-              </div>
+            <p class="mini">Reported {{ when(p.ts) }}<span v-if="p.lastConfirmed"> · last seen {{ daysSince(p.lastConfirmed) === 0 ? 'today' : daysSince(p.lastConfirmed) + ' days ago' }}</span></p>
+
+            <div class="metoo">
+              <div class="metoo-n"><span class="n">{{ p.confirms ?? 0 }}</span><span class="t">{{ (p.confirms ?? 0) === 1 ? 'person says' : 'people say' }} this is still here</span></div>
+              <button class="btn act" :disabled="confirmed[p.id]" @click="confirm(p)">{{ confirmed[p.id] ? '✓ Counted' : '👀 I have this problem too' }}</button>
             </div>
 
-            <div class="still">
-              <div class="still-head">
-                <span class="still-n">{{ p.confirms ?? 0 }}</span>
-                <span class="still-t">{{ (p.confirms ?? 0) === 1 ? 'person says' : 'people say' }} this is still here<span v-if="p.lastConfirmed"> · last seen {{ daysSince(p.lastConfirmed) === 0 ? 'today' : daysSince(p.lastConfirmed) + 'd ago' }}</span></span>
-              </div>
-              <div class="still-acts">
-                <button class="btn sm act" :disabled="confirmed[p.id]" @click="confirm(p)">{{ confirmed[p.id] ? '✓ Counted' : '👀 Yes, I\'ve seen it' }}</button>
-                <label class="btn sm"><input type="file" accept="image/*" capture="environment" hidden @change="onConfirmPhoto(p, $event)" />📸 Add photo</label>
-                <button class="btn sm" @click="shareAsk(p)">Ask neighbours</button>
-              </div>
-              <div v-if="(p.photos ?? []).length > 1" class="still-photos"><img v-for="(ph, i) in p.photos.slice(-4)" :key="i" :src="ph" alt="" /></div>
+            <div class="secondary">
+              <label class="btn sm"><input type="file" accept="image/*" capture="environment" hidden @change="onConfirmPhoto(p, $event)" />📸 Add photo</label>
+              <button class="btn sm" @click="toggle(p)">💬 {{ p.comments ?? 0 }} repl{{ (p.comments ?? 0) === 1 ? 'y' : 'ies' }}</button>
+              <button class="btn sm" @click="shareAsk(p)">Ask neighbours</button>
+              <button class="btn sm primary" @click="emitReceipt(p.service)">🧾 Share card</button>
             </div>
+            <div v-if="(p.photos ?? []).length > 1" class="more-photos"><img v-for="(ph, i) in p.photos.slice(-4)" :key="i" :src="ph" alt="" /></div>
 
-            <div class="pet-strip" :class="petitionFor(p) ? 'has' : ''">
-              <template v-if="petitionFor(p)">
-                <div class="pet-info">
-                  <span class="pill green">Petition raised</span>
-                  <p class="pet-title">{{ petitionFor(p).title }}</p>
-                  <p class="mini"><strong>{{ petitionFor(p).signatures }}</strong> {{ petitionFor(p).signatures === 1 ? 'signature' : 'signatures' }} · {{ petitionFor(p).status === 'open' ? 'collecting signatures' : petitionFor(p).status }}</p>
-                </div>
-                <button class="btn sm act" :disabled="signedP[petitionFor(p).id]" @click="signFor(p)">{{ signedP[petitionFor(p).id] ? '✓ Signed' : '✍️ Sign this' }}</button>
-              </template>
-              <template v-else>
-                <p class="mini">No petition on this yet.</p>
-                <button class="btn sm" @click="startRaise(p)">{{ raising[p.id] ? 'Cancel' : '✍️ Raise a petition' }}</button>
-              </template>
-            </div>
-
-            <form v-if="raising[p.id]" class="raise" @submit.prevent="raise(p)">
-              <input v-model="pTitle[p.id]" class="input" maxlength="120" placeholder="Petition title" />
-              <textarea v-model="pDemand[p.id]" class="input" rows="6" maxlength="600"></textarea>
-              <p class="mini">Pre-filled with this post and {{ wardCode }}'s own budget figures. Edit anything.</p>
-              <button class="btn sm act" type="submit" :disabled="pBusy[p.id]">{{ pBusy[p.id] ? 'Raising…' : 'Publish petition' }}</button>
-            </form>
             <div v-if="open[p.id]" class="comments">
               <p v-if="!comments[p.id]" class="mini">Loading…</p>
               <p v-else-if="!comments[p.id].length" class="mini">No replies yet.</p>
@@ -269,63 +268,101 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
                 <button class="btn sm primary" type="submit" :disabled="busy[p.id]">Reply</button>
               </form>
             </div>
+
+            <div class="pet-strip" :class="petitionFor(p) ? 'has' : ''">
+              <template v-if="petitionFor(p)">
+                <div class="pet-info">
+                  <span class="pill green">Petition raised</span>
+                  <p class="pet-title">{{ petitionFor(p).title }}</p>
+                  <p class="mini"><strong>{{ petitionFor(p).signatures }}</strong> {{ petitionFor(p).signatures === 1 ? 'signature' : 'signatures' }}</p>
+                </div>
+                <button class="btn sm act" :disabled="signedP[petitionFor(p).id]" @click="signFor(p)">{{ signedP[petitionFor(p).id] ? '✓ Signed' : '✍️ Sign this' }}</button>
+              </template>
+              <template v-else>
+                <p class="mini">Want the ward office to answer for this?</p>
+                <button class="btn sm" @click="startRaise(p)">{{ raising[p.id] ? 'Cancel' : '✍️ Raise a petition' }}</button>
+              </template>
+            </div>
+            <form v-if="raising[p.id]" class="raise" @submit.prevent="raise(p)">
+              <input v-model="pTitle[p.id]" class="input" maxlength="120" placeholder="Petition title" />
+              <textarea v-model="pDemand[p.id]" class="input" rows="6" maxlength="600"></textarea>
+              <p class="mini">Pre-filled with this complaint and {{ wardCode }}'s own budget figures. Edit anything.</p>
+              <button class="btn sm act" type="submit" :disabled="pBusy[p.id]">{{ pBusy[p.id] ? 'Raising…' : 'Publish petition' }}</button>
+            </form>
           </div>
         </article>
-        <p v-if="!filtered.length" class="span12 empty">No posts match. Be the first to say what you see.</p>
-      </template>
+      </div>
+    </template>
 
-      <template v-else>
-        <a v-for="t in threads.items" :key="t.url + t.title" class="card thread span4" :href="t.url" target="_blank" rel="noopener">
-          <span class="t-title">{{ t.title }}</span>
-          <span class="mini">r/{{ t.sub }} · ▲ {{ t.score }} · 💬 {{ t.comments }} · {{ new Date(t.created).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) }}</span>
-        </a>
-        <p v-if="!threads.items.length" class="span12 empty">Nothing found yet.</p>
-      </template>
-    </div>
+    <template v-else>
+      <div class="card white">
+        <div class="frow"><h3>What r/mumbai is saying about {{ wardName }}</h3><span class="pill" :class="threads.source === 'snapshot' ? 'purple' : 'green'">{{ threads.source === 'snapshot' ? 'Cached snapshot' : 'Live' }}</span><button class="btn sm" @click="tab = 'residents'">← Back to complaints</button></div>
+        <div class="thread-list">
+          <a v-for="t in threads.items" :key="t.url + t.title" class="thread" :href="t.url" target="_blank" rel="noopener"><span class="t-title">{{ t.title }}</span><span class="mini">r/{{ t.sub }} · ▲ {{ t.score }} · 💬 {{ t.comments }}</span></a>
+        </div>
+        <p class="mini">Public Reddit search, cached hourly. Residents' words, not verified facts.</p>
+      </div>
+    </template>
+
     <div v-if="toast" class="toast">{{ toast }}</div>
   </div>
 </template>
 
 <style scoped>
-.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
-.span4 { grid-column: span 4; } .span5 { grid-column: span 5; } .span7 { grid-column: span 7; } .span12 { grid-column: span 12; }
-.contrast .big { font-family: var(--display); font-size: clamp(44px, 6vw, 84px); letter-spacing: -.06em; line-height: .9; margin-top: 10px; }
-.contrast .vs { font-weight: 900; font-size: 18px; margin: 6px 0 14px; }
-.toolbar { display: grid; gap: 8px; align-content: start; }
-.tabs { display: flex; gap: 8px; margin-bottom: 6px; }
+.forum { display: grid; gap: 18px; }
+.svc-tabs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.svc-tab { display: grid; gap: 2px; text-align: left; border: 3px solid var(--ink); border-radius: 16px; background: var(--white); padding: 12px; cursor: pointer; box-shadow: 4px 4px 0 var(--ink); transition: transform 120ms, box-shadow 120ms; }
+.svc-tab:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.svc-tab.on { background: var(--ink); color: var(--white); }
+.svc-tab .ic { font-size: 22px; }
+.svc-tab .lbl { font-weight: 900; font-size: 14px; line-height: 1.1; }
+.svc-tab .cnt { font-size: 12px; font-weight: 700; opacity: .8; }
+.ledger .row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: center; }
+.ledger .big { font-family: var(--display); font-size: clamp(44px, 6vw, 84px); letter-spacing: -.06em; line-height: .9; margin-top: 10px; }
+.ledger .vs { font-weight: 900; font-size: 17px; margin-top: 6px; }
+.ledger .arrow { font-family: var(--display); font-size: 64px; }
+.ledger-acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.nudge { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-weight: 700; }
+.form h3, .empty h3 { font-size: 26px; letter-spacing: -.05em; margin: 0 0 6px; }
+.form .mini { margin-bottom: 12px; }
+.filters { display: grid; gap: 10px; }
+.frow { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.frow h3 { font-size: 22px; margin: 0; flex: 1; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.tags .pill, .tabs .pill { cursor: pointer; min-height: 36px; }
-.label { margin: 6px 0 0; }
-.mini { font-size: 12px; font-weight: 700; color: #3f3b34; }
-h3 { font-size: 26px; letter-spacing: -.05em; margin: 0 0 12px; }
+.tags .pill { cursor: pointer; min-height: 36px; }
+.mini { font-size: 12px; font-weight: 700; color: #3f3b34; margin: 0; }
+.empty p { font-weight: 700; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 0; }
+.posts { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
 .post { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
-.post img { width: 100%; height: 190px; object-fit: cover; border-bottom: 3px solid var(--ink); display: block; }
-.body { padding: 14px; display: grid; gap: 8px; }
-.note { margin: 0; font-weight: 700; }
-.foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
-.acts { display: flex; gap: 6px; flex-wrap: wrap; }
-.still { border-top: 2px dashed var(--ink); padding-top: 10px; display: grid; gap: 8px; }
-.still-head { display: flex; align-items: baseline; gap: 8px; }
-.still-n { font-family: var(--display); font-size: 34px; letter-spacing: -.05em; line-height: 1; }
-.still-t { font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; }
-.still-acts { display: flex; flex-wrap: wrap; gap: 6px; }
-.still-acts label { cursor: pointer; }
-.still-photos { display: flex; gap: 6px; }
-.still-photos img { width: 56px; height: 56px; object-fit: cover; border: 2px solid var(--ink); border-radius: 8px; }
+.photo { position: relative; height: 230px; border-bottom: 3px solid var(--ink); background: #ded7c2; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nophoto { height: 100%; display: grid; place-items: center; font-weight: 800; color: #3f3b34; }
+.linklike { text-decoration: underline; cursor: pointer; margin-left: 4px; }
+.badge { position: absolute; left: 10px; top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+.body { padding: 14px; display: grid; gap: 10px; }
+.note { margin: 0; font-weight: 800; font-size: 17px; line-height: 1.3; }
+.metoo { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; background: var(--yellow); border: 3px solid var(--ink); border-radius: 14px; padding: 10px 12px; }
+.metoo-n { display: flex; align-items: baseline; gap: 8px; }
+.metoo .n { font-family: var(--display); font-size: 40px; letter-spacing: -.05em; line-height: 1; }
+.metoo .t { font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: .03em; max-width: 140px; line-height: 1.2; }
+.secondary { display: flex; flex-wrap: wrap; gap: 6px; }
+.secondary label { cursor: pointer; }
+.more-photos { display: flex; gap: 6px; }
+.more-photos img { width: 56px; height: 56px; object-fit: cover; border: 2px solid var(--ink); border-radius: 8px; }
+.comments { border-top: 2px dashed var(--ink); padding-top: 10px; display: grid; gap: 8px; }
+.comment { background: var(--white); border: 2px solid var(--ink); border-radius: 12px; padding: 8px 10px; }
+.comment p { margin: 0 0 2px; font-weight: 600; font-size: 14px; }
+.reply { display: flex; gap: 8px; }
+.reply .input { min-height: 40px; }
 .pet-strip { border-top: 2px dashed var(--ink); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
 .pet-strip.has { background: #f3ffe0; border: 2px solid var(--ink); border-radius: 12px; padding: 10px; }
 .pet-info { display: grid; gap: 4px; min-width: 0; flex: 1; }
 .pet-title { margin: 0; font-weight: 800; font-size: 14px; line-height: 1.25; }
 .raise { display: grid; gap: 8px; border-top: 2px dashed var(--ink); padding-top: 10px; }
 .raise .btn { justify-self: start; }
-.comments { border-top: 2px dashed var(--ink); padding-top: 10px; display: grid; gap: 8px; }
-.comment { background: var(--white); border: 2px solid var(--ink); border-radius: 12px; padding: 8px 10px; }
-.comment p { margin: 0 0 2px; font-weight: 600; font-size: 14px; }
-.reply { display: flex; gap: 8px; }
-.reply .input { min-height: 40px; }
-.empty { font-weight: 800; margin: 0; }
-.thread { display: grid; gap: 6px; text-decoration: none; align-content: start; }
+.thread-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; margin: 12px 0; }
+.thread { display: grid; gap: 6px; text-decoration: none; border: 2px solid var(--ink); border-radius: 14px; padding: 12px; background: var(--white); box-shadow: 3px 3px 0 var(--ink); }
 .t-title { font-weight: 800; line-height: 1.3; }
 .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--white); border-radius: 999px; padding: 10px 16px; font-weight: 800; z-index: 120; }
-@media (max-width: 920px) { .span4, .span5, .span7 { grid-column: span 12; } }
+@media (max-width: 920px) { .svc-tabs { grid-template-columns: repeat(2, 1fr); } .ledger .row { grid-template-columns: 1fr; } .ledger .arrow { display: none; } .posts { grid-template-columns: 1fr; } }
 </style>
