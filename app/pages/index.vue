@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ward from '~/data/k-east.json'
+import { tagLabel } from '~/utils/tags'
 
 // ---------- helpers ----------
 const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
@@ -83,7 +84,7 @@ function go(id: string) { document.querySelector(id)?.scrollIntoView({ behavior:
 function pickService(k: string, then: 'forum' | 'rti') {
   selected.value = k
   if (then === 'rti') openRti()
-  else { forumService.value = k; showPostForm.value = true; go('#forum') }
+  else navigateTo({ path: '/forum', query: { service: k } })
 }
 useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
 </script>
@@ -139,6 +140,17 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
           <small class="mini">Source in the receipts section.</small>
         </div>
       </header>
+
+      <!-- HUB: the five branches -->
+      <section class="hub">
+        <div class="hubgrid">
+          <a class="tile blue" href="#reps" @click.prevent="go('#reps')"><span class="ic">🗳️</span><span class="t">Who represents you</span><span class="d">{{ acc.corporators.length }} corporators · ward office · MLAs</span></a>
+          <a class="tile yellow" href="#money" @click.prevent="go('#money')"><span class="ic">💸</span><span class="t">Money received vs spent</span><span class="d">{{ cr(latestBE) }} allotted · {{ cr(latestActual) }} spent</span></a>
+          <a class="tile green" href="#services" @click.prevent="go('#services')"><span class="ic">🕳️</span><span class="t">Split by department</span><span class="d">Roads, drains, garbage, health, parks, markets</span></a>
+          <NuxtLink class="tile pink" to="/forum"><span class="ic">💬</span><span class="t">Forum for {{ pinInfo?.pin }}</span><span class="d">{{ posts.length }} complaints · photos · me too</span></NuxtLink>
+          <a class="tile purple" href="#petitions" @click.prevent="go('#petitions')"><span class="ic">✍️</span><span class="t">Petitions and RTI</span><span class="d">Sign, check status, or ask the BMC</span></a>
+        </div>
+      </section>
 
       <!-- 1. REPRESENTATIVES -->
       <section id="reps">
@@ -242,10 +254,9 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
               <div class="numbers">Allotted {{ cr(sum3(s.be)) }} · Spent {{ cr(sum3(s.actual)) }}<br>{{ rs(s.perCapita) }} per resident per year<span v-if="s.fact"> · {{ s.fact }}</span></div>
               <div v-if="flags?.counts?.[s.key]" class="contrast">{{ cr(sum3(s.actual)) }} spent. {{ flags.counts[s.key] }} resident{{ flags.counts[s.key] === 1 ? '' : 's' }} say they don't see it<span v-if="photoCount(s.key)">, with {{ photoCount(s.key) }} photo{{ photoCount(s.key) === 1 ? '' : 's' }}</span>.</div>
               <div class="svc-actions">
-                <button class="btn sm flag" @click="pickService(s.key, 'forum')">🚩 I don't see this</button>
-                <button class="btn sm act" @click="pickService(s.key, 'rti')">🧾 Ask BMC</button>
-                <button class="btn sm" @click="startPetition(s.key)">✍️ Petition</button>
-                <button class="btn sm primary" @click="openReceipt(s.key)">🧾 Receipt</button>
+                <NuxtLink class="btn flag grow" :to="{ path: '/forum', query: { service: s.key } }">💬 Go to forum →</NuxtLink>
+                <button class="btn sm act" @click="pickService(s.key, 'rti')">Ask BMC</button>
+                <button class="btn sm" @click="openReceipt(s.key)">Receipt</button>
               </div>
             </div>
           </article>
@@ -256,9 +267,29 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
       <section id="forum" class="forum">
         <div class="section-head">
           <h2>On paper<br>vs on the ground.</h2>
-          <p>The ward's group chat. No login, no names. The pinned message is what the BMC spent. Everything under it is what residents see. Same problem? Tap me too.</p>
+          <p>The ward's group chat. No login, no names. What the BMC spent, pinned at the top. What residents see, underneath.</p>
         </div>
-        <Forum :ward-slug="wardSlug" :ward-code="ward.code" :ward-name="ward.name" :services="ward.services" :posts="posts" :counts="flags?.counts ?? {}" :initial-service="forumService" :open-form="showPostForm" @refresh="refreshFlags()" @celebrate="celebrate()" @petition="startPetition" @petitions-changed="petitionsKey++" @receipt="openReceipt" />
+        <div class="grid">
+          <article class="card pink span5 teaser">
+            <span class="pill">{{ ward.code }} residents</span>
+            <div class="big">{{ posts.length }}</div>
+            <div class="vs">complaints · {{ posts.reduce((a: number, p: any) => a + (p.confirms ?? 0), 0) }} "me too" · {{ posts.filter((p: any) => p.photo).length }} photos</div>
+            <div class="cta-row">
+              <NuxtLink class="btn primary" to="/forum">💬 Go to forum →</NuxtLink>
+              <NuxtLink class="btn flag" :to="{ path: '/forum', query: { post: '1' } }">🚩 Report a problem</NuxtLink>
+            </div>
+          </article>
+          <div class="span7 latest">
+            <NuxtLink v-for="p in posts.slice(0, 3)" :key="p.id" class="card lp" :to="{ path: '/forum', hash: `#post-${p.id}` }">
+              <img v-if="p.photo" :src="p.photo" alt="" referrerpolicy="no-referrer" />
+              <div>
+                <div class="lp-tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcIcon(p.service) }} {{ svcLabel(p.service) }}</span></div>
+                <p class="lp-title">{{ p.title || p.note }}</p>
+                <p class="mini">👀 {{ p.confirms ?? 0 }} me too · 💬 {{ p.comments ?? 0 }}<span v-if="p.locality"> · 📍 {{ p.locality }}</span></p>
+              </div>
+            </NuxtLink>
+          </div>
+        </div>
       </section>
 
       <!-- 5. PETITIONS -->
@@ -382,6 +413,15 @@ h1 { font-size: clamp(56px, 8.4vw, 128px); line-height: .84; letter-spacing: -.0
 .herocard p { font-size: 18px; font-weight: 700; margin: 0 0 8px; }
 .mini { font-size: 12px; font-weight: 700; color: #3f3b34; }
 section { padding: 72px max(6vw, calc((100vw - 1440px) / 2)); border-bottom: 3px solid var(--ink); }
+section.hub { padding-top: 28px; padding-bottom: 28px; background: var(--ink); }
+.hubgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.tile { display: grid; gap: 4px; border: 3px solid var(--ink); border-radius: 16px; padding: 14px; text-decoration: none; color: var(--ink); box-shadow: 5px 5px 0 rgba(255,255,255,.9); transition: transform 120ms, box-shadow 120ms; }
+.tile:hover { transform: translate(3px, 3px); box-shadow: 2px 2px 0 rgba(255,255,255,.9); }
+.tile.blue { background: var(--blue); } .tile.yellow { background: var(--yellow); } .tile.green { background: var(--green); } .tile.pink { background: var(--pink); } .tile.purple { background: var(--purple); }
+.tile .ic { font-size: 26px; }
+.tile .t { font-family: var(--display); font-size: 18px; letter-spacing: -.04em; line-height: 1; }
+.tile .d { font-size: 12px; font-weight: 700; }
+@media (max-width: 920px) { .hubgrid { grid-template-columns: 1fr 1fr; } }
 .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
 .section-head h2 { font-size: clamp(42px, 6vw, 84px); line-height: .9; letter-spacing: -.06em; text-transform: uppercase; }
 .section-head p { max-width: 480px; font-weight: 700; margin: 0; }
@@ -426,7 +466,15 @@ h3 { font-size: 34px; letter-spacing: -.05em; line-height: 1; margin: 10px 0; }
 .service p { font-weight: 700; margin: 6px 0 0; }
 .numbers { font-weight: 800; font-size: 14px; border-top: 2px dashed var(--ink); padding-top: 10px; line-height: 1.4; }
 .contrast { margin-top: 8px; font-weight: 900; font-size: 14px; background: var(--white); border: 2px solid var(--ink); border-radius: 10px; padding: 8px 10px; }
-.svc-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.svc-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
+.svc-actions .grow { flex: 1 1 100%; justify-content: center; }
+.teaser .big { font-family: var(--display); font-size: clamp(56px, 8vw, 110px); letter-spacing: -.06em; line-height: .9; margin-top: 10px; }
+.teaser .vs { font-weight: 900; font-size: 17px; margin: 6px 0 4px; }
+.latest { display: grid; gap: 12px; align-content: start; }
+.lp { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 10px; text-decoration: none; align-items: center; }
+.lp img { width: 96px; height: 96px; object-fit: cover; border: 2px solid var(--ink); border-radius: 10px; }
+.lp-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
+.lp-title { margin: 0 0 4px; font-weight: 800; font-size: 15px; line-height: 1.25; }
 .svc-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .svc-tabs .pill { cursor: pointer; min-height: 36px; }
 .contrast-card .big { font-family: var(--display); font-size: clamp(44px, 6vw, 84px); letter-spacing: -.06em; line-height: .9; margin-top: 10px; }

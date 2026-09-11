@@ -48,7 +48,7 @@ button { font-family: inherit; }
 /* Inputs */
 .input { width: 100%; min-height: 48px; border: 3px solid var(--ink); border-radius: var(--r-md); background: var(--white); padding: 10px 14px; font: inherit; font-size: 16px; color: var(--ink); }
 .input:focus { outline: 3px solid var(--yellow); outline-offset: 2px; }
-textarea.input { resize: vertical; }
+textarea.input { resize: vertical; max-height: 220px; min-height: 48px; }
 
 :focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
 

@@ -9,6 +9,7 @@ const props = defineProps<{
   counts: Record<string, number>
   initialService?: string
   openForm?: boolean
+  full?: boolean
 }>()
 const emit = defineEmits<{ (e: 'refresh'): void; (e: 'petition', service: string): void; (e: 'celebrate'): void; (e: 'petitionsChanged'): void; (e: 'receipt', service: string): void }>()
 
@@ -84,6 +85,7 @@ async function comment(p: any) {
     await $fetch(`/api/flags/${encodeURIComponent(`${p.ward}:${p.service}:${p.id}`)}/comments`, { method: 'POST', body: { text } })
     draft.value[p.id] = ''
     await loadComments(p); emit('refresh')
+    nextTick(() => { const el = document.querySelector(`#post-${p.id} .rlist`) as HTMLElement | null; if (el) el.scrollTop = el.scrollHeight })
   } catch {} finally { busy.value[p.id] = false }
 }
 
@@ -208,7 +210,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 </script>
 
 <template>
-  <div class="chat">
+  <div class="chat" :class="{ full }">
     <!-- group header -->
     <header class="chead">
       <div class="avatar">📍</div>
@@ -293,7 +295,9 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
             <!-- replies -->
             <div v-if="open[p.id]" class="replies">
               <p v-if="!comments[p.id]" class="mini">Loading…</p>
-              <div v-for="c in comments[p.id] ?? []" :key="c.id" class="reply"><span class="ravatar">💬</span><div class="rbubble"><p>{{ c.text }}</p><span class="rtime">{{ hhmm(c.ts) }} · {{ dayLabel(c.ts) }}</span></div></div>
+              <div v-else class="rlist">
+                <div v-for="c in comments[p.id] ?? []" :key="c.id" class="reply"><span class="ravatar">💬</span><div class="rbubble"><p>{{ c.text }}</p><span class="rtime">{{ hhmm(c.ts) }} · {{ dayLabel(c.ts) }}</span></div></div>
+              </div>
               <form class="rform" @submit.prevent="comment(p)">
                 <input v-model="draft[p.id]" class="input" maxlength="400" placeholder="Reply…" />
                 <button class="btn sm primary" type="submit" :disabled="busy[p.id]">Send</button>
@@ -337,7 +341,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 </template>
 
 <style scoped>
-.chat { max-width: 760px; margin: 0 auto; border: 3px solid var(--ink); border-radius: 24px; background: var(--surface); box-shadow: 10px 10px 0 var(--ink); display: grid; grid-template-rows: auto auto auto 1fr auto; overflow: hidden; height: min(86vh, 980px); }
+.chat { max-width: 760px; margin: 0 auto; width: 100%; border: 3px solid var(--ink); border-radius: 24px; background: var(--surface); box-shadow: 10px 10px 0 var(--ink); display: grid; grid-template-rows: auto auto auto 1fr auto; overflow: hidden; height: min(86vh, 980px); }
 .chead { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--ink); color: var(--white); }
 .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; font-size: 22px; border: 3px solid var(--white); }
 .cmeta { flex: 1; min-width: 0; }
@@ -380,6 +384,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .raise { display: grid; gap: 8px; }
 .raise .btn { justify-self: start; }
 .replies { margin: 8px 0 0 36px; display: grid; gap: 8px; }
+.rlist { max-height: 240px; overflow-y: auto; display: grid; gap: 8px; padding-right: 4px; }
 .reply { display: flex; gap: 8px; align-items: flex-start; }
 .ravatar { width: 22px; height: 22px; border-radius: 50%; background: var(--white); border: 2px solid var(--ink); display: grid; place-items: center; font-size: 11px; flex: none; margin-top: 4px; }
 .rbubble { background: var(--white); border: 2px solid var(--ink); border-radius: 4px 14px 14px 14px; padding: 8px 10px; }
@@ -396,5 +401,6 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .form-head { display: flex; justify-content: space-between; align-items: center; }
 .mini { font-size: 12px; font-weight: 700; color: #3f3b34; margin: 0; }
 .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--white); border-radius: 999px; padding: 10px 16px; font-weight: 800; z-index: 120; }
+.chat.full { height: calc(100vh - 70px); max-width: 860px; border-radius: 0; border-left: 0; border-right: 0; border-bottom: 0; box-shadow: none; }
 @media (max-width: 600px) { .chat { height: 88vh; border-radius: 18px; box-shadow: 6px 6px 0 var(--ink); } .msg { max-width: 100%; } .replies { margin-left: 16px; } }
 </style>
