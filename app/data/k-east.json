@@ -464,5 +464,39 @@
       "party": "BJP"
     },
     "roadContractorNote": "Since 2023 the BMC has awarded road concretisation as a handful of zone-level contracts worth thousands of crore. Contractor names per individual work in this ward are not published. Question 1 of the RTI asks for them."
-  }
+  },
+  "pincodes": [
+    {
+      "pin": "400057",
+      "area": "Vile Parle East"
+    },
+    {
+      "pin": "400059",
+      "area": "Marol, Andheri East"
+    },
+    {
+      "pin": "400060",
+      "area": "Jogeshwari East"
+    },
+    {
+      "pin": "400069",
+      "area": "Andheri East (Gundavali)"
+    },
+    {
+      "pin": "400072",
+      "area": "Sakinaka"
+    },
+    {
+      "pin": "400093",
+      "area": "Chakala, MIDC Andheri"
+    },
+    {
+      "pin": "400096",
+      "area": "SEEPZ"
+    },
+    {
+      "pin": "400099",
+      "area": "Sahar, Airport"
+    }
+  ]
 }

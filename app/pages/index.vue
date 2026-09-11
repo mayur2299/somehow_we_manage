@@ -60,6 +60,7 @@ const svcTagTally = computed(() => {
 watch(selected, () => (panel.value = 'none'))
 const ctx = ward.cityContext
 const acc = ward.accountable
+const partyTally = Object.entries(acc.corporators.reduce((t: Record<string, number>, c) => { t[c.party] = (t[c.party] ?? 0) + 1; return t }, {})).sort((a, b) => b[1] - a[1])
 const partyClass = (p: string) => p.startsWith('BJP') ? 'p-bjp' : p.includes('UBT') ? 'p-ubt' : p.startsWith('Shiv') ? 'p-ss' : p.startsWith('Cong') ? 'p-inc' : p.startsWith('MNS') ? 'p-mns' : ''
 </script>
 
@@ -70,6 +71,7 @@ const partyClass = (p: string) => p.startsWith('BJP') ? 'p-bjp' : p.includes('UB
       <h1>{{ ward.code }} · {{ ward.name }}</h1>
       <p class="areas">{{ ward.areas }}</p>
       <p class="pop">{{ ward.population2025.toLocaleString('en-IN') }} residents · {{ Math.round(ward.slumShare * 100) }}% live in slums</p>
+      <PincodeLookup :pincodes="ward.pincodes" :ward-code="ward.code" :ward-name="ward.name" />
     </header>
 
     <section class="hook">
@@ -217,14 +219,22 @@ const partyClass = (p: string) => p.startsWith('BJP') ? 'p-bjp' : p.includes('UB
       <div class="admin">
         <strong>{{ acc.administratorPeriod }}: no elected council.</strong> {{ acc.administratorNote }}
       </div>
-      <div class="corps">
-        <div v-for="c in acc.corporators" :key="c.ward" class="corp" :class="{ kn: c.nowKNorth }">
-          <span class="wn">{{ c.ward }}</span>
-          <span class="nm">{{ c.name }}</span>
-          <span class="pt" :class="partyClass(c.party)">{{ c.party }}</span>
+      <p class="sent">
+        <strong>{{ acc.corporators.length }} corporators</strong> represent this area since January 2026:
+        <span v-for="[party, n], i in partyTally" :key="party"><span class="pt" :class="partyClass(party)">{{ party }}</span> {{ n }}<span v-if="i < partyTally.length - 1">, </span></span>.
+        The BMC's electoral ward numbers mean little to residents, so they are tucked away below.
+      </p>
+      <details class="corp-details">
+        <summary>Show all {{ acc.corporators.length }} corporators by electoral ward number</summary>
+        <div class="corps">
+          <div v-for="c in acc.corporators" :key="c.ward" class="corp" :class="{ kn: c.nowKNorth }">
+            <span class="wn">{{ c.ward }}</span>
+            <span class="nm">{{ c.name }}</span>
+            <span class="pt" :class="partyClass(c.party)">{{ c.party }}</span>
+          </div>
         </div>
-      </div>
-      <p class="note">{{ acc.kNorthNote }} Wards shown with a dashed border now report to K/North.</p>
+        <p class="note">{{ acc.kNorthNote }} Wards shown with a dashed border now report to K/North.</p>
+      </details>
       <div class="offs">
         <div class="off">
           <p class="oft">{{ acc.wardOffice.title }}</p>
@@ -356,6 +366,8 @@ tr.sep th { text-align: left; color: #666; font-weight: 600; padding-top: 0.8rem
 .ex a { color: #ffd166; }
 
 .admin { background: #fff4e6; border-left: 4px solid #e8590c; border-radius: 8px; padding: 0.7rem 0.9rem; font-size: 0.9rem; line-height: 1.45; margin-bottom: 0.9rem; }
+.corp-details { margin-top: 0.5rem; }
+.corp-details summary { cursor: pointer; font-size: 0.88rem; color: #3b5bdb; font-weight: 600; margin-bottom: 0.6rem; }
 .corps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.45rem; }
 .corp { display: flex; align-items: flex-start; gap: 0.5rem; border: 1px solid #e3e3e3; border-radius: 10px; padding: 0.45rem 0.6rem; font-size: 0.85rem; background: #fafafa; }
 .corp.kn { border-style: dashed; }
