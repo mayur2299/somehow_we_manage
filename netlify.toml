@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Nitro's Netlify preset writes functions and redirects itself.
+# Node 24 for the build image.
+[build.environment]
+  NODE_VERSION = "24"
