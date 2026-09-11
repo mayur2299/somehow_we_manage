@@ -127,8 +127,13 @@ onMounted(loadMine)
 const isSeed = (p: any) => /^(seed|gen)-/.test(p.id)
 const isMine = (p: any) => !!mine.value[p.id]
 const canDelete = (p: any) => !isSeed(p)
+const armed = ref<Record<string, boolean>>({})
+function askDelete(p: any) {
+  if (!armed.value[p.id]) { armed.value = { [p.id]: true }; setTimeout(() => { armed.value[p.id] = false }, 4000); return }
+  removePost(p)
+}
 async function removePost(p: any) {
-  if (!confirm('Delete this post? This also removes its replies.')) return
+  armed.value[p.id] = false
   try {
     await $fetch(`/api/flags/${encodeURIComponent(`${p.ward}:${p.service}:${p.id}`)}/delete`, { method: 'POST', body: { secret: mine.value[p.id] } })
     const m = { ...mine.value }; delete m[p.id]; mine.value = m
@@ -153,7 +158,6 @@ async function copyLink(p: any) { try { await navigator.clipboard.writeText(perm
 const reported = ref<Record<string, boolean>>({})
 async function report(p: any) {
   if (reported.value[p.id]) return
-  if (!confirm('Report this post as abusive, false, or off-topic?')) return
   reported.value[p.id] = true
   try { const r = await $fetch<{ hidden: boolean }>(`/api/flags/${encodeURIComponent(`${p.ward}:${p.service}:${p.id}`)}/report`, { method: 'POST' }); toast.value = r.hidden ? 'Hidden pending review.' : 'Reported. Thanks.'; if (r.hidden) emit('refresh') } catch { reported.value[p.id] = false }
 }
@@ -252,20 +256,12 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 
     <!-- feed -->
     <div ref="feed" class="feed">
-      <!-- pinned: on paper -->
-      <div class="msg system">
-        <div class="pin">📌 Pinned · On paper</div>
-        <div class="sys-big">{{ spentLine.amount }}</div>
-        <div class="sys-sub">spent {{ spentLine.what }}<span v-if="spentLine.util"> · <strong>{{ spentLine.util }}% of budget</strong></span></div>
-        <div class="sys-sub">Below: what residents see on the ground. Same problem? Tap <strong>me too</strong>.</div>
-      </div>
-
       <template v-if="tab === 'residents'">
         <p v-if="!chatOrder.length" class="empty">No complaints yet for {{ wardCode }}{{ service === 'all' ? '' : ' · ' + svcOf(service)?.label.toLowerCase() }}.<br>The money was spent. If you don't see it, be the first to say so.</p>
         <template v-for="(p, i) in chatOrder" :key="p.id">
           <div v-if="showDay(i)" class="day"><span>{{ dayLabel(p.ts) }}</span></div>
           <article :id="`post-${p.id}`" class="msg">
-            <div class="who"><span class="av">{{ svcOf(p.service)?.icon }}</span><span class="name">Resident<span v-if="p.locality"> · {{ p.locality }}</span></span><span class="time">{{ hhmm(p.ts) }}</span></div>
+            <div class="who"><span class="av">{{ svcOf(p.service)?.icon }}</span><span class="name">Resident<span v-if="p.locality"> · {{ p.locality }}</span></span><span class="time">{{ hhmm(p.ts) }}</span><button v-if="canDelete(p)" class="del" :class="{ armed: armed[p.id] }" :title="armed[p.id] ? 'Click again to delete' : 'Delete this post'" aria-label="Delete this post" @click="askDelete(p)">{{ armed[p.id] ? 'Delete?' : '✕' }}</button></div>
             <div class="bubble">
               <div class="tags"><span class="pill red">{{ tagLabel(p.tag) }}</span><span class="pill">{{ svcOf(p.service)?.label }}</span><span v-if="isMine(p)" class="pill ink">Your post</span></div>
               <h4 v-if="p.title" class="ptitle">{{ p.title }}</h4>
@@ -279,7 +275,6 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
                 <label class="chip"><input type="file" accept="image/*" capture="environment" hidden @change="onConfirmPhoto(p, $event)" />📸</label>
                 <button class="chip" @click="shareOpen[p.id] = !shareOpen[p.id]">↗ Share this</button>
                 <button v-if="!canDelete(p)" class="chip ghost" :disabled="reported[p.id]" @click="report(p)">⚑</button>
-                <button v-else class="chip ghost" @click="removePost(p)">🗑 Delete</button>
               </div>
               <p v-if="p.lastConfirmed" class="seen">Last seen {{ daysSince(p.lastConfirmed) === 0 ? 'today' : daysSince(p.lastConfirmed) + ' days ago' }}</p>
 
@@ -380,6 +375,9 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .who { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; margin: 0 0 4px 4px; color: var(--muted); }
 .av { display: inline-grid; place-items: center; font-size: 16px; line-height: 1; }
 .time { margin-left: auto; font-weight: 700; opacity: .7; }
+.del { border: 0; background: transparent; color: var(--muted); font-size: 14px; line-height: 1; padding: 2px 6px; margin-left: 6px; cursor: pointer; border-radius: 6px; }
+.del:hover { color: var(--coral); background: var(--white); }
+.del.armed { color: var(--white); background: var(--coral); font-weight: 800; font-size: 12px; }
 .bubble { background: var(--white); border: 2px solid var(--ink); border-radius: 4px 18px 18px 18px; padding: 12px; display: grid; gap: 8px; box-shadow: 4px 4px 0 var(--ink); }
 .tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .ptitle { font-size: 20px; letter-spacing: -.04em; line-height: 1.05; margin: 0; }
