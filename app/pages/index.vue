@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ward from '~/data/k-east.json'
+import { tagLabel } from '~/utils/tags'
 
 const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
 const pct = (a: number | null, b: number) => a == null ? null : Math.round((a / b) * 100)
@@ -49,6 +50,11 @@ const panel = ref<'none' | 'flag' | 'rti'>('none')
 const wardSlug = 'k-east'
 const { data: flags, refresh: refreshFlags } = await useFetch(`/api/flags?ward=${wardSlug}`, { default: () => ({ counts: {}, recent: [] as any[] }) })
 const svcFlags = computed(() => (flags.value?.recent ?? []).filter((f: any) => f.service === selected.value))
+const svcTagTally = computed(() => {
+  const t: Record<string, number> = {}
+  for (const f of svcFlags.value) if (f.tag) t[f.tag] = (t[f.tag] ?? 0) + 1
+  return Object.entries(t).sort((a, b) => b[1] - a[1])
+})
 watch(selected, () => (panel.value = 'none'))
 const ctx = ward.cityContext
 const acc = ward.accountable
@@ -148,11 +154,13 @@ const partyClass = (p: string) => p.startsWith('BJP') ? 'p-bjp' : p.includes('UB
         <RtiDraft v-if="panel === 'rti'" :ward-code="ward.code" :ward-name="ward.name" :service="svc" :years="ward.years" />
 
         <div v-if="svcFlags.length" class="flags">
-          <p class="flags-h">{{ svcFlags.length }} resident {{ svcFlags.length === 1 ? 'flag' : 'flags' }} on {{ svc.label.toLowerCase() }}</p>
+          <p class="flags-h">{{ svcFlags.length }} resident {{ svcFlags.length === 1 ? 'flag' : 'flags' }} on {{ svc.label.toLowerCase() }}
+            <span v-for="[k, n] in svcTagTally" :key="k" class="ftag tally">{{ tagLabel(k) }} · {{ n }}</span>
+          </p>
           <div v-for="f in svcFlags" :key="f.id" class="fl">
             <img v-if="f.photo" :src="f.photo" alt="" />
             <div>
-              <p class="fl-note">{{ f.note || 'Photo only' }}</p>
+              <p class="fl-note"><span v-if="f.tag" class="ftag">{{ tagLabel(f.tag) }}</span>{{ f.note || 'Photo only' }}</p>
               <p class="fl-ts">{{ new Date(f.ts).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) }}</p>
             </div>
           </div>
@@ -325,6 +333,8 @@ footer a { color: #3b5bdb; }
 .fl { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.5rem 0; border-top: 1px solid #eee; }
 .fl img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; flex: none; }
 .fl-note { margin: 0; font-size: 0.9rem; }
+.ftag { display: inline-block; background: #e7ecff; color: #2b3a8a; font-size: 0.72rem; font-weight: 700; border-radius: 999px; padding: 0.1rem 0.5rem; margin-right: 0.4rem; vertical-align: middle; }
+.ftag.tally { margin-left: 0.4rem; margin-right: 0; font-weight: 600; }
 .fl-ts { margin: 0.15rem 0 0; font-size: 0.75rem; color: #888; }
 .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 table { border-collapse: collapse; font-size: 0.8rem; min-width: 760px; width: 100%; }

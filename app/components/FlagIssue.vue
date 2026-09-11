@@ -2,6 +2,8 @@
 const props = defineProps<{ wardSlug: string; serviceKey: string; serviceLabel: string }>()
 const emit = defineEmits<{ (e: 'flagged'): void }>()
 
+import { FLAG_TAGS } from '~/utils/tags'
+const tag = ref<string>('')
 const note = ref('')
 const photo = ref<string | undefined>()
 const busy = ref(false)
@@ -25,11 +27,12 @@ async function onFile(e: Event) {
 
 async function submit() {
   error.value = ''
+  if (!tag.value) { error.value = 'Pick a tag first.'; return }
   if (!note.value.trim() && !photo.value) { error.value = 'Add a short note or a photo.'; return }
   busy.value = true
   try {
-    await $fetch('/api/flags', { method: 'POST', body: { ward: props.wardSlug, service: props.serviceKey, note: note.value, photo: photo.value } })
-    done.value = true; note.value = ''; photo.value = undefined
+    await $fetch('/api/flags', { method: 'POST', body: { ward: props.wardSlug, service: props.serviceKey, note: note.value, tag: tag.value, photo: photo.value } })
+    done.value = true; note.value = ''; tag.value = ''; photo.value = undefined
     emit('flagged')
     setTimeout(() => (done.value = false), 2500)
   } catch (e: any) {
@@ -41,6 +44,9 @@ async function submit() {
 <template>
   <div class="flag">
     <p class="lead">Budgeted for {{ serviceLabel.toLowerCase() }}, but you don't see it on the ground? Say where.</p>
+    <div class="tags">
+      <button v-for="t in FLAG_TAGS" :key="t.key" type="button" class="tag" :class="{ on: tag === t.key }" :title="t.hint" @click="tag = t.key">{{ t.label }}</button>
+    </div>
     <textarea v-model="note" rows="2" maxlength="280" placeholder="e.g. Drain outside Marol Naka bus stop has been open since June"></textarea>
     <div class="row">
       <label class="file">
@@ -57,6 +63,10 @@ async function submit() {
 <style scoped>
 .flag { margin-top: 0.9rem; background: #f0f4ff; border: 1px solid #c9d6ff; border-radius: 12px; padding: 0.9rem; }
 .lead { margin: 0 0 0.6rem; font-weight: 600; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.55rem; }
+.tag { border: 1px solid #b9c6f5; background: #fff; color: #2b3a8a; border-radius: 999px; padding: 0.3rem 0.7rem; font: inherit; font-size: 0.8rem; cursor: pointer; }
+.tag.on { background: #3b5bdb; border-color: #3b5bdb; color: #fff; }
 textarea { width: 100%; box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 0.5rem 0.6rem; font: inherit; font-size: 0.9rem; background: #fff; resize: vertical; }
 .row { display: flex; gap: 0.5rem; margin-top: 0.5rem; align-items: center; }
 .file { border: 1px solid #ccc; background: #fff; border-radius: 8px; padding: 0.5rem 0.9rem; cursor: pointer; font-size: 0.9rem; }
