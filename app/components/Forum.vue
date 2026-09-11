@@ -86,7 +86,7 @@ async function compress(file: File) {
   c.getContext('2d')!.drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(img.src)
   return c.toDataURL('image/jpeg', 0.7)
 }
-async function confirm(p: any, file?: File) {
+async function confirmSeen(p: any, file?: File) {
   if (confirmed.value[p.id] && !file) return
   confirmed.value[p.id] = true
   try {
@@ -95,7 +95,7 @@ async function confirm(p: any, file?: File) {
     emit('refresh'); toast.value = file ? 'Photo added. Still there, on record.' : 'Counted. Still there, on record.'
   } catch { confirmed.value[p.id] = false }
 }
-function onConfirmPhoto(p: any, e: Event) { const f = (e.target as HTMLInputElement).files?.[0]; if (f) confirm(p, f) }
+function onConfirmPhoto(p: any, e: Event) { const f = (e.target as HTMLInputElement).files?.[0]; if (f) confirmSeen(p, f) }
 const daysSince = (ts: number) => Math.max(0, Math.round((Date.now() - ts) / 86400000))
 function askConfirm(p: any) {
   const where = p.locality ? ` near ${p.locality}` : ` in ${props.wardName}`
@@ -106,6 +106,27 @@ async function shareAsk(p: any) {
   const text = askConfirm(p)
   if (navigator.share) { try { await navigator.share({ text }) } catch {} }
   else { try { await navigator.clipboard.writeText(text); toast.value = 'Copied. Send it to your building group.' } catch {} }
+}
+
+// share menu (per platform) + report
+const shareOpen = ref<Record<string, boolean>>({})
+function shareText(p: any) {
+  const s = svcOf(p.service)!
+  return `${s.icon} ${p.title || tagLabel(p.tag) + ' · ' + s.label} — ${props.wardCode} ${props.wardName}${p.locality ? ', ' + p.locality : ''}\n"${p.note}"\n${p.confirms ?? 0} people say it's still there. ${props.wardCode} spent ${cr(sum3(s.actual))} on ${s.label.toLowerCase()}, ${Math.round(s.avgUtil * 100)}% of budget.\nIs your ward any better? ${permalink(p)}`
+}
+const enc = (t: string) => encodeURIComponent(t)
+const links = (p: any) => ({
+  whatsapp: `https://wa.me/?text=${enc(shareText(p))}`,
+  x: `https://twitter.com/intent/tweet?text=${enc(shareText(p).slice(0, 260))}`,
+  facebook: `https://www.facebook.com/sharer/sharer.php?u=${enc(permalink(p))}&quote=${enc(shareText(p).slice(0, 200))}`,
+})
+async function copyLink(p: any) { try { await navigator.clipboard.writeText(permalink(p)); toast.value = 'Link copied.' } catch {} }
+const reported = ref<Record<string, boolean>>({})
+async function report(p: any) {
+  if (reported.value[p.id]) return
+  if (!confirm('Report this post as abusive, false, or off-topic?')) return
+  reported.value[p.id] = true
+  try { const r = await $fetch<{ hidden: boolean }>(`/api/flags/${encodeURIComponent(`${p.ward}:${p.service}:${p.id}`)}/report`, { method: 'POST' }); toast.value = r.hidden ? 'Hidden pending review.' : 'Reported. Thanks.'; if (r.hidden) emit('refresh') } catch { reported.value[p.id] = false }
 }
 
 // share + permalink
@@ -243,19 +264,29 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
             <div class="badge"><span class="pill red">{{ tagLabel(p.tag) }}</span><span v-if="p.locality" class="pill">📍 {{ p.locality }}</span></div>
           </div>
           <div class="body">
+            <h4 v-if="p.title" class="ptitle">{{ p.title }}</h4>
             <p class="note">{{ p.note || 'Photo only' }}</p>
             <p class="mini">Reported {{ when(p.ts) }}<span v-if="p.lastConfirmed"> · last seen {{ daysSince(p.lastConfirmed) === 0 ? 'today' : daysSince(p.lastConfirmed) + ' days ago' }}</span></p>
 
             <div class="metoo">
               <div class="metoo-n"><span class="n">{{ p.confirms ?? 0 }}</span><span class="t">{{ (p.confirms ?? 0) === 1 ? 'person says' : 'people say' }} this is still here</span></div>
-              <button class="btn act" :disabled="confirmed[p.id]" @click="confirm(p)">{{ confirmed[p.id] ? '✓ Counted' : '👀 I have this problem too' }}</button>
+              <button class="btn act" :disabled="confirmed[p.id]" @click="confirmSeen(p)">{{ confirmed[p.id] ? '✓ Counted' : '👀 I have this problem too' }}</button>
             </div>
 
             <div class="secondary">
               <label class="btn sm"><input type="file" accept="image/*" capture="environment" hidden @change="onConfirmPhoto(p, $event)" />📸 Add photo</label>
               <button class="btn sm" @click="toggle(p)">💬 {{ p.comments ?? 0 }} repl{{ (p.comments ?? 0) === 1 ? 'y' : 'ies' }}</button>
-              <button class="btn sm" @click="shareAsk(p)">Ask neighbours</button>
+              <button class="btn sm" @click="shareOpen[p.id] = !shareOpen[p.id]">Share ▾</button>
               <button class="btn sm primary" @click="emitReceipt(p.service)">🧾 Share card</button>
+              <button class="btn sm ghost" :disabled="reported[p.id]" @click="report(p)">{{ reported[p.id] ? 'Reported' : 'Report' }}</button>
+            </div>
+            <div v-if="shareOpen[p.id]" class="sharemenu">
+              <a class="btn sm" :href="links(p).whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="btn sm" :href="links(p).x" target="_blank" rel="noopener">X</a>
+              <a class="btn sm" :href="links(p).facebook" target="_blank" rel="noopener">Facebook</a>
+              <button class="btn sm" @click="emitReceipt(p.service)">Instagram (card)</button>
+              <button class="btn sm" @click="copyLink(p)">Copy link</button>
+              <button class="btn sm" @click="shareAsk(p)">Ask neighbours</button>
             </div>
             <div v-if="(p.photos ?? []).length > 1" class="more-photos"><img v-for="(ph, i) in p.photos.slice(-4)" :key="i" :src="ph" alt="" /></div>
 
@@ -340,7 +371,11 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .linklike { text-decoration: underline; cursor: pointer; margin-left: 4px; }
 .badge { position: absolute; left: 10px; top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
 .body { padding: 14px; display: grid; gap: 10px; }
-.note { margin: 0; font-weight: 800; font-size: 17px; line-height: 1.3; }
+.ptitle { font-size: 22px; letter-spacing: -.04em; line-height: 1.05; margin: 0; }
+.note { margin: 0; font-weight: 700; font-size: 15px; line-height: 1.35; }
+.sharemenu { display: flex; flex-wrap: wrap; gap: 6px; background: var(--white); border: 2px solid var(--ink); border-radius: 12px; padding: 8px; }
+.sharemenu a { text-decoration: none; }
+.btn.ghost { background: transparent; box-shadow: none; border-color: #999; color: #555; }
 .metoo { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; background: var(--yellow); border: 3px solid var(--ink); border-radius: 14px; padding: 10px 12px; }
 .metoo-n { display: flex; align-items: baseline; gap: 8px; }
 .metoo .n { font-family: var(--display); font-size: 40px; letter-spacing: -.05em; line-height: 1; }

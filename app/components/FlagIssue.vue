@@ -12,6 +12,7 @@ watch(() => props.serviceKey, v => (service.value = v))
 const tag = ref('')
 const pickSvc = ref(false)
 const note = ref('')
+const title = ref('')
 const locality = ref('')
 const photo = ref<string | undefined>()
 const busy = ref(false)
@@ -39,8 +40,8 @@ async function submit() {
   if (!note.value.trim() && !photo.value) { error.value = 'Add a line or a photo.'; return }
   busy.value = true
   try {
-    await $fetch('/api/flags', { method: 'POST', body: { ward: props.wardSlug, service: service.value, note: note.value, tag: tag.value, photo: photo.value, locality: locality.value } })
-    done.value = true; note.value = ''; tag.value = ''; locality.value = ''; photo.value = undefined
+    await $fetch('/api/flags', { method: 'POST', body: { ward: props.wardSlug, service: service.value, note: note.value, tag: tag.value, photo: photo.value, locality: locality.value, title: title.value } })
+    done.value = true; note.value = ''; title.value = ''; tag.value = ''; locality.value = ''; photo.value = undefined
     emit('flagged')
     setTimeout(() => (done.value = false), 2500)
   } catch (e: any) {
@@ -59,7 +60,8 @@ async function submit() {
     <div class="tags">
       <button v-for="t in FLAG_TAGS" :key="t.key" type="button" class="pill" :class="{ red: tag === t.key }" :title="t.hint" @click="tag = t.key">{{ t.label }}</button>
     </div>
-    <textarea v-model="note" class="input" rows="2" maxlength="280" placeholder="Where exactly? e.g. Drain outside Marol Naka bus stop, open since June"></textarea>
+    <input v-model="title" class="input" maxlength="90" placeholder="Headline · e.g. Drain open outside Marol Naka bus stop since June" />
+    <textarea v-model="note" class="input" rows="2" maxlength="280" placeholder="What exactly do you see? When did it start?"></textarea>
     <div class="row">
       <input v-model="locality" class="input loc" maxlength="60" placeholder="Locality (optional) · Marol, Chakala…" />
       <label class="btn sm file">
