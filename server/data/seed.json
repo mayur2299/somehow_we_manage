@@ -1,5 +1,5 @@
 {
- "version": 4,
+ "version": 5,
  "flags": [
   {
    "id": "seed-01",
@@ -302,7 +302,7 @@
    "confirms": 17,
    "lastConfirmed": 1788800768148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -318,8 +318,8 @@
    "confirms": 8,
    "lastConfirmed": 1788282368148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "photoCredit": "Wikimedia Commons · CC BY 2.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/%22_Akram_Dry_Fish%22_shop_at_Sewri_in_Mumbai.jpg/960px-%22_Akram_Dry_Fish%22_shop_at_Sewri_in_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 4.0"
   },
   {
    "id": "gen-a-5",
@@ -334,8 +334,8 @@
    "confirms": 9,
    "lastConfirmed": 1788973568148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-a-6",
@@ -350,8 +350,8 @@
    "confirms": 0,
    "lastConfirmed": null,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Childrens_play_area_in_Priyadarsdhini_Park.jpg/960px-Childrens_play_area_in_Priyadarsdhini_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/1/18/002_%281%29_Maheshwari_udyan_well_maintained_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-a-7",
@@ -366,7 +366,7 @@
    "confirms": 4,
    "lastConfirmed": 1788973568148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Measuring_PM2.5_air_pollution_from_a_burning_roadside_garbage_dump_at_Bhiwandi_near_Mumbai.jpg/960px-Measuring_PM2.5_air_pollution_from_a_burning_roadside_garbage_dump_at_Bhiwandi_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -382,8 +382,8 @@
    "confirms": 5,
    "lastConfirmed": 1789146368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG/960px-Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC0"
   },
   {
    "id": "gen-a-9",
@@ -398,8 +398,8 @@
    "confirms": 6,
    "lastConfirmed": 1788627968148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/1/18/002_%281%29_Maheshwari_udyan_well_maintained_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Measuring_PM2.5_air_pollution_from_a_burning_roadside_garbage_dump_at_Bhiwandi_near_Mumbai.jpg/960px-Measuring_PM2.5_air_pollution_from_a_burning_roadside_garbage_dump_at_Bhiwandi_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-b-1",
@@ -430,8 +430,8 @@
    "confirms": 14,
    "lastConfirmed": 1788282368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Mumbai%27s_famous_rubbish_dump_outside_Byculla_station%28East%29._A_source_for_stray_cattle_food..JPG/960px-Mumbai%27s_famous_rubbish_dump_outside_Byculla_station%28East%29._A_source_for_stray_cattle_food..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC0"
   },
   {
    "id": "gen-b-3",
@@ -446,8 +446,8 @@
    "confirms": 3,
    "lastConfirmed": 1789059968148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-b-4",
@@ -478,7 +478,7 @@
    "confirms": 4,
    "lastConfirmed": 1788627968148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Potholes_on_road.jpg/960px-Potholes_on_road.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -510,7 +510,7 @@
    "confirms": 14,
    "lastConfirmed": 1789059968148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Potholes_on_road.jpg/960px-Potholes_on_road.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -526,7 +526,7 @@
    "confirms": 4,
    "lastConfirmed": 1788455168148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/1/18/002_%281%29_Maheshwari_udyan_well_maintained_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a6/B_013_Maheshwari_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -542,8 +542,8 @@
    "confirms": 3,
    "lastConfirmed": 1788887168148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG/960px-Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/India_-_Bombay_-_31_-_garbage_dump_%282799575380%29.jpg/960px-India_-_Bombay_-_31_-_garbage_dump_%282799575380%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-c-1",
@@ -558,8 +558,8 @@
    "confirms": 0,
    "lastConfirmed": null,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/1/18/002_%281%29_Maheshwari_udyan_well_maintained_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Bhakti_Park_Wadala.jpg/960px-Bhakti_Park_Wadala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · Public domain"
   },
   {
    "id": "gen-c-2",
@@ -622,8 +622,8 @@
    "confirms": 14,
    "lastConfirmed": 1788627968148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG/960px-Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Potholed_road_outside_Kolkata_Airport.jpg/960px-Potholed_road_outside_Kolkata_Airport.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-c-6",
@@ -638,7 +638,7 @@
    "confirms": 4,
    "lastConfirmed": 1789146368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Mahim_Creek_1.jpg/960px-Mahim_Creek_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -670,7 +670,7 @@
    "confirms": 5,
    "lastConfirmed": 1788887168148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Potholed_road_outside_Kolkata_Airport.jpg/960px-Potholed_road_outside_Kolkata_Airport.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -734,7 +734,7 @@
    "confirms": 1,
    "lastConfirmed": 1788714368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Mahim_Creek_2.jpg/960px-Mahim_Creek_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -750,8 +750,8 @@
    "confirms": 8,
    "lastConfirmed": 1788973568148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/58/Mithi_river.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-d-5",
@@ -862,7 +862,7 @@
    "confirms": 8,
    "lastConfirmed": 1788800768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Garbage_heap_in_Batla_House%2C_New_Delhi%2C_18_June_2024.jpg/960px-Garbage_heap_in_Batla_House%2C_New_Delhi%2C_18_June_2024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -942,7 +942,7 @@
    "confirms": 1,
    "lastConfirmed": 1788887168148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/River_Mithi_1.jpg/960px-River_Mithi_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -958,7 +958,7 @@
    "confirms": 9,
    "lastConfirmed": 1788282368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Roads_deformed_T_munnekollala_Bengaluru_2.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1038,8 +1038,8 @@
    "confirms": 11,
    "lastConfirmed": 1788627968148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/1/18/002_%281%29_Maheshwari_udyan_well_maintained_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Five_Garden_Wadala.jpg/960px-Five_Garden_Wadala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · Public domain"
   },
   {
    "id": "gen-f-north-5",
@@ -1086,7 +1086,7 @@
    "confirms": 11,
    "lastConfirmed": 1788627968148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Potholes_on_road.jpg/960px-Potholes_on_road.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1150,7 +1150,7 @@
    "confirms": 3,
    "lastConfirmed": 1788541568148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Bandra_Shoe_Market.jpg/960px-Bandra_Shoe_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -1166,8 +1166,8 @@
    "confirms": 6,
    "lastConfirmed": 1788800768148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/River_Mithi_2.jpg/960px-River_Mithi_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-f-south-4",
@@ -1182,7 +1182,7 @@
    "confirms": 2,
    "lastConfirmed": 1788541568148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Roads_in_Bihar_have_potholes.jpg/960px-Roads_in_Bihar_have_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1230,7 +1230,7 @@
    "confirms": 5,
    "lastConfirmed": 1789146368148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Volunteers_fixing_potholes.jpg/960px-Volunteers_fixing_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1278,7 +1278,7 @@
    "confirms": 9,
    "lastConfirmed": 1788887168148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Roads_deformed_T_munnekollala_Bengaluru_2.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1310,8 +1310,8 @@
    "confirms": 0,
    "lastConfirmed": null,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "photoCredit": "Wikimedia Commons · CC BY 2.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Bara_Bazaar%2C_Mumbai.jpg/960px-Bara_Bazaar%2C_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 4.0"
   },
   {
    "id": "gen-g-north-4",
@@ -1342,8 +1342,8 @@
    "confirms": 1,
    "lastConfirmed": 1788973568148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Childrens_play_area_in_Priyadarsdhini_Park.jpg/960px-Childrens_play_area_in_Priyadarsdhini_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/Mangrove_Garden_Wadala.JPG/960px-Mangrove_Garden_Wadala.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · Public domain"
   },
   {
    "id": "gen-g-north-6",
@@ -1358,7 +1358,7 @@
    "confirms": 4,
    "lastConfirmed": 1788455168148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/River_Mithi_3.jpg/960px-River_Mithi_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -1374,7 +1374,7 @@
    "confirms": 9,
    "lastConfirmed": 1788800768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Mithi_river_at_CST_road.JPG/960px-Mithi_river_at_CST_road.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1390,8 +1390,8 @@
    "confirms": 8,
    "lastConfirmed": 1789059968148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Altamount_Road_%2C_Mumbai.jpg/960px-Altamount_Road_%2C_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC0"
   },
   {
    "id": "gen-g-north-9",
@@ -1454,8 +1454,8 @@
    "confirms": 6,
    "lastConfirmed": 1788627968148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/8/81/Coming_down_the_bandra_flyover_to_hit_SV_road.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-g-south-4",
@@ -1486,7 +1486,7 @@
    "confirms": 6,
    "lastConfirmed": 1789146368148,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Bazaarchitecture_-_Crawford_Market_%284070461121%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -1502,8 +1502,8 @@
    "confirms": 9,
    "lastConfirmed": 1789059968148,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/1/18/002_%281%29_Maheshwari_udyan_well_maintained_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Rocket_Garden%2C_Wadala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photoCredit": "Wikimedia Commons · Public domain"
   },
   {
    "id": "gen-g-south-7",
@@ -1534,7 +1534,7 @@
    "confirms": 11,
    "lastConfirmed": 1789059968148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/MUMBAI_ROAD_%28NH-16%29%2C_ULUBERIA.jpg/960px-MUMBAI_ROAD_%28NH-16%29%2C_ULUBERIA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1550,7 +1550,7 @@
    "confirms": 17,
    "lastConfirmed": 1788282368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1582,8 +1582,8 @@
    "confirms": 2,
    "lastConfirmed": 1788800768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Mumbai%27s_famous_rubbish_dump_outside_Byculla_station%28East%29._A_source_for_stray_cattle_food..JPG/960px-Mumbai%27s_famous_rubbish_dump_outside_Byculla_station%28East%29._A_source_for_stray_cattle_food..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC0"
   },
   {
    "id": "gen-h-east-3",
@@ -1598,8 +1598,8 @@
    "confirms": 1,
    "lastConfirmed": 1788800768148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/This_road_runs_parallel_to_the_main_roadways_of_the_city%2C_and_still_carries_heavy_cargo_traffic_from_the_docks_to_the_main_highways_that_connect_the_city_to_the_hinterland._%283994259825%29.jpg/960px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-h-east-4",
@@ -1630,7 +1630,7 @@
    "confirms": 5,
    "lastConfirmed": 1788627968148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Roads_in_Bihar_have_potholes.jpg/960px-Roads_in_Bihar_have_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1646,7 +1646,7 @@
    "confirms": 4,
    "lastConfirmed": 1788541568148,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/3/38/Bazaarchitecture_-_Crawford_Market_%284070461519%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -1662,8 +1662,8 @@
    "confirms": 8,
    "lastConfirmed": 1788714368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/India_-_Chennai_-_Monsoon_-_06_%283059058000%29.jpg/960px-India_-_Chennai_-_Monsoon_-_06_%283059058000%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-h-east-8",
@@ -1694,8 +1694,8 @@
    "confirms": 9,
    "lastConfirmed": 1788800768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Monsoon_%2836877269620%29.jpg/960px-Monsoon_%2836877269620%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-h-west-1",
@@ -1742,7 +1742,7 @@
    "confirms": 11,
    "lastConfirmed": 1788887168148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Actually_a_town%27s_drain_in_Gokarna_-_panoramio.jpg/960px-Actually_a_town%27s_drain_in_Gokarna_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -1774,7 +1774,7 @@
    "confirms": 11,
    "lastConfirmed": 1788800768148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Potholes_on_road.jpg/960px-Potholes_on_road.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Employee_Volunteer_CSR_PotholeRaja.jpg/960px-Employee_Volunteer_CSR_PotholeRaja.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1790,7 +1790,7 @@
    "confirms": 9,
    "lastConfirmed": 1788887168148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Volunteers_fixing_potholes.jpg/960px-Volunteers_fixing_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1822,7 +1822,7 @@
    "confirms": 14,
    "lastConfirmed": 1788368768148,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Bazaarchitecture_-_Crawford_Market_%284070461925%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -1838,8 +1838,8 @@
    "confirms": 6,
    "lastConfirmed": 1788455168148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Sturdy_Mahindra_Jeeps_are_the_only_vehicles_that_can_stand_up_to_those_potholed_roads%21.jpg/960px-Sturdy_Mahindra_Jeeps_are_the_only_vehicles_that_can_stand_up_to_those_potholed_roads%21.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-k-west-1",
@@ -1854,8 +1854,8 @@
    "confirms": 17,
    "lastConfirmed": 1789146368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-k-west-2",
@@ -1886,7 +1886,7 @@
    "confirms": 2,
    "lastConfirmed": 1788714368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1918,7 +1918,7 @@
    "confirms": 3,
    "lastConfirmed": 1788368768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Mithi_river_at_CST_road.JPG/960px-Mithi_river_at_CST_road.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -1934,7 +1934,7 @@
    "confirms": 4,
    "lastConfirmed": 1788973568148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Bazaarchitecture_-_Crawford_Market_%284070462103%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -2062,7 +2062,7 @@
    "confirms": 4,
    "lastConfirmed": 1789059968148,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/1/18/002_%281%29_Maheshwari_udyan_well_maintained_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a6/B_013_Maheshwari_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -2142,7 +2142,7 @@
    "confirms": 8,
    "lastConfirmed": 1788800768148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Bazaarchitecture_-_Crawford_Market_%284070462311%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -2158,7 +2158,7 @@
    "confirms": 14,
    "lastConfirmed": 1788627968148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Measuring_PM2.5_air_pollution_from_a_burning_roadside_garbage_dump_at_Bhiwandi_near_Mumbai.jpg/960px-Measuring_PM2.5_air_pollution_from_a_burning_roadside_garbage_dump_at_Bhiwandi_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -2222,8 +2222,8 @@
    "confirms": 4,
    "lastConfirmed": 1788455168148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Drain_yet_to_build_%282%29.jpg/960px-Drain_yet_to_build_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-m-east-7",
@@ -2270,7 +2270,7 @@
    "confirms": 3,
    "lastConfirmed": 1788541568148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -2286,8 +2286,8 @@
    "confirms": 14,
    "lastConfirmed": 1788887168148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Altamount_Road_%2C_Mumbai.jpg/960px-Altamount_Road_%2C_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC0"
   },
   {
    "id": "gen-m-west-2",
@@ -2302,8 +2302,8 @@
    "confirms": 5,
    "lastConfirmed": 1788282368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-m-west-3",
@@ -2350,7 +2350,7 @@
    "confirms": 9,
    "lastConfirmed": 1788455168148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Potholes_on_road.jpg/960px-Potholes_on_road.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -2366,8 +2366,8 @@
    "confirms": 11,
    "lastConfirmed": 1788714368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG/960px-Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/India_-_Bombay_-_31_-_garbage_dump_%282799575380%29.jpg/960px-India_-_Bombay_-_31_-_garbage_dump_%282799575380%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-m-west-7",
@@ -2382,8 +2382,8 @@
    "confirms": 0,
    "lastConfirmed": null,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Childrens_play_area_in_Priyadarsdhini_Park.jpg/960px-Childrens_play_area_in_Priyadarsdhini_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Bhakti_Park_Wadala.jpg/960px-Bhakti_Park_Wadala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · Public domain"
   },
   {
    "id": "gen-m-west-8",
@@ -2398,8 +2398,8 @@
    "confirms": 4,
    "lastConfirmed": 1788714368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG/960px-Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC0"
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/8/81/Coming_down_the_bandra_flyover_to_hit_SV_road.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-m-west-9",
@@ -2414,7 +2414,7 @@
    "confirms": 8,
    "lastConfirmed": 1788368768148,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/d/de/Bazaarchitecture_-_Crawford_Market_%284070462625%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -2430,8 +2430,8 @@
    "confirms": 9,
    "lastConfirmed": 1788541568148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio_%281%29.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-n-2",
@@ -2462,7 +2462,7 @@
    "confirms": 17,
    "lastConfirmed": 1788714368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio_%282%29.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -2478,8 +2478,8 @@
    "confirms": 1,
    "lastConfirmed": 1789059968148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG/960px-Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Garbage_heap_in_Batla_House%2C_New_Delhi%2C_18_June_2024.jpg/960px-Garbage_heap_in_Batla_House%2C_New_Delhi%2C_18_June_2024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-n-5",
@@ -2494,7 +2494,7 @@
    "confirms": 17,
    "lastConfirmed": 1788887168148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/MUMBAI_ROAD_%28NH-16%29%2C_ULUBERIA.jpg/960px-MUMBAI_ROAD_%28NH-16%29%2C_ULUBERIA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -2558,7 +2558,7 @@
    "confirms": 4,
    "lastConfirmed": 1788800768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Potholed_road_outside_Kolkata_Airport.jpg/960px-Potholed_road_outside_Kolkata_Airport.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -2574,7 +2574,7 @@
    "confirms": 0,
    "lastConfirmed": null,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Potholes_on_road.jpg/960px-Potholes_on_road.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -2590,8 +2590,8 @@
    "confirms": 14,
    "lastConfirmed": 1788887168148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG/960px-Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC0"
   },
   {
    "id": "gen-p-north-3",
@@ -2606,8 +2606,8 @@
    "confirms": 6,
    "lastConfirmed": 1788887168148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/This_road_runs_parallel_to_the_main_roadways_of_the_city%2C_and_still_carries_heavy_cargo_traffic_from_the_docks_to_the_main_highways_that_connect_the_city_to_the_hinterland._%283994259825%29.jpg/960px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-p-north-4",
@@ -2622,8 +2622,8 @@
    "confirms": 4,
    "lastConfirmed": 1789146368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-p-north-5",
@@ -2654,8 +2654,8 @@
    "confirms": 1,
    "lastConfirmed": 1789146368148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Mahim_Creek_1.jpg/960px-Mahim_Creek_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-p-north-7",
@@ -2670,7 +2670,7 @@
    "confirms": 11,
    "lastConfirmed": 1789059968148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Bazaarchitecture_-_Crawford_Market_%284070463357%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -2686,8 +2686,8 @@
    "confirms": 4,
    "lastConfirmed": 1788973568148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Mahim_Creek_2.jpg/960px-Mahim_Creek_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-p-north-9",
@@ -2718,8 +2718,8 @@
    "confirms": 4,
    "lastConfirmed": 1788973568148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Childrens_play_area_in_Priyadarsdhini_Park.jpg/960px-Childrens_play_area_in_Priyadarsdhini_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Five_Garden_Wadala.jpg/960px-Five_Garden_Wadala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · Public domain"
   },
   {
    "id": "gen-p-south-2",
@@ -2734,7 +2734,7 @@
    "confirms": 11,
    "lastConfirmed": 1788800768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Childrens_play_area_in_Priyadarsdhini_Park.jpg/960px-Childrens_play_area_in_Priyadarsdhini_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Employee_Volunteer_CSR_PotholeRaja.jpg/960px-Employee_Volunteer_CSR_PotholeRaja.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -2766,8 +2766,8 @@
    "confirms": 11,
    "lastConfirmed": 1788887168148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/58/Mithi_river.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-p-south-5",
@@ -2798,8 +2798,8 @@
    "confirms": 5,
    "lastConfirmed": 1788973568148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Sturdy_Mahindra_Jeeps_are_the_only_vehicles_that_can_stand_up_to_those_potholed_roads%21.jpg/960px-Sturdy_Mahindra_Jeeps_are_the_only_vehicles_that_can_stand_up_to_those_potholed_roads%21.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-p-south-7",
@@ -2814,7 +2814,7 @@
    "confirms": 1,
    "lastConfirmed": 1788627968148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Roads_deformed_T_munnekollala_Bengaluru_2.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -2846,7 +2846,7 @@
    "confirms": 4,
    "lastConfirmed": 1789146368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG/960px-Cattle_feeding_at_rubbish_dump_outside_Byculla_station%28east%29..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Mumbai%27s_famous_rubbish_dump_outside_Byculla_station%28East%29._A_source_for_stray_cattle_food..JPG/960px-Mumbai%27s_famous_rubbish_dump_outside_Byculla_station%28East%29._A_source_for_stray_cattle_food..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC0"
   },
   {
@@ -2910,8 +2910,8 @@
    "confirms": 11,
    "lastConfirmed": 1788541568148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/River_Mithi_1.jpg/960px-River_Mithi_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-r-central-5",
@@ -2926,8 +2926,8 @@
    "confirms": 4,
    "lastConfirmed": 1788455168148,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "photoCredit": "Wikimedia Commons · CC BY 2.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-r-central-6",
@@ -2942,7 +2942,7 @@
    "confirms": 3,
    "lastConfirmed": 1788368768148,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/2/24/Bazaarchitecture_-_Crawford_Market_%284070464281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -2974,7 +2974,7 @@
    "confirms": 2,
    "lastConfirmed": 1788714368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/River_Mithi_2.jpg/960px-River_Mithi_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -2990,7 +2990,7 @@
    "confirms": 0,
    "lastConfirmed": null,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -3006,7 +3006,7 @@
    "confirms": 5,
    "lastConfirmed": 1788887168148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/River_Mithi_3.jpg/960px-River_Mithi_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -3022,8 +3022,8 @@
    "confirms": 9,
    "lastConfirmed": 1788282368148,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/1/18/002_%281%29_Maheshwari_udyan_well_maintained_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/Mangrove_Garden_Wadala.JPG/960px-Mangrove_Garden_Wadala.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · Public domain"
   },
   {
    "id": "gen-r-north-3",
@@ -3038,7 +3038,7 @@
    "confirms": 14,
    "lastConfirmed": 1788282368148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Mahim_Creek_1.jpg/960px-Mahim_Creek_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -3086,8 +3086,8 @@
    "confirms": 5,
    "lastConfirmed": 1788627968148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/India_-_Chennai_-_Monsoon_-_06_%283059058000%29.jpg/960px-India_-_Chennai_-_Monsoon_-_06_%283059058000%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-r-north-7",
@@ -3102,7 +3102,7 @@
    "confirms": 14,
    "lastConfirmed": 1788800768148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Bazaarchitecture_-_Crawford_Market_%284070464465%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -3134,8 +3134,8 @@
    "confirms": 9,
    "lastConfirmed": 1788887168148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/India_-_Bombay_-_31_-_garbage_dump_%282799575380%29.jpg/960px-India_-_Bombay_-_31_-_garbage_dump_%282799575380%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-r-south-1",
@@ -3166,8 +3166,8 @@
    "confirms": 6,
    "lastConfirmed": 1788368768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Mahim_Creek_2.jpg/960px-Mahim_Creek_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-r-south-3",
@@ -3182,8 +3182,8 @@
    "confirms": 9,
    "lastConfirmed": 1788627968148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Monsoon_%2836877269620%29.jpg/960px-Monsoon_%2836877269620%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
    "id": "gen-r-south-4",
@@ -3198,8 +3198,8 @@
    "confirms": 9,
    "lastConfirmed": 1788368768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Childrens_play_area_in_Priyadarsdhini_Park.jpg/960px-Childrens_play_area_in_Priyadarsdhini_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Rocket_Garden%2C_Wadala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photoCredit": "Wikimedia Commons · Public domain"
   },
   {
    "id": "gen-r-south-5",
@@ -3214,7 +3214,7 @@
    "confirms": 9,
    "lastConfirmed": 1788627968148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Roads_in_Bihar_have_potholes.jpg/960px-Roads_in_Bihar_have_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -3230,7 +3230,7 @@
    "confirms": 3,
    "lastConfirmed": 1788368768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Actually_a_town%27s_drain_in_Gokarna_-_panoramio.jpg/960px-Actually_a_town%27s_drain_in_Gokarna_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
@@ -3246,8 +3246,8 @@
    "confirms": 4,
    "lastConfirmed": 1789059968148,
    "comments": 0,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "photoCredit": "Wikimedia Commons · CC BY 2.0"
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/58/Mithi_river.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-r-south-8",
@@ -3278,7 +3278,7 @@
    "confirms": 6,
    "lastConfirmed": 1788455168148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Bazaarchitecture_-_Crawford_Market_%284070464721%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -3294,8 +3294,8 @@
    "confirms": 11,
    "lastConfirmed": 1788368768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Childrens_play_area_in_Priyadarsdhini_Park.jpg/960px-Childrens_play_area_in_Priyadarsdhini_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/River_Mithi_1.jpg/960px-River_Mithi_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-s-2",
@@ -3310,7 +3310,7 @@
    "confirms": 5,
    "lastConfirmed": 1788541568148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/5/57/Andheri_Market.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Bazaarchitecture_-_Crawford_Market_%284070465323%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
    "photoCredit": "Wikimedia Commons · CC BY 2.0"
   },
   {
@@ -3326,8 +3326,8 @@
    "confirms": 1,
    "lastConfirmed": 1788282368148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/River_Mithi_2.jpg/960px-River_Mithi_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-s-4",
@@ -3342,7 +3342,7 @@
    "confirms": 5,
    "lastConfirmed": 1788368768148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Volunteers_fixing_potholes.jpg/960px-Volunteers_fixing_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -3358,8 +3358,8 @@
    "confirms": 6,
    "lastConfirmed": 1788541568148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mumbai_monsoon.jpg/960px-Mumbai_monsoon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Drain_yet_to_build_%281%29.jpg/960px-Drain_yet_to_build_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-s-6",
@@ -3390,7 +3390,7 @@
    "confirms": 0,
    "lastConfirmed": null,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Mithi_river_at_CST_road.JPG/960px-Mithi_river_at_CST_road.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -3406,8 +3406,8 @@
    "confirms": 17,
    "lastConfirmed": 1788627968148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg/960px-RAINY_SHOWER_ON_STORM_WATER_DRAIN_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Drain_yet_to_build_%282%29.jpg/960px-Drain_yet_to_build_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
    "id": "gen-s-9",
@@ -3422,7 +3422,7 @@
    "confirms": 2,
    "lastConfirmed": 1788282368148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg/960px-A_burning_roadside_garbage_dump_at_Panvel_Naka_near_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Garbage_heap_in_Batla_House%2C_New_Delhi%2C_18_June_2024.jpg/960px-Garbage_heap_in_Batla_House%2C_New_Delhi%2C_18_June_2024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
   },
   {
@@ -3502,8 +3502,8 @@
    "confirms": 17,
    "lastConfirmed": 1788887168148,
    "comments": 1,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Childrens_play_area_in_Priyadarsdhini_Park.jpg/960px-Childrens_play_area_in_Priyadarsdhini_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a6/B_013_Maheshwari_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   },
   {
    "id": "gen-t-6",
@@ -3534,8 +3534,8 @@
    "confirms": 5,
    "lastConfirmed": 1789059968148,
    "comments": 0,
-   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-   "photoCredit": "Wikimedia Commons · CC BY-SA 4.0"
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Altamount_Road_%2C_Mumbai.jpg/960px-Altamount_Road_%2C_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "photoCredit": "Wikimedia Commons · CC0"
   },
   {
    "id": "gen-t-8",
@@ -3566,7 +3566,7 @@
    "confirms": 14,
    "lastConfirmed": 1788368768148,
    "comments": 1,
-   "photo": "https://upload.wikimedia.org/wikipedia/commons/1/18/002_%281%29_Maheshwari_udyan_well_maintained_udyan.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/River_Mithi_3.jpg/960px-River_Mithi_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
    "photoCredit": "Wikimedia Commons · CC BY-SA 3.0"
   }
  ],

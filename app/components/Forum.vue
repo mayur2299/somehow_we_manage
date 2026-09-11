@@ -234,6 +234,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
   <div class="chat" :class="{ full }">
     <!-- group header -->
     <header class="chead">
+      <NuxtLink v-if="full" class="back" to="/" aria-label="Back to ward">←</NuxtLink>
       <div class="avatar">📍</div>
       <div class="cmeta">
         <div class="cname">{{ wardCode }} · {{ wardName }} residents</div>
@@ -356,6 +357,8 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .chat { max-width: 760px; margin: 0 auto; width: 100%; border: 2px solid var(--ink); border-radius: 24px; background: var(--surface); box-shadow: 4px 4px 0 var(--ink); display: grid; grid-template-rows: auto auto auto 1fr auto; overflow: hidden; height: min(86vh, 980px); }
 .chead { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--ink); color: var(--white); }
 .avatar { display: grid; place-items: center; font-size: 26px; line-height: 1; }
+.back { color: var(--white); text-decoration: none; font-weight: 900; font-size: 22px; line-height: 1; padding: 6px 10px; border: 2px solid var(--white); border-radius: 10px; }
+.back:hover { background: var(--white); color: var(--ink); }
 .cmeta { flex: 1; min-width: 0; }
 .cname { font-weight: 900; font-size: 16px; }
 .csub { font-size: 12px; font-weight: 700; opacity: .8; }
@@ -421,5 +424,5 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .chat.full .feed { padding: 18px max(18px, 4%) 24px; }
 .chat.full .msg:not(.system) { max-width: 860px; }
 .chat.full .msg.system { max-width: 720px; }
-@media (max-width: 600px) { .chat { height: 88vh; border-radius: 18px; box-shadow: 6px 6px 0 var(--ink); } .msg { max-width: 100%; } .replies { margin-left: 16px; } }
+@media (max-width: 600px) { .chat.full { height: calc(100vh - var(--navh, 64px) - 172px); margin: 8px auto; width: calc(100% - 16px); } .chat { height: 88vh; border-radius: 18px; box-shadow: 6px 6px 0 var(--ink); } .msg { max-width: 100%; } .replies { margin-left: 16px; } }
 </style>
