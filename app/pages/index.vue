@@ -344,10 +344,10 @@ tr.sep th { text-align: left; color: #666; font-weight: 600; padding-top: 0.8rem
 
 .admin { background: #fff4e6; border-left: 4px solid #e8590c; border-radius: 8px; padding: 0.7rem 0.9rem; font-size: 0.9rem; line-height: 1.45; margin-bottom: 0.9rem; }
 .corps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.45rem; }
-.corp { display: flex; align-items: center; gap: 0.5rem; border: 1px solid #e3e3e3; border-radius: 10px; padding: 0.45rem 0.6rem; font-size: 0.85rem; background: #fafafa; }
+.corp { display: flex; align-items: flex-start; gap: 0.5rem; border: 1px solid #e3e3e3; border-radius: 10px; padding: 0.45rem 0.6rem; font-size: 0.85rem; background: #fafafa; }
 .corp.kn { border-style: dashed; }
 .wn { font-weight: 800; color: #666; min-width: 1.6rem; }
-.nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nm { flex: 1; min-width: 0; line-height: 1.25; }
 .pt { font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 999px; background: #eee; color: #444; white-space: nowrap; }
 .p-bjp { background: #ffe8cc; color: #b35c00; } .p-ubt { background: #fff3bf; color: #8a6d00; } .p-ss { background: #ffe3e3; color: #a61e1e; } .p-inc { background: #d3f9d8; color: #1b6e2e; } .p-mns { background: #e5dbff; color: #5f3dc4; }
 .offs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.9rem; }
