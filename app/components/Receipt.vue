@@ -148,7 +148,7 @@ function blob(): Promise<Blob> { return new Promise(res => canvas.value!.toBlob(
 function filename() { return `receipt-${props.wardCode.replace('/', '')}-${props.service.key}${props.post ? '-' + props.post.id : ''}-${fmt.value}.png` }
 async function download() {
   const b = await blob(); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = filename(); a.click(); URL.revokeObjectURL(a.href)
-  status.value = 'Saved. Post it.'
+  status.value = 'Card saved. Post it.'
 }
 async function share() {
   const b = await blob(); const file = new File([b], filename(), { type: 'image/png' })
@@ -166,8 +166,8 @@ async function copyCaption() { try { await navigator.clipboard.writeText(caption
     </div>
     <div class="stage" :class="fmt"><canvas ref="canvas" :aria-label="caption"></canvas></div>
     <div class="acts">
-      <button class="btn primary" @click="share">Share receipt</button>
-      <button class="btn" @click="download">Download PNG</button>
+      <button class="btn primary" @click="share">Make this public</button>
+      <button class="btn" @click="download">Download card</button>
       <button class="btn" @click="copyCaption">Copy caption</button>
     </div>
     <p class="status" aria-live="polite">{{ status }}</p>

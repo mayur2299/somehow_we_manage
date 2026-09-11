@@ -84,7 +84,7 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
           <div class="actbar">
             <span class="label">Do something now</span>
             <NuxtLink class="btn flag" :to="{ path: '/forum', query: { post: '1' } }">🚩 Report a problem</NuxtLink>
-            <button class="btn primary" @click="openReceipt()">🧾 Share the receipt</button>
+            <button class="btn primary" @click="openReceipt()">🧾 Make this public</button>
             <button class="btn act" @click="openRti()">📄 Ask the BMC</button>
           </div>
         </section>
@@ -115,7 +115,7 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
 <section class="close">
         <h2>You paid.<br>You should know.</h2>
         <p>The BMC is called the richest municipal corporation in the country. Every Mumbai resident pays for their ward. This makes the money visible, and turns "where did it go?" into a question the BMC has to answer.</p>
-        <div class="cta-row center"><button class="btn primary" @click="openReceipt()">🧾 Share the receipt</button><button class="btn" @click="openRti()">Ask the BMC</button><button class="btn act" @click="navigateTo('/petitions')">✍️ Sign a petition</button></div>
+        <div class="cta-row center"><button class="btn primary" @click="openReceipt()">🧾 Make this public</button><button class="btn" @click="openRti()">Ask the BMC</button><button class="btn act" @click="navigateTo('/petitions')">✍️ Sign a petition</button></div>
       </section>
 
       <section v-if="ward.todo?.length" class="gaps">

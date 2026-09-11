@@ -10,7 +10,7 @@ const siteUrl = computed(() => (typeof location !== 'undefined' ? location.origi
     <div v-if="receiptOpen" class="modal" @click.self="receiptOpen = false">
       <div class="modal-card">
         <div class="modal-top">
-          <div><span class="pill pink">The receipt</span><h3>{{ receiptPost ? 'Your complaint, as a card.' : 'Savage. Sourced. Shareable.' }}</h3></div>
+          <div><span class="pill pink">Accountability card</span><h3>{{ receiptPost ? 'Make this complaint public.' : 'Sourced. Shareable. Hard to argue with.' }}</h3></div>
           <button class="x" @click="receiptOpen = false" aria-label="Close">✕</button>
         </div>
         <div class="svc-tabs"><button v-for="s in ward.services" :key="s.key" class="pill" :class="{ ink: service === s.key }" @click="service = s.key">{{ s.icon }} {{ s.label }}</button></div>

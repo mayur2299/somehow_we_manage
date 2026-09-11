@@ -94,7 +94,7 @@ useHead({ title: computed(() => `Money · ${ward.value.code} ${ward.value.name}`
               <div class="svc-actions">
                 <NuxtLink class="btn flag grow" :to="{ path: '/forum', query: { service: s.key } }">💬 Go to forum →</NuxtLink>
                 <button class="btn sm act" @click="pickService(s.key, 'rti')">Ask BMC</button>
-                <button class="btn sm" @click="openReceipt(s.key)">Receipt</button>
+                <button class="btn sm" @click="openReceipt(s.key)">Make public</button>
               </div>
             </div>
           </article>

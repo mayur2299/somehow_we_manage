@@ -218,7 +218,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
         <div class="cname">{{ wardCode }} · {{ wardName }} residents</div>
         <div class="csub">{{ posts.length }} complaints · {{ totalMeToo }} "me too" · no login, no names</div>
       </div>
-      <button class="btn sm primary" @click="emitReceipt(service === 'all' ? 'swd' : service)">🧾 Share card</button>
+      <button class="btn sm primary" @click="emitReceipt(service === 'all' ? 'swd' : service)">🧾 Make public</button>
     </header>
 
     <!-- channels -->
@@ -270,7 +270,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
                 <a class="chip" :href="links(p).whatsapp" target="_blank" rel="noopener">WhatsApp</a>
                 <a class="chip" :href="links(p).x" target="_blank" rel="noopener">X</a>
                 <a class="chip" :href="links(p).facebook" target="_blank" rel="noopener">Facebook</a>
-                <button class="chip act" @click="emitReceipt(p.service, p)">🧾 Card of this post</button>
+                <button class="chip act" @click="emitReceipt(p.service, p)">🧾 Make public of this post</button>
                 <button class="chip" @click="copyLink(p)">Copy link</button>
                 <button class="chip" @click="shareAsk(p)">Ask neighbours</button>
               </div>
