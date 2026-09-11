@@ -28,6 +28,29 @@ const threeYearUtil = Math.round((threeYearActual / threeYearBE) * 100)
 const perResidentActual = Math.round((threeYearActual * 1e7) / 3 / ward.population2025)
 const propertyTaxTotal = ward.propertyTax.actual.reduce((a, b) => a + b, 0)
 const revenueActualTotal = ward.revenue.ward.actual.slice(0, 3).reduce((a, b) => a! + b!, 0)!
+
+// Every figure from the report, year by year
+type Row = { label: string; be: (number | null)[]; actual: (number | null)[]; perCapita?: number; extra?: string }
+const allRows: Row[] = [
+  { label: 'Total ward budget', ...ward.total.ward },
+  { label: 'Day-to-day running (revenue)', ...ward.revenue.ward },
+  { label: 'New works (capital)', ...ward.capital.ward },
+  ...ward.services.map(s => ({ label: `${s.icon} ${s.label}`, be: s.be, actual: s.actual, perCapita: s.perCapita, extra: s.fact })),
+  { label: 'Slum improvement (allotted only)', be: ward.slumImprovement.be, actual: [null, null, null, null, null] },
+  { label: 'Property tax collected here', be: [null, null, null, null, null], actual: [...ward.propertyTax.actual, null, null], perCapita: ward.propertyTax.perCapita },
+]
+const mumbaiRows: Row[] = [
+  { label: 'Mumbai total, all wards', ...ward.total.mumbai },
+  { label: 'Mumbai new works (capital)', ...ward.capital.mumbai },
+]
+const fmt = (n: number | null) => n == null ? '—' : n.toLocaleString('en-IN', { maximumFractionDigits: 1 })
+
+const panel = ref<'none' | 'flag' | 'rti'>('none')
+const wardSlug = 'k-east'
+const { data: flags, refresh: refreshFlags } = await useFetch(`/api/flags?ward=${wardSlug}`, { default: () => ({ counts: {}, recent: [] as any[] }) })
+const svcFlags = computed(() => (flags.value?.recent ?? []).filter((f: any) => f.service === selected.value))
+watch(selected, () => (panel.value = 'none'))
+const ctx = ward.cityContext
 </script>
 
 <template>
@@ -38,6 +61,10 @@ const revenueActualTotal = ward.revenue.ward.actual.slice(0, 3).reduce((a, b) =>
       <p class="areas">{{ ward.areas }}</p>
       <p class="pop">{{ ward.population2025.toLocaleString('en-IN') }} residents · {{ Math.round(ward.slumShare * 100) }}% live in slums</p>
     </header>
+
+    <section class="hook">
+      <p>Across Mumbai, the share of the BMC budget that reaches wards fell from <strong>{{ ctx.wardShare2021 }}%</strong> to <strong>{{ ctx.wardShare2025 }}%</strong> between 2021-22 and 2025-26, while the total budget nearly doubled from ₹{{ ctx.bmcBudget2021.toLocaleString('en-IN') }} cr to ₹{{ ctx.bmcBudget2025.toLocaleString('en-IN') }} cr. This page follows one ward's share.</p>
+    </section>
 
     <section class="headline">
       <p class="big">
@@ -87,6 +114,7 @@ const revenueActualTotal = ward.revenue.ward.actual.slice(0, 3).reduce((a, b) =>
       <div class="chips">
         <button v-for="s in ward.services" :key="s.key" class="chip" :class="[{ on: s.key === selected }, utilClass(Math.round(s.avgUtil * 100))]" @click="selected = s.key">
           <span class="ic">{{ s.icon }}</span> {{ s.label }} <b>{{ Math.round(s.avgUtil * 100) }}%</b>
+          <span v-if="flags?.counts?.[s.key]" class="cnt" :title="flags.counts[s.key] + ' resident flags'">🚩{{ flags.counts[s.key] }}</span>
         </button>
       </div>
 
@@ -109,7 +137,75 @@ const revenueActualTotal = ward.revenue.ward.actual.slice(0, 3).reduce((a, b) =>
           </div>
         </div>
         <p class="meta">{{ rs(svc.perCapita) }} per resident per year<span v-if="svc.fact"> · {{ svc.fact }}</span></p>
+
+        <div class="actions">
+          <button class="act" :class="{ on: panel === 'flag' }" @click="panel = panel === 'flag' ? 'none' : 'flag'">🚩 I don't see this on the ground</button>
+          <button class="act" :class="{ on: panel === 'rti' }" @click="panel = panel === 'rti' ? 'none' : 'rti'">📄 Ask the BMC (RTI)</button>
+        </div>
+        <FlagIssue v-if="panel === 'flag'" :ward-slug="wardSlug" :service-key="svc.key" :service-label="svc.label" @flagged="refreshFlags()" />
+        <RtiDraft v-if="panel === 'rti'" :ward-code="ward.code" :ward-name="ward.name" :service="svc" :years="ward.years" />
+
+        <div v-if="svcFlags.length" class="flags">
+          <p class="flags-h">{{ svcFlags.length }} resident {{ svcFlags.length === 1 ? 'flag' : 'flags' }} on {{ svc.label.toLowerCase() }}</p>
+          <div v-for="f in svcFlags" :key="f.id" class="fl">
+            <img v-if="f.photo" :src="f.photo" alt="" />
+            <div>
+              <p class="fl-note">{{ f.note || 'Photo only' }}</p>
+              <p class="fl-ts">{{ new Date(f.ts).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) }}</p>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <section class="card">
+      <h2>Every number we have for {{ ward.code }}</h2>
+      <p class="sub">₹ crore. Allotted = budget estimate. Spent = actual expenditure. Blank means not yet published.</p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th v-for="y in ward.years" :key="y" colspan="2">{{ y }}</th>
+              <th>Per resident<br>per year</th>
+            </tr>
+            <tr class="sub-h">
+              <th></th>
+              <template v-for="y in ward.years" :key="y + 'h'"><th>Allotted</th><th>Spent</th></template>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="r in allRows" :key="r.label">
+              <th>{{ r.label }}<small v-if="r.extra"> · {{ r.extra }}</small></th>
+              <template v-for="(y, i) in ward.years" :key="y + r.label">
+                <td>{{ fmt(r.be[i]) }}</td>
+                <td :class="utilClass(r.be[i] && r.actual[i] != null ? pct(r.actual[i], r.be[i]!) : null)">{{ fmt(r.actual[i]) }}</td>
+              </template>
+              <td>{{ r.perCapita ? rs(r.perCapita) : '—' }}</td>
+            </tr>
+            <tr class="sep"><th colspan="12">For comparison</th></tr>
+            <tr v-for="r in mumbaiRows" :key="r.label">
+              <th>{{ r.label }}</th>
+              <template v-for="(y, i) in ward.years" :key="y + r.label">
+                <td>{{ fmt(r.be[i]) }}</td>
+                <td :class="utilClass(r.be[i] && r.actual[i] != null ? pct(r.actual[i], r.be[i]!) : null)">{{ fmt(r.actual[i]) }}</td>
+              </template>
+              <td>{{ r.perCapita ? rs(r.perCapita) : '—' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Spent figures shown in <span class="over">orange</span> exceeded the allotment by more than half, <span class="under">blue</span> fell short of 90%, <span class="ok">green</span> is within range.</p>
+    </section>
+
+    <section class="card dark">
+      <h2>What the BMC does not publish</h2>
+      <ul class="np">
+        <li v-for="n in ctx.notPublished" :key="n">{{ n }}</li>
+      </ul>
+      <p class="ex">{{ ctx.penaltyExample.text }} <a :href="ctx.penaltyExample.url" target="_blank" rel="noopener">{{ ctx.penaltyExample.source }}</a></p>
+      <p class="ex">That is why every service above has an "Ask the BMC" button: the Right to Information Act obliges the ward office to answer within 30 days.</p>
     </section>
 
     <section class="card">
@@ -187,6 +283,33 @@ footer { color: #666; font-size: 0.85rem; margin-top: 1.5rem; }
 footer ul { padding-left: 1.1rem; margin: 0.25rem 0 0.75rem; }
 footer a { color: #3b5bdb; }
 .fine { font-size: 0.78rem; line-height: 1.45; }
+.hook { background: #eef1ff; border-left: 4px solid #3b5bdb; border-radius: 10px; padding: 0.8rem 1rem; margin: 0.25rem 0 0.9rem; font-size: 0.95rem; line-height: 1.45; }
+.hook p { margin: 0; }
+.cnt { margin-left: 0.25rem; font-size: 0.75rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+.act { border: 1px solid #ccc; background: #fff; border-radius: 10px; padding: 0.55rem 0.9rem; cursor: pointer; font: inherit; font-size: 0.9rem; }
+.act.on { background: #111; color: #fff; border-color: #111; }
+.flags { margin-top: 0.9rem; }
+.flags-h { font-weight: 600; margin: 0 0 0.5rem; font-size: 0.9rem; }
+.fl { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.5rem 0; border-top: 1px solid #eee; }
+.fl img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; flex: none; }
+.fl-note { margin: 0; font-size: 0.9rem; }
+.fl-ts { margin: 0.15rem 0 0; font-size: 0.75rem; color: #888; }
+.tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { border-collapse: collapse; font-size: 0.8rem; min-width: 760px; width: 100%; }
+th, td { padding: 0.4rem 0.45rem; text-align: right; border-bottom: 1px solid #eee; white-space: nowrap; }
+thead th { font-weight: 600; color: #444; text-align: center; border-bottom: 2px solid #ddd; }
+thead .sub-h th { font-weight: 500; font-size: 0.72rem; color: #777; border-bottom: 1px solid #ddd; }
+tbody th { text-align: left; font-weight: 600; position: sticky; left: 0; background: #fff; }
+tbody th small { display: block; font-weight: 400; color: #888; font-size: 0.7rem; }
+tbody td.over { color: #d9480f; font-weight: 700; } tbody td.under { color: #1971c2; font-weight: 700; } tbody td.ok { color: #2b8a3e; font-weight: 700; }
+tr.sep th { text-align: left; color: #666; font-weight: 600; padding-top: 0.8rem; background: #fff; }
+.note .over { color: #d9480f; font-weight: 700; } .note .under { color: #1971c2; font-weight: 700; } .note .ok { color: #2b8a3e; font-weight: 700; }
+.card.dark { background: #111; color: #eee; border-color: #111; }
+.card.dark h2 { color: #fff; }
+.np { padding-left: 1.1rem; margin: 0.5rem 0 0.75rem; line-height: 1.5; }
+.ex { margin: 0.5rem 0 0; line-height: 1.5; font-size: 0.92rem; }
+.ex a { color: #ffd166; }
 @media (max-width: 520px) {
   h1 { font-size: 1.6rem; }
   .stats { grid-template-columns: 1fr; }
