@@ -9,9 +9,10 @@ export default defineNitroPlugin(async () => {
     if (await cache.getItem(marker)) return
     const flags = flagStore(), comments = commentStore(), petitions = petitionStore()
     for (const f of (seed as any).flags as any[]) await flags.setItem(`${f.ward}:${f.service}:${f.id}`, f)
-    for (const c of (seed as any).comments as any[]) await comments.setItem(`k-east:${c.flagId}:${c.id}`, c)
+    const wardOf = new Map<string, string>(((seed as any).flags as any[]).map(f => [f.id, f.ward]))
+    for (const c of (seed as any).comments as any[]) await comments.setItem(`${wardOf.get(c.flagId) ?? 'k-east'}:${c.flagId}:${c.id}`, c)
     for (const p of (seed as any).petitions as any[]) await petitions.setItem(`${p.ward}:${p.id}`, p)
     await cache.setItem(marker, { at: Date.now() })
-    console.log(`[seed] wrote ${(seed as any).flags.length} complaints for k-east`)
+    console.log(`[seed] wrote ${(seed as any).flags.length} complaints across ${new Set(((seed as any).flags as any[]).map((f: any) => f.ward)).size} wards`)
   } catch (e) { console.error('[seed] failed', e) }
 })
