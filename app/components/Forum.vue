@@ -35,7 +35,7 @@ const filtered = computed(() => {
   let list = props.posts.slice()
   if (service.value !== 'all') list = list.filter(p => p.service === service.value)
   if (tag.value !== 'all') list = list.filter(p => p.tag === tag.value)
-  if (sort.value === 'top') list.sort((a, b) => (b.likes ?? 0) - (a.likes ?? 0) || b.ts - a.ts)
+  if (sort.value === 'top') list.sort((a, b) => (b.confirms ?? 0) - (a.confirms ?? 0) || b.ts - a.ts)
   else if (sort.value === 'talked') list.sort((a, b) => (b.comments ?? 0) - (a.comments ?? 0) || b.ts - a.ts)
   else list.sort((a, b) => b.ts - a.ts)
   return list
@@ -275,7 +275,6 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 
               <div class="react">
                 <button class="chip act" :disabled="confirmed[p.id]" @click="confirmSeen(p)">👀 {{ confirmed[p.id] ? 'Counted' : 'Me too' }} · {{ p.confirms ?? 0 }}</button>
-                <button class="chip" :disabled="liked[p.id]" @click="upvote(p)">▲ Upvote · {{ p.likes ?? 0 }}</button>
                 <button class="chip" @click="toggle(p)">💬 {{ p.comments ?? 0 }}</button>
                 <label class="chip"><input type="file" accept="image/*" capture="environment" hidden @change="onConfirmPhoto(p, $event)" />📸</label>
                 <button class="chip" @click="shareOpen[p.id] = !shareOpen[p.id]">↗ Share this</button>
