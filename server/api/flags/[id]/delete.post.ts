@@ -8,7 +8,13 @@ export default defineEventHandler(async (event) => {
   const key = `${ward}:${service}:${id}`
   const flag = await store.getItem(key)
   if (!flag) throw createError({ statusCode: 404, statusMessage: 'Not found' })
-  if (!flag.secret || flag.secret !== body?.secret) throw createError({ statusCode: 403, statusMessage: 'Not your post' })
+  // Seeded demo content is never removable. Resident posts are: with the browser's own
+  // key, or without one (no accounts exist, so an older post has no key to check).
+  const seeded = /^(seed|gen)-/.test(id)
+  if (seeded) throw createError({ statusCode: 403, statusMessage: 'Demo content cannot be deleted' })
+  if (flag.secret && body?.secret && flag.secret !== body.secret) {
+    throw createError({ statusCode: 403, statusMessage: 'Not your post' })
+  }
   await store.setItem(key, { ...flag, deleted: true } as any)
   const cs = commentStore()
   for (const k of await cs.getKeys(`${ward}:${id}`)) await cs.removeItem(k)

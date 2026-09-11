@@ -124,9 +124,11 @@ async function shareAsk(p: any) {
 const mine = ref<Record<string, string>>({})
 function loadMine() { try { mine.value = JSON.parse(localStorage.getItem('wmwmg:mine') || '{}') } catch { mine.value = {} } }
 onMounted(loadMine)
+const isSeed = (p: any) => /^(seed|gen)-/.test(p.id)
 const isMine = (p: any) => !!mine.value[p.id]
+const canDelete = (p: any) => !isSeed(p)
 async function removePost(p: any) {
-  if (!confirm('Delete your post? This also removes its replies.')) return
+  if (!confirm('Delete this post? This also removes its replies.')) return
   try {
     await $fetch(`/api/flags/${encodeURIComponent(`${p.ward}:${p.service}:${p.id}`)}/delete`, { method: 'POST', body: { secret: mine.value[p.id] } })
     const m = { ...mine.value }; delete m[p.id]; mine.value = m
@@ -277,7 +279,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
                 <button class="chip" @click="toggle(p)">💬 {{ p.comments ?? 0 }}</button>
                 <label class="chip"><input type="file" accept="image/*" capture="environment" hidden @change="onConfirmPhoto(p, $event)" />📸</label>
                 <button class="chip" @click="shareOpen[p.id] = !shareOpen[p.id]">↗ Share this</button>
-                <button v-if="!isMine(p)" class="chip ghost" :disabled="reported[p.id]" @click="report(p)">⚑</button>
+                <button v-if="!canDelete(p)" class="chip ghost" :disabled="reported[p.id]" @click="report(p)">⚑</button>
                 <button v-else class="chip ghost" @click="removePost(p)">🗑 Delete</button>
               </div>
               <p v-if="p.lastConfirmed" class="seen">Last seen {{ daysSince(p.lastConfirmed) === 0 ? 'today' : daysSince(p.lastConfirmed) + ' days ago' }}</p>
@@ -359,7 +361,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 <style scoped>
 .chat { max-width: 760px; margin: 0 auto; width: 100%; border: 2px solid var(--ink); border-radius: 24px; background: var(--surface); box-shadow: 4px 4px 0 var(--ink); display: grid; grid-template-rows: auto auto auto 1fr auto; overflow: hidden; height: min(86vh, 980px); }
 .chead { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--ink); color: var(--white); }
-.avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; font-size: 22px; border: 3px solid var(--white); }
+.avatar { display: grid; place-items: center; font-size: 26px; line-height: 1; }
 .cmeta { flex: 1; min-width: 0; }
 .cname { font-weight: 900; font-size: 16px; }
 .csub { font-size: 12px; font-weight: 700; opacity: .8; }
@@ -377,7 +379,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .sys-big { font-family: var(--display); font-size: clamp(36px, 6vw, 56px); letter-spacing: -.06em; line-height: 1; margin: 6px 0 2px; }
 .sys-sub { font-weight: 700; font-size: 14px; margin-top: 4px; }
 .who { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; margin: 0 0 4px 4px; color: var(--muted); }
-.av { width: 26px; height: 26px; border-radius: 50%; background: var(--white); border: 2px solid var(--ink); display: grid; place-items: center; font-size: 14px; }
+.av { display: inline-grid; place-items: center; font-size: 16px; line-height: 1; }
 .time { margin-left: auto; font-weight: 700; opacity: .7; }
 .bubble { background: var(--white); border: 2px solid var(--ink); border-radius: 4px 18px 18px 18px; padding: 12px; display: grid; gap: 8px; box-shadow: 4px 4px 0 var(--ink); }
 .tags { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -403,7 +405,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .replies { margin: 8px 0 0 36px; display: grid; gap: 8px; }
 .rlist { max-height: 240px; overflow-y: auto; display: grid; gap: 8px; padding-right: 4px; }
 .reply { display: flex; gap: 8px; align-items: flex-start; }
-.ravatar { width: 22px; height: 22px; border-radius: 50%; background: var(--white); border: 2px solid var(--ink); display: grid; place-items: center; font-size: 11px; flex: none; margin-top: 4px; }
+.ravatar { display: inline-grid; place-items: center; font-size: 13px; flex: none; margin-top: 4px; line-height: 1; }
 .rbubble { background: var(--white); border: 2px solid var(--ink); border-radius: 4px 14px 14px 14px; padding: 8px 10px; }
 .rbubble p { margin: 0; font-weight: 600; font-size: 14px; }
 .rtime { font-size: 10px; font-weight: 700; color: var(--muted); }
@@ -418,6 +420,9 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .form-head { display: flex; justify-content: space-between; align-items: center; }
 .mini { font-size: 12px; font-weight: 700; color: var(--muted); margin: 0; }
 .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--white); border-radius: 999px; padding: 10px 16px; font-weight: 800; z-index: 120; }
-.chat.full { height: calc(100vh - 70px); max-width: 860px; border-radius: 0; border-left: 0; border-right: 0; border-bottom: 0; box-shadow: none; }
+.chat.full { height: calc(100vh - var(--navh, 64px) - 96px); max-width: 1440px; width: calc(100% - 2 * max(6vw, (100vw - 1440px) / 2)); margin: 24px auto; border-radius: 20px; box-shadow: 4px 4px 0 var(--ink); }
+.chat.full .feed { padding: 18px max(18px, 4%) 24px; }
+.chat.full .msg:not(.system) { max-width: 860px; }
+.chat.full .msg.system { max-width: 720px; }
 @media (max-width: 600px) { .chat { height: 88vh; border-radius: 18px; box-shadow: 6px 6px 0 var(--ink); } .msg { max-width: 100%; } .replies { margin-left: 16px; } }
 </style>
