@@ -1,38 +1,61 @@
 <script setup lang="ts">
-// The one place we use Hind: the name, alternating between Devanagari and Latin.
+// The one place Hind is used: the name, alternating Devanagari and Latin.
+// Split by grapheme cluster, never by code point, or Devanagari matras detach.
 const WORDS = [
-  { text: 'असली मुद्दा', lang: 'hi', label: 'Asli Mudda' },
-  { text: 'Asli Mudda', lang: 'en', label: 'Asli Mudda' },
+  { text: 'असली मुद्दा', lang: 'hi' },
+  { text: 'Asli Mudda', lang: 'en' },
 ]
+const LABEL = 'Asli Mudda'
+
+function graphemes(s: string): string[] {
+  try {
+    const Seg = (Intl as any).Segmenter
+    if (Seg) return [...new Seg('hi', { granularity: 'grapheme' }).segment(s)].map((g: any) => g.segment)
+  } catch {}
+  // fallback: keep every combining mark with the base character before it
+  const out: string[] = []
+  for (const ch of s) {
+    const code = ch.codePointAt(0)!
+    const combining = (code >= 0x0900 && code <= 0x0903) || (code >= 0x093a && code <= 0x094f) ||
+                      (code >= 0x0951 && code <= 0x0957) || (code >= 0x0962 && code <= 0x0963) || code === 0x200d
+    if (combining && out.length) out[out.length - 1] += ch
+    else out.push(ch)
+  }
+  return out
+}
+
 const i = ref(0)
-const out = ref(false)
-let timer: ReturnType<typeof setInterval> | null = null
+const phase = ref<'in' | 'out'>('in')
 const reduced = ref(false)
+let timer: ReturnType<typeof setInterval> | null = null
 
 const current = computed(() => WORDS[i.value])
-const chars = computed(() => [...current.value.text])
+const chars = computed(() => graphemes(current.value.text))
 
 onMounted(() => {
   try { reduced.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches } catch {}
   if (reduced.value) return
   timer = setInterval(() => {
-    out.value = true
-    setTimeout(() => { i.value = (i.value + 1) % WORDS.length; out.value = false }, 420)
-  }, 3800)
+    phase.value = 'out'
+    setTimeout(() => { i.value = (i.value + 1) % WORDS.length; phase.value = 'in' }, 520)
+  }, 4200)
 })
 onBeforeUnmount(() => { if (timer) clearInterval(timer) })
+
+// out: last letter leaves first. in: first letter lands first.
+const delay = (n: number) => `${(phase.value === 'out' ? chars.value.length - 1 - n : n) * 34}ms`
 </script>
 
 <template>
-  <h1 class="am" :aria-label="current.label">
-    <span :key="current.text" class="word" :lang="current.lang" :class="{ out }">
+  <h1 class="am" :aria-label="LABEL">
+    <span class="sr">{{ LABEL }}</span>
+    <span :key="current.text + phase" class="word" :lang="current.lang" :class="phase" aria-hidden="true">
       <span
         v-for="(c, n) in chars"
         :key="n"
         class="ch"
         :class="{ space: c === ' ' }"
-        :style="{ transitionDelay: `${(out ? (chars.length - n - 1) : n) * 26}ms` }"
-        aria-hidden="true"
+        :style="{ animationDelay: delay(n) }"
       >{{ c === ' ' ? ' ' : c }}</span>
     </span>
   </h1>
@@ -40,27 +63,33 @@ onBeforeUnmount(() => { if (timer) clearInterval(timer) })
 
 <style scoped>
 .am {
-  font-family: 'Hind', 'Archivo Black', system-ui, sans-serif;
+  font-family: 'Hind', system-ui, sans-serif;
   font-weight: 700;
-  font-size: clamp(52px, 9vw, 128px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-size: clamp(46px, 8.5vw, 120px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   text-transform: none;
-  margin: 0 0 28px;
-  min-height: 1.1em;
+  margin: 0 0 26px;
+  min-height: 1.3em;
 }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .word { display: inline-flex; flex-wrap: wrap; }
-.ch {
-  display: inline-block;
-  opacity: 1;
-  transform: translateY(0) rotate(0deg);
-  transition: opacity 380ms cubic-bezier(.2, .8, .2, 1), transform 380ms cubic-bezier(.2, .8, .2, 1);
-  will-change: opacity, transform;
+.ch { display: inline-block; will-change: transform, opacity; backface-visibility: hidden; }
+.ch.space { width: .3em; }
+
+.word.in .ch { animation: land 520ms cubic-bezier(.16, 1, .3, 1) both; }
+.word.out .ch { animation: leave 520ms cubic-bezier(.6, 0, .8, .2) both; }
+
+@keyframes land {
+  from { opacity: 0; transform: translateY(0.55em) rotate(6deg) scale(.86); }
+  60%  { opacity: 1; }
+  to   { opacity: 1; transform: none; }
 }
-.ch.space { width: .28em; }
-.word.out .ch { opacity: 0; transform: translateY(-0.34em) rotate(-4deg); }
-@starting-style { .ch { opacity: 0; transform: translateY(0.34em); } }
+@keyframes leave {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateY(-0.5em) rotate(-6deg) scale(.9); }
+}
 @media (prefers-reduced-motion: reduce) {
-  .ch { transition: none; opacity: 1 !important; transform: none !important; }
+  .word.in .ch, .word.out .ch { animation: none; opacity: 1; transform: none; }
 }
 </style>
