@@ -35,7 +35,7 @@ function enter() { if (reveal.value) emit('found', reveal.value) }
       </main>
       <aside class="side">
         <div>
-          <span class="pill">One PIN. Many receipts.</span>
+          <span class="pill">One PIN. Every number.</span>
           <h2>What you'll know in 30 seconds.</h2>
           <div class="list">
             <div class="item">📍 Your BMC ward and who represents it</div>
@@ -55,7 +55,7 @@ function enter() { if (reveal.value) emit('found', reveal.value) }
         <h2>{{ reveal.code }}</h2>
         <p class="bigline">Found your ward.<br>Now let's find your money.</p>
         <p class="micro">{{ reveal.name }}. Figures from RTI-sourced ward budgets, 2021-22 to 2025-26.</p>
-        <button class="btn primary" @click="enter">Show me the receipts →</button>
+        <button class="btn primary" @click="enter">Show me the numbers →</button>
       </div>
     </div>
   </div>

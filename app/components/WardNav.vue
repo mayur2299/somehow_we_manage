@@ -17,8 +17,8 @@ onMounted(() => {
 const tiles = computed(() => [
   { key: 'home', to: '/', cls: 'home', ic: '🏠', t: 'Ward home', d: `${props.ward.code} · ${props.ward.name}` },
   { key: 'who', to: '/who', cls: 'blue', ic: '🗳️', t: 'Who represents you', d: `${props.ward.accountable?.corporators?.length ?? 0} corporators · ward office` },
-  { key: 'money', to: '/money', cls: 'yellow', ic: '💸', t: 'Money received vs spent', d: `${cr(props.ward.total.ward.be[latestIdx.value])} allotted · ${cr(props.ward.total.ward.actual[latestIdx.value])} spent` },
-  { key: 'forum', to: '/forum', cls: 'pink', ic: '💬', t: 'On paper vs on ground', d: `${props.posts?.length ?? 0} complaints · photos · me too` },
+  { key: 'money', to: '/money', cls: 'yellow', ic: '💸', t: 'What It Got vs Spent', d: `${cr(props.ward.total.ward.be[latestIdx.value])} allotted · ${cr(props.ward.total.ward.actual[latestIdx.value])} spent` },
+  { key: 'forum', to: '/forum', cls: 'pink', ic: '💬', t: 'On Paper vs On Ground', d: `${props.posts?.length ?? 0} complaints · photos · me too` },
   { key: 'petitions', to: '/petitions', cls: 'purple', ic: '✍️', t: 'Petitions', d: 'Sign, check status, raise one' },
 ])
 </script>

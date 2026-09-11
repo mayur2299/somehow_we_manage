@@ -17,6 +17,10 @@ function go(id: string) {
 }
 const { data: pets } = await useFetch(() => `/api/petitions?ward=${useState<string>('ward-slug').value}`, { default: () => ({ petitions: [] as any[] }), watch: [useState<string>('ward-slug')] })
 const petitionCount = computed(() => pets.value?.petitions?.length ?? 0)
+const moneyPhoto = computed(() => {
+  const pick = posts.value.find((p: any) => p.photo && ['roads', 'swd'].includes(p.service)) ?? posts.value.find((p: any) => p.photo)
+  return pick ?? null
+})
 const photoStrip = computed(() => posts.value.filter((p: any) => p.photo).slice(0, 4))
 const partyChips = computed(() => Object.entries((ward.value.accountable?.corporators ?? []).reduce((t: Record<string, number>, c: any) => { t[c.party] = (t[c.party] ?? 0) + 1; return t }, {})).sort((a: any, b: any) => b[1] - a[1]).slice(0, 3))
 const heroPost = computed(() => posts.value.find((p: any) => p.photo && p.title) ?? posts.value[0] ?? null)
@@ -47,12 +51,13 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
             <span class="pill">{{ ward.code }} ward · {{ ward.name }}</span>
             <span class="pill">{{ ward.population2025.toLocaleString('en-IN') }} residents</span>
           </div>
-          <h1>Your ward.<br>Four questions.</h1>
+          <h1>Asli Mudda</h1>
 
           <div class="bgrid">
-            <NuxtLink class="branch stone" to="/money">
+            <NuxtLink class="branch stone withpic" to="/money">
+              <div class="bmain">
               <span class="ic">💸</span>
-              <h2>Money received<br>vs money spent</h2>
+              <h2>See What It Got<br>vs What It Spent</h2>
               <div class="num alert">{{ cr(latestActual) }}</div>
               <p class="d">spent in {{ ward.years[latestIdx] }} against {{ cr(latestBE) }} allotted · <strong>{{ pct(latestActual, latestBE) }}%</strong></p>
               <div class="minibars">
@@ -60,11 +65,16 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
                 <div class="mb"><span>Spent</span><div class="mbar spent"><i :style="{ width: '100%' }"></i></div></div>
               </div>
               <span class="go">See the split by department →</span>
+              </div>
+              <figure v-if="moneyPhoto" class="bpic">
+                <img :src="moneyPhoto.photo" alt="" referrerpolicy="no-referrer" />
+                <figcaption>{{ moneyPhoto.locality || ward.name }} · what {{ cr(sum3(ward.services.find((x: any) => x.key === moneyPhoto.service)?.actual ?? [])) }} looks like</figcaption>
+              </figure>
             </NuxtLink>
 
             <NuxtLink class="branch white" to="/forum">
               <span class="ic">💬</span>
-              <h2>On paper<br>vs on ground</h2>
+              <h2>On Paper<br>vs On Ground</h2>
               <div class="num">{{ posts.length }}</div>
               <p class="d">complaints from this ward · {{ posts.reduce((a: number, p: any) => a + (p.confirms ?? 0), 0) }} "me too"</p>
               <div v-if="photoStrip.length" class="strip"><img v-for="p in photoStrip" :key="p.id" :src="p.photo" alt="" referrerpolicy="no-referrer" /></div>
@@ -355,4 +365,11 @@ footer { padding: 34px max(6vw, calc((100vw - 1440px) / 2)) 50px; font-weight: 7
 .mbar i { display: block; height: 100%; background: var(--stone); }
 .mbar.spent i { background: var(--coral); }
 .branch .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+
+.branch.withpic { display: grid; grid-template-columns: 1fr 200px; gap: 18px; align-items: stretch; }
+.branch.withpic .bmain { display: grid; gap: 6px; align-content: start; }
+.bpic { margin: 0; align-self: stretch; display: grid; grid-template-rows: 1fr auto; gap: 6px; }
+.bpic img { width: 100%; height: 100%; min-height: 150px; object-fit: cover; border: 2px solid var(--ink); border-radius: 14px; display: block; }
+.bpic figcaption { font-size: 11px; font-weight: 700; color: var(--muted); line-height: 1.25; }
+@media (max-width: 720px) { .branch.withpic { grid-template-columns: 1fr; } .bpic img { min-height: 140px; } }
 </style>
