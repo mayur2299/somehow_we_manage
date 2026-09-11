@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// The name, swapping one character at a time between Devanagari and Latin.
-// Split by grapheme cluster, never by code point, or Devanagari matras detach.
+// The name, alternating Devanagari and Latin. Split by grapheme cluster, never by
+// code point, or Devanagari matras detach from their consonants.
 const WORDS = [
   { text: 'असली मुद्दा', lang: 'hi', script: 'deva' },
   { text: 'Asli Mudda', lang: 'en', script: 'latn' },
@@ -23,49 +23,39 @@ function graphemes(s: string): string[] {
   return out
 }
 
-const FORMS = WORDS.map(w => ({ ...w, chars: graphemes(w.text) }))
-const WIDTH = Math.max(...FORMS.map(f => f.chars.length))
-const at = (f: typeof FORMS[number], n: number) => f.chars[n] ?? ''
+const HOLD = 5200      // how long each form stays
+const LEAVE = 760      // ms for a word to leave
+const STAGGER = 70     // ms between characters
 
-const idx = ref(0)
-const script = ref(FORMS[0].script)
-const lang = ref(FORMS[0].lang)
-// one cell per position; bump `v` to replay that cell's fade
-const cells = ref(Array.from({ length: WIDTH }, (_, n) => ({ ch: at(FORMS[0], n), v: 0 })))
+const i = ref(0)
+const phase = ref<'in' | 'out'>('in')
+let timer: ReturnType<typeof setInterval> | null = null
+let t2: ReturnType<typeof setTimeout> | null = null
 
-let loop: ReturnType<typeof setInterval> | null = null
-const pending: ReturnType<typeof setTimeout>[] = []
-
-function swapTo(next: number) {
-  const f = FORMS[next]
-  script.value = f.script
-  lang.value = f.lang
-  for (let n = 0; n < WIDTH; n++) {
-    pending.push(setTimeout(() => {
-      cells.value[n] = { ch: at(f, n), v: cells.value[n].v + 1 }
-    }, n * 70))
-  }
-}
+const current = computed(() => WORDS[i.value])
+const chars = computed(() => graphemes(current.value.text))
 
 onMounted(() => {
   let reduced = false
   try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches } catch {}
   if (reduced) return
-  loop = setInterval(() => {
-    idx.value = (idx.value + 1) % FORMS.length
-    swapTo(idx.value)
-  }, 4600)
+  timer = setInterval(() => {
+    phase.value = 'out'
+    const leaveTotal = LEAVE + STAGGER * chars.value.length
+    t2 = setTimeout(() => { i.value = (i.value + 1) % WORDS.length; phase.value = 'in' }, leaveTotal)
+  }, HOLD)
 })
-onBeforeUnmount(() => { if (loop) clearInterval(loop); pending.forEach(clearTimeout) })
+onBeforeUnmount(() => { if (timer) clearInterval(timer); if (t2) clearTimeout(t2) })
+
+// leaving: last character first. landing: first character first.
+const delay = (n: number) => `${(phase.value === 'out' ? chars.value.length - 1 - n : n) * STAGGER}ms`
 </script>
 
 <template>
   <h1 class="am" :aria-label="LABEL">
     <span class="sr">{{ LABEL }}</span>
-    <span class="word" :class="script" :lang="lang" aria-hidden="true">
-      <span v-for="(cell, n) in cells" :key="n" class="slot" :class="{ space: cell.ch === ' ', empty: cell.ch === '' }">
-        <span :key="cell.v" class="ch">{{ cell.ch === ' ' ? ' ' : cell.ch }}</span>
-      </span>
+    <span :key="current.text + phase" class="word" :class="[phase, current.script]" :lang="current.lang" aria-hidden="true">
+      <span v-for="(c, n) in chars" :key="n" class="ch" :class="{ space: c === ' ' }" :style="{ animationDelay: delay(n) }">{{ c === ' ' ? '\u00a0' : c }}</span>
     </span>
   </h1>
 </template>
@@ -73,20 +63,14 @@ onBeforeUnmount(() => { if (loop) clearInterval(loop); pending.forEach(clearTime
 <style scoped>
 .am { margin: 0 0 26px; min-height: 1.15em; line-height: 1.2; text-transform: none; font-weight: 700; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-.word { display: inline-flex; align-items: baseline; }
-
-/* Hind carries the Devanagari only; the Latin keeps the site's display face. */
+.word { display: inline-flex; flex-wrap: wrap; }
 .word.deva { font-family: 'Hind', system-ui, sans-serif; font-weight: 700; font-size: clamp(46px, 8.4vw, 116px); letter-spacing: -0.01em; line-height: 1.3; }
 .word.latn { font-family: var(--display); font-weight: 900; font-size: clamp(48px, 8.6vw, 124px); letter-spacing: -0.055em; text-transform: uppercase; line-height: 1.02; }
-
-.slot { display: inline-block; }
-.slot.space { width: .3em; }
-.slot.empty { width: 0; }
-.ch { display: inline-block; animation: fade 260ms ease both; }
-
-@keyframes fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) { .ch { animation: none; } }
+.ch { display: inline-block; will-change: transform, opacity; backface-visibility: hidden; }
+.ch.space { width: .3em; }
+.word.in .ch  { animation: land  760ms cubic-bezier(.16, 1, .3, 1) both; }
+.word.out .ch { animation: leave 760ms cubic-bezier(.5, 0, .75, .2) both; }
+@keyframes land  { from { opacity: 0; transform: translateY(.45em); } to { opacity: 1; transform: none; } }
+@keyframes leave { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-.4em); } }
+@media (prefers-reduced-motion: reduce) { .word.in .ch, .word.out .ch { animation: none; } }
 </style>

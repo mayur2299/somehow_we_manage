@@ -6,8 +6,8 @@ const flags = ref<{ counts: Record<string, number>; recent: any[] }>({ counts: {
 async function refreshFlags() { try { flags.value = await $fetch(`/api/flags?ward=${slug.value}`) } catch {} }
 const posts = computed(() => flags.value.recent ?? [])
 onMounted(refreshFlags); watch(slug, refreshFlags)
-const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
-const rs = (n: number) => `₹${n.toLocaleString('en-IN')}`
+const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })} cr`
+const rs = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`
 const pct = (a: number | null, b: number) => a == null ? null : Math.round((a / b) * 100)
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
 const utilClass = (u: number | null) => u == null ? 'purple' : u > 150 ? 'red' : u < 90 ? 'blue' : 'green'
@@ -125,7 +125,7 @@ useHead({ title: computed(() => `Money · ${ward.value.code} ${ward.value.name}`
                   <tr class="sep"><th colspan="12">Mumbai, all wards</th></tr>
                   <tr>
                     <th>Total ward budgets</th>
-                    <template v-for="(y, i) in ward.years" :key="y + 'm'"><td>{{ ward.total.mumbai.be[i].toLocaleString('en-IN') }}</td><td :class="ward.total.mumbai.actual[i] == null ? 'est' : utilClass(pct(ward.total.mumbai.actual[i], ward.total.mumbai.be[i]))">{{ ward.total.mumbai.actual[i] == null ? 'est.' : ward.total.mumbai.actual[i]!.toLocaleString('en-IN') }}</td></template>
+                    <template v-for="(y, i) in ward.years" :key="y + 'm'"><td>{{ ward.total.mumbai.be[i].toLocaleString('en-IN', { maximumFractionDigits: 2 }) }}</td><td :class="ward.total.mumbai.actual[i] == null ? 'est' : utilClass(pct(ward.total.mumbai.actual[i], ward.total.mumbai.be[i]))">{{ ward.total.mumbai.actual[i] == null ? 'est.' : ward.total.mumbai.actual[i]!.toLocaleString('en-IN', { maximumFractionDigits: 2 }) }}</td></template>
                     <td>{{ rs(ward.total.mumbai.perCapita) }}</td>
                   </tr>
                 </tbody>

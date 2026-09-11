@@ -10,7 +10,7 @@ const address = ref('')
 const status = ref('')
 
 const sum = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
-const cr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} crore`
+const cr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })} crore`
 
 const text = computed(() => {
   const yrs = `${props.years[0]} to ${props.years[2]}`

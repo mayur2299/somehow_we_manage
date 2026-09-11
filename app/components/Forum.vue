@@ -13,7 +13,7 @@ const props = defineProps<{
 }>()
 const emit = defineEmits<{ (e: 'refresh'): void; (e: 'petition', service: string): void; (e: 'celebrate'): void; (e: 'petitionsChanged'): void; (e: 'receipt', service: string, post?: any): void }>()
 
-const cr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
+const cr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })} cr`
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
 const svcOf = (k: string) => props.services.find(s => s.key === k)
 

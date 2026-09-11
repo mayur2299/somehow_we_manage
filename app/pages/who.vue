@@ -6,8 +6,8 @@ const flags = ref<{ counts: Record<string, number>; recent: any[] }>({ counts: {
 async function refreshFlags() { try { flags.value = await $fetch(`/api/flags?ward=${slug.value}`) } catch {} }
 const posts = computed(() => flags.value.recent ?? [])
 onMounted(refreshFlags); watch(slug, refreshFlags)
-const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
-const rs = (n: number) => `₹${n.toLocaleString('en-IN')}`
+const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })} cr`
+const rs = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`
 const pct = (a: number | null, b: number) => a == null ? null : Math.round((a / b) * 100)
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
 const utilClass = (u: number | null) => u == null ? 'purple' : u > 150 ? 'red' : u < 90 ? 'blue' : 'green'
@@ -75,7 +75,7 @@ useHead({ title: computed(() => `Who represents ${ward.value.code} ${ward.value.
                 <span class="wn">{{ c.ward }}</span>
                 <div class="rep-body">
                   <div class="nm">{{ c.name }}</div>
-                  <div class="pt">{{ c.party }} · {{ c.votes.toLocaleString('en-IN') }} votes</div>
+                  <div class="pt">{{ c.party }} · {{ c.votes.toLocaleString('en-IN', { maximumFractionDigits: 2 }) }} votes</div>
                 </div>
                 <a class="btn sm" :href="affidavit(c.name)" target="_blank" rel="noopener">Declared ↗</a>
               </div>

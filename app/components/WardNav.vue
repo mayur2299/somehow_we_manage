@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{ ward: any; pin: string | null; active: string; posts?: any[]; hideHub?: boolean }>()
 const emit = defineEmits<{ (e: 'changePin'): void }>()
-const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
+const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })} cr`
 const latestIdx = computed(() => props.ward.total.ward.actual.map((v: any, i: number) => v == null ? -1 : i).filter((i: number) => i >= 0).pop() ?? 2)
 const navEl = ref<HTMLElement | null>(null)
 const compact = ref(false)

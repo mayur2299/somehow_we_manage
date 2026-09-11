@@ -23,7 +23,7 @@ const allotted = computed(() => sum3(props.service.be))
 const util = computed(() => Math.round(props.service.avgUtil * 100))
 const oldestDays = computed(() => svcPosts.value.length ? Math.max(0, Math.round((Date.now() - Math.min(...svcPosts.value.map(p => p.ts))) / 86400000)) : 0)
 const perPost = computed(() => svcPosts.value.length ? spent.value / svcPosts.value.length : null)
-const crore = (n: number) => n >= 100 ? `₹${Math.round(n).toLocaleString('en-IN')} CRORE` : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} CRORE`
+const crore = (n: number) => n >= 100 ? `₹${Math.round(n).toLocaleString('en-IN', { maximumFractionDigits: 2 })} CRORE` : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })} CRORE`
 const punch = computed(() => {
   if (util.value >= 300) return "The budget didn't overflow. The spend did."
   if (util.value >= 150) return 'Something doesn\'t add up.'
@@ -115,7 +115,7 @@ async function draw() {
   ] : [
     `${svcPosts.value.length} resident report${svcPosts.value.length === 1 ? '' : 's'} say they don't see it`,
     svcPosts.value.length ? `Oldest report: ${oldestDays.value} day${oldestDays.value === 1 ? '' : 's'} ago` : `Allotted: ${crore(allotted.value)}`,
-    perPost.value != null ? `₹${perPost.value.toLocaleString('en-IN', { maximumFractionDigits: 1 })} crore spent per reported issue` : `Mumbai average: ${props.service.mumbaiAvgUtil ? Math.round(props.service.mumbaiAvgUtil * 100) + '%' : 'n/a'}`,
+    perPost.value != null ? `₹${perPost.value.toLocaleString('en-IN', { maximumFractionDigits: 2 })} crore spent per reported issue` : `Mumbai average: ${props.service.mumbaiAvgUtil ? Math.round(props.service.mumbaiAvgUtil * 100) + '%' : 'n/a'}`,
   ]
   ctx.fillStyle = '#F6F4F1'; ctx.font = `700 ${wide ? 24 : 36}px ${B}`
   y += wide ? 44 : 70

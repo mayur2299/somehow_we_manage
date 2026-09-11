@@ -28,8 +28,8 @@ const moneyPhoto = computed(() => {
 const photoStrip = computed(() => posts.value.filter((p: any) => p.photo).slice(0, 4))
 const partyChips = computed(() => Object.entries((ward.value.accountable?.corporators ?? []).reduce((t: Record<string, number>, c: any) => { t[c.party] = (t[c.party] ?? 0) + 1; return t }, {})).sort((a: any, b: any) => b[1] - a[1]).slice(0, 3))
 const heroPost = computed(() => posts.value.find((p: any) => p.photo && p.title) ?? posts.value[0] ?? null)
-const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
-const rs = (n: number) => `₹${n.toLocaleString('en-IN')}`
+const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })} cr`
+const rs = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`
 const pct = (a: number | null, b: number) => a == null ? null : Math.round((a / b) * 100)
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
 const utilClass = (u: number | null) => u == null ? 'purple' : u > 150 ? 'red' : u < 90 ? 'blue' : 'green'
@@ -53,7 +53,7 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
           <div class="idline">
             <span class="pill yellow">📍 {{ pin }} · {{ area }}</span>
             <span class="pill">{{ ward.code }} ward · {{ ward.name }}</span>
-            <span class="pill">{{ ward.population2025.toLocaleString('en-IN') }} residents</span>
+            <span class="pill">{{ ward.population2025.toLocaleString('en-IN', { maximumFractionDigits: 2 }) }} residents</span>
           </div>
           <AsliMudda />
 
