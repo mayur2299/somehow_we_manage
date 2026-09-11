@@ -17,6 +17,8 @@ function go(id: string) {
 }
 const { data: pets } = await useFetch(() => `/api/petitions?ward=${useState<string>('ward-slug').value}`, { default: () => ({ petitions: [] as any[] }), watch: [useState<string>('ward-slug')] })
 const petitionCount = computed(() => pets.value?.petitions?.length ?? 0)
+const photoStrip = computed(() => posts.value.filter((p: any) => p.photo).slice(0, 4))
+const partyChips = computed(() => Object.entries((ward.value.accountable?.corporators ?? []).reduce((t: Record<string, number>, c: any) => { t[c.party] = (t[c.party] ?? 0) + 1; return t }, {})).sort((a: any, b: any) => b[1] - a[1]).slice(0, 3))
 const heroPost = computed(() => posts.value.find((p: any) => p.photo && p.title) ?? posts.value[0] ?? null)
 const cr = (n: number | null) => n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
 const rs = (n: number) => `₹${n.toLocaleString('en-IN')}`
@@ -37,7 +39,7 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
   <div>
     <PinGate v-if="!ready" :pincodes="allPins" @found="onFound" />
     <div v-else class="page">
-      <WardNav :ward="ward" :pin="pin" active="" :posts="posts" :hub="false" @change-pin="clear" />
+      <WardNav :ward="ward" :pin="pin" active="" :posts="posts" hide-hub @change-pin="clear" />
       <main>
         <section class="branches">
           <div class="idline">
@@ -53,14 +55,19 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
               <h2>Money received<br>vs money spent</h2>
               <div class="num alert">{{ cr(latestActual) }}</div>
               <p class="d">spent in {{ ward.years[latestIdx] }} against {{ cr(latestBE) }} allotted · <strong>{{ pct(latestActual, latestBE) }}%</strong></p>
+              <div class="minibars">
+                <div class="mb"><span>Allotted</span><div class="mbar"><i :style="{ width: (latestBE / Math.max(latestBE, latestActual) * 100) + '%' }"></i></div></div>
+                <div class="mb"><span>Spent</span><div class="mbar spent"><i :style="{ width: '100%' }"></i></div></div>
+              </div>
               <span class="go">See the split by department →</span>
             </NuxtLink>
 
             <NuxtLink class="branch white" to="/forum">
               <span class="ic">💬</span>
-              <h2>What residents<br>actually see</h2>
+              <h2>On paper<br>vs on ground</h2>
               <div class="num">{{ posts.length }}</div>
-              <p class="d">complaints from this ward · {{ posts.filter((p: any) => p.photo).length }} with photos · {{ posts.reduce((a: number, p: any) => a + (p.confirms ?? 0), 0) }} "me too"</p>
+              <p class="d">complaints from this ward · {{ posts.reduce((a: number, p: any) => a + (p.confirms ?? 0), 0) }} "me too"</p>
+              <div v-if="photoStrip.length" class="strip"><img v-for="p in photoStrip" :key="p.id" :src="p.photo" alt="" referrerpolicy="no-referrer" /></div>
               <span class="go">Open the ward chat →</span>
             </NuxtLink>
 
@@ -69,6 +76,9 @@ useHead({ title: computed(() => ready.value ? `${ward.value.code} ${ward.value.n
               <h2>Who is<br>accountable</h2>
               <div class="num">{{ ward.accountable?.corporators?.length ?? 0 }}</div>
               <p class="d">corporators elected Jan 2026 · ward office · MLAs · four years with no council</p>
+              <div v-if="partyChips.length" class="chips">
+                <span v-for="[party, n] in partyChips" :key="party" class="pill">{{ party }} {{ n }}</span>
+              </div>
               <span class="go">See the names →</span>
             </NuxtLink>
 
@@ -336,4 +346,13 @@ footer { padding: 34px max(6vw, calc((100vw - 1440px) / 2)) 50px; font-weight: 7
 .actbar .label { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; margin-right: 4px; }
 .live .livegrid { display: grid; grid-template-columns: 5fr 7fr; gap: 18px; }
 @media (max-width: 920px) { .bgrid { grid-template-columns: 1fr; } .live .livegrid { grid-template-columns: 1fr; } }
+
+.branch .strip { display: flex; gap: 6px; margin-top: 8px; }
+.branch .strip img { width: 56px; height: 56px; object-fit: cover; border: 2px solid var(--ink); border-radius: 10px; }
+.minibars { display: grid; gap: 6px; margin-top: 8px; }
+.mb { display: grid; grid-template-columns: 64px 1fr; gap: 8px; align-items: center; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+.mbar { height: 12px; border: 2px solid var(--ink); border-radius: 999px; background: var(--white); overflow: hidden; }
+.mbar i { display: block; height: 100%; background: var(--stone); }
+.mbar.spent i { background: var(--coral); }
+.branch .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
 </style>
