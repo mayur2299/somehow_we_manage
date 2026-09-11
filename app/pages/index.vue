@@ -151,7 +151,7 @@ h1 { font-size: 2rem; margin: 0; line-height: 1.1; }
 .card { background: #fff; border: 1px solid #e6e6e6; border-radius: 14px; padding: 1.1rem 1.1rem 1rem; margin: 0 0 1rem; }
 h2 { font-size: 1.15rem; margin: 0 0 0.15rem; }
 .sub { margin: 0 0 0.9rem; color: #666; font-size: 0.9rem; }
-.chart { display: flex; gap: 0.5rem; height: 200px; align-items: stretch; }
+.chart { display: flex; gap: 0.5rem; height: 200px; align-items: stretch; padding-top: 1.25rem; }
 .chart.small { height: 130px; }
 .col { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 .bars { flex: 1; display: flex; gap: 3px; align-items: flex-end; justify-content: center; }
