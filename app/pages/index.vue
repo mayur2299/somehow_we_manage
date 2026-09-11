@@ -69,7 +69,8 @@ const confetti = Array.from({ length: 28 }, (_, i) => ({ left: `${(i * 37) % 100
 
 // ---------- Receipt modal ----------
 const receiptOpen = ref(false)
-function openReceipt(k?: string) { if (k) selected.value = k; receiptOpen.value = true }
+const receiptPost = ref<any | null>(null)
+function openReceipt(k?: string, post?: any) { if (k) selected.value = k; receiptPost.value = post ?? null; receiptOpen.value = true }
 const siteUrl = computed(() => (typeof location !== 'undefined' ? location.origin : 'https://somehow-we-manage.netlify.app'))
 
 // ---------- RTI modal ----------
@@ -263,6 +264,7 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
       <!-- 5. PETITIONS -->
       <section id="petitions">
         <div class="section-head"><h2>Put your<br>name on it.</h2><p>Grievances with numbers attached. Every petition carries the ward's own budget figures and goes to the ward office.</p></div>
+        <p class="cta-row"><NuxtLink class="btn" to="/petitions">See all petitions by type →</NuxtLink></p>
         <Petitions :key="petitionsKey" :ward-slug="wardSlug" :ward-code="ward.code" :services="ward.services" :preselect="petitionPreselect" />
       </section>
 
@@ -393,7 +395,7 @@ useHead({ title: `Where My Ward's Money Goes — ${ward.code} ${ward.name}` })
             <button class="x" @click="receiptOpen = false" aria-label="Close">✕</button>
           </div>
           <div class="svc-tabs"><button v-for="s in ward.services" :key="s.key" class="pill" :class="{ ink: selected === s.key }" @click="selected = s.key">{{ s.icon }} {{ s.label }}</button></div>
-          <Receipt :ward-code="ward.code" :ward-name="ward.name" :service="svc" :posts="posts" :site-url="siteUrl" />
+          <Receipt :ward-code="ward.code" :ward-name="ward.name" :service="svc" :posts="posts" :site-url="siteUrl" :post="receiptPost" />
         </div>
       </div>
 

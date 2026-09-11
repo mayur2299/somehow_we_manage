@@ -24,7 +24,8 @@ const posts = computed(() => flags.value?.recent ?? [])
 const selected = ref(initial ?? 'swd')
 const svc = computed(() => ward.services.find(s => s.key === selected.value)!)
 const receiptOpen = ref(false)
-function openReceipt(k: string) { selected.value = k; receiptOpen.value = true }
+const receiptPost = ref<any | null>(null)
+function openReceipt(k: string, post?: any) { selected.value = k; receiptPost.value = post ?? null; receiptOpen.value = true }
 const siteUrl = computed(() => (typeof location !== 'undefined' ? location.origin : 'https://somehow-we-manage.netlify.app'))
 const confettiOn = ref(false)
 function celebrate() { confettiOn.value = true; setTimeout(() => (confettiOn.value = false), 2200) }
@@ -45,11 +46,11 @@ useHead({ title: `${ward.code} residents · Where My Ward's Money Goes` })
     <div v-if="receiptOpen" class="modal" @click.self="receiptOpen = false">
       <div class="modal-card">
         <div class="modal-top">
-          <div><span class="pill pink">The receipt</span><h3>Savage. Sourced. Shareable.</h3></div>
+          <div><span class="pill pink">The receipt</span><h3>{{ receiptPost ? 'Your complaint, as a card.' : 'Savage. Sourced. Shareable.' }}</h3></div>
           <button class="x" @click="receiptOpen = false" aria-label="Close">✕</button>
         </div>
         <div class="svc-tabs"><button v-for="s in ward.services" :key="s.key" class="pill" :class="{ ink: selected === s.key }" @click="selected = s.key">{{ s.icon }} {{ s.label }}</button></div>
-        <Receipt :ward-code="ward.code" :ward-name="ward.name" :service="svc" :posts="posts" :site-url="siteUrl" />
+        <Receipt :ward-code="ward.code" :ward-name="ward.name" :service="svc" :posts="posts" :site-url="siteUrl" :post="receiptPost" />
       </div>
     </div>
     <div v-if="confettiOn" class="confetti" aria-hidden="true"><i v-for="(c, i) in confetti" :key="i" class="piece" :style="{ left: c.left, animationDelay: c.delay, background: c.bg }"></i></div>

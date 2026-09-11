@@ -5,6 +5,7 @@ const props = defineProps<{
   service: { key: string; label: string; icon: string; avgUtil: number; be: number[]; actual: (number | null)[]; mumbaiAvgUtil?: number | null }
   posts: any[]            // all posts for this ward
   siteUrl: string
+  post?: any              // when set, the card is about this one complaint
 }>()
 
 type Fmt = 'square' | 'story' | 'wide'
@@ -15,7 +16,8 @@ const status = ref('')
 
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
 const svcPosts = computed(() => props.posts.filter(p => p.service === props.service.key))
-const photoPost = computed(() => svcPosts.value.find(p => p.photo))
+const photoPost = computed(() => props.post?.photo ? props.post : svcPosts.value.find(p => p.photo))
+const daysAgo = (ts: number) => Math.max(0, Math.round((Date.now() - ts) / 86400000))
 const spent = computed(() => sum3(props.service.actual))
 const allotted = computed(() => sum3(props.service.be))
 const util = computed(() => Math.round(props.service.avgUtil * 100))
@@ -29,7 +31,9 @@ const punch = computed(() => {
   if (util.value < 90) return 'Money left on the table. Not on your road.'
   return 'On budget. So where is it?'
 })
-const caption = computed(() => `${props.wardCode} ${props.wardName.toUpperCase()} — ${props.service.label.toUpperCase()}\n${crore(spent.value)} SPENT (${util.value}% of budget)\n${svcPosts.value.length} resident report${svcPosts.value.length === 1 ? '' : 's'} ${svcPosts.value.length === 1 ? 'says' : 'say'} they don't see it\n${punch.value}\nIs your ward any better? Check your PIN → ${props.siteUrl}`)
+const caption = computed(() => props.post
+  ? `${props.wardCode} ${props.wardName.toUpperCase()} — ${props.service.label.toUpperCase()}\n"${props.post.title || props.post.note}"${props.post.locality ? ' · ' + props.post.locality : ''}\n${props.post.confirms ?? 0} people say this is still here\n${crore(spent.value)} SPENT on ${props.service.label.toLowerCase()} (${util.value}% of budget)\nIs your ward any better? Check your PIN → ${props.siteUrl}`
+  : `${props.wardCode} ${props.wardName.toUpperCase()} — ${props.service.label.toUpperCase()}\n${crore(spent.value)} SPENT (${util.value}% of budget)\n${svcPosts.value.length} resident report${svcPosts.value.length === 1 ? '' : 's'} ${svcPosts.value.length === 1 ? 'says' : 'say'} they don't see it\n${punch.value}\nIs your ward any better? Check your PIN → ${props.siteUrl}`)
 
 function loadImg(src: string) {
   // remote photos go through our proxy so the canvas stays untainted regardless of browser cache state
@@ -87,16 +91,28 @@ async function draw() {
   y += kh + (wide ? 22 : 40)
   ctx.textBaseline = 'alphabetic'
 
-  // big number
+  // big block
   ctx.fillStyle = '#fff'
-  const big = crore(spent.value)
-  const bs = fit(ctx, big, W - pad * 2, wide ? 96 : 150, 60, D)
-  ctx.font = `900 ${bs}px ${D}`; y += bs * 0.9; ctx.fillText(big, pad - 4, y)
-  ctx.font = `800 ${wide ? 26 : 40}px ${B}`; ctx.fillStyle = '#FF88C7'; y += wide ? 40 : 60
-  ctx.fillText(`SPENT · ${util.value}% OF BUDGET`, pad, y)
+  if (props.post) {
+    const hs = wide ? 44 : 64
+    ctx.font = `900 ${hs}px ${D}`
+    for (const line of wrap(ctx, (props.post.title || props.post.note).toUpperCase(), W - pad * 2).slice(0, wide ? 3 : 4)) { y += hs * 0.95; ctx.fillText(line, pad - 2, y) }
+    ctx.font = `800 ${wide ? 26 : 40}px ${B}`; ctx.fillStyle = '#FF88C7'; y += wide ? 40 : 60
+    ctx.fillText(`${props.post.confirms ?? 0} PEOPLE SAY IT'S STILL HERE`, pad, y)
+  } else {
+    const big = crore(spent.value)
+    const bs = fit(ctx, big, W - pad * 2, wide ? 96 : 150, 60, D)
+    ctx.font = `900 ${bs}px ${D}`; y += bs * 0.9; ctx.fillText(big, pad - 4, y)
+    ctx.font = `800 ${wide ? 26 : 40}px ${B}`; ctx.fillStyle = '#FF88C7'; y += wide ? 40 : 60
+    ctx.fillText(`SPENT · ${util.value}% OF BUDGET`, pad, y)
+  }
 
   // stats lines
-  const stats = [
+  const stats = props.post ? [
+    `${crore(spent.value)} spent on ${props.service.label.toLowerCase()} · ${util.value}% of budget`,
+    `Reported ${daysAgo(props.post.ts)} day${daysAgo(props.post.ts) === 1 ? '' : 's'} ago${props.post.locality ? ' · ' + props.post.locality : ''}`,
+    props.post.lastConfirmed ? `Last seen ${daysAgo(props.post.lastConfirmed) === 0 ? 'today' : daysAgo(props.post.lastConfirmed) + ' days ago'}` : `${svcPosts.value.length} complaints on ${props.service.label.toLowerCase()} in this ward`,
+  ] : [
     `${svcPosts.value.length} resident report${svcPosts.value.length === 1 ? '' : 's'} say they don't see it`,
     svcPosts.value.length ? `Oldest report: ${oldestDays.value} day${oldestDays.value === 1 ? '' : 's'} ago` : `Allotted: ${crore(allotted.value)}`,
     perPost.value != null ? `₹${perPost.value.toLocaleString('en-IN', { maximumFractionDigits: 1 })} crore spent per reported issue` : `Mumbai average: ${props.service.mumbaiAvgUtil ? Math.round(props.service.mumbaiAvgUtil * 100) + '%' : 'n/a'}`,
@@ -125,11 +141,11 @@ async function draw() {
   ctx.font = `700 ${wide ? 14 : 20}px ${B}`; ctx.fillStyle = '#3f3b34'
   ctx.fillText(`SOURCE: BMC ward budgets 2021-22 to 2023-24 via Praja Foundation (RTI). Resident reports from this site.`, pad, fy + fh - (wide ? 16 : 26))
 }
-watch([fmt, () => props.service.key, () => props.posts.length], () => nextTick(draw))
+watch([fmt, () => props.service.key, () => props.posts.length, () => props.post?.id], () => nextTick(draw))
 onMounted(() => nextTick(draw))
 
 function blob(): Promise<Blob> { return new Promise(res => canvas.value!.toBlob(b => res(b!), 'image/png')) }
-function filename() { return `receipt-${props.wardCode.replace('/', '')}-${props.service.key}-${fmt.value}.png` }
+function filename() { return `receipt-${props.wardCode.replace('/', '')}-${props.service.key}${props.post ? '-' + props.post.id : ''}-${fmt.value}.png` }
 async function download() {
   const b = await blob(); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = filename(); a.click(); URL.revokeObjectURL(a.href)
   status.value = 'Saved. Post it.'
@@ -155,7 +171,7 @@ async function copyCaption() { try { await navigator.clipboard.writeText(caption
       <button class="btn" @click="copyCaption">Copy caption</button>
     </div>
     <p class="status" aria-live="polite">{{ status }}</p>
-    <p class="mini">Built from this page's numbers. {{ photoPost ? 'Background: a resident\'s photo from the forum.' : 'Add a photo to a post and it becomes the background.' }}</p>
+    <p class="mini">{{ post ? 'This card is about your complaint, with the ward\'s spend for context.' : 'Built from this page\'s numbers.' }} {{ photoPost ? 'Background: the complaint photo.' : 'Add a photo to a post and it becomes the background.' }}</p>
   </div>
 </template>
 

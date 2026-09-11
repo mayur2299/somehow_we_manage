@@ -11,7 +11,7 @@ const props = defineProps<{
   openForm?: boolean
   full?: boolean
 }>()
-const emit = defineEmits<{ (e: 'refresh'): void; (e: 'petition', service: string): void; (e: 'celebrate'): void; (e: 'petitionsChanged'): void; (e: 'receipt', service: string): void }>()
+const emit = defineEmits<{ (e: 'refresh'): void; (e: 'petition', service: string): void; (e: 'celebrate'): void; (e: 'petitionsChanged'): void; (e: 'receipt', service: string, post?: any): void }>()
 
 const cr = (n: number) => `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 1 })} cr`
 const sum3 = (a: (number | null)[]) => a.slice(0, 3).reduce((x, y) => (x ?? 0) + (y ?? 0), 0) as number
@@ -26,7 +26,7 @@ const tag = ref<string>('all')
 const sort = ref<'new' | 'top' | 'talked'>('new')
 const showForm = ref(!!props.openForm)
 const showFilters = ref(false)
-const emitReceipt = (k: string) => emit('receipt', k)
+const emitReceipt = (k: string, post?: any) => emit('receipt', k, post)
 const totalConfirms = computed(() => filtered.value.reduce((a, p) => a + (p.confirms ?? 0), 0))
 watch(() => props.initialService, v => { if (v) { service.value = v; tab.value = 'residents' } })
 watch(() => props.openForm, v => { if (v) showForm.value = true })
@@ -57,9 +57,9 @@ const showDay = (i: number) => i === 0 || dayLabel(chatOrder.value[i - 1].ts) !=
 const hhmm = (ts: number) => new Date(ts).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
 const totalMeToo = computed(() => props.posts.reduce((a, p) => a + (p.confirms ?? 0), 0))
 
-// likes
+// upvotes (stored as likes)
 const liked = ref<Record<string, boolean>>({})
-async function like(p: any) {
+async function upvote(p: any) {
   if (liked.value[p.id]) return
   liked.value[p.id] = true
   try { await $fetch(`/api/flags/${encodeURIComponent(`${p.ward}:${p.service}:${p.id}`)}/like`, { method: 'POST' }); emit('refresh') } catch { liked.value[p.id] = false }
@@ -197,7 +197,7 @@ async function raise(p: any) {
     await $fetch('/api/petitions', { method: 'POST', body: { ward: props.wardSlug, service: p.service, title, demand, fromFlag: p.id } })
     raising.value[p.id] = false
     await loadPetitions(); emit('petitionsChanged'); emit('celebrate')
-    toast.value = 'Petition raised from this post.'
+    toast.value = 'Petition raised. It has its own page now.'
   } catch (e: any) { toast.value = e?.data?.statusMessage || 'Could not save.' }
   finally { pBusy.value[p.id] = false }
 }
@@ -258,10 +258,10 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 
               <div class="react">
                 <button class="chip act" :disabled="confirmed[p.id]" @click="confirmSeen(p)">👀 {{ confirmed[p.id] ? 'Counted' : 'Me too' }} · {{ p.confirms ?? 0 }}</button>
+                <button class="chip" :disabled="liked[p.id]" @click="upvote(p)">▲ Upvote · {{ p.likes ?? 0 }}</button>
                 <button class="chip" @click="toggle(p)">💬 {{ p.comments ?? 0 }}</button>
                 <label class="chip"><input type="file" accept="image/*" capture="environment" hidden @change="onConfirmPhoto(p, $event)" />📸</label>
-                <button class="chip" @click="shareOpen[p.id] = !shareOpen[p.id]">↗ Share</button>
-                <button class="chip" @click="emitReceipt(p.service)">🧾</button>
+                <button class="chip" @click="shareOpen[p.id] = !shareOpen[p.id]">↗ Share this</button>
                 <button class="chip ghost" :disabled="reported[p.id]" @click="report(p)">⚑</button>
               </div>
               <p v-if="p.lastConfirmed" class="seen">Last seen {{ daysSince(p.lastConfirmed) === 0 ? 'today' : daysSince(p.lastConfirmed) + ' days ago' }}</p>
@@ -270,14 +270,14 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
                 <a class="chip" :href="links(p).whatsapp" target="_blank" rel="noopener">WhatsApp</a>
                 <a class="chip" :href="links(p).x" target="_blank" rel="noopener">X</a>
                 <a class="chip" :href="links(p).facebook" target="_blank" rel="noopener">Facebook</a>
-                <button class="chip" @click="emitReceipt(p.service)">Instagram card</button>
+                <button class="chip act" @click="emitReceipt(p.service, p)">🧾 Card of this post</button>
                 <button class="chip" @click="copyLink(p)">Copy link</button>
                 <button class="chip" @click="shareAsk(p)">Ask neighbours</button>
               </div>
 
               <div class="pet" :class="{ has: petitionFor(p) }">
                 <template v-if="petitionFor(p)">
-                  <span>✍️ <strong>{{ petitionFor(p).signatures }}</strong> signed: {{ petitionFor(p).title }}</span>
+                  <NuxtLink class="petlink" :to="`/petitions/${petitionFor(p).id}`">✍️ <strong>{{ petitionFor(p).signatures }}</strong> signed: {{ petitionFor(p).title }} →</NuxtLink>
                   <button class="chip act" :disabled="signedP[petitionFor(p).id]" @click="signFor(p)">{{ signedP[petitionFor(p).id] ? 'Signed' : 'Sign' }}</button>
                 </template>
                 <template v-else>
@@ -380,6 +380,7 @@ const when = (ts: number) => new Date(ts).toLocaleString('en-IN', { day: 'numeri
 .seen { margin: 0; font-size: 11px; font-weight: 700; color: #6b665a; }
 .sharemenu { display: flex; flex-wrap: wrap; gap: 6px; border-top: 2px dashed var(--ink); padding-top: 8px; }
 .pet { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; border-top: 2px dashed var(--ink); padding-top: 8px; font-size: 13px; font-weight: 700; }
+.petlink { color: var(--ink); text-decoration: underline; font-weight: 800; flex: 1; min-width: 0; }
 .pet.has { background: #f3ffe0; border: 2px solid var(--ink); border-radius: 10px; padding: 8px 10px; border-top-style: solid; }
 .raise { display: grid; gap: 8px; }
 .raise .btn { justify-self: start; }
