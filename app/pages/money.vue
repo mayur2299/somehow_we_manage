@@ -101,17 +101,6 @@ useHead({ title: computed(() => `Money · ${ward.value.code} ${ward.value.name}`
         </div>
       </section>
 
-      <!-- MEMES -->
-      <section id="memes" class="meme-zone">
-        <div class="section-head"><h2>The civic<br>meme audit.</h2><p>Every meme is attached to a real number on this page. Funny first, receipt immediately after.</p></div>
-        <div class="memes">
-          <article class="meme red"><div class="emoji">🧮</div><span class="kicker">When {{ cr(latestBE) }} becomes {{ cr(latestActual) }}</span><div class="copy">Budget: "Stay within me."<br><br>Spending: "I don't think I will."</div><p class="desc">{{ ward.code }} was allotted {{ cr(latestBE) }} in {{ latestYear }} and recorded {{ cr(latestActual) }} in spend: {{ latestUtil }}% utilisation. Above 100% can include expenditure booked by central departments.</p></article>
-          <article class="meme blue"><div class="emoji">🕳️</div><span class="kicker">Storm water drains · {{ Math.round(ward.services[2].avgUtil * 100) }}%</span><div class="copy">The drain budget didn't overflow.<br><br>The spend did.</div><p class="desc">The point is not "{{ Math.round(ward.services[2].avgUtil * 100) }}% = corruption". The point is that number deserves an explanation residents can actually ask for. The RTI button is right there.</p></article>
-          <article class="meme yellow"><div class="emoji">📚</div><span class="kicker">How to find your ward's spend</span><div class="copy">Step 1: open 1,000-page PDF.<br>Step 2: lose will to live.<br>Step 3: file RTI.</div><p class="desc">BMC budgets are organised by department, not neighbourhood. Ward actuals on this page come from RTI-sourced Praja Foundation reports joined with BMC budget documents.</p></article>
-          <article class="meme green"><div class="emoji">🧾</div><span class="kicker">₹1 lakh fine · ₹24 crore work</span><div class="copy">Contract value: huge.<br>Penalty: "best I can do is pocket change."</div><p class="desc">{{ ctx.penaltyExample?.text }} The bigger gap: the BMC does not publish project lists, delays and penalties ward by ward.</p></article>
-        </div>
-      </section>
-
       <!-- RECEIPTS -->
       <section id="receipts">
         <div class="section-head"><h2>Every number<br>we have.</h2><p>No "trust us". Source, year, and whether a number is actual, estimate or unavailable.</p></div>
@@ -280,16 +269,7 @@ h3 { font-size: 34px; letter-spacing: -.05em; line-height: 1; margin: 10px 0; }
 .thread-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; margin: 12px 0; }
 .thread { display: grid; gap: 4px; border: 2px solid var(--ink); border-radius: 14px; padding: 12px; background: var(--white); text-decoration: none; box-shadow: 3px 3px 0 var(--ink); }
 .t-title { font-weight: 800; line-height: 1.3; }
-.meme-zone { background: var(--ink); color: var(--white); }
-.meme-zone .section-head p { color: #f2ead5; }
-.memes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-.meme { min-height: 380px; border: 3px solid var(--white); border-radius: 26px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; color: var(--ink); }
-.meme.red { background: var(--red); } .meme.blue { background: var(--blue); } .meme.yellow { background: var(--yellow); } .meme.green { background: var(--green); }
-.kicker { font-size: 12px; font-weight: 900; border: 2px solid currentColor; display: inline-flex; align-self: flex-start; padding: 6px 9px; border-radius: 999px; background: rgba(255,255,255,.3); text-transform: uppercase; }
-.meme .copy { font-family: var(--display); font-size: clamp(30px, 3.6vw, 56px); line-height: .95; letter-spacing: -.05em; margin: 20px 0; }
-.desc { font-size: 15px; font-weight: 700; max-width: 90%; line-height: 1.35; margin: 0; }
-.meme .emoji { position: absolute; right: 18px; top: 16px; font-size: 64px; transform: rotate(8deg); }
-.tablewrap { overflow-x: auto; }
+.meme.red { background: var(--red); } .meme.blue { background: var(--blue); } .meme.yellow { background: var(--yellow); } .tablewrap { overflow-x: auto; }
 table { border-collapse: collapse; font-size: 13px; min-width: 820px; width: 100%; font-weight: 700; }
 th, td { padding: 8px 8px; text-align: right; border-bottom: 2px dashed #c9c2ad; white-space: nowrap; }
 thead th { text-align: center; border-bottom: 3px solid var(--ink); }
@@ -341,8 +321,7 @@ footer { padding: 34px max(6vw, calc((100vw - 1440px) / 2)) 50px; font-weight: 7
   .hero { grid-template-columns: 1fr; padding-top: 40px; }
   .herocard { transform: none; }
   .span4, .span5, .span7 { grid-column: span 12; }
-  .services, .memes { grid-template-columns: 1fr; }
-  .year-row { grid-template-columns: 64px 1fr; }
+  .services,   .year-row { grid-template-columns: 64px 1fr; }
   .year-row > div:nth-child(3), .year-row > div:nth-child(4) { grid-column: 2; }
   .section-head { align-items: start; flex-direction: column; }
   section { padding: 48px 20px; }
