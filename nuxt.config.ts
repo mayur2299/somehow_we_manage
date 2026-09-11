@@ -11,6 +11,12 @@ export default defineNuxtConfig({
       flags: process.env.NETLIFY
         ? { driver: 'netlify-blobs', name: 'ward-flags', consistency: 'strong' }
         : { driver: 'fs', base: './.data/flags' },
+      petitions: process.env.NETLIFY
+        ? { driver: 'netlify-blobs', name: 'ward-petitions', consistency: 'strong' }
+        : { driver: 'fs', base: './.data/petitions' },
+      cache: process.env.NETLIFY
+        ? { driver: 'netlify-blobs', name: 'ward-cache' }
+        : { driver: 'fs', base: './.data/cache' },
     },
   },
 
@@ -19,10 +25,20 @@ export default defineNuxtConfig({
     public: { appName: 'Where My Ward\'s Money Goes' },
   },
 
+  css: ['~/assets/css/main.css'],
+
   app: {
     head: {
-      title: 'Where My Ward\'s Money Goes — K/East Andheri',
-      meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
+      title: 'Where My Ward\'s Money Goes',
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'Your ward\'s budget, what was actually spent, and one tap to ask the BMC why.' },
+      ],
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800;900&display=swap' },
+      ],
     },
   },
 })
